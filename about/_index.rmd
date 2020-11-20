@@ -1,0 +1,39 @@
+---
+title: About Me
+weight: 1
+---
+
+## About Me {.tabset .tabset-pills}  
+
+My CV describing different things I've done.
+
+### HTML  
+
+<div align="center">
+  <iframe width="80%" height="400" src="rjfranssen_cv.html" style="border:1px solid black;"></iframe>
+</div>
+
+### PDF  
+
+<div align="center">
+  <iframe width="80%" height="400" src="rjfranssen_cv.pdf" style="border:1px solid black;"></iframe>
+</div>  
+
+<!-- Tab links -->
+<!-- <div class="tab"> -->
+<!--   <button class="tablinks" onclick="openCity(event, 'London')">HTML</button> -->
+<!--   <button class="tablinks" onclick="openCity(event, 'Paris')">PDF</button> -->
+<!-- </div> -->
+
+<!-- Tab content -->
+<!-- <div id="HTML" class="tabcontent" align="center"> -->
+<!--   <h3>HTML</h3> -->
+<!--   <p>Interactive CV</p> -->
+<!--   <iframe width="80%" height="400" src="rjfranssen_cv.html" style="border:1px solid black;"></iframe> -->
+<!-- </div> -->
+
+<!-- <div id="PDF" class="tabcontent" align="center"> -->
+<!--   <h3>PDF</h3> -->
+<!--   <p>Static CV</p> -->
+<!--   <iframe width="80%" height="400" src="rjfranssen_cv.pdf" style="border:1px solid black;"></iframe> -->
+<!-- </div> -->
