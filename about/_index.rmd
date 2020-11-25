@@ -7,17 +7,19 @@ weight: 1
 
 My CV describing different things I've done.
 
-### HTML  
+<!-- ### HTML   -->
 
-<div align="center">
-  <iframe width="80%" height="400" src="rjfranssen_cv.html" style="border:1px solid black;"></iframe>
-</div>
+<!-- <div align="center"> -->
+<!--   <iframe width="80%" height="400" src="rjfranssen_cv.html" style="border:1px solid black;"></iframe> -->
+<!-- </div> -->
 
-### PDF  
+<!-- ### PDF   -->
 
-<div align="center">
-  <iframe width="80%" height="400" src="rjfranssen_cv.pdf" style="border:1px solid black;"></iframe>
-</div>  
+<!-- <div align="center"> -->
+<!--   <iframe width="80%" height="400" src="rjfranssen_cv.pdf" style="border:1px solid black;"></iframe> -->
+<!-- </div>   -->
+
+
 
 <!-- Tab links -->
 <!-- <div class="tab"> -->
