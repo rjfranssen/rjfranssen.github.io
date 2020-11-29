@@ -19,8 +19,6 @@ My CV describing different things I've done.
 <!--   <iframe width="80%" height="400" src="rjfranssen_cv.pdf" style="border:1px solid black;"></iframe> -->
 <!-- </div>   -->
 
-
-
 <!-- Tab links -->
 <!-- <div class="tab"> -->
 <!--   <button class="tablinks" onclick="openCity(event, 'London')">HTML</button> -->
