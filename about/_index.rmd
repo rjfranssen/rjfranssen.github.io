@@ -1,11 +1,76 @@
 ---
 title: About Me
+output: html_document
 weight: 1
 ---
 
-## About Me {.tabset .tabset-pills}  
+<!-- Notes: -->
+<!-- flex-wrap: https://www.w3schools.com/css/css3_flexbox_container.asp -->
+<!-- js onclick: https://stackoverflow.com/questions/45393499/javascript-onclick-into-a-new-window -->
+
+<!-- Quick notes regarding relative file paths: relative file paths:   -->
+
+<!-- Starting with “/” returns to the root directory and starts there -->
+<!-- Starting with “../” moves one directory backwards and starts there -->
+<!-- Starting with “../../” moves two directories backwards and starts there (and so on…) -->
+<!-- To move forward, just start with the first subdirectory and keep moving forward -->
+
+## About Me
 
 My CV describing different things I've done.
+
+<link rel="stylesheet" href="css/cards.css">
+
+<h2>Round Card</h2>
+
+<!-- <div class="card" style="width:50%;cursor: pointer;" onclick="window.location='http://google.com';"> --> <!-- open in same tab/window -->
+<div class="card" style="width:50%;cursor: pointer;" onclick="window.open('http://www.google.com')"><!-- open in new tab/window (user decides tab/window locally)-->
+  
+  <div class="container">
+  
+  <img src="images/bg.png" alt="Avatar" style="width:100%">
+    John Doe   
+    Architect & Engineer
+    
+  </div>
+  
+</div>
+
+
+<div class="flex-container">
+  <div>1</div>
+  <div>2</div>
+  <div>3</div>  
+  <div>4</div>
+  <div>5</div>
+  <div>6</div>  
+  <div>7</div>
+  <div>8</div>
+  <div>9</div>  
+  <div>10</div>
+  <div>11</div>
+  <div>12</div>  
+</div>
+
+
+## Results {.tabset .tabset-pills}
+
+### Plots
+
+We show a scatter plot in this section.
+
+```{r, fig.dim=c(5, 3)}
+par(mar = c(4, 4, .5, .1))
+plot(mpg ~ hp, data = mtcars, pch = 19)
+```
+
+### Tables
+
+We show the data in this tab.
+
+```{r}
+head(mtcars)
+```
 
 <!-- ### HTML   -->
 
