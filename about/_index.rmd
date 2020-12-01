@@ -17,7 +17,7 @@ weight: 1
 
 ## About Me
 
-My CV describing different things I've done.
+[My CV describing different things I've done.]
 
 <link rel="stylesheet" href="css/cards.css">
 
@@ -38,8 +38,28 @@ My CV describing different things I've done.
 
 
 <div class="flex-container">
-  <div>1</div>
-  <div>2</div>
+  <div class="card" style="width:50%;cursor: pointer;" onclick="window.open('http://www.google.com')">
+  
+  <div class="container">
+  
+  <img src="images/bg.png" alt="Avatar" style="width:100%">
+    John Doe   
+    Architect & Engineer
+    
+  </div>
+  
+</div>
+<div class="card" style="width:50%;cursor: pointer;" onclick="window.open('http://www.google.com')">
+  
+  <div class="container">
+  
+  <img src="images/bg.png" alt="Avatar" style="width:100%">
+    John Doe   
+    Architect & Engineer
+    
+  </div>
+  
+</div>
   <div>3</div>  
   <div>4</div>
   <div>5</div>
