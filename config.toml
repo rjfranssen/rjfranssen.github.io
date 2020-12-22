@@ -1,0 +1,88 @@
+baseURL = "https://rjfranssen.io/"
+title = "rjfranssen"
+enableRobotsTXT = true
+theme = "compose"
+enableGitInfo = true
+enableEmoji = true # added this
+ignoreFiles = ["\\.Rmd$", "\\.Rmarkdown$", "_files$", "_cache$"] # added this per blogdown recommendation
+
+disableKinds = ["taxonomy", "taxonomyTerm"]
+
+[permalinks] # added this for new blog posts per blogdown recommendation
+    post = "/:year/:month/:day/:slug/"
+    
+#  menu items
+[[menu.main]]
+    name = "Docs"
+    weight = 1
+    url = "docs/"
+    
+[[menu.main]]
+    name = "Articles"
+    weight = 2
+    url = "post/"
+    
+[[menu.main]]
+    name = "About"
+    weight = 3
+    url = "about/"
+    
+[[menu.main]]
+    name = "Links"
+    weight = 4
+    url = "links/list/"
+    
+[[menu.main]]
+    name = "Dash"
+    weight = 5
+    url = "dash/"
+
+[markup]
+  [markup.goldmark]
+    [markup.goldmark.renderer]
+      unsafe = true
+    [markup.goldmark.extensions]
+      typographer = false
+  [markup.highlight]
+    codeFences = true
+    guessSyntax = false
+    hl_Lines = ""
+    lineNoStart = 1
+    lineNos = true
+    lineNumbersInTable = true
+    noClasses = false
+    style = "monokai"
+    tabWidth = 2
+  [markup.tableOfContents]
+    endLevel = 4
+    ordered = false
+    startLevel = 2
+
+# Everything below this are Site Params
+
+[params]
+  author = "rjfranssen"
+  searchPlaceholder = "Search..."
+  repo = "https://github.com/rjfranssen/rjfranssen.github.io"
+
+  time_format_blog = "Monday, January 02, 2006"
+  time_format_default = "January 2, 2006"
+  enableDarkMode = false # set to false to disable darkmode by default # user will still have the option to use dark mode
+  [params.logo]
+    lightMode = "rjfranssen-blowfish-wide.png"
+    darkMode = "rjfranssen-blowfish-wide-dark.png"
+
+  [params.source]
+    name = "GitHub"
+    icon = "github.svg"
+    url = "https://github.com/rjfranssen/rjfranssen.github.io"
+    
+  # Custom CSS. Put here your custom CSS files. They are loaded after the theme CSS;
+  # they have to be referred from static root. Example
+  [[params.customCSS]]
+    href = "/css/my-style.css"
+
+  # Custom JS. Put here your custom JS files. They are loaded after the theme JS;
+  # they have to be referred from static root. Example
+  [[params.customJS]]
+    src = "/js/myjs.js"

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Splashpad Links on rjfranssen</title>
+    <link>/links/</link>
+    <description>Recent content in Splashpad Links on rjfranssen</description>
+    <generator>Hugo -- gohugo.io</generator>
+    
+	<atom:link href="/links/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Links and References</title>
+      <link>/links/list/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/links/list/</guid>
+      <description>Links and data sources that I like to use or reference when researching or discussing different topics and geographic or statistical concepts.
+Databases  census.gov NOAA Datasets Waterpoint Data (WPDX) Humanitarian Data Exchange (OCHA) Relief Web Labs (OCHA) Taxonomy as a Service (OCHA) Data.gov - Ocean Data Saildrone Data Galapagos Vital Signs Resources UNICEF Data Awesome Public Datasets (GitHub)  Geographic  leaflet (r) SymbolixAU/mapdeck (r) globe4r (r) Gravity/Huff model tools  Natural Language Processing Statistics  10 Things to Know about Confidence Intervals Bootstrap Confidence Intervals (R) Calculating Line Regression by Hand Central Limit Theorem (Stat Trek) Confidence Intervals Covariance Analysis (ANCOVA) Demystifying Bayesian Deep Learning (Eric J.</description>
+    </item>
+    
+  </channel>
+</rss>
