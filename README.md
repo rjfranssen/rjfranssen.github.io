@@ -117,3 +117,7 @@ TODO:
 - [x] - add flexdashboard snippets to gh 
 - [ ] - add flexdashboard snippets to site 
 - [ ] - update and add cv to about    
+
+Hugo help docs:  
+[content organization (gohugo.io)](https://gohugo.io/content-management/organization#index-pages-index-md)  
+[page bundles (hugo-sandbox)](https://hugo-sandbox.netlify.app/hugodocs/content-management/page-bundles/)  
