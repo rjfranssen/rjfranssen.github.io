@@ -71,6 +71,26 @@ Sometimes, the shortcode will wrap content, sometimes it won’t. When content i
     </item>
     
     <item>
+      <title>Shortcodes Applied</title>
+      <link>/docs/shortcodes-appliedr/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/docs/shortcodes-appliedr/</guid>
+      <description>Using blocks, columns &amp;amp; buttons{{&amp;lt;/* block &amp;quot;grid-2&amp;quot; */&amp;gt;}}{{&amp;lt;/* column */&amp;gt;}}#### Coumn 1 Lorem ipsum dolor sit amet, ...{{&amp;lt;/* button &amp;quot;https://github.com/onweru/compose&amp;quot; &amp;quot;Download Theme&amp;quot; */&amp;gt;}}{{&amp;lt;/* /column */&amp;gt;}}{{&amp;lt;/* column */&amp;gt;}}&amp;lt;!-- generates 👇 --&amp;gt;{{&amp;lt; block “grid-2” &amp;gt;}}{{&amp;lt; column &amp;gt;}}#### Coumn 1
+Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et
+dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</description>
+    </item>
+    
+    <item>
+      <title>Twitter Topics - Gritty Edition</title>
+      <link>/docs/twitter-sentiment-gritty/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/docs/twitter-sentiment-gritty/</guid>
+      <description>Load librarieslibrary(twitteR)## Warning: package &amp;#39;twitteR&amp;#39; was built under R version 4.0.3library(NLP)## Warning: package &amp;#39;NLP&amp;#39; was built under R version 4.0.3library(tm)## Warning: package &amp;#39;tm&amp;#39; was built under R version 4.0.3library(RColorBrewer)library(wordcloud)## Warning: package &amp;#39;wordcloud&amp;#39; was built under R version 4.0.3library(topicmodels)## Warning: package &amp;#39;topicmodels&amp;#39; was built under R version 4.0.3library(SnowballC)## Warning: package &amp;#39;SnowballC&amp;#39; was built under R version 4.</description>
+    </item>
+    
+    <item>
       <title>Hello R Markdown</title>
       <link>/2015/07/23/hello-r-markdown/</link>
       <pubDate>Thu, 23 Jul 2015 21:13:14 -0500</pubDate>

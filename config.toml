@@ -69,20 +69,10 @@ disableKinds = ["taxonomy", "taxonomyTerm"]
   time_format_default = "January 2, 2006"
   enableDarkMode = false # set to false to disable darkmode by default # user will still have the option to use dark mode
   [params.logo]
-    lightMode = "rjfranssen-blowfish-wide.png"
+    lightMode = "rjfranssen-blowfish-wide-dark.png"
     darkMode = "rjfranssen-blowfish-wide-dark.png"
 
   [params.source]
     name = "GitHub"
     icon = "github.svg"
     url = "https://github.com/rjfranssen/rjfranssen.github.io"
-    
-  # Custom CSS. Put here your custom CSS files. They are loaded after the theme CSS;
-  # they have to be referred from static root. Example
-  [[params.customCSS]]
-    href = "/css/my-style.css"
-
-  # Custom JS. Put here your custom JS files. They are loaded after the theme JS;
-  # they have to be referred from static root. Example
-  [[params.customJS]]
-    src = "/js/myjs.js"

@@ -1,0 +1,61 @@
+---
+description: |
+  This is how the shortcodes would look like in action
+title: Shortcodes Applied
+weight: 7
+---
+
+<link href="/rmarkdown-libs/anchor-sections/anchor-sections.css" rel="stylesheet" />
+<script src="/rmarkdown-libs/anchor-sections/anchor-sections.js"></script>
+
+
+<div id="using-blocks-columns-buttons" class="section level3">
+<h3>Using blocks, columns &amp; buttons</h3>
+<pre class="markdown"><code>{{&lt;/* block &quot;grid-2&quot; */&gt;}}
+{{&lt;/* column */&gt;}}
+#### Coumn 1 
+
+Lorem ipsum dolor sit amet, 
+...
+
+{{&lt;/* button &quot;https://github.com/onweru/compose&quot; &quot;Download Theme&quot; */&gt;}}
+
+{{&lt;/* /column */&gt;}}
+{{&lt;/* column */&gt;}}
+
+&lt;!-- generates 👇 --&gt;</code></pre>
+<p>{{&lt; block “grid-2” &gt;}}
+{{&lt; column &gt;}}
+#### Coumn 1</p>
+<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et</p>
+<p>dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+<p>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.</p>
+<blockquote>
+<p>Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+</blockquote>
+<p>{{&lt; button “<a href="https://github.com/onweru/compose" class="uri">https://github.com/onweru/compose</a>” “Download Theme” &gt;}}</p>
+<p>{{&lt; /column &gt;}}
+{{&lt; column &gt;}}
+#### Coumn 2</p>
+<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et</p>
+<blockquote>
+<p>dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+</blockquote>
+<p>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.</p>
+<p>Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+<p>{{&lt; button “docs/” “Read the Docs” &gt;}}</p>
+<p>{{&lt; /column &gt;}}
+{{&lt; /block &gt;}}</p>
+</div>
+<div id="youtube" class="section level3">
+<h3>Youtube</h3>
+<pre class="markdown"><code>{{&lt;/* youtube &quot;q0hyYWKXF0Q&quot; */&gt;}}
+&lt;!-- generates 👇 --&gt;</code></pre>
+<p>{{&lt; youtube “q0hyYWKXF0Q” &gt;}}</p>
+</div>
+<div id="picture" class="section level2">
+<h2>Picture</h2>
+<pre class="markdown"><code>{{&lt;/* picture &quot;compose.svg&quot; &quot;compose-light.svg&quot; &quot;Compose Logo&quot; */&gt;}} 
+&lt;!-- generates 👇 --&gt;</code></pre>
+<p>{{&lt; picture “compose.svg” “compose-light.svg” “Compose Logo” &gt;}}</p>
+</div>
