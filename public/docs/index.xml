@@ -68,7 +68,20 @@ dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco 
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>/docs/twitter-sentiment-gritty/</guid>
-      <description>Load librarieslibrary(twitteR)## Warning: package &amp;#39;twitteR&amp;#39; was built under R version 4.0.3library(NLP)## Warning: package &amp;#39;NLP&amp;#39; was built under R version 4.0.3library(tm)## Warning: package &amp;#39;tm&amp;#39; was built under R version 4.0.3library(RColorBrewer)library(wordcloud)## Warning: package &amp;#39;wordcloud&amp;#39; was built under R version 4.0.3library(topicmodels)## Warning: package &amp;#39;topicmodels&amp;#39; was built under R version 4.0.3library(SnowballC)## Warning: package &amp;#39;SnowballC&amp;#39; was built under R version 4.</description>
+      <description># Knitr options: https://yihui.org/knitr/options/library(lubridate)knitr::opts_chunk$set(collapse = TRUE, eval = TRUE, echo = TRUE, message = FALSE, warning = FALSE, include = TRUE)Last updated 2020-12-29.
+This is a walkthrough of using the Twitter API with the rtweet R package. It borrows from a few difference sources, including:* ropensci/rtweet documentation</description>
+    </item>
+    
+    <item>
+      <title>Custom Color Palette for ggplot2</title>
+      <link>/docs/custom-color-palette/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/docs/custom-color-palette/</guid>
+      <description>Last updated 2020-12-29.
+I’m describing customizing my own color palette for ggplot2. This is based off of Creating corporate colour palettes for ggplot2 by drsimonj.
+First, find a bunch of colors that you like. Canva is a good place to go for inspiration; or, us this tool from Adobe Color that will extract colors from a photo you like. Then, there’s always colorbrewer2.
+Note: In many cases, you can get away with using the scale_color_manual() and scale_fill_manual() functions directly within ggplot2.</description>
     </item>
     
   </channel>

@@ -27,6 +27,8 @@ Sources I like to use when looking for data or for researching/sharing geographi
 * [The Right Viz For the Right Data](https://totaldatascience.com/wp-content/uploads/2019/10/p75.png)  
 * [Statistical Symbols](https://www.rapidtables.com/math/symbols/Statistical_Symbols.html)  
 * [K-Means Clustering](https://i.redd.it/g16w49p2hw661.png)  
+* [Markdown Code Chunks (r)](https://rmarkdown.rstudio.com/lesson-3.html)  
+* [knitr options](https://yihui.org/knitr/options/)  
 
 
 ### Databases  
@@ -75,10 +77,12 @@ Sources I like to use when looking for data or for researching/sharing geographi
 * [A Data Scientific Method](https://towardsdatascience.com/a-data-scientific-method-80caa190dbd4)  
 * [Foundational Methodology for Data Science](https://tdwi.org/~/media/64511A895D86457E964174EDC5C4C7B1.PDF)  
 * [KD nuggets](https://www.kdnuggets.com/)  
+* [Quick R by Datacamp](https://www.statmethods.net/advgraphs/layout.html)  
 
 
 ### Data sources  
 
+* [Armed Conflict Location & Event Data Project](https://acleddata.com/curated-data-files/)  
 * [census.gov](https://www.census.gov/data/datasets.html)  
 * [NOAA Datasets](https://sos.noaa.gov/Datasets/)     
 * [Waterpoint Data (WPDX)](https://www.waterpointdata.org/)     
@@ -114,6 +118,11 @@ Sources I like to use when looking for data or for researching/sharing geographi
 * [Building a data-driven CV with R (r)](https://livefreeordichotomize.com/2019/09/04/building_a_data_driven_cv_with_r/)  
 * [Django CMS](https://www.django-cms.org/en/)  
 * [Mastering Shiny (wickham)](https://mastering-shiny.org/reactive-graph.html)  
+* [Cloud Foundry - Deploying an app with Docker](https://docs.cloudfoundry.org/devguide/deploy-apps/push-docker.html)  
+* [Docker Curriculem](https://docker-curriculum.com/)  
+* [Building Docker Images with heroku.yml (Heroku Dev Center)](https://devcenter.heroku.com/articles/build-docker-images-heroku-yml)  
+* [How to Deploy a Web app Using Docker Web Server (DevTeam.Space)](https://www.devteam.space/blog/how-to-deploy-a-web-app-with-docker-containers/)  
+* [Twitter Developer Portal](https://developer.twitter.com/)  
 
 
 ### Geographic  
@@ -163,6 +172,7 @@ Sources I like to use when looking for data or for researching/sharing geographi
 
 ### Natural Language Processing  
 
+* [tidytextmining (r)](https://www.tidytextmining.com/sentiment.html)  
 * [14 Best Natural Language Processing Tools in the World Today (linuxlinks)](https://www.linuxlinks.com/naturallanguageprocessing/)  
 * [NLTK (python)](https://www.nltk.org/)  
 * [spaCy (python)](https://spacy.io/)  
@@ -185,6 +195,7 @@ Sources I like to use when looking for data or for researching/sharing geographi
 * [Clusterr](https://clusterr.io/explore/machine-learning)  
 * [r/science](https://www.reddit.com/r/science/)  
 * [r/askscience](https://www.reddit.com/r/askscience/)  
+* [Tweet Sentiment Visualization](https://www.csc2.ncsu.edu/faculty/healey/tweet_viz/tweet_app/)  
 
 
 ### Statistics  
@@ -255,6 +266,7 @@ Sources I like to use when looking for data or for researching/sharing geographi
 * [colorbrewer](https://colorbrewer2.org/#type=sequential&scheme=BuGn&n=3)  
 * [pimp my r markdown](https://www.yan-holtz.com/blog/pimpMyRmd.html)  
 * [SQL Fiddle](http://www.sqlfiddle.com/)  
+* [Pablo](https://pablo.buffer.com/)  
 
 
 ### Trading

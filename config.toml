@@ -4,7 +4,7 @@ enableRobotsTXT = true
 theme = "compose"
 enableGitInfo = true
 enableEmoji = true # added this
-ignoreFiles = ["\\.Rmd$", "\\.Rmarkdown$", "_files$", "_cache$"] # added this per blogdown recommendation
+ignoreFiles = ["\\.Rmd$", "\\.Rmarkdown$", "_files$", "_cache$", "\\.yml$",] # added this per blogdown recommendation
 
 disableKinds = ["taxonomy", "taxonomyTerm"]
 
