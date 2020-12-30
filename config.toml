@@ -12,30 +12,30 @@ disableKinds = ["taxonomy", "taxonomyTerm"]
     post = "/:year/:month/:day/:slug/"
     
 #  menu items
+#[[menu.main]]
+#    name = "Docs"
+#    weight = 1
+#    url = "docs/"
+
 [[menu.main]]
-    name = "Docs"
+    name = "About"
     weight = 1
-    url = "docs/"
-    
+    url = "about/"
+
 [[menu.main]]
-    name = "Articles"
+    name = "Posts"
     weight = 2
     url = "post/"
     
 [[menu.main]]
-    name = "About"
+    name = "Dashes"
     weight = 3
-    url = "about/"
-    
+    url = "dash/"
+
 [[menu.main]]
     name = "Links"
     weight = 4
     url = "links/list/"
-    
-[[menu.main]]
-    name = "Dash"
-    weight = 5
-    url = "dash/"
 
 [markup]
   [markup.goldmark]

@@ -117,7 +117,7 @@ TODO:
 - [x] - add flexdashboard snippets to gh 
 - [ ] - add flexdashboard snippets to site 
 - [ ] - update and add cv to about    
-
-Hugo help docs:  
-[content organization (gohugo.io)](https://gohugo.io/content-management/organization#index-pages-index-md)  
+- [ ] - troubleshoot /js/search.min... it's generating an "uncaught syntaxerror: unexpected identifier" - appears relates to quotes in the text ("). Sounds like I may be mixing single and double quotes in my .  
+- [x] - convert .rmd to .rmarkdown to enable hugo tocs  
+- [x] - set eval=FALSE for htmlwidgets and instead save them to dir and bring them in via iframe (rmd supports htmlwidgets, rmarkdown does not)gohugo.io/content-management/organization#index-pages-index-md)  
 [page bundles (hugo-sandbox)](https://hugo-sandbox.netlify.app/hugodocs/content-management/page-bundles/)  

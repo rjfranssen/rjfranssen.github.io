@@ -7,6 +7,11 @@ weight: 5
 
 Sources I like to use when looking for data or for researching/sharing geographic & statistical concepts.  
 
+### Blogdown & Hugo
+
+* [Scientific and Technical Blogging: Radix vs. Blogdown](https://emitanaka.org/r/posts/2018-12-12-scientific-and-technical-blogging-radix-vs-blogdown/#blogdown)  
+* [Alison Hill: Blog](https://alison.rbind.io/post/2020-12-27-blogdown-checks/)  
+* [Work with RStudio, GitHub and Netlify to create and deploy your own webpage](https://medium.com/@diegousaiuk/how-i-used-hugo-and-blogdown-to-set-up-my-own-website-e32e2eddbf81)  
 
 ### Cheatsheets  
 
@@ -105,6 +110,7 @@ Sources I like to use when looking for data or for researching/sharing geographi
 
 ### Development  
 
+* [Chrome DevTools](https://developers.google.com/web/tools/chrome-devtools/sources)  
 * [shinyWidgets app - dreamrs (r)](http://shinyapps.dreamrs.fr/shinyWidgets/)  
 * [Shiny Authentication and User Management (r)](https://docs.rstudio.com/shinyapps.io/authentication-and-user-management.html#user-authentication)  
 * [Is there any way to hos R shiny apps with shinyapp.io with single sign-on authentication (SAML2.0 or openID connect)?](https://stackoverflow.com/questions/57953804/is-there-any-way-to-host-r-shiny-apps-with-shinyapps-io-with-single-sign-on-auth)  
@@ -157,6 +163,7 @@ Sources I like to use when looking for data or for researching/sharing geographi
 
 ### Machine Learning and AI  
 
+* [Attention and Augmented Recurrent Neural Networks (Distill)](https://distill.pub/2016/augmented-rnns/)  
 * [alpha-analysis - Data Science, Machine Learning and Predictive Analytics](https://blog.alpha-analysis.com/)
 * [eran raviv - Blog, Statistics and Econometrics](https://eranraviv.com/)
 * [Machine Learning Glossary (Google Developers)](https://blog.minitab.com/blog/adventures-in-statistics-2/understanding-t-tests-1-sample-2-sample-and-paired-t-tests)  

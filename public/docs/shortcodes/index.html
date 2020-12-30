@@ -1,7 +1,7 @@
 <!doctype html>
 <html lang="en">
 <head><meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1"><meta name="generator" content="Hugo 0.69.0" />
+<meta name="viewport" content="width=device-width, initial-scale=1"><meta name="generator" content="Hugo 0.79.1" />
 <link rel="apple-touch-icon" sizes="180x180" href='/favicons/apple-touch-icon.png'>
 <link rel="icon" type="image/png" sizes="32x32" href='/favicons/favicon-32x32.png'>
 <link rel="icon" type="image/png" sizes="16x16" href='/favicons/favicon-16x16.png'>
@@ -26,7 +26,8 @@
 
 
 
-<meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
+<meta itemprop="keywords" content="" />
+<meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="Shortcodes"/>
 <meta name="twitter:description" content="Use hugo shortcodes to quickly compose site pages.
 "/>
@@ -65,19 +66,16 @@
 
 		</li>
 		<li class="nav-item">
-			<a class="nav-link" href="/docs/"><span>Docs</span></a>
-		</li>
-		<li class="nav-item">
-			<a class="nav-link" href="/post/"><span>Articles</span></a>
-		</li>
-		<li class="nav-item">
 			<a class="nav-link" href="/about/"><span>About</span></a>
 		</li>
 		<li class="nav-item">
-			<a class="nav-link" href="/links/list/"><span>Links</span></a>
+			<a class="nav-link" href="/post/"><span>Posts</span></a>
 		</li>
 		<li class="nav-item">
-			<a class="nav-link" href="/dash/"><span>Dash</span></a>
+			<a class="nav-link" href="/dash/"><span>Dashes</span></a>
+		</li>
+		<li class="nav-item">
+			<a class="nav-link" href="/links/list/"><span>Links</span></a>
 		</li>
 		
 		<li class="nav-item">
@@ -115,7 +113,6 @@
     </li>
   </ul>
 </nav>
-        <h3 class="section_link"><a id="docs-shortcodesr" href="/docs/shortcodesr/">ShortcodesR</a></h3>
         <h3 class="section_link"><a id="docs-shortcodes-applied" href="/docs/shortcodes-applied/">Shortcodes Applied</a></h3><nav id="TableOfContents">
   <ul>
     <li>
@@ -128,8 +125,7 @@
   </ul>
 </nav>
         <h3 class="section_link"><a id="docs-shortcodes-applied" href="/docs/shortcodes-appliedr/">Shortcodes Applied</a></h3>
-        <h3 class="section_link"><a id="docs-twitter-topics---gritty-edition" href="/docs/twitter-sentiment-gritty/">Twitter Topics - Gritty Edition</a></h3>
-        <h3 class="section_link"><a id="docs-custom-color-palette-for-ggplot2" href="/docs/custom-color-palette/">Custom Color Palette for ggplot2</a></h3>
+        <h3 class="section_link"><a id="docs-twitter-topics---gritty-edition" href="/docs/twitter-sentiment-philly/">Twitter Topics - Gritty Edition</a></h3>
       </section>
   </section>
 </aside>
@@ -152,9 +148,9 @@
 </span></code></pre></td>
 <td class="lntd">
 <pre class="chroma"><code class="language-markdown" data-lang="markdown">...
-  {{&lt; block &#34;modifiers&#34; &gt;}}
-  &lt;!-- Nest columns or content  --&gt;
-  {{&lt; /block &gt;}}
+  {{<span class="p">&lt;</span> <span class="nt">block</span> <span class="err">&#34;</span><span class="na">modifiers</span><span class="err">&#34;</span> <span class="p">&gt;</span>}}
+  <span class="c">&lt;!-- Nest columns or content  --&gt;</span>
+  {{<span class="p">&lt;</span> <span class="p">/</span><span class="nt">block</span> <span class="p">&gt;</span>}}
 ...
 </code></pre></td></tr></table>
 </div>
@@ -168,9 +164,9 @@
 </span><span class="lnt">3
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-markdown" data-lang="markdown">  {{&lt; column &#34;mt-2 mb-2&#34; &gt;}}
-  &lt;!-- applied margin top and margin bottom modifiers --&gt;
-  {{&lt; /column &gt;}}
+<pre class="chroma"><code class="language-markdown" data-lang="markdown">  {{<span class="p">&lt;</span> <span class="nt">column</span> <span class="err">&#34;</span><span class="na">mt-2</span> <span class="na">mb-2</span><span class="err">&#34;</span> <span class="p">&gt;</span>}}
+  <span class="c">&lt;!-- applied margin top and margin bottom modifiers --&gt;</span>
+  {{<span class="p">&lt;</span> <span class="p">/</span><span class="nt">column</span> <span class="p">&gt;</span>}}
 </code></pre></td></tr></table>
 </div>
 </div><h3 id="video">Video</h3>
@@ -182,8 +178,8 @@
 </span><span class="lnt">2
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-markdown" data-lang="markdown">  {{&lt; youtube &#34;xWF59rWSceA&#34; &gt;}}
-  &lt;!-- Use the youtube video id --&gt;
+<pre class="chroma"><code class="language-markdown" data-lang="markdown">  {{<span class="p">&lt;</span> <span class="nt">youtube</span> <span class="err">&#34;</span><span class="na">xWF59rWSceA</span><span class="err">&#34;</span> <span class="p">&gt;</span>}}
+  <span class="c">&lt;!-- Use the youtube video id --&gt;</span>
 </code></pre></td></tr></table>
 </div>
 </div><h3 id="button">Button</h3>
@@ -191,21 +187,21 @@
 <table>
 <thead>
 <tr>
-<th align="left">PARAMETER</th>
-<th align="left">PURPOSE</th>
-<th align="left">OPTIONAL</th>
+<th style="text-align:left">PARAMETER</th>
+<th style="text-align:left">PURPOSE</th>
+<th style="text-align:left">OPTIONAL</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td align="left">label</td>
-<td align="left">button text</td>
-<td align="left">no</td>
+<td style="text-align:left">label</td>
+<td style="text-align:left">button text</td>
+<td style="text-align:left">no</td>
 </tr>
 <tr>
-<td align="left">url</td>
-<td align="left">button link</td>
-<td align="left">no</td>
+<td style="text-align:left">url</td>
+<td style="text-align:left">button link</td>
+<td style="text-align:left">no</td>
 </tr>
 </tbody>
 </table>
@@ -231,8 +227,8 @@
   
   <div class="pager_item next">
     
-    <a href="/docs/shortcodesr/" class="pager_link button" title="ShortcodesR">
-      <span class="pager_label">ShortcodesR</span>
+    <a href="/docs/shortcodes-applied/" class="pager_link button" title="Shortcodes Applied">
+      <span class="pager_label">Shortcodes Applied</span>
     </a>
   </div>
   
@@ -271,7 +267,7 @@
   </symbol>
 </svg>
 <script src="/js/bundle.min.02545d1b796e3dc21ed6179e9cc71c1d0b6d8c842047dcfe72785cc4fc15f2a09cefa8fc9a8ed491e8e9fb30fcec32ea64c411ddf411e3e8c681f189dffc64fa.js"></script>
-<script src="/js/search.min.9b79dd55b642cf0f98e76398a97220aa5238c20c1a8cf8b9ab6f1eaf603c9f22d2abec2e9d04e2cfec8b0227737d3fb0b119b376fe67d6f3f8d2c7e7d3f15fb7.js" async defer></script>
+<script src="/js/search.min.ec6828efc4fa6448b8a97ee543727eac2757b9be75aa4c4cee0095df2ba3c38054510453b913f9b4307b69465a598427a716b308afa3cb51e3280bface0b1a32.js" async defer></script>
 
 </body>
 </html>

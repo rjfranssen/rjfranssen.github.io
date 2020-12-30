@@ -11,7 +11,7 @@ I created this site to organize my notes and personal GIS & data science project
 
 Thank you Yihui Xie, Amber Thomas, Alison Presmanes Hill for the wonderful **[Blogdown](https://bookdown.org/yihui/blogdown/)** library & book, Dan Weru for the clean Hugo theme **"[Compose](https://github.com/onweru/compose)"**, and the [RStudio](https://rstudio.com/) folks for an awesome IDE.
 
-{{< button "docs/" "Explore the Docs" >}} {{< button "https://github.com/rjfranssen/io" "This site's Repo" >}}
+{{< button "post/" "Explore the Posts" >}} {{< button "https://github.com/rjfranssen/io" "This site's Repo" >}}
 
 {{< /column >}}
 {{< column >}}

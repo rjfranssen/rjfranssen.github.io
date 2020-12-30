@@ -1,0 +1,975 @@
+<!doctype html>
+<html lang="en">
+<head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1"><meta name="generator" content="Hugo 0.79.1" />
+<link rel="apple-touch-icon" sizes="180x180" href='/favicons/apple-touch-icon.png'>
+<link rel="icon" type="image/png" sizes="32x32" href='/favicons/favicon-32x32.png'>
+<link rel="icon" type="image/png" sizes="16x16" href='/favicons/favicon-16x16.png'>
+<link rel="manifest" href='/favicons/site.webmanifest'>
+<link rel="mask-icon" href='/favicons/safari-pinned-tab.svg'  color="#004750">
+<link rel="shortcut icon" href='/favicons/favicon.ico'>
+<meta name="msapplication-TileColor" content="#ffffff">
+<meta name="msapplication-config" content='/favicons/browserconfig.xml'>
+<meta name="theme-color" content="#ffffff">
+
+<title>Twitter Topics - Gritty Edition | rjfranssen</title><meta property="og:title" content="Twitter Topics - Gritty Edition" />
+<meta property="og:description" content="Using the Twitter API with the twitteR package
+" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="/docs/twitter-sentiment-philly/" />
+
+<meta itemprop="name" content="Twitter Topics - Gritty Edition">
+<meta itemprop="description" content="Using the Twitter API with the twitteR package
+">
+
+<meta itemprop="wordCount" content="3468">
+
+
+
+<meta itemprop="keywords" content="" />
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Twitter Topics - Gritty Edition"/>
+<meta name="twitter:description" content="Using the Twitter API with the twitteR package
+"/>
+
+
+
+<link rel="stylesheet" href="/css/styles.69832e4c6e36908110aac09480bc33c2fa3c11ac6d26d5ad4dce56911af6bd9c8d22888b83f35eaa93b258e9ab5fee9510c6b997fd63be1b42c0f74b8b61faf9.css" integrity="sha512-aYMuTG42kIEQqsCUgLwzwvo8EaxtJtWtTc5WkRr2vZyNIoiLg/NeqpOyWOmrX&#43;6VEMa5l/1jvhtCwPdLi2H6&#43;Q==" crossorigin="anonymous">
+
+</head>
+<body class="page-page">
+  <header class="nav_header">
+<nav class="wrap nav menu">
+	<a href="/" class="nav_brand">
+		<picture data-lit="/images/rjfranssen-blowfish-wide-dark.png" data-dark="/images/rjfranssen-blowfish-wide-dark.png">
+			
+			<img srcset = '/images/rjfranssen-blowfish-wide-dark.png' alt = 'rjfranssen Logo'>
+		</picture>
+		<label class="nav_toggle toggle" title="Site Menu" role="button">
+			<svg class="icon">
+  <use xlink:href="#harmburger"></use>
+</svg>
+		</label>
+	</a>
+	<ul class="nav_body">
+		<li class="nav-item">
+<div class="search">
+  <label for="find" class="search_label"><svg class="icon">
+  <use xlink:href="#search"></use>
+</svg>
+  </label>
+  <input type="search" class="search_field" placeholder="Search..." id="find" autocomplete="off">
+  <div class="search_results"></div>
+</div>
+
+
+
+		</li>
+		<li class="nav-item">
+			<a class="nav-link" href="/about/"><span>About</span></a>
+		</li>
+		<li class="nav-item">
+			<a class="nav-link" href="/post/"><span>Posts</span></a>
+		</li>
+		<li class="nav-item">
+			<a class="nav-link" href="/dash/"><span>Dashes</span></a>
+		</li>
+		<li class="nav-item">
+			<a class="nav-link" href="/links/list/"><span>Links</span></a>
+		</li>
+		
+		<li class="nav-item">
+			<a class="nav-link" href="https://github.com/rjfranssen/rjfranssen.github.io" target="_blank">GitHub</a>
+		</li>
+		<li class="nav-item"><div class = 'color_mode'>
+  <label for = 'mode'></label>
+  <input type = 'checkbox' class = 'color_choice' id = 'mode' title="Toggle Dark Mode">
+</div>
+</li>
+	</ul>
+</nav>
+
+  </header>
+  <div class="main wrap pt-4"><div class="grid-auto"><aside class="aside menu">
+  <div>
+    <label class="aside_toggle toggle" title="Docs Menu" role="button">Docs Menu <svg class="icon">
+  <use xlink:href="#harmburger"></use>
+</svg></label>
+  </div>
+  <section class="section aside_inner">
+    <h2 class="section_title"><a  href="/docs/" class="group">Getting Started</a></h2>
+      <section class="" id="docs-getting-started">
+        <h3 class="section_link"><a id="docs-overview" href="/docs/overview/">Overview</a></h3><nav id="TableOfContents"></nav>
+        <h3 class="section_link"><a id="docs-shortcodes" href="/docs/shortcodes/">Shortcodes</a></h3><nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#block">Block</a></li>
+        <li><a href="#column">Column</a></li>
+        <li><a href="#video">Video</a></li>
+        <li><a href="#button">Button</a></li>
+        <li><a href="#picture">Picture</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+        <h3 class="section_link"><a id="docs-shortcodes-applied" href="/docs/shortcodes-applied/">Shortcodes Applied</a></h3><nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#using-blocks-columns--buttons">Using blocks, columns &amp; buttons</a></li>
+        <li><a href="#youtube">Youtube</a></li>
+      </ul>
+    </li>
+    <li><a href="#picture">Picture</a></li>
+  </ul>
+</nav>
+        <h3 class="section_link"><a id="docs-shortcodes-applied" href="/docs/shortcodes-appliedr/">Shortcodes Applied</a></h3>
+        <h3 class="section_link active"><a id="docs-twitter-topics---gritty-edition" href="/docs/twitter-sentiment-philly/">Twitter Topics - Gritty Edition</a></h3>
+      </section>
+  </section>
+</aside>
+
+  <main class="content">
+    <h1>Twitter Topics - Gritty Edition</h1>
+<link href="/rmarkdown-libs/anchor-sections/anchor-sections.css" rel="stylesheet" />
+<script src="/rmarkdown-libs/anchor-sections/anchor-sections.js"></script>
+<script src="/rmarkdown-libs/htmlwidgets/htmlwidgets.js"></script>
+<script src="/rmarkdown-libs/plotly-binding/plotly.js"></script>
+<script src="/rmarkdown-libs/typedarray/typedarray.min.js"></script>
+<script src="/rmarkdown-libs/jquery/jquery.min.js"></script>
+<link href="/rmarkdown-libs/crosstalk/css/crosstalk.css" rel="stylesheet" />
+<script src="/rmarkdown-libs/crosstalk/js/crosstalk.min.js"></script>
+<link href="/rmarkdown-libs/plotly-htmlwidgets-css/plotly-htmlwidgets.css" rel="stylesheet" />
+<script src="/rmarkdown-libs/plotly-main/plotly-latest.min.js"></script>
+<link href="/rmarkdown-libs/leaflet/leaflet.css" rel="stylesheet" />
+<script src="/rmarkdown-libs/leaflet/leaflet.js"></script>
+<link href="/rmarkdown-libs/leafletfix/leafletfix.css" rel="stylesheet" />
+<script src="/rmarkdown-libs/Proj4Leaflet/proj4-compressed.js"></script>
+<script src="/rmarkdown-libs/Proj4Leaflet/proj4leaflet.js"></script>
+<link href="/rmarkdown-libs/rstudio_leaflet/rstudio_leaflet.css" rel="stylesheet" />
+<script src="/rmarkdown-libs/leaflet-binding/leaflet.js"></script>
+
+
+<pre class="r"><code># Knitr options: https://yihui.org/knitr/options/
+library(lubridate)
+knitr::opts_chunk$set(collapse = TRUE
+                      , eval = TRUE
+                      , echo = TRUE
+                      , message = FALSE
+                      , warning = FALSE
+                      , include = TRUE)</code></pre>
+<p>Last updated 2020-12-30.</p>
+<p>This is a walkthrough of using the Twitter API with the <code>rtweet</code> R package. It borrows from a few difference sources, including:
+* <a href="https://github.com/ropensci/rtweet">ropensci/rtweet documentation</a><br />
+* <a href="https://gist.github.com/bryangoodrich/7b5ef683ce8db592669e">here</a><br />
+* <a href="https://www.tidytextmining.com/topicmodeling.html">Tidy Text Mining with R</a><br />
+* <a href="https://www.earthdatascience.org/courses/earth-analytics/get-data-using-apis/use-twitter-api-r/">Twitter Data in R Using Rtweet: Analyze and Download Twitter Data</a>
+* <a href="https://www.tidytextmining.com/twitter.html">Comparing Twitter archives</a><br />
+* <a href="https://www.tidytextmining.com/nasa.html">Mining NASA metadata</a><br />
+* <a href="https://www.tidytextmining.com/usenet.html">Analyzing usenet text</a></p>
+<div id="load-libraries" class="section level3">
+<h3>Load libraries</h3>
+<pre class="r"><code>#library(twitteR)
+library(rtweet)
+library(NLP)
+library(tm)
+library(RColorBrewer)
+library(wordcloud)
+library(topicmodels)
+library(SnowballC)
+library(config)
+library(dplyr)
+library(tidytext)
+library(tidyr)
+library(ggplot2)
+library(lubridate)
+library(readr)
+library(skimr)</code></pre>
+</div>
+<div id="configure-twitter-api-access" class="section level3">
+<h3>Configure Twitter API access</h3>
+<p>There are a couple different ways to authenticate your session. The <code>rtweet</code> package makes this pretty easy by enabling browser-based authentication. I prefer to authenticate in code. See <code>vignette("auth", package = "rtweet")</code> for options.</p>
+<p>What I did: Head over to the <a href="https://developer.twitter.com/en/apply-for-access">Twitter Developer</a> site and requested a developer account to gain access to Twitter APIs and tools.</p>
+<p>Then I used a <code>config.yml</code> to store my keys. The <code>config</code> package a good way to import keys and passwords without making them publc (just make sure they’re covered by your <code>.gitignore</code> file!). Check out the <a href="https://cran.r-project.org/web/packages/config/vignettes/introduction.html">documentation</a>. <em>Note: If using Hugo and don’t want it swept up into your <code>public</code> directory, you can also add <code>config.yml</code> to the <code>ignoreFiles</code> parameter in the <code>config.toml</code></em>.</p>
+<pre class="r"><code>config &lt;- config::get(file = &#39;config.yml&#39;)
+
+## authenticate via web browser
+token &lt;- create_token(
+  app = config$app,
+  consumer_key = config$apikey,
+  consumer_secret = config$apikeysecret,
+  access_token = config$accesstoken,
+  access_secret = config$accesstokensecret)</code></pre>
+</div>
+<div id="query-the-tweets" class="section level3">
+<h3>Query the Tweets!</h3>
+<p>Going to ask for the most recent 2000.</p>
+<pre class="r"><code># Search tweets using rtweet search function
+tweets_df &lt;- rtweet::search_tweets(
+  q = &#39;philadelphia philly&#39;
+  , n = 2000
+  , include_rts = FALSE
+  , type = &#39;recent&#39;
+  #, geocode = &quot;37.78, -122.40, 1mi&quot;
+  #, retryonratelimit = TRUE
+  #, parse = FALSE
+  #, lang = &#39;en&#39; 
+  # ... see Twitter&#39;s REST API for more search parameters
+)
+
+## Create lat/lng variables using all available tweet and profile geo-location data
+tweets_df &lt;- rtweet::lat_lng(tweets_df)
+
+## Also going to create some friendlier date variables;`created_at` is a `POSIXct` type that requires a bit of tender loving care. WIll still keep the `created_at` value, which works great with `dygraphs` and just fine with `ggplot2`, but I want to be able to group by date variables.
+tweets_df$tweet_datetime &lt;- tweets_df$created_at
+tweets_df$tweet_date &lt;- tweets_df$created_at %&gt;% as.POSIXlt() %&gt;% as.Date() %&gt;% ymd()
+tweets_df$tweet_year &lt;- tweets_df$created_at %&gt;% as.POSIXlt() %&gt;% as.Date() %&gt;% year()
+tweets_df$tweet_month &lt;- tweets_df$created_at %&gt;% as.POSIXlt() %&gt;% as.Date() %&gt;% month()
+tweets_df$tweet_day &lt;- tweets_df$created_at %&gt;% as.POSIXlt() %&gt;% as.Date() %&gt;% day()
+
+
+tweets_df %&gt;% head()</code></pre>
+<p>Optionally, save this df to a local directory so you come back to this later without having to hit the Twitter API; <code>Rds</code> and <code>Rdata</code> files load super fast. You can also add these file types to your <code>.gitignore</code> and <code>config.toml</code> if you don’t want to push them to your online git repo.</p>
+<pre class="r"><code>saveRDS(tweets_df, file = &quot;tweets_df.Rds&quot;, compress = &#39;xz&#39;)</code></pre>
+<p>Reading back in the <code>.Rds</code> file..</p>
+<pre class="r"><code>tweets_df &lt;- readRDS(&quot;tweets_df.Rds&quot;)
+
+tweets_df %&gt;% head(5)
+## # A tibble: 5 x 97
+##   user_id status_id created_at          screen_name text  source
+##   &lt;chr&gt;   &lt;chr&gt;     &lt;dttm&gt;              &lt;chr&gt;       &lt;chr&gt; &lt;chr&gt; 
+## 1 142219~ 13439700~ 2020-12-29 17:20:08 PhillyInqu~ Unio~ Socia~
+## 2 142219~ 13421567~ 2020-12-24 17:14:43 PhillyInqu~ It&#39;s~ Socia~
+## 3 142219~ 13432591~ 2020-12-27 18:15:04 PhillyInqu~ Toda~ Socia~
+## 4 142219~ 13418156~ 2020-12-23 18:39:19 PhillyInqu~ COVI~ Socia~
+## 5 142219~ 13421897~ 2020-12-24 19:25:49 PhillyInqu~ New ~ Socia~
+## # ... with 91 more variables: display_text_width &lt;dbl&gt;,
+## #   reply_to_status_id &lt;chr&gt;, reply_to_user_id &lt;chr&gt;,
+## #   reply_to_screen_name &lt;chr&gt;, is_quote &lt;lgl&gt;, is_retweet &lt;lgl&gt;,
+## #   favorite_count &lt;int&gt;, retweet_count &lt;int&gt;, quote_count &lt;int&gt;,
+## #   reply_count &lt;int&gt;, hashtags &lt;list&gt;, symbols &lt;list&gt;, urls_url &lt;list&gt;,
+## #   urls_t.co &lt;list&gt;, urls_expanded_url &lt;list&gt;, media_url &lt;list&gt;,
+## #   media_t.co &lt;list&gt;, media_expanded_url &lt;list&gt;, media_type &lt;list&gt;,
+## #   ext_media_url &lt;list&gt;, ext_media_t.co &lt;list&gt;, ext_media_expanded_url &lt;list&gt;,
+## #   ext_media_type &lt;chr&gt;, mentions_user_id &lt;list&gt;, mentions_screen_name &lt;list&gt;,
+## #   lang &lt;chr&gt;, quoted_status_id &lt;chr&gt;, quoted_text &lt;chr&gt;,
+## #   quoted_created_at &lt;dttm&gt;, quoted_source &lt;chr&gt;, quoted_favorite_count &lt;int&gt;,
+## #   quoted_retweet_count &lt;int&gt;, quoted_user_id &lt;chr&gt;, quoted_screen_name &lt;chr&gt;,
+## #   quoted_name &lt;chr&gt;, quoted_followers_count &lt;int&gt;,
+## #   quoted_friends_count &lt;int&gt;, quoted_statuses_count &lt;int&gt;,
+## #   quoted_location &lt;chr&gt;, quoted_description &lt;chr&gt;, quoted_verified &lt;lgl&gt;,
+## #   retweet_status_id &lt;chr&gt;, retweet_text &lt;chr&gt;, retweet_created_at &lt;dttm&gt;,
+## #   retweet_source &lt;chr&gt;, retweet_favorite_count &lt;int&gt;,
+## #   retweet_retweet_count &lt;int&gt;, retweet_user_id &lt;chr&gt;,
+## #   retweet_screen_name &lt;chr&gt;, retweet_name &lt;chr&gt;,
+## #   retweet_followers_count &lt;int&gt;, retweet_friends_count &lt;int&gt;,
+## #   retweet_statuses_count &lt;int&gt;, retweet_location &lt;chr&gt;,
+## #   retweet_description &lt;chr&gt;, retweet_verified &lt;lgl&gt;, place_url &lt;chr&gt;,
+## #   place_name &lt;chr&gt;, place_full_name &lt;chr&gt;, place_type &lt;chr&gt;, country &lt;chr&gt;,
+## #   country_code &lt;chr&gt;, geo_coords &lt;list&gt;, coords_coords &lt;list&gt;,
+## #   bbox_coords &lt;list&gt;, status_url &lt;chr&gt;, name &lt;chr&gt;, location &lt;chr&gt;,
+## #   description &lt;chr&gt;, url &lt;chr&gt;, protected &lt;lgl&gt;, followers_count &lt;int&gt;,
+## #   friends_count &lt;int&gt;, listed_count &lt;int&gt;, statuses_count &lt;int&gt;,
+## #   favourites_count &lt;int&gt;, account_created_at &lt;dttm&gt;, verified &lt;lgl&gt;,
+## #   profile_url &lt;chr&gt;, profile_expanded_url &lt;chr&gt;, account_lang &lt;lgl&gt;,
+## #   profile_banner_url &lt;chr&gt;, profile_background_url &lt;chr&gt;,
+## #   profile_image_url &lt;chr&gt;, lat &lt;dbl&gt;, lng &lt;dbl&gt;, tweet_datetime &lt;dttm&gt;,
+## #   tweet_date &lt;date&gt;, tweet_year &lt;dbl&gt;, tweet_month &lt;dbl&gt;, tweet_day &lt;int&gt;</code></pre>
+</div>
+<div id="examing-data" class="section level3">
+<h3>Examing data</h3>
+<p>Now going to identify a few basic things, but first, this df has 92 columns. What are some of the columns that we’re most likely to use? The <code>skimr</code> package is <strong>really</strong> good at doing this and is a good substitute for <code>summary()</code> in many cases.</p>
+<pre class="r"><code>tweets_df %&gt;% select(
+  # About the tweet
+  text
+  , lang
+  , hashtags
+  , symbols
+  , favorite_count
+  , retweet_count
+  , lat
+  , lng
+  # About the user
+  , name
+  , screen_name
+  , followers_count
+  , friends_count
+  , location
+  , description
+  , listed_count
+  , statuses_count
+  , created_at
+  , account_created_at
+  ) %&gt;%
+  head()
+## # A tibble: 6 x 18
+##   text  lang  hashtags symbols favorite_count retweet_count   lat   lng name 
+##   &lt;chr&gt; &lt;chr&gt; &lt;list&gt;   &lt;list&gt;           &lt;int&gt;         &lt;int&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;chr&gt;
+## 1 &quot;Uni~ de    &lt;chr [1~ &lt;chr [~              0             0    NA    NA The ~
+## 2 &quot;It&#39;~ en    &lt;chr [1~ &lt;chr [~              5             1    NA    NA The ~
+## 3 &quot;Tod~ en    &lt;chr [2~ &lt;chr [~              4             2    NA    NA The ~
+## 4 &quot;COV~ en    &lt;chr [1~ &lt;chr [~             21             2    NA    NA The ~
+## 5 &quot;New~ en    &lt;chr [1~ &lt;chr [~              4             8    NA    NA The ~
+## 6 &quot;&lt;U+274C&gt; S~ en    &lt;chr [1~ &lt;chr [~              5             2    NA    NA The ~
+## # ... with 9 more variables: screen_name &lt;chr&gt;, followers_count &lt;int&gt;,
+## #   friends_count &lt;int&gt;, location &lt;chr&gt;, description &lt;chr&gt;, listed_count &lt;int&gt;,
+## #   statuses_count &lt;int&gt;, created_at &lt;dttm&gt;, account_created_at &lt;dttm&gt;</code></pre>
+</div>
+<div id="sample-stats-visualizations" class="section level3">
+<h3>Sample stats &amp; visualizations</h3>
+<p>What is our total tweet <em>count</em>?</p>
+<pre class="r"><code>nrow(tweets_df)
+## [1] 1897</code></pre>
+<p>What is the most <em>favorited</em> tweet?</p>
+<pre class="r"><code>tweets_df %&gt;%
+  slice_max(favorite_count, n = 1) %&gt;% # can also use arrange()
+  select(screen_name
+         , text
+         , favorite_count
+         , created_at)
+## # A tibble: 1 x 4
+##   screen_name text                            favorite_count created_at         
+##   &lt;chr&gt;       &lt;chr&gt;                                    &lt;int&gt; &lt;dttm&gt;             
+## 1 GetUpESPN   &quot;\&quot;Carson Wentz is soft! ... H~           1993 2020-12-21 16:16:24</code></pre>
+<p>What users are <em>tweeting the most</em>?</p>
+<pre class="r"><code>top_tweeters &lt;- tweets_df %&gt;%
+  group_by(screen_name) %&gt;%
+  summarize(num_tweets = n()) %&gt;%
+  arrange(-num_tweets) %&gt;% # can also use slice_max()
+  ungroup() %&gt;%
+  head(5)
+
+ggplot(top_tweeters) +
+  geom_histogram(aes(x = screen_name, y = num_tweets, fill = screen_name), stat = &#39;identity&#39;) +
+  theme_minimal() +
+  scale_fill_viridis_d(option = &quot;viridis&quot;) +
+  labs(title = &quot;What users are tweeting the most?&quot;) +
+  theme(legend.position = &quot;none&quot;) +
+  xlab(&quot;&quot;) +
+  ylab(&quot;Number of Tweets&quot;)</code></pre>
+<p><img src="/docs/twitter-sentiment-philly/index_files/figure-html/statsthree-1.png" width="672" /></p>
+<p>In what <em>languages</em> are they tweeting?</p>
+<p>Languages are recorded here as <a href="https://www.loc.gov/standards/iso639-2/php/code_list.php">alpha-3 / ISO 639.2 codes</a>.</p>
+<pre class="r"><code>tweets_df %&gt;%
+  group_by(lang) %&gt;%
+  summarize(num_tweets = n()) %&gt;%
+  arrange(-num_tweets) %&gt;% # can also use slice_max()
+  head(10)
+## # A tibble: 10 x 2
+##    lang  num_tweets
+##    &lt;chr&gt;      &lt;int&gt;
+##  1 en          1829
+##  2 und           34
+##  3 cy             8
+##  4 es             6
+##  5 de             3
+##  6 et             3
+##  7 ja             3
+##  8 fr             2
+##  9 pt             2
+## 10 ro             2
+
+# ggplot(tweets_df) +
+#   geom_bar(aes(x = lang, fill = lang))</code></pre>
+<p>What <em>platforms</em> are people using?</p>
+<pre class="r"><code>users_by_source &lt;- tweets_df %&gt;%
+  group_by(source) %&gt;%
+  summarize(num_users = n_distinct(user_id)) %&gt;%
+  arrange(-num_users) %&gt;% # can also use slice_max()
+  ungroup() %&gt;%
+  head(10)
+
+ggplot(users_by_source) +
+  geom_histogram(aes(x = reorder(source, num_users), y = num_users, fill = source), stat = &#39;identity&#39;) +
+  scale_fill_viridis_d(option = &quot;viridis&quot;) +
+  coord_flip() +
+  theme_gray() +
+  theme(legend.position = &quot;none&quot;) +
+  #theme(legend.title = element_blank()) +
+  labs(title = &quot;Top 10 Twitter Platforms People are Using&quot;) +
+  xlab(&quot;&quot;) +
+  ylab(&quot;Number of Users&quot;) +
+  scale_y_continuous(breaks = seq(0, 400, by=50), limits = c(0, 400), expand = c(0, 0)) + # use expand() to remove empty space between axis and bars
+  geom_hline(yintercept = seq(0, 400, by = 25), color = &#39;white&#39;)</code></pre>
+<p><img src="/docs/twitter-sentiment-philly/index_files/figure-html/statsfive-1.png" width="672" /></p>
+<p><em>How many</em> tweets per day?</p>
+<p>Going to create a chart with <a href="https://plotly-r.com/improving-ggplotly.html">ggplot2 and plotly</a> and a second one with <a href="https://rstudio.github.io/dygraphs/index.html">dygraphs for r</a>.</p>
+<pre class="r"><code>tweets_per_day &lt;- tweets_df %&gt;%
+  group_by(tweet_date) %&gt;%
+  summarize(num_tweets = n()) %&gt;%
+  arrange(-num_tweets) %&gt;% # can also use slice_max()
+  ungroup()
+
+# Using ggplot + plotly
+library(plotly)
+plt1 &lt;- ggplot(tweets_per_day) +
+  geom_line(aes(x = tweet_date, y = num_tweets)) +
+  scale_fill_viridis_d(option = &quot;viridis&quot;) +
+  theme_gray() +
+  theme(legend.position = &quot;none&quot;) +
+  labs(title = &quot;Daily Tweets&quot;) +
+  xlab(&quot;&quot;) +
+  ylab(&quot;Number of Tweets&quot;) 
+
+plotly::ggplotly(plt1)</code></pre>
+<div id="htmlwidget-1" style="width:672px;height:480px;" class="plotly html-widget"></div>
+<script type="application/json" data-for="htmlwidget-1">{"x":{"data":[{"x":[18617,18618,18619,18620,18621,18622,18623,18624,18625],"y":[194,287,290,240,159,138,203,240,146],"text":["tweet_date: 2020-12-21<br />num_tweets: 194","tweet_date: 2020-12-22<br />num_tweets: 287","tweet_date: 2020-12-23<br />num_tweets: 290","tweet_date: 2020-12-24<br />num_tweets: 240","tweet_date: 2020-12-25<br />num_tweets: 159","tweet_date: 2020-12-26<br />num_tweets: 138","tweet_date: 2020-12-27<br />num_tweets: 203","tweet_date: 2020-12-28<br />num_tweets: 240","tweet_date: 2020-12-29<br />num_tweets: 146"],"type":"scatter","mode":"lines","line":{"width":1.88976377952756,"color":"rgba(0,0,0,1)","dash":"solid"},"hoveron":"points","showlegend":false,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null}],"layout":{"margin":{"t":43.7625570776256,"r":7.30593607305936,"b":25.5707762557078,"l":43.1050228310502},"plot_bgcolor":"rgba(235,235,235,1)","paper_bgcolor":"rgba(255,255,255,1)","font":{"color":"rgba(0,0,0,1)","family":"","size":14.6118721461187},"title":{"text":"Daily Tweets","font":{"color":"rgba(0,0,0,1)","family":"","size":17.5342465753425},"x":0,"xref":"paper"},"xaxis":{"domain":[0,1],"automargin":true,"type":"linear","autorange":false,"range":[18616.6,18625.4],"tickmode":"array","ticktext":["Dec 22","Dec 24","Dec 26","Dec 28"],"tickvals":[18618,18620,18622,18624],"categoryorder":"array","categoryarray":["Dec 22","Dec 24","Dec 26","Dec 28"],"nticks":null,"ticks":"outside","tickcolor":"rgba(51,51,51,1)","ticklen":3.65296803652968,"tickwidth":0.66417600664176,"showticklabels":true,"tickfont":{"color":"rgba(77,77,77,1)","family":"","size":11.689497716895},"tickangle":-0,"showline":false,"linecolor":null,"linewidth":0,"showgrid":true,"gridcolor":"rgba(255,255,255,1)","gridwidth":0.66417600664176,"zeroline":false,"anchor":"y","title":{"text":"","font":{"color":"rgba(0,0,0,1)","family":"","size":14.6118721461187}},"hoverformat":".2f"},"yaxis":{"domain":[0,1],"automargin":true,"type":"linear","autorange":false,"range":[130.4,297.6],"tickmode":"array","ticktext":["150","200","250"],"tickvals":[150,200,250],"categoryorder":"array","categoryarray":["150","200","250"],"nticks":null,"ticks":"outside","tickcolor":"rgba(51,51,51,1)","ticklen":3.65296803652968,"tickwidth":0.66417600664176,"showticklabels":true,"tickfont":{"color":"rgba(77,77,77,1)","family":"","size":11.689497716895},"tickangle":-0,"showline":false,"linecolor":null,"linewidth":0,"showgrid":true,"gridcolor":"rgba(255,255,255,1)","gridwidth":0.66417600664176,"zeroline":false,"anchor":"x","title":{"text":"Number of Tweets","font":{"color":"rgba(0,0,0,1)","family":"","size":14.6118721461187}},"hoverformat":".2f"},"shapes":[{"type":"rect","fillcolor":null,"line":{"color":null,"width":0,"linetype":[]},"yref":"paper","xref":"paper","x0":0,"x1":1,"y0":0,"y1":1}],"showlegend":false,"legend":{"bgcolor":"rgba(255,255,255,1)","bordercolor":"transparent","borderwidth":1.88976377952756,"font":{"color":"rgba(0,0,0,1)","family":"","size":11.689497716895}},"hovermode":"closest","barmode":"relative"},"config":{"doubleClick":"reset","showSendToCloud":false},"source":"A","attrs":{"52d845fe73ba":{"x":{},"y":{},"type":"scatter"}},"cur_data":"52d845fe73ba","visdat":{"52d845fe73ba":["function (y) ","x"]},"highlight":{"on":"plotly_click","persistent":false,"dynamic":false,"selectize":false,"opacityDim":0.2,"selected":{"opacity":1},"debounce":0},"shinyEvents":["plotly_hover","plotly_click","plotly_selected","plotly_relayout","plotly_brushed","plotly_brushing","plotly_clickannotation","plotly_doubleclick","plotly_deselect","plotly_afterplot","plotly_sunburstclick"],"base_url":"https://plot.ly"},"evals":[],"jsHooks":[]}</script>
+<pre class="r"><code># Using dygraph
+# convert series to an xts object 
+tweets_ts &lt;- xts::xts(tweets_per_day$num_tweets, order.by = tweets_per_day$tweet_date)
+# Create the dygraph
+library(dygraphs)
+dygraph(tweets_ts, main = &quot;Daily Tweets for &#39;Philadelphia&#39;&quot;) %&gt;%
+  dySeries(&quot;V1&quot;, label = &quot;Tweet Count&quot;)</code></pre>
+<p>And <em>where</em> are people tweeting?</p>
+<p>Of the 1897 tweets that we have, 133 are geotagged. We’ll plot those using <a href="https://rstudio.github.io/leaflet/">leaflet</a> and build on this later.</p>
+<pre class="r"><code>library(leaflet)
+
+leaflet(tweets_df) %&gt;%
+  addTiles() %&gt;%
+  addCircleMarkers(lng = ~lng
+                   , lat = ~lat)</code></pre>
+<div id="htmlwidget-2" style="width:672px;height:480px;" class="leaflet html-widget"></div>
+<script type="application/json" data-for="htmlwidget-2">{"x":{"options":{"crs":{"crsClass":"L.CRS.EPSG3857","code":null,"proj4def":null,"projectedBounds":null,"options":{}}},"calls":[{"method":"addTiles","args":["//{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",null,null,{"minZoom":0,"maxZoom":18,"tileSize":256,"subdomains":"abc","errorTileUrl":"","tms":false,"noWrap":false,"zoomOffset":0,"zoomReverse":false,"opacity":1,"zIndex":1,"detectRetina":false,"attribution":"&copy; <a href=\"http://openstreetmap.org\">OpenStreetMap<\/a> contributors, <a href=\"http://creativecommons.org/licenses/by-sa/2.0/\">CC-BY-SA<\/a>"}]},{"method":"addCircleMarkers","args":[[null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,39.99976982,39.99976982,39.99976982,39.99976982,39.99976982,null,null,null,null,null,null,null,null,null,39.9527,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,39.9527,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,40.0085325,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,40.0048655,40.8503475,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,40.0048655,null,42.37819765,42.37819765,40.0586789,39.9556623,40.0745008,39.9946465,null,null,null,39.9527,null,null,null,40.0048655,null,null,40.1320755,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,39.9542158,39.94893092,39.95742063,39.96502462,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,39.9525839,null,null,40.0048655,40.0048655,null,null,null,39.9527,39.9527,39.96502462,null,null,null,null,null,null,null,null,39.98912386,null,null,null,null,40.0048655,39.951573,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,41.83358445,null,null,null,null,39.9525839,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,41.1179365,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,26.46884765,null,null,null,null,null,null,null,null,null,null,null,null,null,40.655138,null,null,null,null,40.0048655,null,null,null,null,null,null,39.9527,34.05733575,40.0048655,null,null,null,null,null,null,null,null,null,40.150702,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,39.99976982,null,null,39.9527,null,null,null,41.0983345,null,39.9527,null,null,null,null,null,null,null,38.343445,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,40.67087955,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,40.0048655,null,null,null,null,null,null,null,null,null,null,null,39.9527,39.9527,39.9527,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,40.2904485,null,null,null,null,null,null,null,null,null,null,null,null,40.0048655,null,null,39.95544868,39.95544868,39.95544868,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,40.0048655,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,40.0048655,40.0048655,null,40.0048655,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,39.9527,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,39.9527,39.9527,null,null,null,null,null,null,null,null,null,null,null,40.0048655,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,39.9527,39.9231,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,40.0048655,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,39.9527,null,null,39.9527,39.9527,40.0048655,40.0048655,null,null,null,null,null,null,null,null,39.9526035068042,39.952746,39.952746,39.9527,null,null,null,null,null,null,39.9408655,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,40.0048655,null,null,null,null,null,null,null,null,39.17917928,39.95997069,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,41.1179365,39.998,32.7742,40.0048655,null,null,null,null,null,null,null,null,null,41.6565905,null,null,39.99976982,null,null,null,null,null,null,null,null,null,null,null,null,39.9527,null,40.2368775,null,null,null,null,null,39.8877485,null,null,null,null,null,null,null,null,null,40.1382005,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,39.9527,null,null,null,null,null,40.02626709,null,null,51.027664,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,40.0048655,40.0048655,40.0048655,null,null,null,null,39.9527,null,null,null,null,null,39.95402298,null,39.9527,null,null,null,null,39.9527,null,45.484892,null,null,null,40.0048655,40.0048655,40.0048655,40.0048655,null,null,41.1179365,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,24.99346225,null,null,null,null,null,null,null,null,null,40.0048655,40.0048655,null,null,null,null,null,null,null,null,null,null,null,null,null,40.0048655,null,null,null,null,null,null,null,null,null,null,39.94859,39.94859,null,null,null,null,null,39.95993,null,40.0048655,null,null,null,null,41.1179365,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,39.9201777971345,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,40.0048655,null,null,null,null,null,null,null,null,null,null,39.9140094531944,null,null,null,40.0048655,null,null,null,null,null,null,null,null,null,null,39.91752,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,41.1179365,null,null,null,null,null,null,null,39.9527,null,null,null,null,null,40.0048655,null,null,null,null,null,null,41.1179365,null,null,null,null,null,null,39.49095065,39.9530922882618,null,null,null,null,null,null,null,40.0048655,null,null,40.0048655,null,null,null,null,null,null,null,null,null,null,null,null,40.0416891,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,39.9527,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,40.0211830370044,null,null,null,null,null,null],[null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,-75.11781236,-75.11781236,-75.11781236,-75.11781236,-75.11781236,null,null,null,null,null,null,null,null,null,-75.1651,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,-75.1651,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,-76.12608,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,-75.117998,-73.8494415,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,-75.117998,null,-71.112377,-71.112377,-75.1646845,-75.2002054,-75.0344261,-75.0952642,null,null,null,-75.1651,null,null,null,-75.117998,null,null,-75.384245,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,-75.16559583,-75.15004635,-75.16883428,-75.17996394,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,-75.1652215,null,null,-75.117998,-75.117998,null,null,null,-75.1651,-75.1651,-75.17996394,null,null,null,null,null,null,null,null,-75.19497829,null,null,null,null,-75.117998,-75.158525,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,-87.732013,null,null,null,null,-75.1652215,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,-77.604684,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,-80.1486538,null,null,null,null,null,null,null,null,null,null,null,null,null,-73.9487755,null,null,null,null,-75.117998,null,null,null,null,null,null,-75.1651,-81.11191575,-75.117998,null,null,null,null,null,null,null,null,null,-75.1173005,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,-75.11781236,null,null,-75.1651,null,null,null,-73.554097,null,-75.1651,null,null,null,null,null,null,null,-122.699418,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,-73.8311875,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,-75.117998,null,null,null,null,null,null,null,null,null,null,null,-75.1651,-75.1651,-75.1651,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,-75.2078345,null,null,null,null,null,null,null,null,null,null,null,null,-75.117998,null,null,-75.15051067,-75.15051067,-75.15051067,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,-75.117998,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,-75.117998,-75.117998,null,-75.117998,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,-75.1651,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,-75.1651,-75.1651,null,null,null,null,null,null,null,null,null,null,null,-75.117998,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,-75.1651,-75.1753,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,-75.117998,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,-75.1651,null,null,-75.1651,-75.1651,-75.117998,-75.117998,null,null,null,null,null,null,null,null,-75.1606246356687,-75.163461,-75.163461,-75.1651,null,null,null,null,null,null,-75.2770645,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,-75.117998,null,null,null,null,null,null,null,null,-76.6688633,-75.22486746,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,-77.604684,-75.1448,-89.1128,-75.117998,null,null,null,null,null,null,null,null,null,-83.574671,null,null,-75.11781236,null,null,null,null,null,null,null,null,null,null,null,null,-75.1651,null,-83.3497615,null,null,null,null,null,-74.9096475,null,null,null,null,null,null,null,null,null,-75.5234715,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,-75.1651,null,null,null,null,null,-75.03018379,null,null,-114.08785095,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,-75.117998,-75.117998,-75.117998,null,null,null,null,-75.1651,null,null,null,null,null,-75.1652799,null,-75.1651,null,null,null,null,-75.1651,null,-122.805579,null,null,null,-75.117998,-75.117998,-75.117998,-75.117998,null,null,-77.604684,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,55.55117235,null,null,null,null,null,null,null,null,null,-75.117998,-75.117998,null,null,null,null,null,null,null,null,null,null,null,null,null,-75.117998,null,null,null,null,null,null,null,null,null,null,-75.17444,-75.17444,null,null,null,null,null,-75.605775,null,-75.117998,null,null,null,null,-77.604684,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,-75.1706068217754,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,-75.117998,null,null,null,null,null,null,null,null,null,null,-75.3505929368663,null,null,null,-75.117998,null,null,null,null,null,null,null,null,null,null,-75.33015,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,-77.604684,null,null,null,null,null,null,null,-75.1651,null,null,null,null,null,-75.117998,null,null,null,null,null,null,-77.604684,null,null,null,null,null,null,-74.47120925,-75.170188352254,null,null,null,null,null,null,null,-75.117998,null,null,-75.117998,null,null,null,null,null,null,null,null,null,null,null,null,-75.0259754,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,-75.1651,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,-75.2163541574007,null,null,null,null,null,null],10,null,null,{"interactive":true,"className":"","stroke":true,"color":"#03F","weight":5,"opacity":0.5,"fill":true,"fillColor":"#03F","fillOpacity":0.2},null,null,null,null,null,{"interactive":false,"permanent":false,"direction":"auto","opacity":1,"offset":[0,0],"textsize":"10px","textOnly":false,"className":"","sticky":true},null]}],"limits":{"lat":[24.99346225,51.027664],"lng":[-122.805579,55.55117235]}},"evals":[],"jsHooks":[]}</script>
+</div>
+<div id="sentiment-analysis" class="section level3">
+<h3>Sentiment analysis</h3>
+<p>Now switching over to <a href="https://www.tidytextmining.com/topicmodeling.html">tidytext</a></p>
+<blockquote>
+<p>The function <code>get_sentiments()</code> allows us to get specific sentiment lexicons with the appropriate measures for each one.</p>
+</blockquote>
+<p>Preview some of the sentiment lexicons. You’ll be prompted to download the <code>textdata</code> package and the <code>afinn</code>, <code>bing</code>, and <code>nrc</code> lexicons if you don’t have them already.</p>
+<p><strong><a href="http://www2.imm.dtu.dk/pubdb/pubs/6010-full.html">afinn</a></strong> - assigns a numeric value to each word on a scale of -5 to +5
+<strong><a href="https://www.cs.uic.edu/~liub/FBS/sentiment-analysis.html">bing</a></strong> - binary assignment to each word, e.g. ‘positive’ or ‘negative’<br />
+<strong><a href="http://saifmohammad.com/WebPages/NRC-Emotion-Lexicon.htm">nrc</a></strong> - categorizes words into categories: positive, negative, anger, anticipation, disgust, fear, joy, sadness, surprise, and trust</p>
+<pre class="r"><code>#install.packages(&quot;textdata&quot;)
+library(tidytext)
+
+get_sentiments(&quot;afinn&quot;) %&gt;% head()
+## # A tibble: 6 x 2
+##   word       value
+##   &lt;chr&gt;      &lt;dbl&gt;
+## 1 abandon       -2
+## 2 abandoned     -2
+## 3 abandons      -2
+## 4 abducted      -2
+## 5 abduction     -2
+## 6 abductions    -2
+get_sentiments(&quot;bing&quot;) %&gt;% head()
+## # A tibble: 6 x 2
+##   word       sentiment
+##   &lt;chr&gt;      &lt;chr&gt;    
+## 1 2-faces    negative 
+## 2 abnormal   negative 
+## 3 abolish    negative 
+## 4 abominable negative 
+## 5 abominably negative 
+## 6 abominate  negative
+get_sentiments(&quot;nrc&quot;) %&gt;% head()
+## # A tibble: 6 x 2
+##   word      sentiment
+##   &lt;chr&gt;     &lt;chr&gt;    
+## 1 abacus    trust    
+## 2 abandon   fear     
+## 3 abandon   negative 
+## 4 abandon   sadness  
+## 5 abandoned anger    
+## 6 abandoned fear</code></pre>
+<p>Now tidy up the data and prepare it for analysis. If running this with the <code>austen_books()</code> example from the <a href="https://www.tidytextmining.com/sentiment.html">tidytext docs</a>, it’s relatively straightforward:</p>
+<pre class="r"><code>library(stringr)
+library(janeaustenr)
+
+tidy_books &lt;- austen_books() %&gt;%
+  group_by(book) %&gt;%
+  mutate(
+    linenumber = row_number(),
+    chapter = cumsum(str_detect(text, 
+                                regex(&quot;^chapter [\\divxlc]&quot;, 
+                                      ignore_case = TRUE)))) %&gt;%
+  ungroup() %&gt;%
+  unnest_tokens(word, text)
+
+tidy_books %&gt;% head()
+## # A tibble: 6 x 4
+##   book                linenumber chapter word       
+##   &lt;fct&gt;                    &lt;int&gt;   &lt;int&gt; &lt;chr&gt;      
+## 1 Sense &amp; Sensibility          1       0 sense      
+## 2 Sense &amp; Sensibility          1       0 and        
+## 3 Sense &amp; Sensibility          1       0 sensibility
+## 4 Sense &amp; Sensibility          3       0 by         
+## 5 Sense &amp; Sensibility          3       0 jane       
+## 6 Sense &amp; Sensibility          3       0 austen</code></pre>
+<p>But I want to run this on tweets, so I need to reshape the data. I only executed one search for <code>philadelphia+philly</code>, so I’m going to build a dataframe from that. Though, we can run multiple searches and assign each search its own <code>book</code> value to enable comparisons and faceted plots later.</p>
+<pre class="r"><code>tweets_book &lt;- cbind(&#39;Philadelphia&#39;, tweets_df$text) %&gt;% data.frame()
+colnames(tweets_book) &lt;- c(&#39;book&#39;, &#39;text&#39;)
+
+# Reformat the date - running above insists on converting the `tweet_date` value to its integer form.
+tweets_book$chapter &lt;- tweets_df$tweet_date
+
+tidy_books &lt;- tweets_book %&gt;%
+  group_by(book) %&gt;%
+  mutate(
+    linenumber = row_number()
+    ) %&gt;%
+  ungroup() %&gt;%
+  unnest_tokens(word, text)
+
+tidy_books %&gt;% head()
+## # A tibble: 6 x 4
+##   book         chapter    linenumber word    
+##   &lt;chr&gt;        &lt;date&gt;          &lt;int&gt; &lt;chr&gt;   
+## 1 Philadelphia 2020-12-29          1 union   
+## 2 Philadelphia 2020-12-29          1 to      
+## 3 Philadelphia 2020-12-29          1 sell    
+## 4 Philadelphia 2020-12-29          1 mark    
+## 5 Philadelphia 2020-12-29          1 mckenzie
+## 6 Philadelphia 2020-12-29          1 to</code></pre>
+<p>Now the tweets are in a tidy format with one word per row.</p>
+<p>Looking at the <code>nrc</code> lexicon, what are some of the “joy” words?</p>
+<pre class="r"><code>nrc_joy &lt;- get_sentiments(&quot;nrc&quot;) %&gt;% 
+  filter(sentiment == &quot;joy&quot;)
+
+head(nrc_joy)
+## # A tibble: 6 x 2
+##   word          sentiment
+##   &lt;chr&gt;         &lt;chr&gt;    
+## 1 absolution    joy      
+## 2 abundance     joy      
+## 3 abundant      joy      
+## 4 accolade      joy      
+## 5 accompaniment joy      
+## 6 accomplish    joy</code></pre>
+<p>How many “joy” words do we have in our tweets?</p>
+<pre class="r"><code>tidy_books %&gt;%
+  filter(book == &quot;Philadelphia&quot;) %&gt;%
+  inner_join(nrc_joy) %&gt;%
+  count(word, sort = TRUE) %&gt;%
+  head(10)
+## # A tibble: 10 x 2
+##    word        n
+##    &lt;chr&gt;   &lt;int&gt;
+##  1 love       58
+##  2 good       56
+##  3 holiday    52
+##  4 art        36
+##  5 food       29
+##  6 music      27
+##  7 deal       24
+##  8 save       24
+##  9 safe       23
+## 10 happy      21</code></pre>
+<p>Using <code>tidyr</code>, we can continue to examine how sentiment changes throughout the book. This is more relevant to the novels examples from the docs, but I’m including it here as an exercise. This example will use the <code>bing</code> lexicon. We need some type of interval - the example creates an index from 80 line chunks, but I’m going to update this to use the <code>chapter</code> value, which now represents the date of each tweet allowing to see changes in sentiment over time.</p>
+<p>From the docs:</p>
+<blockquote>
+<p>… First, we find a sentiment score for each word using the Bing lexicon and inner_join().</p>
+</blockquote>
+<blockquote>
+<p>Next, we count up how many positive and negative words there are in defined sections of each book. We define an index here to keep track of where we are in the narrative; this index (using integer division) counts up sections of 80 lines of text.</p>
+</blockquote>
+<blockquote>
+<p>The %/% operator does integer division (x %/% y is equivalent to floor(x/y)) so the index keeps track of which 80-line section of text we are counting up negative and positive sentiment in.</p>
+</blockquote>
+<blockquote>
+<p>Small sections of text may not have enough words in them to get a good estimate of sentiment while really large sections can wash out narrative structure. For these books, using 80 lines works well, but this can vary depending on individual texts, how long the lines were to start with, etc. We then use spread() so that we have negative and positive sentiment in separate columns, and lastly calculate a net sentiment (positive - negative).</p>
+</blockquote>
+<pre class="r"><code>philly_sentiment &lt;- tidy_books %&gt;%
+  inner_join(get_sentiments(&quot;bing&quot;)) %&gt;%
+  #count(book, index = linenumber %/% 80, sentiment) %&gt;% # 80-line tweet chunks
+  count(book, index = chapter, sentiment) %&gt;%
+  spread(sentiment, n, fill = 0) %&gt;%
+  mutate(sentiment = positive - negative)</code></pre>
+<pre class="r"><code>ggplot(philly_sentiment) +
+  geom_col(aes(index, sentiment, fill = sentiment)) +
+  #facet_wrap(~book, ncol = 1, scales = &quot;free_x&quot;) # apply if we&#39;relooking across multiple books +
+  labs(title = &quot;Sentiment of &#39;Philadelphia&#39; Tweets&quot;) +
+  scale_fill_gradient2(low=&#39;red&#39;, mid=&#39;orange&#39;, high=&#39;navy&#39;) +
+  #scale_fill_viridis_c(option = &quot;viridis&quot;) +
+  theme(legend.position = &quot;none&quot;) +
+  xlab(&quot;&quot;) +
+  ylab(&quot;Sentiment&quot;)</code></pre>
+<p><img src="/docs/twitter-sentiment-philly/index_files/figure-html/sentimentsplotone-1.png" width="672" /></p>
+</div>
+<div id="comparing-sentiments" class="section level3">
+<h3>Comparing sentiments</h3>
+<p>Going to compare the different sentiment lexicons. Still writing the code as if there are multiple books (or search results) in the dataframe.</p>
+<pre class="r"><code>philly_tweets &lt;- tidy_books %&gt;% 
+  filter(book == &quot;Philadelphia&quot;)</code></pre>
+<p>Using <code>dplyr::inner_join()</code>, estimate the different sentiment values for each lexicon.</p>
+<pre class="r"><code>## afinn
+afinn &lt;- philly_tweets %&gt;% 
+  inner_join(get_sentiments(&quot;afinn&quot;)) %&gt;% 
+  #group_by(index = linenumber %/% 80) %&gt;% # Can use 80-line chunks
+  group_by(index = chapter) %&gt;% # or other type of index value, like date
+  summarise(sentiment = sum(value)) %&gt;% 
+  mutate(method = &quot;AFINN&quot;)
+
+## rbinding bing and nrc
+bing_and_nrc &lt;- bind_rows(
+  philly_tweets %&gt;% 
+    inner_join(get_sentiments(&quot;bing&quot;)) %&gt;%
+    mutate(method = &quot;Bing et al.&quot;),
+  philly_tweets %&gt;% 
+    inner_join(get_sentiments(&quot;nrc&quot;) %&gt;% 
+                 filter(sentiment %in% c(&quot;positive&quot;,
+                                         &quot;negative&quot;))
+    ) %&gt;%
+    mutate(method = &quot;NRC&quot;)) %&gt;%
+  #count(method, index = linenumber %/% 80, sentiment) %&gt;% # Can use 80-line chunks
+  count(method, index = chapter, sentiment) %&gt;% # or other type of index value, like date
+  spread(sentiment, n, fill = 0) %&gt;%
+  mutate(sentiment = positive - negative)</code></pre>
+<p>Now combine and plot them together.</p>
+<pre class="r"><code>bind_rows(afinn, 
+          bing_and_nrc) %&gt;%
+  ggplot(aes(index, sentiment, fill = method)) +
+  geom_col(show.legend = FALSE) +
+  facet_wrap(~method, ncol = 1, scales = &quot;free_y&quot;) +
+  labs(title = &quot;Sentiment of &#39;Philadelphia&#39; Tweets - Lexicon Comparison&quot;) +
+  scale_fill_viridis_d(option = &quot;viridis&quot;) +
+  theme(legend.position = &quot;none&quot;) +
+  xlab(&quot;&quot;) +
+  ylab(&quot;Sentiment&quot;)</code></pre>
+<p><img src="/docs/twitter-sentiment-philly/index_files/figure-html/sentimentplottwo-1.png" width="672" /></p>
+</div>
+<div id="some-routine-checks" class="section level3">
+<h3>Some routine checks</h3>
+<p>When comparing results across different lexicons, consider word counts and the ratio of positive words to negative words.</p>
+<p>TODO: Update include and eval settings here - ok to keep in md doc but no need to knit them</p>
+<pre class="r"><code>get_sentiments(&quot;nrc&quot;) %&gt;% 
+  filter(sentiment %in% c(&quot;positive&quot;, &quot;negative&quot;)) %&gt;% 
+  count(sentiment)
+## # A tibble: 2 x 2
+##   sentiment     n
+##   &lt;chr&gt;     &lt;int&gt;
+## 1 negative   3324
+## 2 positive   2312
+
+get_sentiments(&quot;bing&quot;) %&gt;% 
+  count(sentiment)
+## # A tibble: 2 x 2
+##   sentiment     n
+##   &lt;chr&gt;     &lt;int&gt;
+## 1 negative   4781
+## 2 positive   2005</code></pre>
+<pre class="r"><code>bing_word_counts &lt;- tidy_books %&gt;%
+  inner_join(get_sentiments(&quot;bing&quot;)) %&gt;%
+  count(word, sentiment, sort = TRUE) %&gt;%
+  ungroup()
+
+bing_word_counts %&gt;% head(25)
+## # A tibble: 25 x 3
+##    word       sentiment     n
+##    &lt;chr&gt;      &lt;chr&gt;     &lt;int&gt;
+##  1 corruption negative    120
+##  2 like       positive     74
+##  3 love       positive     58
+##  4 great      positive     57
+##  5 good       positive     56
+##  6 best       positive     50
+##  7 hurts      negative     42
+##  8 well       positive     38
+##  9 work       positive     29
+## 10 free       positive     28
+## # ... with 15 more rows</code></pre>
+<p>What are the top words driving sentiment score?</p>
+<pre class="r"><code>bing_word_counts %&gt;%
+  group_by(sentiment) %&gt;%
+  top_n(10) %&gt;%
+  ungroup() %&gt;%
+  mutate(word = reorder(word, n)) %&gt;%
+  ggplot(aes(n, word, fill = sentiment)) +
+  geom_col(show.legend = FALSE) +
+  scale_fill_viridis_d(option = &quot;viridis&quot;) +
+  facet_wrap(~sentiment, scales = &quot;free_y&quot;) +
+  labs(x = &quot;Contribution to sentiment&quot;,
+       y = NULL)</code></pre>
+<p><img src="/docs/twitter-sentiment-philly/index_files/figure-html/sentplotfour-1.png" width="672" /></p>
+</div>
+<div id="wordclouds" class="section level3">
+<h3>Wordclouds</h3>
+<p>I don’t find wordclouds terrible useful, but they’re not terrible for a background graphic or an attention grabber.</p>
+<p>First, let’s add some custom stop words (i.e. words to exclude from the analysis). If you want to know why, run the next chunk and see how URLs (and obviously our original search terms) throw off our term frequency matrix.</p>
+<pre class="r"><code>custom_stop_words &lt;- bind_rows(tibble(word = c(&#39;philadelphia&#39;, &#39;philly&#39;, &#39;t.co&#39;, &#39;https&#39;, &#39;amp&#39;),
+                                      lexicon = c(&quot;custom&quot;)),
+                               stop_words)
+
+custom_stop_words %&gt;% head()
+## # A tibble: 6 x 2
+##   word         lexicon
+##   &lt;chr&gt;        &lt;chr&gt;  
+## 1 philadelphia custom 
+## 2 philly       custom 
+## 3 t.co         custom 
+## 4 https        custom 
+## 5 amp          custom 
+## 6 a            SMART</code></pre>
+<pre class="r"><code>library(wordcloud)
+
+tidy_books %&gt;%
+  anti_join(custom_stop_words) %&gt;%
+  count(word) %&gt;%
+  with(wordcloud(word, n, max.words = 100, col = brewer.pal(8, &quot;Dark2&quot;)))</code></pre>
+<p><img src="/docs/twitter-sentiment-philly/index_files/figure-html/wordcloudone-1.png" width="672" /></p>
+<p>Going to compare the most popular positive and negative words using <code>comparison.cloud()</code>. Keep a look out for pronouns that get mistaken for positive or negative words (e.g. ‘hurts’ as in ‘jalen hurts’, though you might leave that in depending on how you feel about the Eagles qb situation).</p>
+<pre class="r"><code>library(reshape2)
+
+tidy_books %&gt;%
+  inner_join(get_sentiments(&quot;bing&quot;)) %&gt;%
+  count(word, sentiment, sort = TRUE) %&gt;%
+  acast(word ~ sentiment, value.var = &quot;n&quot;, fill = 0) %&gt;%
+  comparison.cloud(colors = c(&quot;orange&quot;, &quot;navy&quot;),
+                   max.words = 100)</code></pre>
+<p><img src="/docs/twitter-sentiment-philly/index_files/figure-html/wordcloudtwo-1.png" width="672" /></p>
+</div>
+<div id="what-about-sentences" class="section level3">
+<h3>What about sentences?</h3>
+<p>Rather than assign sentiment to words, some algorithms attempt to derive sentiment from complete sentences, e.g. “I am not having a good day” should imply negative sentiment, not positive. Our tweets are already pretty succinct, so we can try to look at the entire tweek to make an assessment.</p>
+<p>TODO: Fix how this is parsing sentences. See <a href="https://www.tidytextmining.com/sentiment.html#looking-at-units-beyond-just-words">docs</a></p>
+<p>Using sentences, or some other type of index, we can assign a sentiment value - not by word - but by an entire chapter.</p>
+<p>Which chapter (date) had the <em>highest proportion</em> of positive words?</p>
+<pre class="r"><code>bingpositive &lt;- get_sentiments(&quot;bing&quot;) %&gt;% 
+  filter(sentiment == &quot;positive&quot;)
+
+wordcounts &lt;- tidy_books %&gt;%
+  group_by(book, chapter) %&gt;%
+  summarize(words = n())
+
+tidy_books %&gt;%
+  semi_join(bingpositive) %&gt;%
+  group_by(book, chapter) %&gt;%
+  summarize(positivewords = n()) %&gt;%
+  left_join(wordcounts, by = c(&quot;book&quot;, &quot;chapter&quot;)) %&gt;%
+  mutate(positive_ratio = positivewords/words) %&gt;%
+  filter(chapter != 0) %&gt;%
+  top_n(1) %&gt;%
+  ungroup()
+## # A tibble: 1 x 5
+##   book         chapter    positivewords words positive_ratio
+##   &lt;chr&gt;        &lt;date&gt;             &lt;int&gt; &lt;int&gt;          &lt;dbl&gt;
+## 1 Philadelphia 2020-12-21           196  5755         0.0341</code></pre>
+<!-- TO BE CONTINUED -->
+<!-- ### Condition the data -->
+<!-- Pre-process the data (source: bryangoodrich). -->
+<!-- ```{r, eval = FALSE, include = FALSE} -->
+<!-- tweets <- iconv(tweets, to = "ASCII", sub = " ")  # Convert to basic ASCII text -->
+<!-- tweets <- tolower(tweets)  # Make everything lower case -->
+<!-- tweets <- gsub("rt", " ", tweets)  # Remove the "RT" (retweet) so duplicates are duplicates -->
+<!-- tweets <- gsub("@\\w+", " ", tweets)  # Remove user names -->
+<!-- tweets <- gsub("http.+ |http.+$", " ", tweets)  # Remove links -->
+<!-- tweets <- gsub("[[:punct:]]", " ", tweets)  # Remove punctuation -->
+<!-- tweets <- gsub("[ |\t]{2,}", " ", tweets)  # Remove tabs -->
+<!-- tweets <- gsub("amp", " ", tweets)  # "&" is "&amp" in HTML, so after punctuation removed ... -->
+<!-- tweets <- gsub("^ ", "", tweets)  # Leading blanks -->
+<!-- tweets <- gsub(" $", "", tweets)  # Lagging blanks -->
+<!-- tweets <- gsub(" +", " ", tweets) # General spaces (should just do all whitespaces no?) -->
+<!-- tweets <- unique(tweets)  # Now get rid of duplicates! -->
+<!-- ``` -->
+<!-- Convert the `tweets` object to a corpus object to use with the `tm` package. -->
+<!-- ```{r tm_corpus, eval = FALSE, include = FALSE} -->
+<!-- corpus <- tm::Corpus(VectorSource(tweets))  -->
+<!-- ``` -->
+<!-- Remove English [stop words](https://rdrr.io/rforge/tm/man/stopwords.html). _Also see [Adding custom stopwords in R tm](https://stackoverflow.com/questions/18446408/adding-custom-stopwords-in-r-tm)_.   -->
+<!-- ```{r stopwordstwo, eval = FALSE, include = FALSE} -->
+<!-- corpus <- tm_map(corpus, removeWords, stopwords("en"))   -->
+<!-- ``` -->
+<!-- Remove the search terms from the corpus.  -->
+<!-- _TODO: Make these variables and use paste() to place them in the search term earlier._ -->
+<!-- ```{r rmsearchterms, eval = FALSE, include = FALSE} -->
+<!-- #corpus <- tm_map(corpus, removeWords, c("energy", "electricity")) -->
+<!-- corpus <- tm_map(corpus, removeWords, c('tesla', 'tsla')) -->
+<!-- ``` -->
+<!-- Remove numbers. -->
+<!-- ```{r numbers, eval = FALSE, include = FALSE} -->
+<!-- corpus <- tm_map(corpus, removeNumbers, mc.cores=1) -->
+<!-- ``` -->
+<!-- Stem the words  (e.g. likes, liked, likely, liking >> like). _For more on stemming and lemmatization, see [NLP Stanford](https://nlp.stanford.edu/IR-book/html/htmledition/stemming-and-lemmatization-1.html)_. -->
+<!-- ```{r stemming, eval = FALSE, include = FALSE} -->
+<!-- corpus <- tm_map(corpus, stemDocument) -->
+<!-- ``` -->
+<!-- ### Visualization -->
+<!-- Display the corpus as a word cloud. -->
+<!-- ```{r wordcloud, eval = FALSE, include = FALSE} -->
+<!-- pal <- brewer.pal(8, "Dark2") -->
+<!-- wordcloud(corpus, min.freq=2, max.words = 150, random.order = TRUE, col = pal) -->
+<!-- ``` -->
+<!-- ### Topic Modeling -->
+<!-- Get the lengths and make sure we only create a Document Term Matrix (DTM) for tweets with actual content. -->
+<!-- ```{r dtm, eval = FALSE, include = FALSE} -->
+<!-- doc_lengths <- corpus %>% DocumentTermMatrix() %>% as.matrix() %>% rowSums() -->
+<!-- dtm <- corpus[doc_lengths > 0] %>% DocumentTermMatrix() -->
+<!-- ``` -->
+<!-- Test a Latent Dirichlet Allocation model; A LDA_VEM topic model with 2 topics. -->
+<!-- ```{r lda, eval = FALSE, include = FALSE} -->
+<!-- lda <- LDA(x = dtm, k = 2, method = 'VEM', control = list(seed = 1234)) -->
+<!-- ``` -->
+<!-- Explore it a bit with `tidytext` ([documentation](https://www.tidytextmining.com/topicmodeling.html)) -->
+<!-- > tidytext package provides this method for extracting the per-topic-per-word probabilities, called  -->
+<!-- β (“beta”), from the model ... For each combination, the model computes the probability of that term being generated from that topic -->
+<!-- ```{r lda_topics, eval = FALSE, include = FALSE} -->
+<!-- topics <- tidy(lda, matrix = "beta") -->
+<!-- topics %>% arrange(-beta) %>% head(50) -->
+<!-- ``` -->
+<!-- Display top terms for each topic. -->
+<!-- ```{r topterms, eval = FALSE, include = FALSE} -->
+<!-- top_terms <- topics %>% -->
+<!--   group_by(topic) %>% -->
+<!--   top_n(10, beta) %>% -->
+<!--   ungroup() %>% -->
+<!--   arrange(topic, -beta) -->
+<!-- top_terms %>% -->
+<!--   mutate(term = reorder_within(term, beta, topic)) %>% -->
+<!--   ggplot(aes(beta, term, fill = factor(topic))) + -->
+<!--   geom_col(show.legend = FALSE) + -->
+<!--   facet_wrap(~ topic, scales = "free") + -->
+<!--   scale_y_reordered() + -->
+<!--   labs( -->
+<!--     title = 'Top Terms in Twitter Corpus' -->
+<!--     , subtitle = 'The terms that are most common within each topic' -->
+<!--   ) -->
+<!-- ``` -->
+<!-- ```{r betaspread, eval = FALSE, include = FALSE} -->
+<!-- beta_spread <- topics %>% -->
+<!--   mutate(topic = paste0("topic", topic)) %>% -->
+<!--   spread(topic, beta) %>% -->
+<!--   filter(topic1 > .001 | topic2 > .001) %>% -->
+<!--   mutate(log_ratio = log2(topic2 / topic1)) -->
+<!-- beta_spread -->
+<!-- ``` -->
+<!-- Document topic probabilities. -->
+<!-- > Each of these values is an estimated proportion of words from that document that are generated from that topic. For example, the model estimates that only about 25% of the words in document 1 were generated from topic 1. -->
+<!-- ```{r doctopics, eval = FALSE, include = FALSE} -->
+<!-- documents <- tidy(lda, matrix = "gamma") -->
+<!-- documents %>% arrange(document) %>% head(50) -->
+<!-- ``` -->
+<!-- # Now for some topics -->
+<!-- ```{r, eval = FALSE, include = FALSE} -->
+<!-- SEED = sample(1:1000000, 1)  # Pick a random seed for replication -->
+<!-- k = 10  # Let's start with 10 topics -->
+<!-- ``` -->
+<!-- ```{r, eval = FALSE, include = FALSE} -->
+<!-- # This might take a minute! -->
+<!-- models <- list( -->
+<!--     CTM       = CTM(dtm, k = k, control = list(seed = SEED, var = list(tol = 10^-4), em = list(tol = 10^-3))), -->
+<!--     VEM       = LDA(dtm, k = k, control = list(seed = SEED)), -->
+<!--     VEM_Fixed = LDA(dtm, k = k, control = list(estimate.alpha = FALSE, seed = SEED)), -->
+<!--     Gibbs     = LDA(dtm, k = k, method = "Gibbs", control = list(seed = SEED, burnin = 1000, -->
+<!--                                                                  thin = 100,    iter = 1000)) -->
+<!-- ) -->
+<!-- ``` -->
+<!-- # There you have it. Models now holds 4 topics. See the topicmodels API documentation for details -->
+<!-- # Top 10 terms of each topic for each model -->
+<!-- # Do you see any themes you can label to these "topics" (lists of words)? -->
+<!-- ```{r, eval = FALSE, include = FALSE} -->
+<!-- lapply(models, terms, 10) -->
+<!-- ``` -->
+<!-- # matrix of tweet assignments to predominate topic on that tweet for each of the models, in case you wanted to categorize them -->
+<!-- ```{r, eval = FALSE, include = FALSE} -->
+<!-- assignments <- sapply(models, topics) -->
+<!-- ``` -->
+<!-- ### Scrapyard -->
+<!-- Configuring session for use with `twitteR` package   -->
+<!-- ```{r configtwitteR, eval = FALSE, include = FALSE} -->
+<!-- config <- config::get(file = 'config.yml') -->
+<!-- my_config <- function() { -->
+<!--     ckey = config$apikey -->
+<!--     csec = config$apikeysecret -->
+<!--     akey = config$accesstoken -->
+<!--     asec = config$accesstokensecret -->
+<!--     setup_twitter_oauth(ckey, csec, akey, asec)   -->
+<!-- } -->
+<!-- my_config() -->
+<!-- ``` -->
+<!-- **twitteR** -->
+<!-- First, a few examples of searches from the help docs (excluding results): -->
+<!-- ```{r examples, eval = FALSE, include = FALSE} -->
+<!-- ## Search between two dates -->
+<!-- searchTwitter('tesla', since = '2020-12-01', until = '2020-12-24') -->
+<!-- ## Geocoded results -->
+<!-- searchTwitter('patriots', geocode = '42.375, -71.1061111, 10mi') -->
+<!-- ## Using resultType -->
+<!-- searchTwitter('from:GrittyNHL', resultType = "popular", n = 50) -->
+<!-- phl_tweets <- searchTwitter('philadelphia+philly', resultType = "recent", n = 15) -->
+<!-- head(phl_tweets, 1) %>% str() -->
+<!-- ``` -->
+<!-- Going to write a function to format the results I care about into a tidy dataframe -->
+<!-- ```{r, eval = FALSE, include = FALSE} -->
+<!-- getTweets <- function(){ -->
+<!--   searchTwitter('philadelphia+philly', resultType = "recent", n = 15) -->
+<!-- } -->
+<!-- ``` -->
+<!-- Now, a convenience function for accessing the text part of a tweet returned by the twitteR API (source: bryangoodrich). -->
+<!-- ```{r fun1, eval = FALSE, include = FALSE} -->
+<!-- tweet_text <- function(x) x$getText() -->
+<!-- ``` -->
+<!-- Next, a search function that uses `tweet_text()` to extract the text from each tweet (source: bryangoodrich). -->
+<!-- ```{r fun2, eval = FALSE, include = FALSE} -->
+<!-- tweet_corpus <- function(search, n = 5000, ...) { -->
+<!--     payload <- searchTwitter(search, n = n, ...) -->
+<!--     sapply(payload, tweet_text) -->
+<!-- } -->
+<!-- ``` -->
+<!-- Finally, run the search. This may take a few minutes. -->
+<!-- ```{r search, eval = FALSE, include = FALSE} -->
+<!-- #tweets <- tweet_corpus("energy+electricity", n = 100, lang = 'en') -->
+<!-- tweets <- tweet_corpus('philadelphia+philly', n = 1000, lang = 'en') -->
+<!-- ``` -->
+</div>
+
+    <div class="pager">
+  
+  <div class="pager_item prev">
+    
+    <a href="/docs/shortcodes-appliedr/" class="pager_link button" title="Shortcodes Applied">
+      <span class="pager_label">Shortcodes Applied</span>
+    </a>
+  </div>
+  
+
+  
+  <div class="pager_item next">
+    
+    <a href="/2020/12/30/custom-color-palette/" class="pager_link button" title="Custom Color Palette">
+      <span class="pager_label">Custom Color Palette</span>
+    </a>
+  </div>
+  
+</div>
+<svg width="0" height="0" class="hidden">
+  <symbol xmlns="http://www.w3.org/2000/svg" viewBox="0 0 492.004 492.004" id="next">
+    <path d="M484.14 226.886L306.46 49.202c-5.072-5.072-11.832-7.856-19.04-7.856-7.216 0-13.972 2.788-19.044 7.856l-16.132 16.136c-5.068 5.064-7.86 11.828-7.86 19.04 0 7.208 2.792 14.2 7.86 19.264L355.9 207.526H26.58C11.732 207.526 0 219.15 0 234.002v22.812c0 14.852 11.732 27.648 26.58 27.648h330.496L252.248 388.926c-5.068 5.072-7.86 11.652-7.86 18.864 0 7.204 2.792 13.88 7.86 18.948l16.132 16.084c5.072 5.072 11.828 7.836 19.044 7.836 7.208 0 13.968-2.8 19.04-7.872l177.68-177.68c5.084-5.088 7.88-11.88 7.86-19.1.016-7.244-2.776-14.04-7.864-19.12z"></path>
+  </symbol>
+  <symbol xmlns="http://www.w3.org/2000/svg" viewBox="0 0 511.999 511.999" id="search">
+    <path d="M508.874 478.708L360.142 329.976c28.21-34.827 45.191-79.103 45.191-127.309C405.333 90.917 314.416 0 202.666 0S0 90.917 0 202.667s90.917 202.667 202.667 202.667c48.206 0 92.482-16.982 127.309-45.191l148.732 148.732c4.167 4.165 10.919 4.165 15.086 0l15.081-15.082c4.165-4.166 4.165-10.92-.001-15.085zM202.667 362.667c-88.229 0-160-71.771-160-160s71.771-160 160-160 160 71.771 160 160-71.771 160-160 160z"></path>
+  </symbol>
+  <symbol xmlns="http://www.w3.org/2000/svg" viewBox="0 0 241 179" id="harmburger">
+    <path d="M1 10C1 4.477 5.477 0 11 0h220c5.523 0 10 4.477 10 10s-4.477 10-10 10H11C5.477 20 1 15.523 1 10zm0 80c0-5.523 4.477-10 10-10h220c5.523 0 10 4.477 10 10s-4.477 10-10 10H11c-5.523 0-10-4.477-10-10zm9 69c-5.523 0-10 4.477-10 10s4.477 10 10 10h220c5.523 0 10-4.477 10-10s-4.477-10-10-10H10z"></path>
+  </symbol>
+</svg>
+  </main>
+</div>
+
+  </div>
+<footer class="pt-2 pb-2">
+  <div class="wrap">
+    <p>&copy; 2020 rjfranssen</p>
+  </div>
+</footer>
+
+
+<svg width="0" height="0" class="hidden">
+  <symbol xmlns="http://www.w3.org/2000/svg" viewBox="0 0 492.004 492.004" id="next">
+    <path d="M484.14 226.886L306.46 49.202c-5.072-5.072-11.832-7.856-19.04-7.856-7.216 0-13.972 2.788-19.044 7.856l-16.132 16.136c-5.068 5.064-7.86 11.828-7.86 19.04 0 7.208 2.792 14.2 7.86 19.264L355.9 207.526H26.58C11.732 207.526 0 219.15 0 234.002v22.812c0 14.852 11.732 27.648 26.58 27.648h330.496L252.248 388.926c-5.068 5.072-7.86 11.652-7.86 18.864 0 7.204 2.792 13.88 7.86 18.948l16.132 16.084c5.072 5.072 11.828 7.836 19.044 7.836 7.208 0 13.968-2.8 19.04-7.872l177.68-177.68c5.084-5.088 7.88-11.88 7.86-19.1.016-7.244-2.776-14.04-7.864-19.12z"></path>
+  </symbol>
+  <symbol xmlns="http://www.w3.org/2000/svg" viewBox="0 0 511.999 511.999" id="search">
+    <path d="M508.874 478.708L360.142 329.976c28.21-34.827 45.191-79.103 45.191-127.309C405.333 90.917 314.416 0 202.666 0S0 90.917 0 202.667s90.917 202.667 202.667 202.667c48.206 0 92.482-16.982 127.309-45.191l148.732 148.732c4.167 4.165 10.919 4.165 15.086 0l15.081-15.082c4.165-4.166 4.165-10.92-.001-15.085zM202.667 362.667c-88.229 0-160-71.771-160-160s71.771-160 160-160 160 71.771 160 160-71.771 160-160 160z"></path>
+  </symbol>
+  <symbol xmlns="http://www.w3.org/2000/svg" viewBox="0 0 241 179" id="harmburger">
+    <path d="M1 10C1 4.477 5.477 0 11 0h220c5.523 0 10 4.477 10 10s-4.477 10-10 10H11C5.477 20 1 15.523 1 10zm0 80c0-5.523 4.477-10 10-10h220c5.523 0 10 4.477 10 10s-4.477 10-10 10H11c-5.523 0-10-4.477-10-10zm9 69c-5.523 0-10 4.477-10 10s4.477 10 10 10h220c5.523 0 10-4.477 10-10s-4.477-10-10-10H10z"></path>
+  </symbol>
+</svg>
+<script src="/js/bundle.min.02545d1b796e3dc21ed6179e9cc71c1d0b6d8c842047dcfe72785cc4fc15f2a09cefa8fc9a8ed491e8e9fb30fcec32ea64c411ddf411e3e8c681f189dffc64fa.js"></script>
+<script src="/js/search.min.ec6828efc4fa6448b8a97ee543727eac2757b9be75aa4c4cee0095df2ba3c38054510453b913f9b4307b69465a598427a716b308afa3cb51e3280bface0b1a32.js" async defer></script>
+
+</body>
+</html>

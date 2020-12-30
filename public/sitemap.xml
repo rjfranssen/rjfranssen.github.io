@@ -13,6 +13,11 @@
   </url>
   
   <url>
+    <loc>/post/</loc>
+    <lastmod>2020-12-30T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
     <loc>/docs/</loc>
     <lastmod>2020-12-22T11:54:02-05:00</lastmod>
   </url>
@@ -38,11 +43,6 @@
   </url>
   
   <url>
-    <loc>/docs/shortcodesr/</loc>
-    <lastmod>2020-12-22T11:54:02-05:00</lastmod>
-  </url>
-  
-  <url>
     <loc>/docs/shortcodes-applied/</loc>
     <lastmod>2020-12-22T11:54:02-05:00</lastmod>
   </url>
@@ -53,23 +53,17 @@
   </url>
   
   <url>
-    <loc>/docs/twitter-sentiment-gritty/</loc>
-    <lastmod>2020-12-29T20:26:38-05:00</lastmod>
+    <loc>/docs/twitter-sentiment-philly/</loc>
   </url>
   
   <url>
-    <loc>/docs/custom-color-palette/</loc>
-    <lastmod>2020-12-29T20:26:38-05:00</lastmod>
+    <loc>/2020/12/30/custom-color-palette/</loc>
+    <lastmod>2020-12-30T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>/2015/07/23/hello-r-markdown/</loc>
-    <lastmod>2020-12-22T11:54:02-05:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/post/</loc>
-    <lastmod>2020-12-22T11:54:02-05:00</lastmod>
+    <loc>/2020/12/30/twitter-sentiment-philly/</loc>
+    <lastmod>2020-12-30T00:00:00+00:00</lastmod>
   </url>
   
   <url>

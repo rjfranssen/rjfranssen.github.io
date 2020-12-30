@@ -1,26 +1,8 @@
-# Build and Release Folders
-bin-debug/
-bin-release/
-[Oo]bj/
-[Bb]in/
-
-# Other files and folders
-.settings/
-config.yml
-*.Rds
-*.Rdata
-site_files/
-
-# Executables
-*.swf
-*.air
-*.ipa
-*.apk
-*.exe
-
-# Project files, i.e. `.project`, `.actionScriptProperties` and `.flexProperties`
-# should NOT be excluded as they contain compiler settings and other important
-# information for Eclipse / Flash Builder.
-
-site_notes/
 .Rproj.user
+.Rhistory
+.RData
+.Rds
+.Ruserdata
+.Rproj.user
+site_files/
+config.yml

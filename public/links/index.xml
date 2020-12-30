@@ -4,11 +4,7 @@
     <title>Library on rjfranssen</title>
     <link>/links/</link>
     <description>Recent content in Library on rjfranssen</description>
-    <generator>Hugo -- gohugo.io</generator>
-    
-	<atom:link href="/links/index.xml" rel="self" type="application/rss+xml" />
-    
-    
+    <generator>Hugo -- gohugo.io</generator><atom:link href="/links/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Links and References</title>
       <link>/links/list/</link>
@@ -16,7 +12,7 @@
       
       <guid>/links/list/</guid>
       <description>Sources I like to use when looking for data or for researching/sharing geographic &amp;amp; statistical concepts.
-Cheatsheets  Cheatsheets for Data Scientists (datacamp) Colors in R (pdf) R Markdown Statistics Cheat Sheet (web.mit.edu) joins using dplyr (r) R to python data wrangling snippets Beautiful Plotting in ggplot2 - ZevRoss (R) BI Visual Reference Visual Vocabulary - Financial Times Mapping Data to Visualizations Visualizing Percentages and Parts of a Whole How to Think Visually (Vital) Which Visualization?</description>
+Blogdown &amp;amp; Hugo  Scientific and Technical Blogging: Radix vs. Blogdown Alison Hill: Blog Work with RStudio, GitHub and Netlify to create and deploy your own webpage  Cheatsheets  Cheatsheets for Data Scientists (datacamp) Colors in R (pdf) R Markdown Statistics Cheat Sheet (web.mit.edu) joins using dplyr (r) R to python data wrangling snippets Beautiful Plotting in ggplot2 - ZevRoss (R) BI Visual Reference Visual Vocabulary - Financial Times Mapping Data to Visualizations Visualizing Percentages and Parts of a Whole How to Think Visually (Vital) Which Visualization?</description>
     </item>
     
   </channel>
