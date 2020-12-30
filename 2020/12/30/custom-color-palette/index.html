@@ -1,0 +1,271 @@
+<!doctype html><html lang=en><head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1"><meta name=generator content="Hugo 0.77.0"><link rel=apple-touch-icon sizes=180x180 href=https://rjfranssen.io/favicons/apple-touch-icon.png><link rel=icon type=image/png sizes=32x32 href=https://rjfranssen.io/favicons/favicon-32x32.png><link rel=icon type=image/png sizes=16x16 href=https://rjfranssen.io/favicons/favicon-16x16.png><link rel=manifest href=https://rjfranssen.io/favicons/site.webmanifest><link rel=mask-icon href=https://rjfranssen.io/favicons/safari-pinned-tab.svg color=#004750><link rel="shortcut icon" href=https://rjfranssen.io/favicons/favicon.ico><meta name=msapplication-TileColor content="#ffffff"><meta name=msapplication-config content="https://rjfranssen.io/favicons/browserconfig.xml"><meta name=theme-color content="#ffffff"><title>Custom Color Palette | rjfranssen</title><meta property="og:title" content="Custom Color Palette"><meta property="og:description" content="Last updated 2020-12-30.
+I'm describing customizing my own color palette for ggplot2. This is based off of Creating corporate colour palettes for ggplot2 by drsimonj.
+First, find a bunch of colors that you like. Canva is a good place to go for inspiration; or, us this tool from Adobe Color that will extract colors from a photo you like. Then, there's always colorbrewer2.
+Note: In many cases, you can get away with using the scale_color_manual() and scale_fill_manual() functions directly within ggplot2."><meta property="og:type" content="article"><meta property="og:url" content="https://rjfranssen.io/2020/12/30/custom-color-palette/"><meta property="article:published_time" content="2020-12-30T00:00:00+00:00"><meta property="article:modified_time" content="2020-12-30T12:57:43-05:00"><meta itemprop=name content="Custom Color Palette"><meta itemprop=description content="Last updated 2020-12-30.
+I'm describing customizing my own color palette for ggplot2. This is based off of Creating corporate colour palettes for ggplot2 by drsimonj.
+First, find a bunch of colors that you like. Canva is a good place to go for inspiration; or, us this tool from Adobe Color that will extract colors from a photo you like. Then, there's always colorbrewer2.
+Note: In many cases, you can get away with using the scale_color_manual() and scale_fill_manual() functions directly within ggplot2."><meta itemprop=datePublished content="2020-12-30T00:00:00+00:00"><meta itemprop=dateModified content="2020-12-30T12:57:43-05:00"><meta itemprop=wordCount content="1264"><meta itemprop=keywords content><meta name=twitter:card content="summary"><meta name=twitter:title content="Custom Color Palette"><meta name=twitter:description content="Last updated 2020-12-30.
+I'm describing customizing my own color palette for ggplot2. This is based off of Creating corporate colour palettes for ggplot2 by drsimonj.
+First, find a bunch of colors that you like. Canva is a good place to go for inspiration; or, us this tool from Adobe Color that will extract colors from a photo you like. Then, there's always colorbrewer2.
+Note: In many cases, you can get away with using the scale_color_manual() and scale_fill_manual() functions directly within ggplot2."><link rel=stylesheet href=https://rjfranssen.io/css/styles.69832e4c6e36908110aac09480bc33c2fa3c11ac6d26d5ad4dce56911af6bd9c8d22888b83f35eaa93b258e9ab5fee9510c6b997fd63be1b42c0f74b8b61faf9.css integrity="sha512-aYMuTG42kIEQqsCUgLwzwvo8EaxtJtWtTc5WkRr2vZyNIoiLg/NeqpOyWOmrX+6VEMa5l/1jvhtCwPdLi2H6+Q==" crossorigin=anonymous></head><body class=page-page><header class=nav_header><nav class="wrap nav menu"><a href=https://rjfranssen.io/ class=nav_brand><picture data-lit=https://rjfranssen.io/images/rjfranssen-blowfish-wide-dark.png data-dark=https://rjfranssen.io/images/rjfranssen-blowfish-wide-dark.png>
+<img srcset=https://rjfranssen.io/images/rjfranssen-blowfish-wide-dark.png alt="rjfranssen Logo"></picture>
+<label class="nav_toggle toggle" title="Site Menu" role=button><svg class="icon"><use xlink:href="#harmburger"/></svg></label></a><ul class=nav_body><li class=nav-item><div class=search><label for=find class=search_label><svg class="icon"><use xlink:href="#search"/></svg></label><input type=search class=search_field placeholder=Search... id=find autocomplete=off><div class=search_results></div></div></li><li class=nav-item><a class=nav-link href=https://rjfranssen.io/about/><span>About</span></a></li><li class=nav-item><a class=nav-link href=https://rjfranssen.io/post/><span>Posts</span></a></li><li class=nav-item><a class=nav-link href=https://rjfranssen.io/dash/><span>Dashes</span></a></li><li class=nav-item><a class=nav-link href=https://rjfranssen.io/links/list/><span>Links</span></a></li><li class=nav-item><a class=nav-link href=https://github.com/rjfranssen/rjfranssen.github.io target=_blank>GitHub</a></li><li class=nav-item><div class=color_mode><label for=mode></label><input type=checkbox class=color_choice id=mode title="Toggle Dark Mode"></div></li></ul></nav></header><div class="main wrap pt-4"><div class=grid-auto><aside class="aside menu"><div><label class="aside_toggle toggle" title="Docs Menu" role=button>Docs Menu<svg class="icon"><use xlink:href="#harmburger"/></svg></label></div><section class="section aside_inner"><h2 class=section_title><a href=https://rjfranssen.io/post/ class=group>Posts</a></h2><section id=docs-posts><h3 class="section_link active"><a id=docs-custom-color-palette href=https://rjfranssen.io/2020/12/30/custom-color-palette/>Custom Color Palette</a></h3><nav id=TableOfContents><ul><li><ul><li><a href=#acknowledgements>Acknowledgements</a></li><li><a href=#references>References</a></li><li><a href=#reproducibility>Reproducibility</a></li></ul></li></ul></nav><h3 class=section_link><a id=docs-twitter-sentiment-philly href=https://rjfranssen.io/2020/12/30/twitter-sentiment-philly/>Twitter Sentiment Philly</a></h3><nav id=TableOfContents><ul><li><ul><li><a href=#load-libraries>Load libraries</a></li><li><a href=#configure-twitter-api-access>Configure Twitter API access</a></li><li><a href=#query-the-tweets>Query the Tweets!</a></li><li><a href=#examing-data>Examing data</a></li><li><a href=#sample-stats--visualizations>Sample stats & visualizations</a></li><li><a href=#sentiment-analysis>Sentiment analysis</a></li><li><a href=#comparing-sentiments>Comparing sentiments</a></li><li><a href=#some-routine-checks>Some routine checks</a></li><li><a href=#wordclouds>Wordclouds</a></li><li><a href=#what-about-sentences>What about sentences?</a></li><li><a href=#post-content>Post content</a></li><li><a href=#r-image>R image</a></li><li><a href=#custom-image>Custom image</a></li><li><a href=#acknowledgements>Acknowledgements</a></li><li><a href=#references>References</a></li><li><a href=#reproducibility>Reproducibility</a></li></ul></li></ul></nav></section></section></aside><main class=content><h1>Custom Color Palette</h1><p>Last updated 2020-12-30.</p><p>I'm describing customizing my own color palette for ggplot2. This is based off of <a href=https://drsimonj.svbtle.com/creating-corporate-colour-palettes-for-ggplot2>Creating corporate colour palettes for ggplot2</a> by <a href=https://twitter.com/drsimonj>drsimonj</a>.</p><p>First, find a bunch of colors that you like. <a href=https://www.canva.com/>Canva</a> is a good place to go for inspiration; or, us this <a href=https://color.adobe.com/create/image>tool from Adobe Color</a> that will extract colors from a photo you like. Then, there's always <a href="https://colorbrewer2.org/#type=sequential&scheme=BuGn&n=3">colorbrewer2</a>.</p><p><em>Note: In many cases, you can get away with using the <code>scale_color_manual()</code> and <code>scale_fill_manual()</code> functions directly within ggplot2. See <a href=https://ggplot2.tidyverse.org/reference/scale_manual.html>the docs</a> for examples.</em></p><p>Define colors</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span></code></pre></td><td class=lntd><pre class=chroma><code class=language-r data-lang=r><span class=n>rjfranssen_colors</span> <span class=o>&lt;-</span> <span class=nf>c</span><span class=p>(</span>
+  <span class=n>`ebony`</span> <span class=o>=</span> <span class=s>&#34;#1E2225&#34;</span><span class=p>,</span>
+  <span class=n>`blue_grotto`</span> <span class=o>=</span> <span class=s>&#34;#05263B&#34;</span><span class=p>,</span>
+  <span class=n>`charcoal`</span> <span class=o>=</span> <span class=s>&#34;#43758A&#34;</span><span class=p>,</span>
+  <span class=n>`light_sea_green`</span> <span class=o>=</span> <span class=s>&#34;#36B4AF&#34;</span><span class=p>,</span>
+  <span class=n>`pewter`</span> <span class=o>=</span> <span class=s>&#34;#D3DADA&#34;</span><span class=p>,</span>
+  <span class=n>`carafe`</span> <span class=o>=</span> <span class=s>&#34;#55423A&#34;</span><span class=p>,</span>
+  <span class=n>`goldenrod`</span> <span class=o>=</span> <span class=s>&#34;#F1B416&#34;</span><span class=p>,</span>
+  <span class=n>`burnt_sienna`</span> <span class=o>=</span> <span class=s>&#34;#E56A19&#34;</span><span class=p>,</span>
+  <span class=n>`crimson`</span> <span class=o>=</span> <span class=s>&#34;#900000&#34;</span><span class=p>)</span>
+</code></pre></td></tr></table></div></div><p>Function to extract colors as hex codes (source: <a href=https://drsimonj.svbtle.com/creating-corporate-colour-palettes-for-ggplot2>drsimonj</a>)</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span><span class=lnt>7
+</span><span class=lnt>8
+</span></code></pre></td><td class=lntd><pre class=chroma><code class=language-r data-lang=r><span class=n>rjfranssen_cols</span> <span class=o>&lt;-</span> <span class=nf>function</span><span class=p>(</span><span class=kc>...</span><span class=p>)</span> <span class=p>{</span>
+  <span class=n>cols</span> <span class=o>&lt;-</span> <span class=nf>c</span><span class=p>(</span><span class=kc>...</span><span class=p>)</span>
+
+  <span class=nf>if </span><span class=p>(</span><span class=nf>is.null</span><span class=p>(</span><span class=n>cols</span><span class=p>))</span>
+    <span class=nf>return </span><span class=p>(</span><span class=n>rjfranssen_colors</span><span class=p>)</span>
+
+  <span class=n>rjfranssen_colors[cols]</span>
+<span class=p>}</span>
+</code></pre></td></tr></table></div></div><p>Examples of returning specific color codes. The <code>scales</code> package has a convenient <code>show_col()</code> function for this:</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span></code></pre></td><td class=lntd><pre class=chroma><code class=language-r data-lang=r><span class=nf>library</span><span class=p>(</span><span class=n>scales</span><span class=p>)</span>
+<span class=nf>library</span><span class=p>(</span><span class=n>dplyr</span><span class=p>)</span>
+
+<span class=nf>par</span><span class=p>(</span><span class=n>mfrow</span><span class=o>=</span><span class=nf>c</span><span class=p>(</span><span class=m>1</span><span class=p>,</span><span class=m>2</span><span class=p>))</span>
+<span class=nf>rjfranssen_cols</span><span class=p>()</span> <span class=o>%&gt;%</span> <span class=nf>show_col</span><span class=p>()</span>
+<span class=nf>rjfranssen_cols</span><span class=p>(</span><span class=s>&#34;light_sea_green&#34;</span><span class=p>,</span> <span class=s>&#34;burnt_sienna&#34;</span><span class=p>)</span> <span class=o>%&gt;%</span> <span class=nf>show_col</span><span class=p>()</span>
+</code></pre></td></tr></table></div></div><p><img src=/post/2020-12-30-custom-color-palette/index_files/figure-html/examples-1.png width=672></p><p>Simply plot example.</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span></code></pre></td><td class=lntd><pre class=chroma><code class=language-r data-lang=r><span class=nf>ggplot</span><span class=p>(</span><span class=n>mtcars</span><span class=p>,</span> <span class=nf>aes</span><span class=p>(</span><span class=n>hp</span><span class=p>,</span> <span class=n>mpg</span><span class=p>))</span> <span class=o>+</span>
+    <span class=nf>geom_point</span><span class=p>(</span><span class=n>color</span> <span class=o>=</span> <span class=nf>rjfranssen_cols</span><span class=p>(</span><span class=s>&#34;goldenrod&#34;</span><span class=p>),</span>
+               <span class=n>size</span> <span class=o>=</span> <span class=m>4</span><span class=p>,</span> <span class=n>alpha</span> <span class=o>=</span> <span class=m>.8</span><span class=p>)</span>
+</code></pre></td></tr></table></div></div><p><img src=/post/2020-12-30-custom-color-palette/index_files/figure-html/simpltplot-1.png width=672></p><p>Now, combine sets of colors into individual palettes.</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span><span class=lnt>7
+</span><span class=lnt>8
+</span></code></pre></td><td class=lntd><pre class=chroma><code class=language-r data-lang=r><span class=n>rjfranssen_palettes</span> <span class=o>&lt;-</span> <span class=nf>list</span><span class=p>(</span>
+  
+  <span class=n>`primary`</span>  <span class=o>=</span> <span class=nf>rjfranssen_cols</span><span class=p>(</span><span class=s>&#34;ebony&#34;</span><span class=p>,</span> <span class=s>&#34;blue_grotto&#34;</span><span class=p>,</span> <span class=s>&#34;charcoal&#34;</span><span class=p>,</span> <span class=s>&#34;light_sea_green&#34;</span><span class=p>,</span> <span class=s>&#34;pewter&#34;</span><span class=p>),</span>
+
+  <span class=n>`secondary`</span>  <span class=o>=</span> <span class=nf>rjfranssen_cols</span><span class=p>(</span><span class=s>&#34;carafe&#34;</span><span class=p>,</span> <span class=s>&#34;goldenrod&#34;</span><span class=p>,</span> <span class=s>&#34;burnt_sienna&#34;</span><span class=p>,</span> <span class=s>&#34;crimson&#34;</span><span class=p>),</span>
+
+  <span class=n>`all`</span>   <span class=o>=</span> <span class=nf>rjfranssen_cols</span><span class=p>(</span><span class=s>&#34;ebony&#34;</span><span class=p>,</span> <span class=s>&#34;blue_grotto&#34;</span><span class=p>,</span> <span class=s>&#34;charcoal&#34;</span><span class=p>,</span> <span class=s>&#34;light_sea_green&#34;</span><span class=p>,</span> <span class=s>&#34;pewter&#34;</span><span class=p>,</span> <span class=s>&#34;carafe&#34;</span><span class=p>,</span> <span class=s>&#34;goldenrod&#34;</span><span class=p>,</span> <span class=s>&#34;burnt_sienna&#34;</span><span class=p>,</span> <span class=s>&#34;crimson&#34;</span><span class=p>)</span>
+<span class=p>)</span>
+</code></pre></td></tr></table></div></div><p>Function to interpolate the palettes (source: <a href=https://drsimonj.svbtle.com/creating-corporate-colour-palettes-for-ggplot2>drsimonj</a>). Option to padd additional arguments into <code>colorRampPallete()</code> like <code>alpha</code>.</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span><span class=lnt>7
+</span></code></pre></td><td class=lntd><pre class=chroma><code class=language-r data-lang=r><span class=n>rjfranssen_pal</span> <span class=o>&lt;-</span> <span class=nf>function</span><span class=p>(</span><span class=n>palette</span> <span class=o>=</span> <span class=s>&#34;main&#34;</span><span class=p>,</span> <span class=n>reverse</span> <span class=o>=</span> <span class=kc>FALSE</span><span class=p>,</span> <span class=kc>...</span><span class=p>)</span> <span class=p>{</span>
+  <span class=n>pal</span> <span class=o>&lt;-</span> <span class=n>rjfranssen_palettes[[palette]]</span>
+
+  <span class=nf>if </span><span class=p>(</span><span class=n>reverse</span><span class=p>)</span> <span class=n>pal</span> <span class=o>&lt;-</span> <span class=nf>rev</span><span class=p>(</span><span class=n>pal</span><span class=p>)</span>
+
+  <span class=nf>colorRampPalette</span><span class=p>(</span><span class=n>pal</span><span class=p>,</span> <span class=kc>...</span><span class=p>)</span>
+<span class=p>}</span>
+</code></pre></td></tr></table></div></div><p>Preview the palettes, e.g. applying 10 levels to the <code>primary</code> color palette. Again using <code>scales::show_col()</code> to display the colors with hex codes.</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span></code></pre></td><td class=lntd><pre class=chroma><code class=language-r data-lang=r><span class=nf>par</span><span class=p>(</span><span class=n>mfrow</span><span class=o>=</span><span class=nf>c</span><span class=p>(</span><span class=m>1</span><span class=p>,</span><span class=m>2</span><span class=p>))</span>
+
+<span class=nf>rjfranssen_pal</span><span class=p>(</span><span class=s>&#34;primary&#34;</span><span class=p>)(</span><span class=m>12</span><span class=p>)</span> <span class=o>%&gt;%</span> <span class=nf>show_col</span><span class=p>()</span>
+<span class=nf>rjfranssen_pal</span><span class=p>(</span><span class=s>&#34;secondary&#34;</span><span class=p>)(</span><span class=m>4</span><span class=p>)</span> <span class=o>%&gt;%</span> <span class=nf>show_col</span><span class=p>()</span>
+</code></pre></td></tr></table></div></div><p><img src=/post/2020-12-30-custom-color-palette/index_files/figure-html/showinterp-1.png width=672></p><p>Everything that's been up to this point is creating a storage places for favorite colors. Now, prepare some functions specifically for using with <code>ggplot</code>.</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span><span class=lnt>22
+</span></code></pre></td><td class=lntd><pre class=chroma><code class=language-r data-lang=r><span class=n>scale_color_rjfranssen</span> <span class=o>&lt;-</span> <span class=nf>function</span><span class=p>(</span><span class=n>palette</span> <span class=o>=</span> <span class=s>&#34;main&#34;</span><span class=p>,</span>
+           <span class=n>discrete</span> <span class=o>=</span> <span class=kc>TRUE</span><span class=p>,</span>
+           <span class=n>reverse</span> <span class=o>=</span> <span class=kc>FALSE</span><span class=p>,</span>
+           <span class=kc>...</span><span class=p>)</span> <span class=p>{</span>
+    <span class=n>pal</span> <span class=o>&lt;-</span> <span class=nf>rjfranssen_pal</span><span class=p>(</span><span class=n>palette</span> <span class=o>=</span> <span class=n>palette</span><span class=p>,</span> <span class=n>reverse</span> <span class=o>=</span> <span class=n>reverse</span><span class=p>)</span>
+    
+    <span class=nf>if </span><span class=p>(</span><span class=n>discrete</span><span class=p>)</span> <span class=p>{</span>
+      <span class=nf>discrete_scale</span><span class=p>(</span><span class=s>&#34;colour&#34;</span><span class=p>,</span> <span class=nf>paste0</span><span class=p>(</span><span class=s>&#34;rjfranssen_&#34;</span><span class=p>,</span> <span class=n>palette</span><span class=p>),</span> <span class=n>palette</span> <span class=o>=</span> <span class=n>pal</span><span class=p>,</span> <span class=kc>...</span><span class=p>)</span>
+    <span class=p>}</span> <span class=n>else</span> <span class=p>{</span>
+      <span class=nf>scale_color_gradientn</span><span class=p>(</span><span class=n>colours</span> <span class=o>=</span> <span class=nf>pal</span><span class=p>(</span><span class=m>256</span><span class=p>),</span> <span class=kc>...</span><span class=p>)</span>
+    <span class=p>}</span>
+<span class=p>}</span>
+
+<span class=n>scale_fill_rjfranssen</span> <span class=o>&lt;-</span> <span class=nf>function</span><span class=p>(</span><span class=n>palette</span> <span class=o>=</span> <span class=s>&#34;main&#34;</span><span class=p>,</span> <span class=n>discrete</span> <span class=o>=</span> <span class=kc>TRUE</span><span class=p>,</span> <span class=n>reverse</span> <span class=o>=</span> <span class=kc>FALSE</span><span class=p>,</span> <span class=kc>...</span><span class=p>)</span> <span class=p>{</span>
+  <span class=n>pal</span> <span class=o>&lt;-</span> <span class=nf>rjfranssen_pal</span><span class=p>(</span><span class=n>palette</span> <span class=o>=</span> <span class=n>palette</span><span class=p>,</span> <span class=n>reverse</span> <span class=o>=</span> <span class=n>reverse</span><span class=p>)</span>
+
+  <span class=nf>if </span><span class=p>(</span><span class=n>discrete</span><span class=p>)</span> <span class=p>{</span>
+    <span class=nf>discrete_scale</span><span class=p>(</span><span class=s>&#34;fill&#34;</span><span class=p>,</span> <span class=nf>paste0</span><span class=p>(</span><span class=s>&#34;rjfranssen_&#34;</span><span class=p>,</span> <span class=n>palette</span><span class=p>),</span> <span class=n>palette</span> <span class=o>=</span> <span class=n>pal</span><span class=p>,</span> <span class=kc>...</span><span class=p>)</span>
+  <span class=p>}</span> <span class=n>else</span> <span class=p>{</span>
+    <span class=nf>scale_fill_gradientn</span><span class=p>(</span><span class=n>colours</span> <span class=o>=</span> <span class=nf>pal</span><span class=p>(</span><span class=m>256</span><span class=p>),</span> <span class=kc>...</span><span class=p>)</span>
+  <span class=p>}</span>
+<span class=p>}</span>
+</code></pre></td></tr></table></div></div><p>Done - now plotting a few examples.</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span></code></pre></td><td class=lntd><pre class=chroma><code class=language-r data-lang=r><span class=nf>ggplot</span><span class=p>(</span><span class=n>iris</span><span class=p>,</span> <span class=nf>aes</span><span class=p>(</span><span class=n>Sepal.Width</span><span class=p>,</span> <span class=n>Sepal.Length</span><span class=p>,</span> <span class=n>color</span> <span class=o>=</span> <span class=n>Sepal.Length</span><span class=p>))</span> <span class=o>+</span>
+    <span class=nf>geom_point</span><span class=p>(</span><span class=n>size</span> <span class=o>=</span> <span class=m>4</span><span class=p>,</span> <span class=n>alpha</span> <span class=o>=</span> <span class=m>.6</span><span class=p>)</span> <span class=o>+</span>
+    <span class=nf>scale_color_rjfranssen</span><span class=p>(</span><span class=n>discrete</span> <span class=o>=</span> <span class=kc>FALSE</span><span class=p>,</span> <span class=n>palette</span> <span class=o>=</span> <span class=s>&#34;primary&#34;</span><span class=p>)</span>
+</code></pre></td></tr></table></div></div><p><img src=/post/2020-12-30-custom-color-palette/index_files/figure-html/exampletwo-1.png width=672></p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span></code></pre></td><td class=lntd><pre class=chroma><code class=language-r data-lang=r><span class=nf>ggplot</span><span class=p>(</span><span class=n>iris</span><span class=p>,</span> <span class=nf>aes</span><span class=p>(</span><span class=n>Sepal.Width</span><span class=p>,</span> <span class=n>Sepal.Length</span><span class=p>,</span> <span class=n>color</span> <span class=o>=</span> <span class=n>Species</span><span class=p>))</span> <span class=o>+</span>
+    <span class=nf>geom_point</span><span class=p>(</span><span class=n>size</span> <span class=o>=</span> <span class=m>4</span><span class=p>)</span> <span class=o>+</span>
+    <span class=nf>scale_color_rjfranssen</span><span class=p>(</span><span class=s>&#34;secondary&#34;</span><span class=p>)</span>
+</code></pre></td></tr></table></div></div><p><img src=/post/2020-12-30-custom-color-palette/index_files/figure-html/exampleone-1.png width=672></p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span></code></pre></td><td class=lntd><pre class=chroma><code class=language-r data-lang=r><span class=nf>ggplot</span><span class=p>(</span><span class=n>mpg</span><span class=p>,</span> <span class=nf>aes</span><span class=p>(</span><span class=n>manufacturer</span><span class=p>,</span> <span class=n>fill</span> <span class=o>=</span> <span class=n>manufacturer</span><span class=p>))</span> <span class=o>+</span>
+    <span class=nf>geom_bar</span><span class=p>()</span> <span class=o>+</span>
+    <span class=nf>theme</span><span class=p>(</span><span class=n>axis.text.x</span> <span class=o>=</span> <span class=nf>element_text</span><span class=p>(</span><span class=n>angle</span> <span class=o>=</span> <span class=m>45</span><span class=p>,</span> <span class=n>hjust</span> <span class=o>=</span> <span class=m>1</span><span class=p>))</span> <span class=o>+</span>
+    <span class=nf>scale_fill_rjfranssen</span><span class=p>(</span><span class=n>palette</span> <span class=o>=</span> <span class=s>&#34;all&#34;</span><span class=p>,</span> <span class=n>guide</span> <span class=o>=</span> <span class=s>&#34;none&#34;</span><span class=p>)</span>
+</code></pre></td></tr></table></div></div><p><img src=/post/2020-12-30-custom-color-palette/index_files/figure-html/examplethree-1.png width=672></p><p>Finally, I want to be able to pull down my palette whereever I am, so I copied the above R code into <code>rjfranssen_col_pal.r</code> and pushed it to my <a href=https://github.com/rjfranssen/rjfranssen>GitHub repo</a>. I can read it down using <code>devtools</code> as an <a href=https://stackoverflow.com/questions/35720660/how-to-use-an-r-script-from-github>r file</a> or as a <a href=https://gist.github.com/jtoll/4041987>gist</a>. <a href=https://rstudio.com/wp-content/uploads/2015/03/devtools-cheatsheet.pdf>(devtools cheatsheet)</a></p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span></code></pre></td><td class=lntd><pre class=chroma><code class=language-r data-lang=r><span class=nf>library</span><span class=p>(</span><span class=n>devtools</span><span class=p>)</span>
+<span class=nf>source_url</span><span class=p>(</span><span class=s>&#34;https://raw.githubusercontent.com/rjfranssen/rjfranssen/main/utils/rjfranssen_col_pal.r&#34;</span><span class=p>)</span>
+</code></pre></td></tr></table></div></div><h3 id=acknowledgements>Acknowledgements</h3><p>This blog post was made possible thanks to:</p><ul><li><em><a href=https://bioconductor.org/packages/3.12/BiocStyle>BiocStyle</a></em> <a id=cite-Oles_2020></a>(<a href=https://github.com/Bioconductor/BiocStyle>Oles, Morgan, and Huber, 2020</a>)</li><li><em><a href="https://CRAN.R-project.org/package=blogdown">blogdown</a></em> <a id=cite-Xie_2017></a>(<a href=https://github.com/rstudio/blogdown>Xie, Hill, and Thomas, 2017</a>)</li><li><em><a href="https://CRAN.R-project.org/package=devtools">devtools</a></em> <a id=cite-Wickham_2020></a>(<a href="https://CRAN.R-project.org/package=devtools">Wickham, Hester, and Chang, 2020</a>)</li><li><em><a href="https://CRAN.R-project.org/package=knitcitations">knitcitations</a></em> <a id=cite-Boettiger_2020></a>(<a href=https://github.com/cboettig/knitcitations>Boettiger, 2020</a>)</li></ul><h3 id=references>References</h3><p><a id=bib-Boettiger_2020></a><a href=#cite-Boettiger_2020>[1]</a><cite>
+C. Boettiger.
+<em>knitcitations: Citations for 'Knitr' Markdown Files</em>.
+R package version 1.0.11.
+2020.
+URL: <a href=https://github.com/cboettig/knitcitations>https://github.com/cboettig/knitcitations</a>.</cite></p><p><a id=bib-Oles_2020></a><a href=#cite-Oles_2020>[2]</a><cite>
+A. Oles, M. Morgan, and W. Huber.
+<em>BiocStyle: Standard styles for vignettes and other Bioconductor documents</em>.
+R package version 2.18.1.
+2020.
+URL: <a href=https://github.com/Bioconductor/BiocStyle>https://github.com/Bioconductor/BiocStyle</a>.</cite></p><p><a id=bib-Wickham_2020></a><a href=#cite-Wickham_2020>[3]</a><cite>
+H. Wickham, J. Hester, and W. Chang.
+<em>devtools: Tools to Make Developing R Packages Easier</em>.
+R package version 2.3.1.
+2020.
+URL: <a href="https://CRAN.R-project.org/package=devtools">https://CRAN.R-project.org/package=devtools</a>.</cite></p><p><a id=bib-Xie_2017></a><a href=#cite-Xie_2017>[4]</a><cite>
+Y. Xie, A. P. Hill, and A. Thomas.
+<em>blogdown: Creating Websites with R Markdown</em>.
+ISBN 978-0815363729.
+Boca Raton, Florida: Chapman and Hall/CRC, 2017.
+URL: <a href=https://github.com/rstudio/blogdown>https://github.com/rstudio/blogdown</a>.</cite></p><h3 id=reproducibility>Reproducibility</h3><pre><code>## - Session info -------------------------------------------------------------------------------------------------------
+##  setting  value                       
+##  version  R version 4.0.2 (2020-06-22)
+##  os       Windows 10 x64              
+##  system   x86_64, mingw32             
+##  ui       RTerm                       
+##  language (EN)                        
+##  collate  English_United States.1252  
+##  ctype    English_United States.1252  
+##  tz       America/New_York            
+##  date     2020-12-30                  
+## 
+## - Packages -----------------------------------------------------------------------------------------------------------
+##  package       * version date       lib source                                 
+##  assertthat      0.2.1   2019-03-21 [1] CRAN (R 4.0.2)                         
+##  BiocManager     1.30.10 2019-11-16 [1] CRAN (R 4.0.3)                         
+##  BiocStyle     * 2.18.1  2020-11-24 [1] Bioconductor                           
+##  blogdown        0.20    2020-06-23 [1] CRAN (R 4.0.2)                         
+##  bookdown        0.21    2020-10-13 [1] CRAN (R 4.0.3)                         
+##  callr           3.4.3   2020-03-28 [1] CRAN (R 4.0.2)                         
+##  cli             2.2.0   2020-11-20 [1] CRAN (R 4.0.3)                         
+##  colorspace      2.0-0   2020-11-11 [1] CRAN (R 4.0.3)                         
+##  crayon          1.3.4   2017-09-16 [1] CRAN (R 4.0.2)                         
+##  desc            1.2.0   2018-05-01 [1] CRAN (R 4.0.2)                         
+##  devtools      * 2.3.1   2020-07-21 [1] CRAN (R 4.0.2)                         
+##  digest          0.6.27  2020-10-24 [1] CRAN (R 4.0.3)                         
+##  dplyr         * 1.0.2   2020-08-18 [1] CRAN (R 4.0.3)                         
+##  ellipsis        0.3.1   2020-05-15 [1] CRAN (R 4.0.2)                         
+##  evaluate        0.14    2019-05-28 [1] CRAN (R 4.0.2)                         
+##  fansi           0.4.1   2020-01-08 [1] CRAN (R 4.0.2)                         
+##  farver          2.0.3   2020-01-16 [1] CRAN (R 4.0.2)                         
+##  fs              1.5.0   2020-07-31 [1] CRAN (R 4.0.3)                         
+##  generics        0.1.0   2020-10-31 [1] CRAN (R 4.0.3)                         
+##  ggplot2       * 3.3.2   2020-06-19 [1] CRAN (R 4.0.2)                         
+##  glue            1.4.2   2020-08-27 [1] CRAN (R 4.0.2)                         
+##  gtable          0.3.0   2019-03-25 [1] CRAN (R 4.0.2)                         
+##  htmltools       0.5.0   2020-06-16 [1] CRAN (R 4.0.2)                         
+##  httr            1.4.2   2020-07-20 [1] CRAN (R 4.0.3)                         
+##  jsonlite        1.7.2   2020-12-09 [1] CRAN (R 4.0.3)                         
+##  knitcitations * 1.0.11  2020-12-30 [1] Github (cboettig/knitcitations@23750d5)
+##  knitr           1.30    2020-09-22 [1] CRAN (R 4.0.3)                         
+##  labeling        0.4.2   2020-10-20 [1] CRAN (R 4.0.3)                         
+##  lifecycle       0.2.0   2020-03-06 [1] CRAN (R 4.0.2)                         
+##  lubridate     * 1.7.9.2 2020-11-13 [1] CRAN (R 4.0.3)                         
+##  magrittr        2.0.1   2020-11-17 [1] CRAN (R 4.0.3)                         
+##  memoise         1.1.0   2017-04-21 [1] CRAN (R 4.0.2)                         
+##  munsell         0.5.0   2018-06-12 [1] CRAN (R 4.0.2)                         
+##  pillar          1.4.6   2020-07-10 [1] CRAN (R 4.0.3)                         
+##  pkgbuild        1.0.8   2020-05-07 [1] CRAN (R 4.0.2)                         
+##  pkgconfig       2.0.3   2019-09-22 [1] CRAN (R 4.0.2)                         
+##  pkgload         1.1.0   2020-05-29 [1] CRAN (R 4.0.2)                         
+##  plyr            1.8.6   2020-03-03 [1] CRAN (R 4.0.2)                         
+##  prettyunits     1.1.1   2020-01-24 [1] CRAN (R 4.0.2)                         
+##  processx        3.4.4   2020-09-03 [1] CRAN (R 4.0.3)                         
+##  ps              1.4.0   2020-10-07 [1] CRAN (R 4.0.3)                         
+##  purrr           0.3.4   2020-04-17 [1] CRAN (R 4.0.2)                         
+##  R6              2.5.0   2020-10-28 [1] CRAN (R 4.0.3)                         
+##  Rcpp            1.0.5   2020-07-06 [1] CRAN (R 4.0.2)                         
+##  RefManageR      1.3.0   2020-11-13 [1] CRAN (R 4.0.3)                         
+##  remotes         2.2.0   2020-07-21 [1] CRAN (R 4.0.3)                         
+##  rlang           0.4.9   2020-11-26 [1] CRAN (R 4.0.3)                         
+##  rmarkdown       2.5     2020-10-21 [1] CRAN (R 4.0.3)                         
+##  rprojroot       2.0.2   2020-11-15 [1] CRAN (R 4.0.2)                         
+##  scales        * 1.1.1   2020-05-11 [1] CRAN (R 4.0.2)                         
+##  sessioninfo     1.1.1   2018-11-05 [1] CRAN (R 4.0.2)                         
+##  stringi         1.5.3   2020-09-09 [1] CRAN (R 4.0.3)                         
+##  stringr         1.4.0   2019-02-10 [1] CRAN (R 4.0.2)                         
+##  testthat        2.3.2   2020-03-02 [1] CRAN (R 4.0.2)                         
+##  tibble          3.0.4   2020-10-12 [1] CRAN (R 4.0.3)                         
+##  tidyselect      1.1.0   2020-05-11 [1] CRAN (R 4.0.2)                         
+##  usethis       * 2.0.0   2020-12-10 [1] CRAN (R 4.0.3)                         
+##  vctrs           0.3.4   2020-08-29 [1] CRAN (R 4.0.3)                         
+##  withr           2.3.0   2020-09-22 [1] CRAN (R 4.0.3)                         
+##  xfun            0.19    2020-10-30 [1] CRAN (R 4.0.3)                         
+##  xml2            1.3.2   2020-04-23 [1] CRAN (R 4.0.2)                         
+##  yaml            2.2.1   2020-02-01 [1] CRAN (R 4.0.0)                         
+## 
+## [1] C:/Users/rober/Documents/R/win-library/4.0
+## [2] C:/Program Files/R/R-4.0.2/library
+</code></pre><div class=pager><div class="pager_item prev"><a href=https://rjfranssen.io/docs/twitter-sentiment-philly/ class="pager_link button" title="Twitter Topics - Gritty Edition"><span class=pager_label>Twitter Topics - Gritty Edition</span></a></div><div class="pager_item next"><a href=https://rjfranssen.io/2020/12/30/twitter-sentiment-philly/ class="pager_link button" title="Twitter Sentiment Philly"><span class=pager_label>Twitter Sentiment Philly</span></a></div></div><svg width="0" height="0" class="hidden"><symbol xmlns="http://www.w3.org/2000/svg" viewBox="0 0 492.004 492.004" id="next"><path d="M484.14 226.886 306.46 49.202c-5.072-5.072-11.832-7.856-19.04-7.856-7.216.0-13.972 2.788-19.044 7.856l-16.132 16.136c-5.068 5.064-7.86 11.828-7.86 19.04.0 7.208 2.792 14.2 7.86 19.264L355.9 207.526H26.58C11.732 207.526.0 219.15.0 234.002v22.812c0 14.852 11.732 27.648 26.58 27.648h330.496L252.248 388.926c-5.068 5.072-7.86 11.652-7.86 18.864.0 7.204 2.792 13.88 7.86 18.948l16.132 16.084c5.072 5.072 11.828 7.836 19.044 7.836 7.208.0 13.968-2.8 19.04-7.872l177.68-177.68c5.084-5.088 7.88-11.88 7.86-19.1.016-7.244-2.776-14.04-7.864-19.12z"/></symbol><symbol xmlns="http://www.w3.org/2000/svg" viewBox="0 0 511.999 511.999" id="search"><path d="M508.874 478.708 360.142 329.976c28.21-34.827 45.191-79.103 45.191-127.309C405.333 90.917 314.416.0 202.666.0S0 90.917.0 202.667s90.917 202.667 202.667 202.667c48.206.0 92.482-16.982 127.309-45.191l148.732 148.732c4.167 4.165 10.919 4.165 15.086.0l15.081-15.082c4.165-4.166 4.165-10.92-.001-15.085zM202.667 362.667c-88.229.0-160-71.771-160-160s71.771-160 160-160 160 71.771 160 160-71.771 160-160 160z"/></symbol><symbol xmlns="http://www.w3.org/2000/svg" viewBox="0 0 241 179" id="harmburger"><path d="M1 10C1 4.477 5.477.0 11 0h220c5.523.0 10 4.477 10 10s-4.477 10-10 10H11C5.477 20 1 15.523 1 10zm0 80c0-5.523 4.477-10 10-10h220c5.523.0 10 4.477 10 10s-4.477 10-10 10H11c-5.523.0-10-4.477-10-10zm9 69c-5.523.0-10 4.477-10 10s4.477 10 10 10h220c5.523.0 10-4.477 10-10s-4.477-10-10-10H10z"/></symbol></svg></main></div></div><footer class="pt-2 pb-2"><div class=wrap><p>&copy; 2020 rjfranssen</p></div></footer><svg width="0" height="0" class="hidden"><symbol xmlns="http://www.w3.org/2000/svg" viewBox="0 0 492.004 492.004" id="next"><path d="M484.14 226.886 306.46 49.202c-5.072-5.072-11.832-7.856-19.04-7.856-7.216.0-13.972 2.788-19.044 7.856l-16.132 16.136c-5.068 5.064-7.86 11.828-7.86 19.04.0 7.208 2.792 14.2 7.86 19.264L355.9 207.526H26.58C11.732 207.526.0 219.15.0 234.002v22.812c0 14.852 11.732 27.648 26.58 27.648h330.496L252.248 388.926c-5.068 5.072-7.86 11.652-7.86 18.864.0 7.204 2.792 13.88 7.86 18.948l16.132 16.084c5.072 5.072 11.828 7.836 19.044 7.836 7.208.0 13.968-2.8 19.04-7.872l177.68-177.68c5.084-5.088 7.88-11.88 7.86-19.1.016-7.244-2.776-14.04-7.864-19.12z"/></symbol><symbol xmlns="http://www.w3.org/2000/svg" viewBox="0 0 511.999 511.999" id="search"><path d="M508.874 478.708 360.142 329.976c28.21-34.827 45.191-79.103 45.191-127.309C405.333 90.917 314.416.0 202.666.0S0 90.917.0 202.667s90.917 202.667 202.667 202.667c48.206.0 92.482-16.982 127.309-45.191l148.732 148.732c4.167 4.165 10.919 4.165 15.086.0l15.081-15.082c4.165-4.166 4.165-10.92-.001-15.085zM202.667 362.667c-88.229.0-160-71.771-160-160s71.771-160 160-160 160 71.771 160 160-71.771 160-160 160z"/></symbol><symbol xmlns="http://www.w3.org/2000/svg" viewBox="0 0 241 179" id="harmburger"><path d="M1 10C1 4.477 5.477.0 11 0h220c5.523.0 10 4.477 10 10s-4.477 10-10 10H11C5.477 20 1 15.523 1 10zm0 80c0-5.523 4.477-10 10-10h220c5.523.0 10 4.477 10 10s-4.477 10-10 10H11c-5.523.0-10-4.477-10-10zm9 69c-5.523.0-10 4.477-10 10s4.477 10 10 10h220c5.523.0 10-4.477 10-10s-4.477-10-10-10H10z"/></symbol></svg><script src=https://rjfranssen.io/js/bundle.min.e23f146f1a54fbecd66e224e25d9b7ccad3a5c1c5bce508f74e215a81d39631aca9d233d80f0ed724c10fb9c858451882b84a74c3d5e1c3e4ff71431ec79c2e4.js></script><script src=https://rjfranssen.io/js/search.min.9beb54ba755384d491513e57e070d902bd2180de32cfc2b2df2f31d2e8cc86ec6eaa454c6c9daea21e668d2f15bc9fa2ef5f3e7553f8b0bc09da8a3aeb0d1d3e.js async defer></script></body></html>
