@@ -1,7 +1,7 @@
 ---
+title: "Twitter Topics - Gritty Edition"
 description: |
   Using the Twitter API with the twitteR package
-title: Twitter Topics - Gritty Edition
 weight: 7
 ---
 
@@ -261,7 +261,9 @@ plt1 <- ggplot(tweets_per_day) +
   ylab("Number of Tweets") 
 
 plotly::ggplotly(plt1)
+```
 
+```{r dygraph, include = TRUE, eval = FALSE}
 # Using dygraph
 # convert series to an xts object 
 tweets_ts <- xts::xts(tweets_per_day$num_tweets, order.by = tweets_per_day$tweet_date)
@@ -583,251 +585,252 @@ tidy_books %>%
 
 
 
+<!-- TO BE CONTINUED -->
 
-### Condition the data
+<!-- ### Condition the data -->
 
-Pre-process the data (source: bryangoodrich).
+<!-- Pre-process the data (source: bryangoodrich). -->
 
-```{r, eval = FALSE, include = FALSE}
-tweets <- iconv(tweets, to = "ASCII", sub = " ")  # Convert to basic ASCII text
-tweets <- tolower(tweets)  # Make everything lower case
-tweets <- gsub("rt", " ", tweets)  # Remove the "RT" (retweet) so duplicates are duplicates
-tweets <- gsub("@\\w+", " ", tweets)  # Remove user names
-tweets <- gsub("http.+ |http.+$", " ", tweets)  # Remove links
-tweets <- gsub("[[:punct:]]", " ", tweets)  # Remove punctuation
-tweets <- gsub("[ |\t]{2,}", " ", tweets)  # Remove tabs
-tweets <- gsub("amp", " ", tweets)  # "&" is "&amp" in HTML, so after punctuation removed ...
-tweets <- gsub("^ ", "", tweets)  # Leading blanks
-tweets <- gsub(" $", "", tweets)  # Lagging blanks
-tweets <- gsub(" +", " ", tweets) # General spaces (should just do all whitespaces no?)
-tweets <- unique(tweets)  # Now get rid of duplicates!
-```
+<!-- ```{r, eval = FALSE, include = FALSE} -->
+<!-- tweets <- iconv(tweets, to = "ASCII", sub = " ")  # Convert to basic ASCII text -->
+<!-- tweets <- tolower(tweets)  # Make everything lower case -->
+<!-- tweets <- gsub("rt", " ", tweets)  # Remove the "RT" (retweet) so duplicates are duplicates -->
+<!-- tweets <- gsub("@\\w+", " ", tweets)  # Remove user names -->
+<!-- tweets <- gsub("http.+ |http.+$", " ", tweets)  # Remove links -->
+<!-- tweets <- gsub("[[:punct:]]", " ", tweets)  # Remove punctuation -->
+<!-- tweets <- gsub("[ |\t]{2,}", " ", tweets)  # Remove tabs -->
+<!-- tweets <- gsub("amp", " ", tweets)  # "&" is "&amp" in HTML, so after punctuation removed ... -->
+<!-- tweets <- gsub("^ ", "", tweets)  # Leading blanks -->
+<!-- tweets <- gsub(" $", "", tweets)  # Lagging blanks -->
+<!-- tweets <- gsub(" +", " ", tweets) # General spaces (should just do all whitespaces no?) -->
+<!-- tweets <- unique(tweets)  # Now get rid of duplicates! -->
+<!-- ``` -->
 
-Convert the `tweets` object to a corpus object to use with the `tm` package.
+<!-- Convert the `tweets` object to a corpus object to use with the `tm` package. -->
 
-```{r tm_corpus, eval = FALSE, include = FALSE}
-corpus <- tm::Corpus(VectorSource(tweets)) 
-```
+<!-- ```{r tm_corpus, eval = FALSE, include = FALSE} -->
+<!-- corpus <- tm::Corpus(VectorSource(tweets))  -->
+<!-- ``` -->
 
-Remove English [stop words](https://rdrr.io/rforge/tm/man/stopwords.html). _Also see [Adding custom stopwords in R tm](https://stackoverflow.com/questions/18446408/adding-custom-stopwords-in-r-tm)_.  
+<!-- Remove English [stop words](https://rdrr.io/rforge/tm/man/stopwords.html). _Also see [Adding custom stopwords in R tm](https://stackoverflow.com/questions/18446408/adding-custom-stopwords-in-r-tm)_.   -->
 
-```{r stopwordstwo, eval = FALSE, include = FALSE}
-corpus <- tm_map(corpus, removeWords, stopwords("en"))  
-```
+<!-- ```{r stopwordstwo, eval = FALSE, include = FALSE} -->
+<!-- corpus <- tm_map(corpus, removeWords, stopwords("en"))   -->
+<!-- ``` -->
 
-Remove the search terms from the corpus. 
+<!-- Remove the search terms from the corpus.  -->
 
-_TODO: Make these variables and use paste() to place them in the search term earlier._
+<!-- _TODO: Make these variables and use paste() to place them in the search term earlier._ -->
 
-```{r rmsearchterms, eval = FALSE, include = FALSE}
-#corpus <- tm_map(corpus, removeWords, c("energy", "electricity"))
-corpus <- tm_map(corpus, removeWords, c('tesla', 'tsla'))
-```
+<!-- ```{r rmsearchterms, eval = FALSE, include = FALSE} -->
+<!-- #corpus <- tm_map(corpus, removeWords, c("energy", "electricity")) -->
+<!-- corpus <- tm_map(corpus, removeWords, c('tesla', 'tsla')) -->
+<!-- ``` -->
 
-Remove numbers.
+<!-- Remove numbers. -->
 
-```{r numbers, eval = FALSE, include = FALSE}
-corpus <- tm_map(corpus, removeNumbers, mc.cores=1)
-```
+<!-- ```{r numbers, eval = FALSE, include = FALSE} -->
+<!-- corpus <- tm_map(corpus, removeNumbers, mc.cores=1) -->
+<!-- ``` -->
 
-Stem the words  (e.g. likes, liked, likely, liking >> like). _For more on stemming and lemmatization, see [NLP Stanford](https://nlp.stanford.edu/IR-book/html/htmledition/stemming-and-lemmatization-1.html)_.
+<!-- Stem the words  (e.g. likes, liked, likely, liking >> like). _For more on stemming and lemmatization, see [NLP Stanford](https://nlp.stanford.edu/IR-book/html/htmledition/stemming-and-lemmatization-1.html)_. -->
 
-```{r stemming, eval = FALSE, include = FALSE}
-corpus <- tm_map(corpus, stemDocument)
-```
+<!-- ```{r stemming, eval = FALSE, include = FALSE} -->
+<!-- corpus <- tm_map(corpus, stemDocument) -->
+<!-- ``` -->
 
 
-### Visualization
+<!-- ### Visualization -->
 
-Display the corpus as a word cloud.
+<!-- Display the corpus as a word cloud. -->
 
-```{r wordcloud, eval = FALSE, include = FALSE}
-pal <- brewer.pal(8, "Dark2")
-wordcloud(corpus, min.freq=2, max.words = 150, random.order = TRUE, col = pal)
-```
+<!-- ```{r wordcloud, eval = FALSE, include = FALSE} -->
+<!-- pal <- brewer.pal(8, "Dark2") -->
+<!-- wordcloud(corpus, min.freq=2, max.words = 150, random.order = TRUE, col = pal) -->
+<!-- ``` -->
 
 
-### Topic Modeling
+<!-- ### Topic Modeling -->
 
-Get the lengths and make sure we only create a Document Term Matrix (DTM) for tweets with actual content.
+<!-- Get the lengths and make sure we only create a Document Term Matrix (DTM) for tweets with actual content. -->
 
-```{r dtm, eval = FALSE, include = FALSE}
-doc_lengths <- corpus %>% DocumentTermMatrix() %>% as.matrix() %>% rowSums()
+<!-- ```{r dtm, eval = FALSE, include = FALSE} -->
+<!-- doc_lengths <- corpus %>% DocumentTermMatrix() %>% as.matrix() %>% rowSums() -->
 
-dtm <- corpus[doc_lengths > 0] %>% DocumentTermMatrix()
-```
+<!-- dtm <- corpus[doc_lengths > 0] %>% DocumentTermMatrix() -->
+<!-- ``` -->
 
-Test a Latent Dirichlet Allocation model; A LDA_VEM topic model with 2 topics.
+<!-- Test a Latent Dirichlet Allocation model; A LDA_VEM topic model with 2 topics. -->
 
-```{r lda, eval = FALSE, include = FALSE}
-lda <- LDA(x = dtm, k = 2, method = 'VEM', control = list(seed = 1234))
-```
+<!-- ```{r lda, eval = FALSE, include = FALSE} -->
+<!-- lda <- LDA(x = dtm, k = 2, method = 'VEM', control = list(seed = 1234)) -->
+<!-- ``` -->
 
-Explore it a bit with `tidytext` ([documentation](https://www.tidytextmining.com/topicmodeling.html))
+<!-- Explore it a bit with `tidytext` ([documentation](https://www.tidytextmining.com/topicmodeling.html)) -->
 
-> tidytext package provides this method for extracting the per-topic-per-word probabilities, called 
-β (“beta”), from the model ... For each combination, the model computes the probability of that term being generated from that topic
+<!-- > tidytext package provides this method for extracting the per-topic-per-word probabilities, called  -->
+<!-- β (“beta”), from the model ... For each combination, the model computes the probability of that term being generated from that topic -->
 
-```{r lda_topics, eval = FALSE, include = FALSE}
-topics <- tidy(lda, matrix = "beta")
-topics %>% arrange(-beta) %>% head(50)
-```
+<!-- ```{r lda_topics, eval = FALSE, include = FALSE} -->
+<!-- topics <- tidy(lda, matrix = "beta") -->
+<!-- topics %>% arrange(-beta) %>% head(50) -->
+<!-- ``` -->
 
-Display top terms for each topic.
+<!-- Display top terms for each topic. -->
 
-```{r topterms, eval = FALSE, include = FALSE}
-top_terms <- topics %>%
-  group_by(topic) %>%
-  top_n(10, beta) %>%
-  ungroup() %>%
-  arrange(topic, -beta)
+<!-- ```{r topterms, eval = FALSE, include = FALSE} -->
+<!-- top_terms <- topics %>% -->
+<!--   group_by(topic) %>% -->
+<!--   top_n(10, beta) %>% -->
+<!--   ungroup() %>% -->
+<!--   arrange(topic, -beta) -->
 
-top_terms %>%
-  mutate(term = reorder_within(term, beta, topic)) %>%
-  ggplot(aes(beta, term, fill = factor(topic))) +
-  geom_col(show.legend = FALSE) +
-  facet_wrap(~ topic, scales = "free") +
-  scale_y_reordered() +
-  labs(
-    title = 'Top Terms in Twitter Corpus'
-    , subtitle = 'The terms that are most common within each topic'
-  )
-  
-```
+<!-- top_terms %>% -->
+<!--   mutate(term = reorder_within(term, beta, topic)) %>% -->
+<!--   ggplot(aes(beta, term, fill = factor(topic))) + -->
+<!--   geom_col(show.legend = FALSE) + -->
+<!--   facet_wrap(~ topic, scales = "free") + -->
+<!--   scale_y_reordered() + -->
+<!--   labs( -->
+<!--     title = 'Top Terms in Twitter Corpus' -->
+<!--     , subtitle = 'The terms that are most common within each topic' -->
+<!--   ) -->
 
+<!-- ``` -->
 
-```{r betaspread, eval = FALSE, include = FALSE}
-beta_spread <- topics %>%
-  mutate(topic = paste0("topic", topic)) %>%
-  spread(topic, beta) %>%
-  filter(topic1 > .001 | topic2 > .001) %>%
-  mutate(log_ratio = log2(topic2 / topic1))
 
-beta_spread
-```
+<!-- ```{r betaspread, eval = FALSE, include = FALSE} -->
+<!-- beta_spread <- topics %>% -->
+<!--   mutate(topic = paste0("topic", topic)) %>% -->
+<!--   spread(topic, beta) %>% -->
+<!--   filter(topic1 > .001 | topic2 > .001) %>% -->
+<!--   mutate(log_ratio = log2(topic2 / topic1)) -->
 
+<!-- beta_spread -->
+<!-- ``` -->
 
-Document topic probabilities.
 
-> Each of these values is an estimated proportion of words from that document that are generated from that topic. For example, the model estimates that only about 25% of the words in document 1 were generated from topic 1.
+<!-- Document topic probabilities. -->
 
-```{r doctopics, eval = FALSE, include = FALSE}
-documents <- tidy(lda, matrix = "gamma")
-documents %>% arrange(document) %>% head(50)
-```
+<!-- > Each of these values is an estimated proportion of words from that document that are generated from that topic. For example, the model estimates that only about 25% of the words in document 1 were generated from topic 1. -->
 
+<!-- ```{r doctopics, eval = FALSE, include = FALSE} -->
+<!-- documents <- tidy(lda, matrix = "gamma") -->
+<!-- documents %>% arrange(document) %>% head(50) -->
+<!-- ``` -->
 
 
 
 
 
-# Now for some topics
 
-```{r, eval = FALSE, include = FALSE}
-SEED = sample(1:1000000, 1)  # Pick a random seed for replication
-k = 10  # Let's start with 10 topics
-```
+<!-- # Now for some topics -->
 
-```{r, eval = FALSE, include = FALSE}
-# This might take a minute!
-models <- list(
-    CTM       = CTM(dtm, k = k, control = list(seed = SEED, var = list(tol = 10^-4), em = list(tol = 10^-3))),
-    VEM       = LDA(dtm, k = k, control = list(seed = SEED)),
-    VEM_Fixed = LDA(dtm, k = k, control = list(estimate.alpha = FALSE, seed = SEED)),
-    Gibbs     = LDA(dtm, k = k, method = "Gibbs", control = list(seed = SEED, burnin = 1000,
-                                                                 thin = 100,    iter = 1000))
-)
-```
+<!-- ```{r, eval = FALSE, include = FALSE} -->
+<!-- SEED = sample(1:1000000, 1)  # Pick a random seed for replication -->
+<!-- k = 10  # Let's start with 10 topics -->
+<!-- ``` -->
 
+<!-- ```{r, eval = FALSE, include = FALSE} -->
+<!-- # This might take a minute! -->
+<!-- models <- list( -->
+<!--     CTM       = CTM(dtm, k = k, control = list(seed = SEED, var = list(tol = 10^-4), em = list(tol = 10^-3))), -->
+<!--     VEM       = LDA(dtm, k = k, control = list(seed = SEED)), -->
+<!--     VEM_Fixed = LDA(dtm, k = k, control = list(estimate.alpha = FALSE, seed = SEED)), -->
+<!--     Gibbs     = LDA(dtm, k = k, method = "Gibbs", control = list(seed = SEED, burnin = 1000, -->
+<!--                                                                  thin = 100,    iter = 1000)) -->
+<!-- ) -->
+<!-- ``` -->
 
-# There you have it. Models now holds 4 topics. See the topicmodels API documentation for details
 
-# Top 10 terms of each topic for each model
-# Do you see any themes you can label to these "topics" (lists of words)?
+<!-- # There you have it. Models now holds 4 topics. See the topicmodels API documentation for details -->
 
-```{r, eval = FALSE, include = FALSE}
-lapply(models, terms, 10)
-```
+<!-- # Top 10 terms of each topic for each model -->
+<!-- # Do you see any themes you can label to these "topics" (lists of words)? -->
 
-# matrix of tweet assignments to predominate topic on that tweet for each of the models, in case you wanted to categorize them
+<!-- ```{r, eval = FALSE, include = FALSE} -->
+<!-- lapply(models, terms, 10) -->
+<!-- ``` -->
 
-```{r, eval = FALSE, include = FALSE}
-assignments <- sapply(models, topics)
-```
+<!-- # matrix of tweet assignments to predominate topic on that tweet for each of the models, in case you wanted to categorize them -->
 
+<!-- ```{r, eval = FALSE, include = FALSE} -->
+<!-- assignments <- sapply(models, topics) -->
+<!-- ``` -->
 
 
 
-### Scrapyard
 
-Configuring session for use with `twitteR` package  
+<!-- ### Scrapyard -->
 
-```{r configtwitteR, eval = FALSE, include = FALSE}
-config <- config::get(file = 'config.yml')
+<!-- Configuring session for use with `twitteR` package   -->
 
-my_config <- function() {
-    ckey = config$apikey
-    csec = config$apikeysecret
-    akey = config$accesstoken
-    asec = config$accesstokensecret
-  
-    setup_twitter_oauth(ckey, csec, akey, asec)  
-}
+<!-- ```{r configtwitteR, eval = FALSE, include = FALSE} -->
+<!-- config <- config::get(file = 'config.yml') -->
 
-my_config()
-```
+<!-- my_config <- function() { -->
+<!--     ckey = config$apikey -->
+<!--     csec = config$apikeysecret -->
+<!--     akey = config$accesstoken -->
+<!--     asec = config$accesstokensecret -->
 
-**twitteR**
-First, a few examples of searches from the help docs (excluding results):
+<!--     setup_twitter_oauth(ckey, csec, akey, asec)   -->
+<!-- } -->
 
-```{r examples, eval = FALSE, include = FALSE}
-## Search between two dates
-searchTwitter('tesla', since = '2020-12-01', until = '2020-12-24')
+<!-- my_config() -->
+<!-- ``` -->
 
-## Geocoded results
-searchTwitter('patriots', geocode = '42.375, -71.1061111, 10mi')
+<!-- **twitteR** -->
+<!-- First, a few examples of searches from the help docs (excluding results): -->
 
-## Using resultType
-searchTwitter('from:GrittyNHL', resultType = "popular", n = 50)
+<!-- ```{r examples, eval = FALSE, include = FALSE} -->
+<!-- ## Search between two dates -->
+<!-- searchTwitter('tesla', since = '2020-12-01', until = '2020-12-24') -->
 
-phl_tweets <- searchTwitter('philadelphia+philly', resultType = "recent", n = 15)
-head(phl_tweets, 1) %>% str()
-```
+<!-- ## Geocoded results -->
+<!-- searchTwitter('patriots', geocode = '42.375, -71.1061111, 10mi') -->
 
-Going to write a function to format the results I care about into a tidy dataframe
+<!-- ## Using resultType -->
+<!-- searchTwitter('from:GrittyNHL', resultType = "popular", n = 50) -->
 
-```{r, eval = FALSE, include = FALSE}
-getTweets <- function(){
-  searchTwitter('philadelphia+philly', resultType = "recent", n = 15)
-}
-```
+<!-- phl_tweets <- searchTwitter('philadelphia+philly', resultType = "recent", n = 15) -->
+<!-- head(phl_tweets, 1) %>% str() -->
+<!-- ``` -->
 
+<!-- Going to write a function to format the results I care about into a tidy dataframe -->
 
+<!-- ```{r, eval = FALSE, include = FALSE} -->
+<!-- getTweets <- function(){ -->
+<!--   searchTwitter('philadelphia+philly', resultType = "recent", n = 15) -->
+<!-- } -->
+<!-- ``` -->
 
 
 
 
 
-Now, a convenience function for accessing the text part of a tweet returned by the twitteR API (source: bryangoodrich).
 
-```{r fun1, eval = FALSE, include = FALSE}
-tweet_text <- function(x) x$getText()
-```
 
-Next, a search function that uses `tweet_text()` to extract the text from each tweet (source: bryangoodrich).
+<!-- Now, a convenience function for accessing the text part of a tweet returned by the twitteR API (source: bryangoodrich). -->
 
-```{r fun2, eval = FALSE, include = FALSE}
-tweet_corpus <- function(search, n = 5000, ...) {
-    payload <- searchTwitter(search, n = n, ...)
-    sapply(payload, tweet_text)
-}
-```
+<!-- ```{r fun1, eval = FALSE, include = FALSE} -->
+<!-- tweet_text <- function(x) x$getText() -->
+<!-- ``` -->
 
-Finally, run the search. This may take a few minutes.
+<!-- Next, a search function that uses `tweet_text()` to extract the text from each tweet (source: bryangoodrich). -->
 
-```{r search, eval = FALSE, include = FALSE}
-#tweets <- tweet_corpus("energy+electricity", n = 100, lang = 'en')
-tweets <- tweet_corpus('philadelphia+philly', n = 1000, lang = 'en')
-```
+<!-- ```{r fun2, eval = FALSE, include = FALSE} -->
+<!-- tweet_corpus <- function(search, n = 5000, ...) { -->
+<!--     payload <- searchTwitter(search, n = n, ...) -->
+<!--     sapply(payload, tweet_text) -->
+<!-- } -->
+<!-- ``` -->
+
+<!-- Finally, run the search. This may take a few minutes. -->
+
+<!-- ```{r search, eval = FALSE, include = FALSE} -->
+<!-- #tweets <- tweet_corpus("energy+electricity", n = 100, lang = 'en') -->
+<!-- tweets <- tweet_corpus('philadelphia+philly', n = 1000, lang = 'en') -->
+<!-- ``` -->
 
 

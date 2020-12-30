@@ -88,7 +88,8 @@ dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco 
       
       <guid>/docs/twitter-sentiment-gritty/</guid>
       <description># Knitr options: https://yihui.org/knitr/options/library(lubridate)knitr::opts_chunk$set(collapse = TRUE, eval = TRUE, echo = TRUE, message = FALSE, warning = FALSE, include = TRUE)Last updated 2020-12-29.
-This is a walkthrough of using the Twitter API with the rtweet R package. It borrows from a few difference sources, including:* ropensci/rtweet documentation</description>
+This is a walkthrough of using the Twitter API with the rtweet R package. It borrows from a few difference sources, including:* ropensci/rtweet documentation
+* here</description>
     </item>
     
     <item>

@@ -1,7 +1,7 @@
 ---
-title: "Custom Color Palette for ggplot2"
 description: |
   Developing a corporate color palette for ggplot2
+title: Custom Color Palette for ggplot2
 weight: 8
 ---
   
