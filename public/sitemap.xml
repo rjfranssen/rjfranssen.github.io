@@ -13,13 +13,13 @@
   </url>
   
   <url>
-    <loc>/post/</loc>
-    <lastmod>2020-12-30T00:00:00+00:00</lastmod>
+    <loc>/docs/</loc>
+    <lastmod>2020-12-22T11:54:02-05:00</lastmod>
   </url>
   
   <url>
-    <loc>/docs/</loc>
-    <lastmod>2020-12-22T11:54:02-05:00</lastmod>
+    <loc>/post/</loc>
+    <lastmod>2020-12-30T12:57:43-05:00</lastmod>
   </url>
   
   <url>
@@ -34,7 +34,7 @@
   
   <url>
     <loc>/links/list/</loc>
-    <lastmod>2020-12-29T20:26:38-05:00</lastmod>
+    <lastmod>2020-12-30T12:57:43-05:00</lastmod>
   </url>
   
   <url>
@@ -48,27 +48,18 @@
   </url>
   
   <url>
-    <loc>/docs/shortcodes-appliedr/</loc>
-    <lastmod>2020-12-23T21:26:08-05:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/docs/twitter-sentiment-philly/</loc>
-  </url>
-  
-  <url>
     <loc>/2020/12/30/custom-color-palette/</loc>
-    <lastmod>2020-12-30T00:00:00+00:00</lastmod>
+    <lastmod>2020-12-30T12:57:43-05:00</lastmod>
   </url>
   
   <url>
     <loc>/2020/12/30/twitter-sentiment-philly/</loc>
-    <lastmod>2020-12-30T00:00:00+00:00</lastmod>
+    <lastmod>2020-12-30T12:57:43-05:00</lastmod>
   </url>
   
   <url>
     <loc>/</loc>
-    <lastmod>2020-12-22T11:54:02-05:00</lastmod>
+    <lastmod>2020-12-30T12:57:43-05:00</lastmod>
   </url>
   
 </urlset>

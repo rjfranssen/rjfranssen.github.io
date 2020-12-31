@@ -4,8 +4,7 @@
     <title>Posts on rjfranssen</title>
     <link>/post/</link>
     <description>Recent content in Posts on rjfranssen</description>
-    <generator>Hugo -- gohugo.io</generator>
-    <lastBuildDate>Wed, 30 Dec 2020 00:00:00 +0000</lastBuildDate><atom:link href="/post/index.xml" rel="self" type="application/rss+xml" />
+    <generator>Hugo -- gohugo.io</generator><atom:link href="/post/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Custom Color Palette</title>
       <link>/2020/12/30/custom-color-palette/</link>
@@ -24,7 +23,7 @@ Note: In many cases, you can get away with using the scale_color_manual() and sc
       <pubDate>Wed, 30 Dec 2020 00:00:00 +0000</pubDate>
       
       <guid>/2020/12/30/twitter-sentiment-philly/</guid>
-      <description>1 2 3 4 5 6 7 8  # Knitr options: https://yihui.org/knitr/options/ library(lubridate) knitr::opts_chunk$set(collapse = TRUE , eval = TRUE , echo = TRUE , message = FALSE , warning = FALSE , include = TRUE)   % addTiles() %% setView(0,0,1) --Last updated 2020-12-30.
+      <description>% addTiles() %% setView(0,0,1) --Last updated 2020-12-31.
 This is a walkthrough of using the Twitter API with the rtweet R package. It borrows from a few difference sources, including:
  ropensci/rtweet documentation here Tidy Text Mining with R Twitter Data in R Using Rtweet: Analyze and Download Twitter Data Comparing Twitter archives Mining NASA metadata Analyzing usenet text  Load libraries 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18  #library(twitteR) library(rtweet) library(rmarkdown) library(NLP) library(tm) library(RColorBrewer) library(wordcloud) library(topicmodels) library(SnowballC) library(config) library(dplyr) library(tidytext) library(tidyr) library(ggplot2) library(lubridate) library(readr) library(skimr) library(widgetframe)   Configure Twitter API access There are a couple different ways to authenticate your session.</description>
     </item>

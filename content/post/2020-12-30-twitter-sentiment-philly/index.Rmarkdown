@@ -16,7 +16,7 @@ header:
 ---
 
 
-```{r setup, include = TRUE, message = FALSE, warning = FALSE}
+```{r setup, include = FALSE, message = FALSE, warning = FALSE}
 # Knitr options: https://yihui.org/knitr/options/
 library(lubridate)
 knitr::opts_chunk$set(collapse = TRUE
@@ -73,14 +73,14 @@ library(widgetframe)
 
 ### Configure Twitter API access
 
-There are a couple different ways to authenticate your session. The `rtweet` package makes this pretty easy by enabling browser-based authentication. I prefer to authenticate in code. See `vignette("auth", package = "rtweet")` for options.
+There are a couple different ways to authenticate your session. The `rtweet` package makes this pretty easy by enabling browser-based authentication. I prefer to authenticate in code. Check the `rtweet` vignette for connection options.  
 
 What I did: Head over to the [Twitter Developer](https://developer.twitter.com/en/apply-for-access) site and requested a developer account to gain access to Twitter APIs and tools.
 
 Then I used a `config.yml` to store my keys. The `config` package a good way to import keys and passwords without making them publc (just make sure they're covered by your `.gitignore` file!). Check out the [documentation](https://cran.r-project.org/web/packages/config/vignettes/introduction.html). _Note: If using Hugo and don't want it swept up into your `public` directory, you can also add `config.yml` to the `ignoreFiles` parameter in the `config.toml`_.
 
 
-```{r configrtweet}
+```{r configrtweet, eval = FALSE}
 config <- config::get(file = 'config.yml')
 
 ## authenticate via web browser
@@ -137,8 +137,7 @@ Reading back in the `.Rds` file..
 ```{r loadfromfile}
 tweets_df <- readRDS("tweets_df.Rds")
 
-tweets_df %>% head(5) %>% paged_table()
-tweets_df %>% head(5) %>% DT::datatable()
+tweets_df %>% head(5)
 ```
 
 
@@ -285,7 +284,9 @@ plt1 <- ggplot(tweets_per_day) +
   xlab("") +
   ylab("Number of Tweets") 
 
-plotly::ggplotly(plt1)
+#plotly::ggplotly(plt1)
+
+plt1
 ```
 
 ```{r dygraph, include = TRUE, eval = FALSE}
@@ -321,7 +322,7 @@ htmlwidgets::saveWidget(widget = tweet_map
 <!-- ``` -->
 
 
-<iframe src="tweet_map.html" width="600" height="400" style="border: none;"></iframe>
+<iframe src="tweet_map.html" width="100%" height="400" style="border: none;"></iframe>
 
 
 ### Sentiment analysis
@@ -414,11 +415,8 @@ Using `tidyr`, we can continue to examine how sentiment changes throughout the b
 From the docs:  
 
 > ... First, we find a sentiment score for each word using the Bing lexicon and inner_join(). 
-
 > Next, we count up how many positive and negative words there are in defined sections of each book. We define an index here to keep track of where we are in the narrative; this index (using integer division) counts up sections of 80 lines of text.  
-
 > The %/% operator does integer division (x %/% y is equivalent to floor(x/y)) so the index keeps track of which 80-line section of text we are counting up negative and positive sentiment in.  
-
 > Small sections of text may not have enough words in them to get a good estimate of sentiment while really large sections can wash out narrative structure. For these books, using 80 lines works well, but this can vary depending on individual texts, how long the lines were to start with, etc. We then use spread() so that we have negative and positive sentiment in separate columns, and lastly calculate a net sentiment (positive - negative).  
 
 ```{r sentimentssix}

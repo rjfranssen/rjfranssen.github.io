@@ -31,8 +31,8 @@ This way, you can side step complex html and css boilerplate in your content fil
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>/links/list/</guid>
-      <description>Sources I like to use when looking for data or for researching/sharing geographic &amp;amp; statistical concepts.
-Blogdown &amp;amp; Hugo  Scientific and Technical Blogging: Radix vs. Blogdown Alison Hill: Blog Work with RStudio, GitHub and Netlify to create and deploy your own webpage  Cheatsheets  Cheatsheets for Data Scientists (datacamp) Colors in R (pdf) R Markdown Statistics Cheat Sheet (web.mit.edu) joins using dplyr (r) R to python data wrangling snippets Beautiful Plotting in ggplot2 - ZevRoss (R) BI Visual Reference Visual Vocabulary - Financial Times Mapping Data to Visualizations Visualizing Percentages and Parts of a Whole How to Think Visually (Vital) Which Visualization?</description>
+      <description>Sources I like to use when looking for data or for researching/sharing geographic &amp;amp; statistical concepts. I&#39;m fully aware that googling is normally a faster route to answering questions, but these are the sites that I leave open in Chrome for months at a time.
+Blogdown &amp;amp; Hugo  Hugo Shortcodes Scientific and Technical Blogging: Radix vs. Blogdown Alison Hill: Blog Work with RStudio, GitHub and Netlify to create and deploy your own webpage  Cheatsheets  Cheatsheets for Data Scientists (datacamp) Colors in R (pdf) R Markdown Statistics Cheat Sheet (web.</description>
     </item>
     
     <item>
@@ -56,28 +56,6 @@ Sometimes, the shortcode will wrap content, sometimes it won&#39;t. When content
     </item>
     
     <item>
-      <title>Shortcodes Applied</title>
-      <link>/docs/shortcodes-appliedr/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
-      <guid>/docs/shortcodes-appliedr/</guid>
-      <description>Using blocks, columns &amp;amp; buttons{{&amp;lt;/* block &amp;quot;grid-2&amp;quot; */&amp;gt;}}{{&amp;lt;/* column */&amp;gt;}}#### Coumn 1 Lorem ipsum dolor sit amet, ...{{&amp;lt;/* button &amp;quot;https://github.com/onweru/compose&amp;quot; &amp;quot;Download Theme&amp;quot; */&amp;gt;}}{{&amp;lt;/* /column */&amp;gt;}}{{&amp;lt;/* column */&amp;gt;}}&amp;lt;!-- generates 👇 --&amp;gt;{{&amp;lt; block “grid-2” &amp;gt;}}{{&amp;lt; column &amp;gt;}}#### Coumn 1
-Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et
-dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</description>
-    </item>
-    
-    <item>
-      <title>Twitter Topics - Gritty Edition</title>
-      <link>/docs/twitter-sentiment-philly/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
-      <guid>/docs/twitter-sentiment-philly/</guid>
-      <description># Knitr options: https://yihui.org/knitr/options/library(lubridate)knitr::opts_chunk$set(collapse = TRUE, eval = TRUE, echo = TRUE, message = FALSE, warning = FALSE, include = TRUE)Last updated 2020-12-30.
-This is a walkthrough of using the Twitter API with the rtweet R package. It borrows from a few difference sources, including:* ropensci/rtweet documentation
-* here</description>
-    </item>
-    
-    <item>
       <title>Custom Color Palette</title>
       <link>/2020/12/30/custom-color-palette/</link>
       <pubDate>Wed, 30 Dec 2020 00:00:00 +0000</pubDate>
@@ -95,7 +73,7 @@ Note: In many cases, you can get away with using the scale_color_manual() and sc
       <pubDate>Wed, 30 Dec 2020 00:00:00 +0000</pubDate>
       
       <guid>/2020/12/30/twitter-sentiment-philly/</guid>
-      <description>1 2 3 4 5 6 7 8  # Knitr options: https://yihui.org/knitr/options/ library(lubridate) knitr::opts_chunk$set(collapse = TRUE , eval = TRUE , echo = TRUE , message = FALSE , warning = FALSE , include = TRUE)   % addTiles() %% setView(0,0,1) --Last updated 2020-12-30.
+      <description>% addTiles() %% setView(0,0,1) --Last updated 2020-12-31.
 This is a walkthrough of using the Twitter API with the rtweet R package. It borrows from a few difference sources, including:
  ropensci/rtweet documentation here Tidy Text Mining with R Twitter Data in R Using Rtweet: Analyze and Download Twitter Data Comparing Twitter archives Mining NASA metadata Analyzing usenet text  Load libraries 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18  #library(twitteR) library(rtweet) library(rmarkdown) library(NLP) library(tm) library(RColorBrewer) library(wordcloud) library(topicmodels) library(SnowballC) library(config) library(dplyr) library(tidytext) library(tidyr) library(ggplot2) library(lubridate) library(readr) library(skimr) library(widgetframe)   Configure Twitter API access There are a couple different ways to authenticate your session.</description>
     </item>

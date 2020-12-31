@@ -5,10 +5,11 @@ title: Links and References
 weight: 5
 ---
 
-Sources I like to use when looking for data or for researching/sharing geographic & statistical concepts.  
+Sources I like to use when looking for data or for researching/sharing geographic & statistical concepts. I'm fully aware that googling is normally a faster route to answering questions, but these are the sites that I leave open in Chrome for months at a time. 
 
 ### Blogdown & Hugo
 
+* [Hugo Shortcodes](https://gohugo.io/content-management/shortcodes/)  
 * [Scientific and Technical Blogging: Radix vs. Blogdown](https://emitanaka.org/r/posts/2018-12-12-scientific-and-technical-blogging-radix-vs-blogdown/#blogdown)  
 * [Alison Hill: Blog](https://alison.rbind.io/post/2020-12-27-blogdown-checks/)  
 * [Work with RStudio, GitHub and Netlify to create and deploy your own webpage](https://medium.com/@diegousaiuk/how-i-used-hugo-and-blogdown-to-set-up-my-own-website-e32e2eddbf81)  
@@ -110,6 +111,7 @@ Sources I like to use when looking for data or for researching/sharing geographi
 
 ### Development  
 
+* [Awesome R Shiny](https://github.com/grabear/awesome-rshiny)  
 * [Chrome DevTools](https://developers.google.com/web/tools/chrome-devtools/sources)  
 * [shinyWidgets app - dreamrs (r)](http://shinyapps.dreamrs.fr/shinyWidgets/)  
 * [Shiny Authentication and User Management (r)](https://docs.rstudio.com/shinyapps.io/authentication-and-user-management.html#user-authentication)  
@@ -129,6 +131,7 @@ Sources I like to use when looking for data or for researching/sharing geographi
 * [Building Docker Images with heroku.yml (Heroku Dev Center)](https://devcenter.heroku.com/articles/build-docker-images-heroku-yml)  
 * [How to Deploy a Web app Using Docker Web Server (DevTeam.Space)](https://www.devteam.space/blog/how-to-deploy-a-web-app-with-docker-containers/)  
 * [Twitter Developer Portal](https://developer.twitter.com/)  
+* [Paul Vanderlaken: Blog](https://paulvanderlaken.com/tag/shiny/)  
 
 
 ### Geographic  
