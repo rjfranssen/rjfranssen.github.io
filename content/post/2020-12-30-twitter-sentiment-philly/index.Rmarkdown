@@ -28,16 +28,7 @@ knitr::opts_chunk$set(collapse = TRUE
 ```
 
 
-<!-- ```{r, eval = FALSE, include = FALSE} -->
-<!-- library(leaflet) -->
-<!-- library(widgetframe) -->
-<!-- l <- leaflet(height=300) %>% addTiles() %>% setView(0,0,1) -->
-
-<!-- frameWidget(l) -->
-<!-- ``` -->
-
-
-Last updated `r today()`.  
+Updated `r today()`.  
 
 This is a walkthrough of using the Twitter API with the `rtweet` R package. It borrows from a few difference sources, including:
 * [ropensci/rtweet documentation](https://github.com/ropensci/rtweet)  
@@ -51,7 +42,6 @@ This is a walkthrough of using the Twitter API with the `rtweet` R package. It b
 ### Load libraries
 
 ```{r libraries}
-#library(twitteR)
 library(rtweet)
 library(rmarkdown)
 library(NLP)
@@ -68,7 +58,6 @@ library(ggplot2)
 library(lubridate)
 library(readr)
 library(skimr)
-library(widgetframe)
 ```
 
 ### Configure Twitter API access
@@ -121,8 +110,6 @@ tweets_df$tweet_year <- tweets_df$created_at %>% as.POSIXlt() %>% as.Date() %>% 
 tweets_df$tweet_month <- tweets_df$created_at %>% as.POSIXlt() %>% as.Date() %>% month()
 tweets_df$tweet_day <- tweets_df$created_at %>% as.POSIXlt() %>% as.Date() %>% day()
 
-
-tweets_df %>% head()
 ```
 
 
@@ -137,20 +124,21 @@ Reading back in the `.Rds` file..
 ```{r loadfromfile}
 tweets_df <- readRDS("tweets_df.Rds")
 
-tweets_df %>% head(5)
+tweets_df %>% head()
 ```
 
 
-### Examing data
+### Examining data
 
-Now going to identify a few basic things, but first, this df has 92 columns. What are some of the columns that we're most likely to use? The `skimr` package is **really** good at doing this and is a good substitute for `summary()` in many cases.
+Now going to identify a few basic things, but first, this df has 92 columns. What are some of the columns that we're most likely to use? The `skimr` package is **really** good at doing this and I often use it in addition to `summary()`.
 
-```{r skimdf, eval = FALSE, include = FALSE}
+```{r skimddf, eval = FALSE}
 #summary(tweet_df)
 skim(tweets_df)
-
-# Commenting this out because it threw off the page, but this is super useful!
 ```
+
+
+And what does the table look like?
 
 
 ```{r}
@@ -176,7 +164,7 @@ tweets_df %>% select(
   , created_at
   , account_created_at
   ) %>%
-  head()
+  head(2)
 ```
 
 ### Sample stats & visualizations  
@@ -184,7 +172,7 @@ tweets_df %>% select(
 What is our total tweet *count*?   
 
 ```{r stats1}
-nrow(tweets_df)
+nrow(tweets_df) %>% print()
 ```
 
 What is the most *favorited* tweet?  
@@ -195,7 +183,7 @@ tweets_df %>%
   select(screen_name
          , text
          , favorite_count
-         , created_at)
+         , created_at) %>% knitr::kable()
 
 ```
 
@@ -230,7 +218,7 @@ tweets_df %>%
   group_by(lang) %>%
   summarize(num_tweets = n()) %>%
   arrange(-num_tweets) %>% # can also use slice_max()
-  head(10)
+  head(5)
 
 # ggplot(tweets_df) +
 #   geom_bar(aes(x = lang, fill = lang))
@@ -280,23 +268,47 @@ plt1 <- ggplot(tweets_per_day) +
   scale_fill_viridis_d(option = "viridis") +
   theme_gray() +
   theme(legend.position = "none") +
-  labs(title = "Daily Tweets") +
+  labs(title = "Daily Tweets for 'Philadelphia' (ggplot2 + plotly)") +
   xlab("") +
   ylab("Number of Tweets") 
 
-#plotly::ggplotly(plt1)
-
-plt1
+pltly1 <- plotly::ggplotly(plt1)
 ```
 
-```{r dygraph, include = TRUE, eval = FALSE}
+
+_Note: for html widgets, because I'm writing this in .Rmarkdown, I use the below snippet to save the html widget to file and then bring it back in via an iframe. The main reason is that `.Rmarkdown` files get rendered as `.markdown` and then `html`, and my widgets were getting lost. Widgets work great with `.Rmd` files, but I lose some of the other hugo functionalities like the TOCs and code highlighting. This might change soon if it hasn't already. I've hidden these snippets for the other html widgets below._
+
+```{r, results = "asis"}
+widget <- pltly1
+widgetfile <- 'pltly1.html'
+
+htmlwidgets::saveWidget(widget = widget
+                        , selfcontained = TRUE
+                        , file = widgetfile)
+
+cat(paste0('<iframe src= "', widgetfile, '" width="100%" height="400" style="border: none;"></iframe>'))
+```
+
+```{r dygraph}
 # Using dygraph
 # convert series to an xts object 
 tweets_ts <- xts::xts(tweets_per_day$num_tweets, order.by = tweets_per_day$tweet_date)
 # Create the dygraph
 library(dygraphs)
-dygraph(tweets_ts, main = "Daily Tweets for 'Philadelphia'") %>%
+
+dygraph1 <- dygraph(tweets_ts, main = "Daily Tweets for 'Philadelphia' (dygraph)") %>%
   dySeries("V1", label = "Tweet Count")
+```
+
+```{r, echo = FALSE, results = "asis"}
+widget <- dygraph1
+widgetfile <- 'dygraph1.html'
+
+htmlwidgets::saveWidget(widget = widget
+                        , selfcontained = TRUE
+                        , file = widgetfile)
+
+cat(paste0('<iframe src= "', widgetfile, '" width="100%" height="400" style="border: none;"></iframe>'))
 ```
 
 
@@ -304,25 +316,25 @@ And *where* are people tweeting?
 
 Of the `r nrow(tweets_df)` tweets that we have, `r tweets_df %>% filter(!is.na(lat) & !is.na(lng)) %>% nrow()` are geotagged. We'll plot those using [leaflet](https://rstudio.github.io/leaflet/) and build on this later.
 
-```{r mapsave, eval = FALSE}
+```{r mapsave}
 library(leaflet)
 
 tweet_map <- leaflet(tweets_df) %>%
   addTiles() %>%
   addCircleMarkers(lng = ~lng
                    , lat = ~lat)
-
-htmlwidgets::saveWidget(widget = tweet_map
-                        , 'tweet_map.html'
-                        , selfcontained = TRUE)
 ```
 
-<!-- ```{r mapshow} -->
-<!-- knitr::include_url(url = 'tweet_map.html', height = "400px") -->
-<!-- ``` -->
+```{r, echo = FALSE, results = "asis"}
+widget <- tweet_map
+widgetfile <- 'tweet_map.html'
 
+htmlwidgets::saveWidget(widget = widget
+                        , selfcontained = TRUE
+                        , file = widgetfile)
 
-<iframe src="tweet_map.html" width="100%" height="400" style="border: none;"></iframe>
+cat(paste0('<iframe src= "', widgetfile, '" width="100%" height="400" style="border: none;"></iframe>'))
+```
 
 
 ### Sentiment analysis
@@ -363,7 +375,7 @@ tidy_books <- austen_books() %>%
   ungroup() %>%
   unnest_tokens(word, text)
 
-tidy_books %>% head()
+tidy_books %>% head() %>% knitr::kable()
 ```
 
 
@@ -385,7 +397,7 @@ tidy_books <- tweets_book %>%
   ungroup() %>%
   unnest_tokens(word, text)
 
-tidy_books %>% head()
+tidy_books %>% head() %>% knitr::kable()
 ```
 
 
@@ -397,7 +409,7 @@ Looking at the `nrc` lexicon, what are some of the "joy" words?
 nrc_joy <- get_sentiments("nrc") %>% 
   filter(sentiment == "joy")
 
-head(nrc_joy)
+head(nrc_joy) %>% knitr::kable()
 ```
 
 How many "joy" words do we have in our tweets?
@@ -407,7 +419,7 @@ tidy_books %>%
   filter(book == "Philadelphia") %>%
   inner_join(nrc_joy) %>%
   count(word, sort = TRUE) %>%
-  head(10)
+  head(10) %>% knitr::kable()
 ```
 
 Using `tidyr`, we can continue to examine how sentiment changes throughout the book. This is more relevant to the novels examples from the docs, but I'm including it here as an exercise. This example will use the `bing` lexicon. We need some type of interval - the example creates an index from 80 line chunks, but I'm going to update this to use the `chapter` value, which now represents the date of each tweet allowing to see changes in sentiment over time.
@@ -508,10 +520,10 @@ TODO: Update include and eval settings here - ok to keep in md doc but no need t
 ```{r sentimentcounts}
 get_sentiments("nrc") %>% 
   filter(sentiment %in% c("positive", "negative")) %>% 
-  count(sentiment)
+  count(sentiment) %>% knitr::kable()
 
 get_sentiments("bing") %>% 
-  count(sentiment)
+  count(sentiment) %>% knitr::kable()
 ```
 
 ```{r routineone}
@@ -520,7 +532,7 @@ bing_word_counts <- tidy_books %>%
   count(word, sentiment, sort = TRUE) %>%
   ungroup()
 
-bing_word_counts %>% head(25)
+bing_word_counts %>% head(10) %>% knitr::kable()
 ```
 
 
@@ -553,7 +565,7 @@ custom_stop_words <- bind_rows(tibble(word = c('philadelphia', 'philly', 't.co',
                                       lexicon = c("custom")),
                                stop_words)
 
-custom_stop_words %>% head()
+custom_stop_words %>% head() %>% knitr::kable()
 ```
 
 
@@ -591,7 +603,7 @@ philly_sentences <- tibble(text = tweets_df$text) %>%
   #iconv(text, from = 'ASCII', to = 'latin1') %>%
   unnest_tokens(sentence, text, token = 'sentences')
 
-philly_sentences$sentence[2]
+philly_sentences$sentence[2] %>% knitr::kable()
 ```
 
 Using sentences, or some other type of index, we can assign a sentiment value - not by word - but by an entire chapter.  
@@ -619,255 +631,6 @@ tidy_books %>%
 
 
 
-<!-- TO BE CONTINUED -->
-
-<!-- ### Condition the data -->
-
-<!-- Pre-process the data (source: bryangoodrich). -->
-
-<!-- ```{r, eval = FALSE, include = FALSE} -->
-<!-- tweets <- iconv(tweets, to = "ASCII", sub = " ")  # Convert to basic ASCII text -->
-<!-- tweets <- tolower(tweets)  # Make everything lower case -->
-<!-- tweets <- gsub("rt", " ", tweets)  # Remove the "RT" (retweet) so duplicates are duplicates -->
-<!-- tweets <- gsub("@\\w+", " ", tweets)  # Remove user names -->
-<!-- tweets <- gsub("http.+ |http.+$", " ", tweets)  # Remove links -->
-<!-- tweets <- gsub("[[:punct:]]", " ", tweets)  # Remove punctuation -->
-<!-- tweets <- gsub("[ |\t]{2,}", " ", tweets)  # Remove tabs -->
-<!-- tweets <- gsub("amp", " ", tweets)  # "&" is "&amp" in HTML, so after punctuation removed ... -->
-<!-- tweets <- gsub("^ ", "", tweets)  # Leading blanks -->
-<!-- tweets <- gsub(" $", "", tweets)  # Lagging blanks -->
-<!-- tweets <- gsub(" +", " ", tweets) # General spaces (should just do all whitespaces no?) -->
-<!-- tweets <- unique(tweets)  # Now get rid of duplicates! -->
-<!-- ``` -->
-
-<!-- Convert the `tweets` object to a corpus object to use with the `tm` package. -->
-
-<!-- ```{r tm_corpus, eval = FALSE, include = FALSE} -->
-<!-- corpus <- tm::Corpus(VectorSource(tweets))  -->
-<!-- ``` -->
-
-<!-- Remove English [stop words](https://rdrr.io/rforge/tm/man/stopwords.html). _Also see [Adding custom stopwords in R tm](https://stackoverflow.com/questions/18446408/adding-custom-stopwords-in-r-tm)_.   -->
-
-<!-- ```{r stopwordstwo, eval = FALSE, include = FALSE} -->
-<!-- corpus <- tm_map(corpus, removeWords, stopwords("en"))   -->
-<!-- ``` -->
-
-<!-- Remove the search terms from the corpus.  -->
-
-<!-- _TODO: Make these variables and use paste() to place them in the search term earlier._ -->
-
-<!-- ```{r rmsearchterms, eval = FALSE, include = FALSE} -->
-<!-- #corpus <- tm_map(corpus, removeWords, c("energy", "electricity")) -->
-<!-- corpus <- tm_map(corpus, removeWords, c('tesla', 'tsla')) -->
-<!-- ``` -->
-
-<!-- Remove numbers. -->
-
-<!-- ```{r numbers, eval = FALSE, include = FALSE} -->
-<!-- corpus <- tm_map(corpus, removeNumbers, mc.cores=1) -->
-<!-- ``` -->
-
-<!-- Stem the words  (e.g. likes, liked, likely, liking >> like). _For more on stemming and lemmatization, see [NLP Stanford](https://nlp.stanford.edu/IR-book/html/htmledition/stemming-and-lemmatization-1.html)_. -->
-
-<!-- ```{r stemming, eval = FALSE, include = FALSE} -->
-<!-- corpus <- tm_map(corpus, stemDocument) -->
-<!-- ``` -->
-
-
-<!-- ### Visualization -->
-
-<!-- Display the corpus as a word cloud. -->
-
-<!-- ```{r wordcloud, eval = FALSE, include = FALSE} -->
-<!-- pal <- brewer.pal(8, "Dark2") -->
-<!-- wordcloud(corpus, min.freq=2, max.words = 150, random.order = TRUE, col = pal) -->
-<!-- ``` -->
-
-
-<!-- ### Topic Modeling -->
-
-<!-- Get the lengths and make sure we only create a Document Term Matrix (DTM) for tweets with actual content. -->
-
-<!-- ```{r dtm, eval = FALSE, include = FALSE} -->
-<!-- doc_lengths <- corpus %>% DocumentTermMatrix() %>% as.matrix() %>% rowSums() -->
-
-<!-- dtm <- corpus[doc_lengths > 0] %>% DocumentTermMatrix() -->
-<!-- ``` -->
-
-<!-- Test a Latent Dirichlet Allocation model; A LDA_VEM topic model with 2 topics. -->
-
-<!-- ```{r lda, eval = FALSE, include = FALSE} -->
-<!-- lda <- LDA(x = dtm, k = 2, method = 'VEM', control = list(seed = 1234)) -->
-<!-- ``` -->
-
-<!-- Explore it a bit with `tidytext` ([documentation](https://www.tidytextmining.com/topicmodeling.html)) -->
-
-<!-- > tidytext package provides this method for extracting the per-topic-per-word probabilities, called  -->
-<!-- β (“beta”), from the model ... For each combination, the model computes the probability of that term being generated from that topic -->
-
-<!-- ```{r lda_topics, eval = FALSE, include = FALSE} -->
-<!-- topics <- tidy(lda, matrix = "beta") -->
-<!-- topics %>% arrange(-beta) %>% head(50) -->
-<!-- ``` -->
-
-<!-- Display top terms for each topic. -->
-
-<!-- ```{r topterms, eval = FALSE, include = FALSE} -->
-<!-- top_terms <- topics %>% -->
-<!--   group_by(topic) %>% -->
-<!--   top_n(10, beta) %>% -->
-<!--   ungroup() %>% -->
-<!--   arrange(topic, -beta) -->
-
-<!-- top_terms %>% -->
-<!--   mutate(term = reorder_within(term, beta, topic)) %>% -->
-<!--   ggplot(aes(beta, term, fill = factor(topic))) + -->
-<!--   geom_col(show.legend = FALSE) + -->
-<!--   facet_wrap(~ topic, scales = "free") + -->
-<!--   scale_y_reordered() + -->
-<!--   labs( -->
-<!--     title = 'Top Terms in Twitter Corpus' -->
-<!--     , subtitle = 'The terms that are most common within each topic' -->
-<!--   ) -->
-
-<!-- ``` -->
-
-
-<!-- ```{r betaspread, eval = FALSE, include = FALSE} -->
-<!-- beta_spread <- topics %>% -->
-<!--   mutate(topic = paste0("topic", topic)) %>% -->
-<!--   spread(topic, beta) %>% -->
-<!--   filter(topic1 > .001 | topic2 > .001) %>% -->
-<!--   mutate(log_ratio = log2(topic2 / topic1)) -->
-
-<!-- beta_spread -->
-<!-- ``` -->
-
-
-<!-- Document topic probabilities. -->
-
-<!-- > Each of these values is an estimated proportion of words from that document that are generated from that topic. For example, the model estimates that only about 25% of the words in document 1 were generated from topic 1. -->
-
-<!-- ```{r doctopics, eval = FALSE, include = FALSE} -->
-<!-- documents <- tidy(lda, matrix = "gamma") -->
-<!-- documents %>% arrange(document) %>% head(50) -->
-<!-- ``` -->
-
-
-
-
-
-
-<!-- # Now for some topics -->
-
-<!-- ```{r, eval = FALSE, include = FALSE} -->
-<!-- SEED = sample(1:1000000, 1)  # Pick a random seed for replication -->
-<!-- k = 10  # Let's start with 10 topics -->
-<!-- ``` -->
-
-<!-- ```{r, eval = FALSE, include = FALSE} -->
-<!-- # This might take a minute! -->
-<!-- models <- list( -->
-<!--     CTM       = CTM(dtm, k = k, control = list(seed = SEED, var = list(tol = 10^-4), em = list(tol = 10^-3))), -->
-<!--     VEM       = LDA(dtm, k = k, control = list(seed = SEED)), -->
-<!--     VEM_Fixed = LDA(dtm, k = k, control = list(estimate.alpha = FALSE, seed = SEED)), -->
-<!--     Gibbs     = LDA(dtm, k = k, method = "Gibbs", control = list(seed = SEED, burnin = 1000, -->
-<!--                                                                  thin = 100,    iter = 1000)) -->
-<!-- ) -->
-<!-- ``` -->
-
-
-<!-- # There you have it. Models now holds 4 topics. See the topicmodels API documentation for details -->
-
-<!-- # Top 10 terms of each topic for each model -->
-<!-- # Do you see any themes you can label to these "topics" (lists of words)? -->
-
-<!-- ```{r, eval = FALSE, include = FALSE} -->
-<!-- lapply(models, terms, 10) -->
-<!-- ``` -->
-
-<!-- # matrix of tweet assignments to predominate topic on that tweet for each of the models, in case you wanted to categorize them -->
-
-<!-- ```{r, eval = FALSE, include = FALSE} -->
-<!-- assignments <- sapply(models, topics) -->
-<!-- ``` -->
-
-
-
-
-<!-- ### Scrapyard -->
-
-<!-- Configuring session for use with `twitteR` package   -->
-
-<!-- ```{r configtwitteR, eval = FALSE, include = FALSE} -->
-<!-- config <- config::get(file = 'config.yml') -->
-
-<!-- my_config <- function() { -->
-<!--     ckey = config$apikey -->
-<!--     csec = config$apikeysecret -->
-<!--     akey = config$accesstoken -->
-<!--     asec = config$accesstokensecret -->
-
-<!--     setup_twitter_oauth(ckey, csec, akey, asec)   -->
-<!-- } -->
-
-<!-- my_config() -->
-<!-- ``` -->
-
-<!-- **twitteR** -->
-<!-- First, a few examples of searches from the help docs (excluding results): -->
-
-<!-- ```{r examples, eval = FALSE, include = FALSE} -->
-<!-- ## Search between two dates -->
-<!-- searchTwitter('tesla', since = '2020-12-01', until = '2020-12-24') -->
-
-<!-- ## Geocoded results -->
-<!-- searchTwitter('patriots', geocode = '42.375, -71.1061111, 10mi') -->
-
-<!-- ## Using resultType -->
-<!-- searchTwitter('from:GrittyNHL', resultType = "popular", n = 50) -->
-
-<!-- phl_tweets <- searchTwitter('philadelphia+philly', resultType = "recent", n = 15) -->
-<!-- head(phl_tweets, 1) %>% str() -->
-<!-- ``` -->
-
-<!-- Going to write a function to format the results I care about into a tidy dataframe -->
-
-<!-- ```{r, eval = FALSE, include = FALSE} -->
-<!-- getTweets <- function(){ -->
-<!--   searchTwitter('philadelphia+philly', resultType = "recent", n = 15) -->
-<!-- } -->
-<!-- ``` -->
-
-
-
-
-
-
-
-<!-- Now, a convenience function for accessing the text part of a tweet returned by the twitteR API (source: bryangoodrich). -->
-
-<!-- ```{r fun1, eval = FALSE, include = FALSE} -->
-<!-- tweet_text <- function(x) x$getText() -->
-<!-- ``` -->
-
-<!-- Next, a search function that uses `tweet_text()` to extract the text from each tweet (source: bryangoodrich). -->
-
-<!-- ```{r fun2, eval = FALSE, include = FALSE} -->
-<!-- tweet_corpus <- function(search, n = 5000, ...) { -->
-<!--     payload <- searchTwitter(search, n = n, ...) -->
-<!--     sapply(payload, tweet_text) -->
-<!-- } -->
-<!-- ``` -->
-
-<!-- Finally, run the search. This may take a few minutes. -->
-
-<!-- ```{r search, eval = FALSE, include = FALSE} -->
-<!-- #tweets <- tweet_corpus("energy+electricity", n = 100, lang = 'en') -->
-<!-- tweets <- tweet_corpus('philadelphia+philly', n = 1000, lang = 'en') -->
-<!-- ``` -->
-
-
 ```{r archetypesetup, echo = FALSE, message = FALSE, warning = FALSE}
 ## Load frequently used packages for blog posts
 library('knitcitations') # for citations
@@ -879,7 +642,23 @@ cleanbib()
 cite_options(hyperlink = 'to.doc', citation_format = 'text', style = 'html')
 
 bib <- c(
-    'BiocStyle' = citation('BiocStyle'),
+    'knitr' = citation('knitr'),
+    'rtweet' = citation('rtweet'),
+    'rmarkdown' = citation('rmarkdown'),
+    'NLP' = citation('NLP'),
+    'tm' = citation('tm'),
+    'RColorBrewer' = citation('RColorBrewer'),
+    'wordcloud' = citation('wordcloud'),
+    'topicmodels' = citation('topicmodels'),
+    'SnowballC' = citation('SnowballC'),
+    'config' = citation('config'),
+    'dplyr' = citation('dplyr'),
+    'tidytext' = citation('tidytext'),
+    'tidyr' = citation('tidyr'),
+    'ggplot2' = citation('ggplot2'),
+    'lubridate' = citation('lubridate'),
+    'readr' = citation('readr'),
+    'skimr' = citation('skimr'),
     'blogdown' = citation('blogdown')[2],
     'devtools' = citation('devtools'),
     'knitcitations' = citation('knitcitations')
@@ -887,59 +666,45 @@ bib <- c(
 ```
 
 
-### Post content
-
-Typical location to start editing since the bibliography chunk is hidden. Make sure that you selected `R Markdown (.Rmd)` as the _format_ option of the post when using the `New Post` `r CRANpkg('blogdown')` addin.
-
-### R image
-
-
-```{r 'plot', echo = TRUE, fig.width = 6, fig.height = 6, eval = FALSE}
-## This imaged will be saved in the /post/*_files/ directory
-## Use echo = FALSE if you want to hide the code for making the plot
-plot(1:10, 10:1)
-```
-
-If you prefer not to use the `fig.width` and `fig.height` options in every plot chunk, edit the YAML (the part at the top of the post) with:
-
-```
-output:
-  blogdown::html_page:
-    toc: no
-    fig_width: 5
-    fig_height: 5
-```
-
-The spaces are important.
-
-### Custom image
-
-The easiest option is to use the `r CRANpkg('blogdown')` _Insert Image_ RStudio addin to add an external image described in this [blog post](http://lcolladotor.github.io/2018/03/07/blogdown-insert-image-addin). You need to use version 0.5.7 or newer to have access to this plugin. 
-
-If you want to add images manually, check this [blog post](http://lcolladotor.github.io/2018/02/17/r-markdown-blog-template/#.WqChJZPwa50) for more details on the image syntax.
-
-
 ### Acknowledgements
 
 
 This blog post was made possible thanks to:
 
+* `r Biocpkg('knitr')` `r citep(bib[['knitr']])`
+* `r Biocpkg('rtweet')` `r citep(bib[['rtweet']])`
+* `r Biocpkg('rmarkdown')` `r citep(bib[['rmarkdown']])`
+* `r Biocpkg('NLP')` `r citep(bib[['NLP']])`
+* `r Biocpkg('tm')` `r citep(bib[['tm']])`
+* `r Biocpkg('RColorBrewer')` `r citep(bib[['RColorBrewer']])`
+* `r Biocpkg('wordcloud')` `r citep(bib[['wordcloud']])`
+* `r Biocpkg('topicmodels')` `r citep(bib[['topicmodels']])`
+* `r Biocpkg('SnowballC')` `r citep(bib[['SnowballC']])`
+* `r Biocpkg('config')` `r citep(bib[['config']])`
+* `r Biocpkg('dplyr')` `r citep(bib[['dplyr']])`
+* `r Biocpkg('tidytext')` `r citep(bib[['tidytext']])`
+* `r Biocpkg('tidyr')` `r citep(bib[['tidyr']])`
+* `r Biocpkg('ggplot2')` `r citep(bib[['ggplot2']])`
+* `r Biocpkg('lubridate')` `r citep(bib[['lubridate']])`
+* `r Biocpkg('readr')` `r citep(bib[['readr']])`
+* `r Biocpkg('skimr')` `r citep(bib[['skimr']])`
 * `r Biocpkg('BiocStyle')` `r citep(bib[['BiocStyle']])`
 * `r CRANpkg('blogdown')` `r citep(bib[['blogdown']])`
 * `r CRANpkg('devtools')` `r citep(bib[['devtools']])`
 * `r CRANpkg('knitcitations')` `r citep(bib[['knitcitations']])`
 
-### References
 
-```{r bibliography, results = 'asis', echo = FALSE, cache = FALSE}
-## Print bibliography
-bibliography(style = 'html')
-```
+<!-- ### References -->
 
-### Reproducibility
+<!-- ```{r bibliography, results = 'asis', echo = FALSE, cache = FALSE} -->
+<!-- ## Print bibliography -->
+<!-- bibliography(style = 'html') -->
+<!-- ``` -->
 
-```{r reproducibility, echo = FALSE}
-## Reproducibility info
-options(width = 120)
-session_info()
-```
+<!-- ### Reproducibility -->
+
+<!-- ```{r reproducibility, echo = FALSE} -->
+<!-- ## Reproducibility info -->
+<!-- options(width = 120) -->
+<!-- session_info() -->
+<!-- ``` -->

@@ -28,9 +28,9 @@ disableKinds = ["taxonomy", "taxonomyTerm"]
     url = "post/"
     
 [[menu.main]]
-    name = "Dashes"
+    name = "Apps"
     weight = 3
-    url = "dash/"
+    url = "app/"
 
 [[menu.main]]
     name = "Links"

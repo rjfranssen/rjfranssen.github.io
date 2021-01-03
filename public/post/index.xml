@@ -6,15 +6,15 @@
     <description>Recent content in Posts on rjfranssen</description>
     <generator>Hugo -- gohugo.io</generator><atom:link href="/post/index.xml" rel="self" type="application/rss+xml" />
     <item>
-      <title>Custom Color Palette</title>
+      <title>Custom Color Palette in R</title>
       <link>/2020/12/30/custom-color-palette/</link>
       <pubDate>Wed, 30 Dec 2020 00:00:00 +0000</pubDate>
       
       <guid>/2020/12/30/custom-color-palette/</guid>
-      <description>Last updated 2020-12-30.
+      <description>Updated 2021-01-02.
 I&#39;m describing customizing my own color palette for ggplot2. This is based off of Creating corporate colour palettes for ggplot2 by drsimonj.
 First, find a bunch of colors that you like. Canva is a good place to go for inspiration; or, us this tool from Adobe Color that will extract colors from a photo you like. Then, there&#39;s always colorbrewer2.
-Note: In many cases, you can get away with using the scale_color_manual() and scale_fill_manual() functions directly within ggplot2.</description>
+Note: In some cases, it&#39;s enough to use the scale_color_manual() and scale_fill_manual() functions directly within ggplot2.</description>
     </item>
     
     <item>
@@ -23,9 +23,9 @@ Note: In many cases, you can get away with using the scale_color_manual() and sc
       <pubDate>Wed, 30 Dec 2020 00:00:00 +0000</pubDate>
       
       <guid>/2020/12/30/twitter-sentiment-philly/</guid>
-      <description>% addTiles() %% setView(0,0,1) --Last updated 2020-12-31.
+      <description>Updated 2021-01-02.
 This is a walkthrough of using the Twitter API with the rtweet R package. It borrows from a few difference sources, including:
- ropensci/rtweet documentation here Tidy Text Mining with R Twitter Data in R Using Rtweet: Analyze and Download Twitter Data Comparing Twitter archives Mining NASA metadata Analyzing usenet text  Load libraries 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18  #library(twitteR) library(rtweet) library(rmarkdown) library(NLP) library(tm) library(RColorBrewer) library(wordcloud) library(topicmodels) library(SnowballC) library(config) library(dplyr) library(tidytext) library(tidyr) library(ggplot2) library(lubridate) library(readr) library(skimr) library(widgetframe)   Configure Twitter API access There are a couple different ways to authenticate your session.</description>
+ ropensci/rtweet documentation here Tidy Text Mining with R Twitter Data in R Using Rtweet: Analyze and Download Twitter Data Comparing Twitter archives Mining NASA metadata Analyzing usenet text  Load libraries 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16  library(rtweet) library(rmarkdown) library(NLP) library(tm) library(RColorBrewer) library(wordcloud) library(topicmodels) library(SnowballC) library(config) library(dplyr) library(tidytext) library(tidyr) library(ggplot2) library(lubridate) library(readr) library(skimr)   Configure Twitter API access There are a couple different ways to authenticate your session.</description>
     </item>
     
   </channel>

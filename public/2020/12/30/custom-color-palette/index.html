@@ -12,33 +12,33 @@
 <meta name="msapplication-config" content='/favicons/browserconfig.xml'>
 <meta name="theme-color" content="#ffffff">
 
-<title>Custom Color Palette | rjfranssen</title><meta property="og:title" content="Custom Color Palette" />
-<meta property="og:description" content="Last updated 2020-12-30.
+<title>Custom Color Palette in R | rjfranssen</title><meta property="og:title" content="Custom Color Palette in R" />
+<meta property="og:description" content="Updated 2021-01-02.
 I&#39;m describing customizing my own color palette for ggplot2. This is based off of Creating corporate colour palettes for ggplot2 by drsimonj.
 First, find a bunch of colors that you like. Canva is a good place to go for inspiration; or, us this tool from Adobe Color that will extract colors from a photo you like. Then, there&#39;s always colorbrewer2.
-Note: In many cases, you can get away with using the scale_color_manual() and scale_fill_manual() functions directly within ggplot2." />
+Note: In some cases, it&#39;s enough to use the scale_color_manual() and scale_fill_manual() functions directly within ggplot2." />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="/2020/12/30/custom-color-palette/" />
 <meta property="article:published_time" content="2020-12-30T00:00:00+00:00" />
 <meta property="article:modified_time" content="2020-12-30T12:57:43-05:00" />
-<meta itemprop="name" content="Custom Color Palette">
-<meta itemprop="description" content="Last updated 2020-12-30.
+<meta itemprop="name" content="Custom Color Palette in R">
+<meta itemprop="description" content="Updated 2021-01-02.
 I&#39;m describing customizing my own color palette for ggplot2. This is based off of Creating corporate colour palettes for ggplot2 by drsimonj.
 First, find a bunch of colors that you like. Canva is a good place to go for inspiration; or, us this tool from Adobe Color that will extract colors from a photo you like. Then, there&#39;s always colorbrewer2.
-Note: In many cases, you can get away with using the scale_color_manual() and scale_fill_manual() functions directly within ggplot2.">
+Note: In some cases, it&#39;s enough to use the scale_color_manual() and scale_fill_manual() functions directly within ggplot2.">
 <meta itemprop="datePublished" content="2020-12-30T00:00:00+00:00" />
 <meta itemprop="dateModified" content="2020-12-30T12:57:43-05:00" />
-<meta itemprop="wordCount" content="1264">
+<meta itemprop="wordCount" content="627">
 
 
 
-<meta itemprop="keywords" content="" />
+<meta itemprop="keywords" content="r,ggplot2,color," />
 <meta name="twitter:card" content="summary"/>
-<meta name="twitter:title" content="Custom Color Palette"/>
-<meta name="twitter:description" content="Last updated 2020-12-30.
+<meta name="twitter:title" content="Custom Color Palette in R"/>
+<meta name="twitter:description" content="Updated 2021-01-02.
 I&#39;m describing customizing my own color palette for ggplot2. This is based off of Creating corporate colour palettes for ggplot2 by drsimonj.
 First, find a bunch of colors that you like. Canva is a good place to go for inspiration; or, us this tool from Adobe Color that will extract colors from a photo you like. Then, there&#39;s always colorbrewer2.
-Note: In many cases, you can get away with using the scale_color_manual() and scale_fill_manual() functions directly within ggplot2."/>
+Note: In some cases, it&#39;s enough to use the scale_color_manual() and scale_fill_manual() functions directly within ggplot2."/>
 
 
 
@@ -80,7 +80,7 @@ Note: In many cases, you can get away with using the scale_color_manual() and sc
 			<a class="nav-link" href="/post/"><span>Posts</span></a>
 		</li>
 		<li class="nav-item">
-			<a class="nav-link" href="/dash/"><span>Dashes</span></a>
+			<a class="nav-link" href="/app/"><span>Apps</span></a>
 		</li>
 		<li class="nav-item">
 			<a class="nav-link" href="/links/list/"><span>Links</span></a>
@@ -107,13 +107,15 @@ Note: In many cases, you can get away with using the scale_color_manual() and sc
   <section class="section aside_inner">
     <h2 class="section_title"><a  href="/post/" class="group">Posts</a></h2>
       <section class="" id="docs-posts">
-        <h3 class="section_link active"><a id="docs-custom-color-palette" href="/2020/12/30/custom-color-palette/">Custom Color Palette</a></h3><nav id="TableOfContents">
+        <h3 class="section_link active"><a id="docs-custom-color-palette-in-r" href="/2020/12/30/custom-color-palette/">Custom Color Palette in R</a></h3><nav id="TableOfContents">
   <ul>
     <li>
       <ul>
+        <li><a href="#define-colors">Define colors</a></li>
+        <li><a href="#create-palettes">Create palettes</a></li>
+        <li><a href="#scale-functions-for-ggplot2">Scale functions for ggplot2</a></li>
+        <li><a href="#example-plots">Example plots</a></li>
         <li><a href="#acknowledgements">Acknowledgements</a></li>
-        <li><a href="#references">References</a></li>
-        <li><a href="#reproducibility">Reproducibility</a></li>
       </ul>
     </li>
   </ul>
@@ -125,19 +127,14 @@ Note: In many cases, you can get away with using the scale_color_manual() and sc
         <li><a href="#load-libraries">Load libraries</a></li>
         <li><a href="#configure-twitter-api-access">Configure Twitter API access</a></li>
         <li><a href="#query-the-tweets">Query the Tweets!</a></li>
-        <li><a href="#examing-data">Examing data</a></li>
+        <li><a href="#examining-data">Examining data</a></li>
         <li><a href="#sample-stats--visualizations">Sample stats &amp; visualizations</a></li>
         <li><a href="#sentiment-analysis">Sentiment analysis</a></li>
         <li><a href="#comparing-sentiments">Comparing sentiments</a></li>
         <li><a href="#some-routine-checks">Some routine checks</a></li>
         <li><a href="#wordclouds">Wordclouds</a></li>
         <li><a href="#what-about-sentences">What about sentences?</a></li>
-        <li><a href="#post-content">Post content</a></li>
-        <li><a href="#r-image">R image</a></li>
-        <li><a href="#custom-image">Custom image</a></li>
         <li><a href="#acknowledgements">Acknowledgements</a></li>
-        <li><a href="#references">References</a></li>
-        <li><a href="#reproducibility">Reproducibility</a></li>
       </ul>
     </li>
   </ul>
@@ -147,11 +144,12 @@ Note: In many cases, you can get away with using the scale_color_manual() and sc
 </aside>
 
   <main class="content">
-    <h1>Custom Color Palette</h1><p>Last updated 2020-12-30.</p>
+    <h1>Custom Color Palette in R</h1><p>Updated 2021-01-02.</p>
 <p>I'm describing customizing my own color palette for ggplot2. This is based off of <a href="https://drsimonj.svbtle.com/creating-corporate-colour-palettes-for-ggplot2">Creating corporate colour palettes for ggplot2</a> by <a href="https://twitter.com/drsimonj">drsimonj</a>.</p>
 <p>First, find a bunch of colors that you like. <a href="https://www.canva.com/">Canva</a> is a good place to go for inspiration; or, us this <a href="https://color.adobe.com/create/image">tool from Adobe Color</a> that will extract colors from a photo you like. Then, there's always <a href="https://colorbrewer2.org/#type=sequential&amp;scheme=BuGn&amp;n=3">colorbrewer2</a>.</p>
-<p><em>Note: In many cases, you can get away with using the <code>scale_color_manual()</code> and <code>scale_fill_manual()</code> functions directly within ggplot2. See <a href="https://ggplot2.tidyverse.org/reference/scale_manual.html">the docs</a> for examples.</em></p>
-<p>Define colors</p>
+<p><em>Note: In some cases, it's enough to use the <code>scale_color_manual()</code> and <code>scale_fill_manual()</code> functions directly within ggplot2. See <a href="https://ggplot2.tidyverse.org/reference/scale_manual.html">the docs</a> for examples.</em></p>
+<h3 id="define-colors">Define colors</h3>
+<p>This is the color scheme used by the non-profit, <strong><a href="https://www.splashdown.org/">splashdown.org</a></strong>.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre class="chroma"><code><span class="lnt"> 1
@@ -166,7 +164,7 @@ Note: In many cases, you can get away with using the scale_color_manual() and sc
 </span><span class="lnt">10
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-r" data-lang="r"><span class="n">rjfranssen_colors</span> <span class="o">&lt;-</span> <span class="nf">c</span><span class="p">(</span>
+<pre class="chroma"><code class="language-r" data-lang="r"><span class="n">splashdown_colors</span> <span class="o">&lt;-</span> <span class="nf">c</span><span class="p">(</span>
   <span class="n">`ebony`</span> <span class="o">=</span> <span class="s">&#34;#1E2225&#34;</span><span class="p">,</span>
   <span class="n">`blue_grotto`</span> <span class="o">=</span> <span class="s">&#34;#05263B&#34;</span><span class="p">,</span>
   <span class="n">`charcoal`</span> <span class="o">=</span> <span class="s">&#34;#43758A&#34;</span><span class="p">,</span>
@@ -187,17 +185,13 @@ Note: In many cases, you can get away with using the scale_color_manual() and sc
 </span><span class="lnt">4
 </span><span class="lnt">5
 </span><span class="lnt">6
-</span><span class="lnt">7
-</span><span class="lnt">8
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-r" data-lang="r"><span class="n">rjfranssen_cols</span> <span class="o">&lt;-</span> <span class="nf">function</span><span class="p">(</span><span class="kc">...</span><span class="p">)</span> <span class="p">{</span>
+<pre class="chroma"><code class="language-r" data-lang="r"><span class="n">splashdown_cols</span> <span class="o">&lt;-</span> <span class="nf">function</span><span class="p">(</span><span class="kc">...</span><span class="p">)</span> <span class="p">{</span>
   <span class="n">cols</span> <span class="o">&lt;-</span> <span class="nf">c</span><span class="p">(</span><span class="kc">...</span><span class="p">)</span>
-
   <span class="nf">if </span><span class="p">(</span><span class="nf">is.null</span><span class="p">(</span><span class="n">cols</span><span class="p">))</span>
-    <span class="nf">return </span><span class="p">(</span><span class="n">rjfranssen_colors</span><span class="p">)</span>
-
-  <span class="n">rjfranssen_colors[cols]</span>
+    <span class="nf">return </span><span class="p">(</span><span class="n">splashdown_colors</span><span class="p">)</span>
+  <span class="n">splashdown_colors[cols]</span>
 <span class="p">}</span>
 </code></pre></td></tr></table>
 </div>
@@ -216,12 +210,12 @@ Note: In many cases, you can get away with using the scale_color_manual() and sc
 <span class="nf">library</span><span class="p">(</span><span class="n">dplyr</span><span class="p">)</span>
 
 <span class="nf">par</span><span class="p">(</span><span class="n">mfrow</span><span class="o">=</span><span class="nf">c</span><span class="p">(</span><span class="m">1</span><span class="p">,</span><span class="m">2</span><span class="p">))</span>
-<span class="nf">rjfranssen_cols</span><span class="p">()</span> <span class="o">%&gt;%</span> <span class="nf">show_col</span><span class="p">()</span>
-<span class="nf">rjfranssen_cols</span><span class="p">(</span><span class="s">&#34;light_sea_green&#34;</span><span class="p">,</span> <span class="s">&#34;burnt_sienna&#34;</span><span class="p">)</span> <span class="o">%&gt;%</span> <span class="nf">show_col</span><span class="p">()</span>
+<span class="nf">splashdown_cols</span><span class="p">()</span> <span class="o">%&gt;%</span> <span class="nf">show_col</span><span class="p">()</span>
+<span class="nf">splashdown_cols</span><span class="p">(</span><span class="s">&#34;light_sea_green&#34;</span><span class="p">,</span> <span class="s">&#34;burnt_sienna&#34;</span><span class="p">)</span> <span class="o">%&gt;%</span> <span class="nf">show_col</span><span class="p">()</span>
 </code></pre></td></tr></table>
 </div>
 </div><p><img src="/post/2020-12-30-custom-color-palette/index_files/figure-html/examples-1.png" width="672" /></p>
-<p>Simply plot example.</p>
+<p>Very simple plot with color selection.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre class="chroma"><code><span class="lnt">1
@@ -230,12 +224,13 @@ Note: In many cases, you can get away with using the scale_color_manual() and sc
 </span></code></pre></td>
 <td class="lntd">
 <pre class="chroma"><code class="language-r" data-lang="r"><span class="nf">ggplot</span><span class="p">(</span><span class="n">mtcars</span><span class="p">,</span> <span class="nf">aes</span><span class="p">(</span><span class="n">hp</span><span class="p">,</span> <span class="n">mpg</span><span class="p">))</span> <span class="o">+</span>
-    <span class="nf">geom_point</span><span class="p">(</span><span class="n">color</span> <span class="o">=</span> <span class="nf">rjfranssen_cols</span><span class="p">(</span><span class="s">&#34;goldenrod&#34;</span><span class="p">),</span>
+    <span class="nf">geom_point</span><span class="p">(</span><span class="n">color</span> <span class="o">=</span> <span class="nf">splashdown_cols</span><span class="p">(</span><span class="s">&#34;goldenrod&#34;</span><span class="p">),</span>
                <span class="n">size</span> <span class="o">=</span> <span class="m">4</span><span class="p">,</span> <span class="n">alpha</span> <span class="o">=</span> <span class="m">.8</span><span class="p">)</span>
 </code></pre></td></tr></table>
 </div>
 </div><p><img src="/post/2020-12-30-custom-color-palette/index_files/figure-html/simpltplot-1.png" width="672" /></p>
-<p>Now, combine sets of colors into individual palettes.</p>
+<h3 id="create-palettes">Create palettes</h3>
+<p>Combine sets of colors to create individual palettes.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre class="chroma"><code><span class="lnt">1
@@ -243,22 +238,16 @@ Note: In many cases, you can get away with using the scale_color_manual() and sc
 </span><span class="lnt">3
 </span><span class="lnt">4
 </span><span class="lnt">5
-</span><span class="lnt">6
-</span><span class="lnt">7
-</span><span class="lnt">8
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-r" data-lang="r"><span class="n">rjfranssen_palettes</span> <span class="o">&lt;-</span> <span class="nf">list</span><span class="p">(</span>
-  
-  <span class="n">`primary`</span>  <span class="o">=</span> <span class="nf">rjfranssen_cols</span><span class="p">(</span><span class="s">&#34;ebony&#34;</span><span class="p">,</span> <span class="s">&#34;blue_grotto&#34;</span><span class="p">,</span> <span class="s">&#34;charcoal&#34;</span><span class="p">,</span> <span class="s">&#34;light_sea_green&#34;</span><span class="p">,</span> <span class="s">&#34;pewter&#34;</span><span class="p">),</span>
-
-  <span class="n">`secondary`</span>  <span class="o">=</span> <span class="nf">rjfranssen_cols</span><span class="p">(</span><span class="s">&#34;carafe&#34;</span><span class="p">,</span> <span class="s">&#34;goldenrod&#34;</span><span class="p">,</span> <span class="s">&#34;burnt_sienna&#34;</span><span class="p">,</span> <span class="s">&#34;crimson&#34;</span><span class="p">),</span>
-
-  <span class="n">`all`</span>   <span class="o">=</span> <span class="nf">rjfranssen_cols</span><span class="p">(</span><span class="s">&#34;ebony&#34;</span><span class="p">,</span> <span class="s">&#34;blue_grotto&#34;</span><span class="p">,</span> <span class="s">&#34;charcoal&#34;</span><span class="p">,</span> <span class="s">&#34;light_sea_green&#34;</span><span class="p">,</span> <span class="s">&#34;pewter&#34;</span><span class="p">,</span> <span class="s">&#34;carafe&#34;</span><span class="p">,</span> <span class="s">&#34;goldenrod&#34;</span><span class="p">,</span> <span class="s">&#34;burnt_sienna&#34;</span><span class="p">,</span> <span class="s">&#34;crimson&#34;</span><span class="p">)</span>
+<pre class="chroma"><code class="language-r" data-lang="r"><span class="n">splashdown_palettes</span> <span class="o">&lt;-</span> <span class="nf">list</span><span class="p">(</span>
+  <span class="n">`primary`</span>  <span class="o">=</span> <span class="nf">splashdown_cols</span><span class="p">(</span><span class="s">&#34;ebony&#34;</span><span class="p">,</span> <span class="s">&#34;blue_grotto&#34;</span><span class="p">,</span> <span class="s">&#34;charcoal&#34;</span><span class="p">,</span> <span class="s">&#34;light_sea_green&#34;</span><span class="p">,</span> <span class="s">&#34;pewter&#34;</span><span class="p">),</span>
+  <span class="n">`secondary`</span>  <span class="o">=</span> <span class="nf">splashdown_cols</span><span class="p">(</span><span class="s">&#34;carafe&#34;</span><span class="p">,</span> <span class="s">&#34;goldenrod&#34;</span><span class="p">,</span> <span class="s">&#34;burnt_sienna&#34;</span><span class="p">,</span> <span class="s">&#34;crimson&#34;</span><span class="p">),</span>
+  <span class="n">`all`</span>   <span class="o">=</span> <span class="nf">splashdown_cols</span><span class="p">(</span><span class="s">&#34;ebony&#34;</span><span class="p">,</span> <span class="s">&#34;blue_grotto&#34;</span><span class="p">,</span> <span class="s">&#34;charcoal&#34;</span><span class="p">,</span> <span class="s">&#34;light_sea_green&#34;</span><span class="p">,</span> <span class="s">&#34;pewter&#34;</span><span class="p">,</span> <span class="s">&#34;carafe&#34;</span><span class="p">,</span> <span class="s">&#34;goldenrod&#34;</span><span class="p">,</span> <span class="s">&#34;burnt_sienna&#34;</span><span class="p">,</span> <span class="s">&#34;crimson&#34;</span><span class="p">)</span>
 <span class="p">)</span>
 </code></pre></td></tr></table>
 </div>
-</div><p>Function to interpolate the palettes (source: <a href="https://drsimonj.svbtle.com/creating-corporate-colour-palettes-for-ggplot2">drsimonj</a>). Option to padd additional arguments into <code>colorRampPallete()</code> like <code>alpha</code>.</p>
+</div><p>Function to interpolate the palettes (source: <a href="https://drsimonj.svbtle.com/creating-corporate-colour-palettes-for-ggplot2">drsimonj</a>). Option to add additional arguments into <code>colorRampPallete()</code> like <code>alpha</code>.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre class="chroma"><code><span class="lnt">1
@@ -266,15 +255,11 @@ Note: In many cases, you can get away with using the scale_color_manual() and sc
 </span><span class="lnt">3
 </span><span class="lnt">4
 </span><span class="lnt">5
-</span><span class="lnt">6
-</span><span class="lnt">7
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-r" data-lang="r"><span class="n">rjfranssen_pal</span> <span class="o">&lt;-</span> <span class="nf">function</span><span class="p">(</span><span class="n">palette</span> <span class="o">=</span> <span class="s">&#34;main&#34;</span><span class="p">,</span> <span class="n">reverse</span> <span class="o">=</span> <span class="kc">FALSE</span><span class="p">,</span> <span class="kc">...</span><span class="p">)</span> <span class="p">{</span>
-  <span class="n">pal</span> <span class="o">&lt;-</span> <span class="n">rjfranssen_palettes[[palette]]</span>
-
+<pre class="chroma"><code class="language-r" data-lang="r"><span class="n">splashdown_pal</span> <span class="o">&lt;-</span> <span class="nf">function</span><span class="p">(</span><span class="n">palette</span> <span class="o">=</span> <span class="s">&#34;main&#34;</span><span class="p">,</span> <span class="n">reverse</span> <span class="o">=</span> <span class="kc">FALSE</span><span class="p">,</span> <span class="kc">...</span><span class="p">)</span> <span class="p">{</span>
+  <span class="n">pal</span> <span class="o">&lt;-</span> <span class="n">splashdown_palettes[[palette]]</span>
   <span class="nf">if </span><span class="p">(</span><span class="n">reverse</span><span class="p">)</span> <span class="n">pal</span> <span class="o">&lt;-</span> <span class="nf">rev</span><span class="p">(</span><span class="n">pal</span><span class="p">)</span>
-
   <span class="nf">colorRampPalette</span><span class="p">(</span><span class="n">pal</span><span class="p">,</span> <span class="kc">...</span><span class="p">)</span>
 <span class="p">}</span>
 </code></pre></td></tr></table>
@@ -290,11 +275,12 @@ Note: In many cases, you can get away with using the scale_color_manual() and sc
 <td class="lntd">
 <pre class="chroma"><code class="language-r" data-lang="r"><span class="nf">par</span><span class="p">(</span><span class="n">mfrow</span><span class="o">=</span><span class="nf">c</span><span class="p">(</span><span class="m">1</span><span class="p">,</span><span class="m">2</span><span class="p">))</span>
 
-<span class="nf">rjfranssen_pal</span><span class="p">(</span><span class="s">&#34;primary&#34;</span><span class="p">)(</span><span class="m">12</span><span class="p">)</span> <span class="o">%&gt;%</span> <span class="nf">show_col</span><span class="p">()</span>
-<span class="nf">rjfranssen_pal</span><span class="p">(</span><span class="s">&#34;secondary&#34;</span><span class="p">)(</span><span class="m">4</span><span class="p">)</span> <span class="o">%&gt;%</span> <span class="nf">show_col</span><span class="p">()</span>
+<span class="nf">splashdown_pal</span><span class="p">(</span><span class="s">&#34;primary&#34;</span><span class="p">)(</span><span class="m">12</span><span class="p">)</span> <span class="o">%&gt;%</span> <span class="nf">show_col</span><span class="p">()</span>
+<span class="nf">splashdown_pal</span><span class="p">(</span><span class="s">&#34;secondary&#34;</span><span class="p">)(</span><span class="m">4</span><span class="p">)</span> <span class="o">%&gt;%</span> <span class="nf">show_col</span><span class="p">()</span>
 </code></pre></td></tr></table>
 </div>
 </div><p><img src="/post/2020-12-30-custom-color-palette/index_files/figure-html/showinterp-1.png" width="672" /></p>
+<h3 id="scale-functions-for-ggplot2">Scale functions for ggplot2</h3>
 <p>Everything that's been up to this point is creating a storage places for favorite colors. Now, prepare some functions specifically for using with <code>ggplot</code>.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -322,31 +308,31 @@ Note: In many cases, you can get away with using the scale_color_manual() and sc
 </span><span class="lnt">22
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-r" data-lang="r"><span class="n">scale_color_rjfranssen</span> <span class="o">&lt;-</span> <span class="nf">function</span><span class="p">(</span><span class="n">palette</span> <span class="o">=</span> <span class="s">&#34;main&#34;</span><span class="p">,</span>
+<pre class="chroma"><code class="language-r" data-lang="r"><span class="n">scale_color_splashdown</span> <span class="o">&lt;-</span> <span class="nf">function</span><span class="p">(</span><span class="n">palette</span> <span class="o">=</span> <span class="s">&#34;main&#34;</span><span class="p">,</span>
            <span class="n">discrete</span> <span class="o">=</span> <span class="kc">TRUE</span><span class="p">,</span>
            <span class="n">reverse</span> <span class="o">=</span> <span class="kc">FALSE</span><span class="p">,</span>
            <span class="kc">...</span><span class="p">)</span> <span class="p">{</span>
-    <span class="n">pal</span> <span class="o">&lt;-</span> <span class="nf">rjfranssen_pal</span><span class="p">(</span><span class="n">palette</span> <span class="o">=</span> <span class="n">palette</span><span class="p">,</span> <span class="n">reverse</span> <span class="o">=</span> <span class="n">reverse</span><span class="p">)</span>
+    <span class="n">pal</span> <span class="o">&lt;-</span> <span class="nf">splashdown_pal</span><span class="p">(</span><span class="n">palette</span> <span class="o">=</span> <span class="n">palette</span><span class="p">,</span> <span class="n">reverse</span> <span class="o">=</span> <span class="n">reverse</span><span class="p">)</span>
     
     <span class="nf">if </span><span class="p">(</span><span class="n">discrete</span><span class="p">)</span> <span class="p">{</span>
-      <span class="nf">discrete_scale</span><span class="p">(</span><span class="s">&#34;colour&#34;</span><span class="p">,</span> <span class="nf">paste0</span><span class="p">(</span><span class="s">&#34;rjfranssen_&#34;</span><span class="p">,</span> <span class="n">palette</span><span class="p">),</span> <span class="n">palette</span> <span class="o">=</span> <span class="n">pal</span><span class="p">,</span> <span class="kc">...</span><span class="p">)</span>
+      <span class="nf">discrete_scale</span><span class="p">(</span><span class="s">&#34;colour&#34;</span><span class="p">,</span> <span class="nf">paste0</span><span class="p">(</span><span class="s">&#34;splashdown_&#34;</span><span class="p">,</span> <span class="n">palette</span><span class="p">),</span> <span class="n">palette</span> <span class="o">=</span> <span class="n">pal</span><span class="p">,</span> <span class="kc">...</span><span class="p">)</span>
     <span class="p">}</span> <span class="n">else</span> <span class="p">{</span>
       <span class="nf">scale_color_gradientn</span><span class="p">(</span><span class="n">colours</span> <span class="o">=</span> <span class="nf">pal</span><span class="p">(</span><span class="m">256</span><span class="p">),</span> <span class="kc">...</span><span class="p">)</span>
     <span class="p">}</span>
 <span class="p">}</span>
 
-<span class="n">scale_fill_rjfranssen</span> <span class="o">&lt;-</span> <span class="nf">function</span><span class="p">(</span><span class="n">palette</span> <span class="o">=</span> <span class="s">&#34;main&#34;</span><span class="p">,</span> <span class="n">discrete</span> <span class="o">=</span> <span class="kc">TRUE</span><span class="p">,</span> <span class="n">reverse</span> <span class="o">=</span> <span class="kc">FALSE</span><span class="p">,</span> <span class="kc">...</span><span class="p">)</span> <span class="p">{</span>
-  <span class="n">pal</span> <span class="o">&lt;-</span> <span class="nf">rjfranssen_pal</span><span class="p">(</span><span class="n">palette</span> <span class="o">=</span> <span class="n">palette</span><span class="p">,</span> <span class="n">reverse</span> <span class="o">=</span> <span class="n">reverse</span><span class="p">)</span>
+<span class="n">scale_fill_splashdown</span> <span class="o">&lt;-</span> <span class="nf">function</span><span class="p">(</span><span class="n">palette</span> <span class="o">=</span> <span class="s">&#34;main&#34;</span><span class="p">,</span> <span class="n">discrete</span> <span class="o">=</span> <span class="kc">TRUE</span><span class="p">,</span> <span class="n">reverse</span> <span class="o">=</span> <span class="kc">FALSE</span><span class="p">,</span> <span class="kc">...</span><span class="p">)</span> <span class="p">{</span>
+  <span class="n">pal</span> <span class="o">&lt;-</span> <span class="nf">splashdown_pal</span><span class="p">(</span><span class="n">palette</span> <span class="o">=</span> <span class="n">palette</span><span class="p">,</span> <span class="n">reverse</span> <span class="o">=</span> <span class="n">reverse</span><span class="p">)</span>
 
   <span class="nf">if </span><span class="p">(</span><span class="n">discrete</span><span class="p">)</span> <span class="p">{</span>
-    <span class="nf">discrete_scale</span><span class="p">(</span><span class="s">&#34;fill&#34;</span><span class="p">,</span> <span class="nf">paste0</span><span class="p">(</span><span class="s">&#34;rjfranssen_&#34;</span><span class="p">,</span> <span class="n">palette</span><span class="p">),</span> <span class="n">palette</span> <span class="o">=</span> <span class="n">pal</span><span class="p">,</span> <span class="kc">...</span><span class="p">)</span>
+    <span class="nf">discrete_scale</span><span class="p">(</span><span class="s">&#34;fill&#34;</span><span class="p">,</span> <span class="nf">paste0</span><span class="p">(</span><span class="s">&#34;splashdown_&#34;</span><span class="p">,</span> <span class="n">palette</span><span class="p">),</span> <span class="n">palette</span> <span class="o">=</span> <span class="n">pal</span><span class="p">,</span> <span class="kc">...</span><span class="p">)</span>
   <span class="p">}</span> <span class="n">else</span> <span class="p">{</span>
     <span class="nf">scale_fill_gradientn</span><span class="p">(</span><span class="n">colours</span> <span class="o">=</span> <span class="nf">pal</span><span class="p">(</span><span class="m">256</span><span class="p">),</span> <span class="kc">...</span><span class="p">)</span>
   <span class="p">}</span>
 <span class="p">}</span>
 </code></pre></td></tr></table>
 </div>
-</div><p>Done - now plotting a few examples.</p>
+</div><h3 id="example-plots">Example plots</h3>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre class="chroma"><code><span class="lnt">1
@@ -356,7 +342,7 @@ Note: In many cases, you can get away with using the scale_color_manual() and sc
 <td class="lntd">
 <pre class="chroma"><code class="language-r" data-lang="r"><span class="nf">ggplot</span><span class="p">(</span><span class="n">iris</span><span class="p">,</span> <span class="nf">aes</span><span class="p">(</span><span class="n">Sepal.Width</span><span class="p">,</span> <span class="n">Sepal.Length</span><span class="p">,</span> <span class="n">color</span> <span class="o">=</span> <span class="n">Sepal.Length</span><span class="p">))</span> <span class="o">+</span>
     <span class="nf">geom_point</span><span class="p">(</span><span class="n">size</span> <span class="o">=</span> <span class="m">4</span><span class="p">,</span> <span class="n">alpha</span> <span class="o">=</span> <span class="m">.6</span><span class="p">)</span> <span class="o">+</span>
-    <span class="nf">scale_color_rjfranssen</span><span class="p">(</span><span class="n">discrete</span> <span class="o">=</span> <span class="kc">FALSE</span><span class="p">,</span> <span class="n">palette</span> <span class="o">=</span> <span class="s">&#34;primary&#34;</span><span class="p">)</span>
+    <span class="nf">scale_color_splashdown</span><span class="p">(</span><span class="n">discrete</span> <span class="o">=</span> <span class="kc">FALSE</span><span class="p">,</span> <span class="n">palette</span> <span class="o">=</span> <span class="s">&#34;primary&#34;</span><span class="p">)</span>
 </code></pre></td></tr></table>
 </div>
 </div><p><img src="/post/2020-12-30-custom-color-palette/index_files/figure-html/exampletwo-1.png" width="672" /></p>
@@ -369,7 +355,7 @@ Note: In many cases, you can get away with using the scale_color_manual() and sc
 <td class="lntd">
 <pre class="chroma"><code class="language-r" data-lang="r"><span class="nf">ggplot</span><span class="p">(</span><span class="n">iris</span><span class="p">,</span> <span class="nf">aes</span><span class="p">(</span><span class="n">Sepal.Width</span><span class="p">,</span> <span class="n">Sepal.Length</span><span class="p">,</span> <span class="n">color</span> <span class="o">=</span> <span class="n">Species</span><span class="p">))</span> <span class="o">+</span>
     <span class="nf">geom_point</span><span class="p">(</span><span class="n">size</span> <span class="o">=</span> <span class="m">4</span><span class="p">)</span> <span class="o">+</span>
-    <span class="nf">scale_color_rjfranssen</span><span class="p">(</span><span class="s">&#34;secondary&#34;</span><span class="p">)</span>
+    <span class="nf">scale_color_splashdown</span><span class="p">(</span><span class="s">&#34;secondary&#34;</span><span class="p">)</span>
 </code></pre></td></tr></table>
 </div>
 </div><p><img src="/post/2020-12-30-custom-color-palette/index_files/figure-html/exampleone-1.png" width="672" /></p>
@@ -384,11 +370,11 @@ Note: In many cases, you can get away with using the scale_color_manual() and sc
 <pre class="chroma"><code class="language-r" data-lang="r"><span class="nf">ggplot</span><span class="p">(</span><span class="n">mpg</span><span class="p">,</span> <span class="nf">aes</span><span class="p">(</span><span class="n">manufacturer</span><span class="p">,</span> <span class="n">fill</span> <span class="o">=</span> <span class="n">manufacturer</span><span class="p">))</span> <span class="o">+</span>
     <span class="nf">geom_bar</span><span class="p">()</span> <span class="o">+</span>
     <span class="nf">theme</span><span class="p">(</span><span class="n">axis.text.x</span> <span class="o">=</span> <span class="nf">element_text</span><span class="p">(</span><span class="n">angle</span> <span class="o">=</span> <span class="m">45</span><span class="p">,</span> <span class="n">hjust</span> <span class="o">=</span> <span class="m">1</span><span class="p">))</span> <span class="o">+</span>
-    <span class="nf">scale_fill_rjfranssen</span><span class="p">(</span><span class="n">palette</span> <span class="o">=</span> <span class="s">&#34;all&#34;</span><span class="p">,</span> <span class="n">guide</span> <span class="o">=</span> <span class="s">&#34;none&#34;</span><span class="p">)</span>
+    <span class="nf">scale_fill_splashdown</span><span class="p">(</span><span class="n">palette</span> <span class="o">=</span> <span class="s">&#34;all&#34;</span><span class="p">,</span> <span class="n">guide</span> <span class="o">=</span> <span class="s">&#34;none&#34;</span><span class="p">)</span>
 </code></pre></td></tr></table>
 </div>
 </div><p><img src="/post/2020-12-30-custom-color-palette/index_files/figure-html/examplethree-1.png" width="672" /></p>
-<p>Finally, I want to be able to pull down my palette whereever I am, so I copied the above R code into <code>rjfranssen_col_pal.r</code> and pushed it to my <a href="https://github.com/rjfranssen/rjfranssen">GitHub repo</a>. I can read it down using <code>devtools</code> as an <a href="https://stackoverflow.com/questions/35720660/how-to-use-an-r-script-from-github">r file</a> or as a <a href="https://gist.github.com/jtoll/4041987">gist</a>. <a href="https://rstudio.com/wp-content/uploads/2015/03/devtools-cheatsheet.pdf">(devtools cheatsheet)</a></p>
+<p>Finally, I want to be able to pull down my palette whereever I am, so I copied the above R code into <code>splashdown_col_pal.r</code> and pushed it to my <a href="https://github.com/rjfranssen/rjfranssen">GitHub repo</a>. I can read it down using <code>devtools</code> as an <a href="https://stackoverflow.com/questions/35720660/how-to-use-an-r-script-from-github">r file</a> or as a <a href="https://gist.github.com/jtoll/4041987">gist</a>. <a href="https://rstudio.com/wp-content/uploads/2015/03/devtools-cheatsheet.pdf">(devtools cheatsheet)</a></p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre class="chroma"><code><span class="lnt">1
@@ -396,123 +382,33 @@ Note: In many cases, you can get away with using the scale_color_manual() and sc
 </span></code></pre></td>
 <td class="lntd">
 <pre class="chroma"><code class="language-r" data-lang="r"><span class="nf">library</span><span class="p">(</span><span class="n">devtools</span><span class="p">)</span>
-<span class="nf">source_url</span><span class="p">(</span><span class="s">&#34;https://raw.githubusercontent.com/rjfranssen/rjfranssen/main/utils/rjfranssen_col_pal.r&#34;</span><span class="p">)</span>
+<span class="nf">source_url</span><span class="p">(</span><span class="s">&#34;https://raw.githubusercontent.com/rjfranssen/rjfranssen/main/utils/splashdown_col_pal.r&#34;</span><span class="p">)</span>
 </code></pre></td></tr></table>
 </div>
 </div><h3 id="acknowledgements">Acknowledgements</h3>
-<p>This blog post was made possible thanks to:</p>
+<p>This post was made possible thanks to</p>
 <ul>
+<li><em><a href="https://bioconductor.org/packages/3.12/lubridate">lubridate</a></em> <a id='cite-Grolemund_2011'></a>(<a href='https://www.jstatsoft.org/v40/i03/'>Grolemund and Wickham, 2011</a>)</li>
+<li><em><a href="https://bioconductor.org/packages/3.12/dplyr">dplyr</a></em> <a id='cite-Wickham_2020'></a>(<a href='https://CRAN.R-project.org/package=dplyr'>Wickham, François, 
+Henry, and Müller, 2020</a>)</li>
+<li><em><a href="https://CRAN.R-project.org/package=ggplot2">ggplot2</a></em> <a id='cite-Wickham_2016'></a>(<a href='https://ggplot2.tidyverse.org'>Wickham, 2016</a>)</li>
 <li><em><a href="https://bioconductor.org/packages/3.12/BiocStyle">BiocStyle</a></em> <a id='cite-Oles_2020'></a>(<a href='https://github.com/Bioconductor/BiocStyle'>Oles, Morgan, and Huber, 2020</a>)</li>
 <li><em><a href="https://CRAN.R-project.org/package=blogdown">blogdown</a></em> <a id='cite-Xie_2017'></a>(<a href='https://github.com/rstudio/blogdown'>Xie, Hill, and Thomas, 2017</a>)</li>
-<li><em><a href="https://CRAN.R-project.org/package=devtools">devtools</a></em> <a id='cite-Wickham_2020'></a>(<a href='https://CRAN.R-project.org/package=devtools'>Wickham, Hester, and Chang, 2020</a>)</li>
+<li><em><a href="https://CRAN.R-project.org/package=devtools">devtools</a></em> <a id='cite-Wickham_2020a'></a>(<a href='https://CRAN.R-project.org/package=devtools'>Wickham, Hester, and Chang, 2020</a>)</li>
 <li><em><a href="https://CRAN.R-project.org/package=knitcitations">knitcitations</a></em> <a id='cite-Boettiger_2020'></a>(<a href='https://github.com/cboettig/knitcitations'>Boettiger, 2020</a>)</li>
 </ul>
-<h3 id="references">References</h3>
-<p><a id='bib-Boettiger_2020'></a><a href="#cite-Boettiger_2020">[1]</a><cite>
-C. Boettiger.
-<em>knitcitations: Citations for 'Knitr' Markdown Files</em>.
-R package version 1.0.11.
-2020.
-URL: <a href="https://github.com/cboettig/knitcitations">https://github.com/cboettig/knitcitations</a>.</cite></p>
-<p><a id='bib-Oles_2020'></a><a href="#cite-Oles_2020">[2]</a><cite>
-A. Oles, M. Morgan, and W. Huber.
-<em>BiocStyle: Standard styles for vignettes and other Bioconductor documents</em>.
-R package version 2.18.1.
-2020.
-URL: <a href="https://github.com/Bioconductor/BiocStyle">https://github.com/Bioconductor/BiocStyle</a>.</cite></p>
-<p><a id='bib-Wickham_2020'></a><a href="#cite-Wickham_2020">[3]</a><cite>
-H. Wickham, J. Hester, and W. Chang.
-<em>devtools: Tools to Make Developing R Packages Easier</em>.
-R package version 2.3.1.
-2020.
-URL: <a href="https://CRAN.R-project.org/package=devtools">https://CRAN.R-project.org/package=devtools</a>.</cite></p>
-<p><a id='bib-Xie_2017'></a><a href="#cite-Xie_2017">[4]</a><cite>
-Y. Xie, A. P. Hill, and A. Thomas.
-<em>blogdown: Creating Websites with R Markdown</em>.
-ISBN 978-0815363729.
-Boca Raton, Florida: Chapman and Hall/CRC, 2017.
-URL: <a href="https://github.com/rstudio/blogdown">https://github.com/rstudio/blogdown</a>.</cite></p>
-<h3 id="reproducibility">Reproducibility</h3>
-<pre><code>## - Session info -------------------------------------------------------------------------------------------------------
-##  setting  value                       
-##  version  R version 4.0.2 (2020-06-22)
-##  os       Windows 10 x64              
-##  system   x86_64, mingw32             
-##  ui       RTerm                       
-##  language (EN)                        
-##  collate  English_United States.1252  
-##  ctype    English_United States.1252  
-##  tz       America/New_York            
-##  date     2020-12-30                  
-## 
-## - Packages -----------------------------------------------------------------------------------------------------------
-##  package       * version date       lib source                                 
-##  assertthat      0.2.1   2019-03-21 [1] CRAN (R 4.0.2)                         
-##  BiocManager     1.30.10 2019-11-16 [1] CRAN (R 4.0.3)                         
-##  BiocStyle     * 2.18.1  2020-11-24 [1] Bioconductor                           
-##  blogdown        0.20    2020-06-23 [1] CRAN (R 4.0.2)                         
-##  bookdown        0.21    2020-10-13 [1] CRAN (R 4.0.3)                         
-##  callr           3.4.3   2020-03-28 [1] CRAN (R 4.0.2)                         
-##  cli             2.2.0   2020-11-20 [1] CRAN (R 4.0.3)                         
-##  colorspace      2.0-0   2020-11-11 [1] CRAN (R 4.0.3)                         
-##  crayon          1.3.4   2017-09-16 [1] CRAN (R 4.0.2)                         
-##  desc            1.2.0   2018-05-01 [1] CRAN (R 4.0.2)                         
-##  devtools      * 2.3.1   2020-07-21 [1] CRAN (R 4.0.2)                         
-##  digest          0.6.27  2020-10-24 [1] CRAN (R 4.0.3)                         
-##  dplyr         * 1.0.2   2020-08-18 [1] CRAN (R 4.0.3)                         
-##  ellipsis        0.3.1   2020-05-15 [1] CRAN (R 4.0.2)                         
-##  evaluate        0.14    2019-05-28 [1] CRAN (R 4.0.2)                         
-##  fansi           0.4.1   2020-01-08 [1] CRAN (R 4.0.2)                         
-##  farver          2.0.3   2020-01-16 [1] CRAN (R 4.0.2)                         
-##  fs              1.5.0   2020-07-31 [1] CRAN (R 4.0.3)                         
-##  generics        0.1.0   2020-10-31 [1] CRAN (R 4.0.3)                         
-##  ggplot2       * 3.3.2   2020-06-19 [1] CRAN (R 4.0.2)                         
-##  glue            1.4.2   2020-08-27 [1] CRAN (R 4.0.2)                         
-##  gtable          0.3.0   2019-03-25 [1] CRAN (R 4.0.2)                         
-##  htmltools       0.5.0   2020-06-16 [1] CRAN (R 4.0.2)                         
-##  httr            1.4.2   2020-07-20 [1] CRAN (R 4.0.3)                         
-##  jsonlite        1.7.2   2020-12-09 [1] CRAN (R 4.0.3)                         
-##  knitcitations * 1.0.11  2020-12-30 [1] Github (cboettig/knitcitations@23750d5)
-##  knitr           1.30    2020-09-22 [1] CRAN (R 4.0.3)                         
-##  labeling        0.4.2   2020-10-20 [1] CRAN (R 4.0.3)                         
-##  lifecycle       0.2.0   2020-03-06 [1] CRAN (R 4.0.2)                         
-##  lubridate     * 1.7.9.2 2020-11-13 [1] CRAN (R 4.0.3)                         
-##  magrittr        2.0.1   2020-11-17 [1] CRAN (R 4.0.3)                         
-##  memoise         1.1.0   2017-04-21 [1] CRAN (R 4.0.2)                         
-##  munsell         0.5.0   2018-06-12 [1] CRAN (R 4.0.2)                         
-##  pillar          1.4.6   2020-07-10 [1] CRAN (R 4.0.3)                         
-##  pkgbuild        1.0.8   2020-05-07 [1] CRAN (R 4.0.2)                         
-##  pkgconfig       2.0.3   2019-09-22 [1] CRAN (R 4.0.2)                         
-##  pkgload         1.1.0   2020-05-29 [1] CRAN (R 4.0.2)                         
-##  plyr            1.8.6   2020-03-03 [1] CRAN (R 4.0.2)                         
-##  prettyunits     1.1.1   2020-01-24 [1] CRAN (R 4.0.2)                         
-##  processx        3.4.4   2020-09-03 [1] CRAN (R 4.0.3)                         
-##  ps              1.4.0   2020-10-07 [1] CRAN (R 4.0.3)                         
-##  purrr           0.3.4   2020-04-17 [1] CRAN (R 4.0.2)                         
-##  R6              2.5.0   2020-10-28 [1] CRAN (R 4.0.3)                         
-##  Rcpp            1.0.5   2020-07-06 [1] CRAN (R 4.0.2)                         
-##  RefManageR      1.3.0   2020-11-13 [1] CRAN (R 4.0.3)                         
-##  remotes         2.2.0   2020-07-21 [1] CRAN (R 4.0.3)                         
-##  rlang           0.4.9   2020-11-26 [1] CRAN (R 4.0.3)                         
-##  rmarkdown       2.5     2020-10-21 [1] CRAN (R 4.0.3)                         
-##  rprojroot       2.0.2   2020-11-15 [1] CRAN (R 4.0.2)                         
-##  scales        * 1.1.1   2020-05-11 [1] CRAN (R 4.0.2)                         
-##  sessioninfo     1.1.1   2018-11-05 [1] CRAN (R 4.0.2)                         
-##  stringi         1.5.3   2020-09-09 [1] CRAN (R 4.0.3)                         
-##  stringr         1.4.0   2019-02-10 [1] CRAN (R 4.0.2)                         
-##  testthat        2.3.2   2020-03-02 [1] CRAN (R 4.0.2)                         
-##  tibble          3.0.4   2020-10-12 [1] CRAN (R 4.0.3)                         
-##  tidyselect      1.1.0   2020-05-11 [1] CRAN (R 4.0.2)                         
-##  usethis       * 2.0.0   2020-12-10 [1] CRAN (R 4.0.3)                         
-##  vctrs           0.3.4   2020-08-29 [1] CRAN (R 4.0.3)                         
-##  withr           2.3.0   2020-09-22 [1] CRAN (R 4.0.3)                         
-##  xfun            0.19    2020-10-30 [1] CRAN (R 4.0.3)                         
-##  xml2            1.3.2   2020-04-23 [1] CRAN (R 4.0.2)                         
-##  yaml            2.2.1   2020-02-01 [1] CRAN (R 4.0.0)                         
-## 
-## [1] C:/Users/rober/Documents/R/win-library/4.0
-## [2] C:/Program Files/R/R-4.0.2/library
-</code></pre>
+<!-- ### References -->
+<!-- ```{r bibliography, results = 'asis', echo = FALSE, cache = FALSE} -->
+<!-- ## Print bibliography -->
+<!-- bibliography(style = 'html') -->
+<!-- ``` -->
+<!-- ### Reproducibility -->
+<!-- ```{r reproducibility, echo = FALSE} -->
+<!-- ## Reproducibility info -->
+<!-- options(width = 120) -->
+<!-- session_info() -->
+<!-- ``` -->
+
     <div class="pager">
   
   <div class="pager_item prev">
@@ -549,7 +445,7 @@ URL: <a href="https://github.com/rstudio/blogdown">https://github.com/rstudio/bl
   </div>
 <footer class="pt-2 pb-2">
   <div class="wrap">
-    <p>&copy; 2020 rjfranssen</p>
+    <p>&copy; 2021 rjfranssen</p>
   </div>
 </footer>
 
@@ -566,7 +462,7 @@ URL: <a href="https://github.com/rstudio/blogdown">https://github.com/rstudio/bl
   </symbol>
 </svg>
 <script src="/js/bundle.min.02545d1b796e3dc21ed6179e9cc71c1d0b6d8c842047dcfe72785cc4fc15f2a09cefa8fc9a8ed491e8e9fb30fcec32ea64c411ddf411e3e8c681f189dffc64fa.js"></script>
-<script src="/js/search.min.c5e97b27b04204a83b6f83529445813feb8856b178ce6cf6413995865d2e0f4c7213c58d1fbbf83805f9dc8ca1be445b3bfb65f4076c6b66c7e393cdc725ce9e.js" async defer></script>
+<script src="/js/search.min.14dd135dce00c95d145417c799c20e5b8998de3a890163241c7c695524bd083d498a4791728e35879e7c0e3f463f06c8efcb6c95affe3a26a4a8dda3edd47721.js" async defer></script>
 
 </body>
 </html>

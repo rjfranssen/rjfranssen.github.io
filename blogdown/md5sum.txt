@@ -1,4 +1,4 @@
 "file" "checksum"
 "content/about/_index.rmd" "e5cff536bcb4d868cc7ee2db95b5b43c"
-"content/post/2020-12-30-custom-color-palette/index.Rmarkdown" "edeb3d3d36016e0912f5eec25269f86a"
-"content/post/2020-12-30-twitter-sentiment-philly/index.Rmarkdown" "85d4410825a051293a01e506521df475"
+"content/post/2020-12-30-custom-color-palette/index.Rmarkdown" "0d77c10a45d4ad07c9d7bab1faf424ca"
+"content/post/2020-12-30-twitter-sentiment-philly/index.Rmarkdown" "e4d9624f4ba5d3364e92c4ebfe5ac8f7"

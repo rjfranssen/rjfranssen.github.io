@@ -1,10 +1,15 @@
 ---
-title: Custom Color Palette
+title: Custom Color Palette in R
 author: rjfranssen
 date: '2020-12-30'
 slug: custom-color-palette
-categories: []
-tags: []
+categories:
+  - utilities
+  - helpers
+tags:
+  - r
+  - ggplot2
+  - color
 header:
   caption: ''
   image: ''
@@ -14,10 +19,9 @@ header:
 
 ```{r setup, include = FALSE, message = FALSE, warning = FALSE}
 # Knitr options: https://yihui.org/knitr/options/
-library(lubridate)
-library(scales)
 library(dplyr)
 library(ggplot2)
+library(lubridate)
 knitr::opts_chunk$set(collapse = TRUE
                       , eval = TRUE
                       , echo = TRUE
@@ -26,19 +30,22 @@ knitr::opts_chunk$set(collapse = TRUE
                       , include = TRUE)
 ```
 
-Last updated `r today()`.
 
-I'm describing customizing my own color palette for ggplot2. This is based off of [Creating corporate colour palettes for ggplot2](https://drsimonj.svbtle.com/creating-corporate-colour-palettes-for-ggplot2) by [drsimonj](https://twitter.com/drsimonj). 
+Updated `r today()`.
+
+I'm describing customizing my own color palette for ggplot2. This is based off of [Creating corporate colour palettes for ggplot2](https://drsimonj.svbtle.com/creating-corporate-colour-palettes-for-ggplot2) by [drsimonj](https://twitter.com/drsimonj).
 
 First, find a bunch of colors that you like. [Canva](https://www.canva.com/) is a good place to go for inspiration; or, us this [tool from Adobe Color](https://color.adobe.com/create/image) that will extract colors from a photo you like. Then, there's always [colorbrewer2](https://colorbrewer2.org/#type=sequential&scheme=BuGn&n=3).  
 
-_Note: In many cases, you can get away with using the `scale_color_manual()` and `scale_fill_manual()` functions directly within ggplot2. See [the docs](https://ggplot2.tidyverse.org/reference/scale_manual.html) for examples._
+_Note: In some cases, it's enough to use the `scale_color_manual()` and `scale_fill_manual()` functions directly within ggplot2. See [the docs](https://ggplot2.tidyverse.org/reference/scale_manual.html) for examples._
 
 
-Define colors
+### Define colors
+
+This is the color scheme used by the non-profit, **[splashdown.org](https://www.splashdown.org/)**.  
 
 ```{r definepal}
-rjfranssen_colors <- c(
+splashdown_colors <- c(
   `ebony` = "#1E2225",
   `blue_grotto` = "#05263B",
   `charcoal` = "#43758A",
@@ -54,13 +61,11 @@ rjfranssen_colors <- c(
 Function to extract colors as hex codes (source: [drsimonj](https://drsimonj.svbtle.com/creating-corporate-colour-palettes-for-ggplot2))
 
 ```{r extractcols}
-rjfranssen_cols <- function(...) {
+splashdown_cols <- function(...) {
   cols <- c(...)
-
   if (is.null(cols))
-    return (rjfranssen_colors)
-
-  rjfranssen_colors[cols]
+    return (splashdown_colors)
+  splashdown_colors[cols]
 }
 ```
 
@@ -71,41 +76,38 @@ library(scales)
 library(dplyr)
 
 par(mfrow=c(1,2))
-rjfranssen_cols() %>% show_col()
-rjfranssen_cols("light_sea_green", "burnt_sienna") %>% show_col()
+splashdown_cols() %>% show_col()
+splashdown_cols("light_sea_green", "burnt_sienna") %>% show_col()
 ```
 
-Simply plot example.
+Very simple plot with color selection.
 
 ```{r simpltplot}
 ggplot(mtcars, aes(hp, mpg)) +
-    geom_point(color = rjfranssen_cols("goldenrod"),
+    geom_point(color = splashdown_cols("goldenrod"),
                size = 4, alpha = .8)
 ```
 
+### Create palettes
 
-Now, combine sets of colors into individual palettes.
+Combine sets of colors to create individual palettes.
 
 ```{r createpals}
-rjfranssen_palettes <- list(
-  
-  `primary`  = rjfranssen_cols("ebony", "blue_grotto", "charcoal", "light_sea_green", "pewter"),
-
-  `secondary`  = rjfranssen_cols("carafe", "goldenrod", "burnt_sienna", "crimson"),
-
-  `all`   = rjfranssen_cols("ebony", "blue_grotto", "charcoal", "light_sea_green", "pewter", "carafe", "goldenrod", "burnt_sienna", "crimson")
+splashdown_palettes <- list(
+  `primary`  = splashdown_cols("ebony", "blue_grotto", "charcoal", "light_sea_green", "pewter"),
+  `secondary`  = splashdown_cols("carafe", "goldenrod", "burnt_sienna", "crimson"),
+  `all`   = splashdown_cols("ebony", "blue_grotto", "charcoal", "light_sea_green", "pewter", "carafe", "goldenrod", "burnt_sienna", "crimson")
 )
 ```
 
 
-Function to interpolate the palettes (source: [drsimonj](https://drsimonj.svbtle.com/creating-corporate-colour-palettes-for-ggplot2)). Option to padd additional arguments into `colorRampPallete()` like `alpha`.
+Function to interpolate the palettes (source: [drsimonj](https://drsimonj.svbtle.com/creating-corporate-colour-palettes-for-ggplot2)). Option to add additional arguments into `colorRampPallete()` like `alpha`.
+
 
 ```{r interopolatepals}
-rjfranssen_pal <- function(palette = "main", reverse = FALSE, ...) {
-  pal <- rjfranssen_palettes[[palette]]
-
+splashdown_pal <- function(palette = "main", reverse = FALSE, ...) {
+  pal <- splashdown_palettes[[palette]]
   if (reverse) pal <- rev(pal)
-
   colorRampPalette(pal, ...)
 }
 ```
@@ -117,32 +119,34 @@ Preview the palettes, e.g. applying 10 levels to the `primary` color palette. Ag
 ```{r showinterp}
 par(mfrow=c(1,2))
 
-rjfranssen_pal("primary")(12) %>% show_col()
-rjfranssen_pal("secondary")(4) %>% show_col()
+splashdown_pal("primary")(12) %>% show_col()
+splashdown_pal("secondary")(4) %>% show_col()
 ```
 
+
+### Scale functions for ggplot2
 
 Everything that's been up to this point is creating a storage places for favorite colors. Now, prepare some functions specifically for using with `ggplot`.
 
 ```{r ggplotscales}
-scale_color_rjfranssen <- function(palette = "main",
+scale_color_splashdown <- function(palette = "main",
            discrete = TRUE,
            reverse = FALSE,
            ...) {
-    pal <- rjfranssen_pal(palette = palette, reverse = reverse)
+    pal <- splashdown_pal(palette = palette, reverse = reverse)
     
     if (discrete) {
-      discrete_scale("colour", paste0("rjfranssen_", palette), palette = pal, ...)
+      discrete_scale("colour", paste0("splashdown_", palette), palette = pal, ...)
     } else {
       scale_color_gradientn(colours = pal(256), ...)
     }
 }
 
-scale_fill_rjfranssen <- function(palette = "main", discrete = TRUE, reverse = FALSE, ...) {
-  pal <- rjfranssen_pal(palette = palette, reverse = reverse)
+scale_fill_splashdown <- function(palette = "main", discrete = TRUE, reverse = FALSE, ...) {
+  pal <- splashdown_pal(palette = palette, reverse = reverse)
 
   if (discrete) {
-    discrete_scale("fill", paste0("rjfranssen_", palette), palette = pal, ...)
+    discrete_scale("fill", paste0("splashdown_", palette), palette = pal, ...)
   } else {
     scale_fill_gradientn(colours = pal(256), ...)
   }
@@ -150,19 +154,19 @@ scale_fill_rjfranssen <- function(palette = "main", discrete = TRUE, reverse = F
 ```
 
 
-Done - now plotting a few examples.
+### Example plots
 
 
 ```{r exampletwo}
 ggplot(iris, aes(Sepal.Width, Sepal.Length, color = Sepal.Length)) +
     geom_point(size = 4, alpha = .6) +
-    scale_color_rjfranssen(discrete = FALSE, palette = "primary")
+    scale_color_splashdown(discrete = FALSE, palette = "primary")
 ```
 
 ```{r exampleone}
 ggplot(iris, aes(Sepal.Width, Sepal.Length, color = Species)) +
     geom_point(size = 4) +
-    scale_color_rjfranssen("secondary")
+    scale_color_splashdown("secondary")
 ```
 
 
@@ -170,14 +174,15 @@ ggplot(iris, aes(Sepal.Width, Sepal.Length, color = Species)) +
 ggplot(mpg, aes(manufacturer, fill = manufacturer)) +
     geom_bar() +
     theme(axis.text.x = element_text(angle = 45, hjust = 1)) +
-    scale_fill_rjfranssen(palette = "all", guide = "none")
+    scale_fill_splashdown(palette = "all", guide = "none")
 ```
 
-Finally, I want to be able to pull down my palette whereever I am, so I copied the above R code into `rjfranssen_col_pal.r` and pushed it to my [GitHub repo](https://github.com/rjfranssen/rjfranssen). I can read it down using `devtools` as an [r file](https://stackoverflow.com/questions/35720660/how-to-use-an-r-script-from-github) or as a [gist](https://gist.github.com/jtoll/4041987). [(devtools cheatsheet)](https://rstudio.com/wp-content/uploads/2015/03/devtools-cheatsheet.pdf)  
+
+Finally, I want to be able to pull down my palette whereever I am, so I copied the above R code into `splashdown_col_pal.r` and pushed it to my [GitHub repo](https://github.com/rjfranssen/rjfranssen). I can read it down using `devtools` as an [r file](https://stackoverflow.com/questions/35720660/how-to-use-an-r-script-from-github) or as a [gist](https://gist.github.com/jtoll/4041987). [(devtools cheatsheet)](https://rstudio.com/wp-content/uploads/2015/03/devtools-cheatsheet.pdf)  
 
 ```{r getpal, eval = FALSE}
 library(devtools)
-source_url("https://raw.githubusercontent.com/rjfranssen/rjfranssen/main/utils/rjfranssen_col_pal.r")
+source_url("https://raw.githubusercontent.com/rjfranssen/rjfranssen/main/utils/splashdown_col_pal.r")
 ```
 
 
@@ -193,6 +198,9 @@ cleanbib()
 cite_options(hyperlink = 'to.doc', citation_format = 'text', style = 'html')
 
 bib <- c(
+    'lubridate' = citation('lubridate'),
+    'dplyr' = citation('dplyr'),
+    'ggplot2' = citation('ggplot2'),
     'BiocStyle' = citation('BiocStyle'),
     'blogdown' = citation('blogdown')[2],
     'devtools' = citation('devtools'),
@@ -202,25 +210,28 @@ bib <- c(
 
 ### Acknowledgements
 
+This post was made possible thanks to
 
-This blog post was made possible thanks to:
-
+* `r Biocpkg('lubridate')` `r citep(bib[['lubridate']])`
+* `r Biocpkg('dplyr')` `r citep(bib[['dplyr']])`
+* `r CRANpkg('ggplot2')` `r citep(bib[['ggplot2']])`
 * `r Biocpkg('BiocStyle')` `r citep(bib[['BiocStyle']])`
 * `r CRANpkg('blogdown')` `r citep(bib[['blogdown']])`
 * `r CRANpkg('devtools')` `r citep(bib[['devtools']])`
 * `r CRANpkg('knitcitations')` `r citep(bib[['knitcitations']])`
 
-### References
 
-```{r bibliography, results = 'asis', echo = FALSE, cache = FALSE}
-## Print bibliography
-bibliography(style = 'html')
-```
+<!-- ### References -->
 
-### Reproducibility
+<!-- ```{r bibliography, results = 'asis', echo = FALSE, cache = FALSE} -->
+<!-- ## Print bibliography -->
+<!-- bibliography(style = 'html') -->
+<!-- ``` -->
 
-```{r reproducibility, echo = FALSE}
-## Reproducibility info
-options(width = 120)
-session_info()
-```
+<!-- ### Reproducibility -->
+
+<!-- ```{r reproducibility, echo = FALSE} -->
+<!-- ## Reproducibility info -->
+<!-- options(width = 120) -->
+<!-- session_info() -->
+<!-- ``` -->

@@ -19,16 +19,7 @@ header:
 
 
 
-<!-- ```{r, eval = FALSE, include = FALSE} -->
-<!-- library(leaflet) -->
-<!-- library(widgetframe) -->
-<!-- l <- leaflet(height=300) %>% addTiles() %>% setView(0,0,1) -->
-
-<!-- frameWidget(l) -->
-<!-- ``` -->
-
-
-Last updated 2020-12-31.  
+Updated 2021-01-02.  
 
 This is a walkthrough of using the Twitter API with the `rtweet` R package. It borrows from a few difference sources, including:
 * [ropensci/rtweet documentation](https://github.com/ropensci/rtweet)  
@@ -43,7 +34,6 @@ This is a walkthrough of using the Twitter API with the `rtweet` R package. It b
 
 
 ```r
-#library(twitteR)
 library(rtweet)
 library(rmarkdown)
 library(NLP)
@@ -60,7 +50,6 @@ library(ggplot2)
 library(lubridate)
 library(readr)
 library(skimr)
-library(widgetframe)
 ```
 
 ### Configure Twitter API access
@@ -115,8 +104,6 @@ tweets_df$tweet_year <- tweets_df$created_at %>% as.POSIXlt() %>% as.Date() %>% 
 tweets_df$tweet_month <- tweets_df$created_at %>% as.POSIXlt() %>% as.Date() %>% month()
 tweets_df$tweet_day <- tweets_df$created_at %>% as.POSIXlt() %>% as.Date() %>% day()
 
-
-tweets_df %>% head()
 ```
 
 
@@ -133,15 +120,16 @@ Reading back in the `.Rds` file..
 ```r
 tweets_df <- readRDS("tweets_df.Rds")
 
-tweets_df %>% head(5)
-## # A tibble: 5 x 97
+tweets_df %>% head()
+## # A tibble: 6 x 97
 ##   user_id status_id created_at          screen_name text  source
 ##   <chr>   <chr>     <dttm>              <chr>       <chr> <chr> 
-## 1 142219~ 13439700~ 2020-12-29 17:20:08 PhillyInqu~ Unio~ Socia~
-## 2 142219~ 13421567~ 2020-12-24 17:14:43 PhillyInqu~ It's~ Socia~
-## 3 142219~ 13432591~ 2020-12-27 18:15:04 PhillyInqu~ Toda~ Socia~
-## 4 142219~ 13418156~ 2020-12-23 18:39:19 PhillyInqu~ COVI~ Socia~
-## 5 142219~ 13421897~ 2020-12-24 19:25:49 PhillyInqu~ New ~ Socia~
+## 1 142219~ 13439700~ 2020-12-29 17:20:08 PhillyInqu~ "Uni~ Socia~
+## 2 142219~ 13421567~ 2020-12-24 17:14:43 PhillyInqu~ "It'~ Socia~
+## 3 142219~ 13432591~ 2020-12-27 18:15:04 PhillyInqu~ "Tod~ Socia~
+## 4 142219~ 13418156~ 2020-12-23 18:39:19 PhillyInqu~ "COV~ Socia~
+## 5 142219~ 13421897~ 2020-12-24 19:25:49 PhillyInqu~ "New~ Socia~
+## 6 142219~ 13418101~ 2020-12-23 18:17:18 PhillyInqu~ "<U+274C> S~ Socia~
 ## # ... with 91 more variables: display_text_width <dbl>,
 ## #   reply_to_status_id <chr>, reply_to_user_id <chr>,
 ## #   reply_to_screen_name <chr>, is_quote <lgl>, is_retweet <lgl>,
@@ -177,11 +165,18 @@ tweets_df %>% head(5)
 ```
 
 
-### Examing data
+### Examining data
 
-Now going to identify a few basic things, but first, this df has 92 columns. What are some of the columns that we're most likely to use? The `skimr` package is **really** good at doing this and is a good substitute for `summary()` in many cases.
+Now going to identify a few basic things, but first, this df has 92 columns. What are some of the columns that we're most likely to use? The `skimr` package is **really** good at doing this and I often use it in addition to `summary()`.
 
 
+```r
+#summary(tweet_df)
+skim(tweets_df)
+```
+
+
+And what does the table look like?
 
 
 
@@ -208,16 +203,12 @@ tweets_df %>% select(
   , created_at
   , account_created_at
   ) %>%
-  head()
-## # A tibble: 6 x 18
+  head(2)
+## # A tibble: 2 x 18
 ##   text  lang  hashtags symbols favorite_count retweet_count   lat   lng name 
 ##   <chr> <chr> <list>   <list>           <int>         <int> <dbl> <dbl> <chr>
-## 1 "Uni~ de    <chr [1~ <chr [~              0             0    NA    NA The ~
-## 2 "It'~ en    <chr [1~ <chr [~              5             1    NA    NA The ~
-## 3 "Tod~ en    <chr [2~ <chr [~              4             2    NA    NA The ~
-## 4 "COV~ en    <chr [1~ <chr [~             21             2    NA    NA The ~
-## 5 "New~ en    <chr [1~ <chr [~              4             8    NA    NA The ~
-## 6 "<U+274C> S~ en    <chr [1~ <chr [~              5             2    NA    NA The ~
+## 1 Unio~ de    <chr [1~ <chr [~              0             0    NA    NA The ~
+## 2 It's~ en    <chr [1~ <chr [~              5             1    NA    NA The ~
 ## # ... with 9 more variables: screen_name <chr>, followers_count <int>,
 ## #   friends_count <int>, location <chr>, description <chr>, listed_count <int>,
 ## #   statuses_count <int>, created_at <dttm>, account_created_at <dttm>
@@ -229,7 +220,7 @@ What is our total tweet *count*?
 
 
 ```r
-nrow(tweets_df)
+nrow(tweets_df) %>% print()
 ## [1] 1897
 ```
 
@@ -242,12 +233,16 @@ tweets_df %>%
   select(screen_name
          , text
          , favorite_count
-         , created_at)
-## # A tibble: 1 x 4
-##   screen_name text                            favorite_count created_at         
-##   <chr>       <chr>                                    <int> <dttm>             
-## 1 GetUpESPN   "\"Carson Wentz is soft! ... H~           1993 2020-12-21 16:16:24
+         , created_at) %>% knitr::kable()
 ```
+
+
+
+|screen_name |text                                                                                                                                                                                          | favorite_count|created_at          |
+|:-----------|:---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|--------------:|:-------------------|
+|GetUpESPN   |"Carson Wentz is soft! ... He don't have that Philly toughness ... But Jalen Hurts does! Jalen Hurts IS Philadelphia. Jalen Hurts is freakin' Rocky!"
+
+—@Realrclark25 https://t.co/nYvJ7IsB57 |           1993|2020-12-21 16:16:24 |
 
 
 What users are *tweeting the most*?  
@@ -284,20 +279,15 @@ tweets_df %>%
   group_by(lang) %>%
   summarize(num_tweets = n()) %>%
   arrange(-num_tweets) %>% # can also use slice_max()
-  head(10)
-## # A tibble: 10 x 2
-##    lang  num_tweets
-##    <chr>      <int>
-##  1 en          1829
-##  2 und           34
-##  3 cy             8
-##  4 es             6
-##  5 de             3
-##  6 et             3
-##  7 ja             3
-##  8 fr             2
-##  9 pt             2
-## 10 ro             2
+  head(5)
+## # A tibble: 5 x 2
+##   lang  num_tweets
+##   <chr>      <int>
+## 1 en          1829
+## 2 und           34
+## 3 cy             8
+## 4 es             6
+## 5 de             3
 
 # ggplot(tweets_df) +
 #   geom_bar(aes(x = lang, fill = lang))
@@ -351,16 +341,29 @@ plt1 <- ggplot(tweets_per_day) +
   scale_fill_viridis_d(option = "viridis") +
   theme_gray() +
   theme(legend.position = "none") +
-  labs(title = "Daily Tweets") +
+  labs(title = "Daily Tweets for 'Philadelphia' (ggplot2 + plotly)") +
   xlab("") +
   ylab("Number of Tweets") 
 
-#plotly::ggplotly(plt1)
-
-plt1
+pltly1 <- plotly::ggplotly(plt1)
 ```
 
-<img src="/post/2020-12-30-twitter-sentiment-philly/index_files/figure-html/pltone-1.png" width="672" />
+
+_Note: for html widgets, because I'm writing this in .Rmarkdown, I use the below snippet to save the html widget to file and then bring it back in via an iframe. The main reason is that `.Rmarkdown` files get rendered as `.markdown` and then `html`, and my widgets were getting lost. Widgets work great with `.Rmd` files, but I lose some of the other hugo functionalities like the TOCs and code highlighting. This might change soon if it hasn't already. I've hidden these snippets for the other html widgets below._
+
+
+```r
+widget <- pltly1
+widgetfile <- 'pltly1.html'
+
+htmlwidgets::saveWidget(widget = widget
+                        , selfcontained = TRUE
+                        , file = widgetfile)
+
+cat(paste0('<iframe src= "', widgetfile, '" width="100%" height="400" style="border: none;"></iframe>'))
+```
+
+<iframe src= "pltly1.html" width="100%" height="400" style="border: none;"></iframe>
 
 
 ```r
@@ -369,9 +372,12 @@ plt1
 tweets_ts <- xts::xts(tweets_per_day$num_tweets, order.by = tweets_per_day$tweet_date)
 # Create the dygraph
 library(dygraphs)
-dygraph(tweets_ts, main = "Daily Tweets for 'Philadelphia'") %>%
+
+dygraph1 <- dygraph(tweets_ts, main = "Daily Tweets for 'Philadelphia' (dygraph)") %>%
   dySeries("V1", label = "Tweet Count")
 ```
+
+<iframe src= "dygraph1.html" width="100%" height="400" style="border: none;"></iframe>
 
 
 And *where* are people tweeting?
@@ -386,18 +392,9 @@ tweet_map <- leaflet(tweets_df) %>%
   addTiles() %>%
   addCircleMarkers(lng = ~lng
                    , lat = ~lat)
-
-htmlwidgets::saveWidget(widget = tweet_map
-                        , 'tweet_map.html'
-                        , selfcontained = TRUE)
 ```
 
-<!-- ```{r mapshow} -->
-<!-- knitr::include_url(url = 'tweet_map.html', height = "400px") -->
-<!-- ``` -->
-
-
-<iframe src="tweet_map.html" width="100%" height="400" style="border: none;"></iframe>
+<iframe src= "tweet_map.html" width="100%" height="400" style="border: none;"></iframe>
 
 
 ### Sentiment analysis
@@ -467,17 +464,19 @@ tidy_books <- austen_books() %>%
   ungroup() %>%
   unnest_tokens(word, text)
 
-tidy_books %>% head()
-## # A tibble: 6 x 4
-##   book                linenumber chapter word       
-##   <fct>                    <int>   <int> <chr>      
-## 1 Sense & Sensibility          1       0 sense      
-## 2 Sense & Sensibility          1       0 and        
-## 3 Sense & Sensibility          1       0 sensibility
-## 4 Sense & Sensibility          3       0 by         
-## 5 Sense & Sensibility          3       0 jane       
-## 6 Sense & Sensibility          3       0 austen
+tidy_books %>% head() %>% knitr::kable()
 ```
+
+
+
+|book                | linenumber| chapter|word        |
+|:-------------------|----------:|-------:|:-----------|
+|Sense & Sensibility |          1|       0|sense       |
+|Sense & Sensibility |          1|       0|and         |
+|Sense & Sensibility |          1|       0|sensibility |
+|Sense & Sensibility |          3|       0|by          |
+|Sense & Sensibility |          3|       0|jane        |
+|Sense & Sensibility |          3|       0|austen      |
 
 
 But I want to run this on tweets, so I need to reshape the data. I only executed one search for `philadelphia+philly`, so I'm going to build a dataframe from that. Though, we can run multiple searches and assign each search its own `book` value to enable comparisons and faceted plots later.  
@@ -499,17 +498,19 @@ tidy_books <- tweets_book %>%
   ungroup() %>%
   unnest_tokens(word, text)
 
-tidy_books %>% head()
-## # A tibble: 6 x 4
-##   book         chapter    linenumber word    
-##   <chr>        <date>          <int> <chr>   
-## 1 Philadelphia 2020-12-29          1 union   
-## 2 Philadelphia 2020-12-29          1 to      
-## 3 Philadelphia 2020-12-29          1 sell    
-## 4 Philadelphia 2020-12-29          1 mark    
-## 5 Philadelphia 2020-12-29          1 mckenzie
-## 6 Philadelphia 2020-12-29          1 to
+tidy_books %>% head() %>% knitr::kable()
 ```
+
+
+
+|book         |chapter    | linenumber|word     |
+|:------------|:----------|----------:|:--------|
+|Philadelphia |2020-12-29 |          1|union    |
+|Philadelphia |2020-12-29 |          1|to       |
+|Philadelphia |2020-12-29 |          1|sell     |
+|Philadelphia |2020-12-29 |          1|mark     |
+|Philadelphia |2020-12-29 |          1|mckenzie |
+|Philadelphia |2020-12-29 |          1|to       |
 
 
 Now the tweets are in a tidy format with one word per row.  
@@ -521,17 +522,19 @@ Looking at the `nrc` lexicon, what are some of the "joy" words?
 nrc_joy <- get_sentiments("nrc") %>% 
   filter(sentiment == "joy")
 
-head(nrc_joy)
-## # A tibble: 6 x 2
-##   word          sentiment
-##   <chr>         <chr>    
-## 1 absolution    joy      
-## 2 abundance     joy      
-## 3 abundant      joy      
-## 4 accolade      joy      
-## 5 accompaniment joy      
-## 6 accomplish    joy
+head(nrc_joy) %>% knitr::kable()
 ```
+
+
+
+|word          |sentiment |
+|:-------------|:---------|
+|absolution    |joy       |
+|abundance     |joy       |
+|abundant      |joy       |
+|accolade      |joy       |
+|accompaniment |joy       |
+|accomplish    |joy       |
 
 How many "joy" words do we have in our tweets?
 
@@ -541,21 +544,23 @@ tidy_books %>%
   filter(book == "Philadelphia") %>%
   inner_join(nrc_joy) %>%
   count(word, sort = TRUE) %>%
-  head(10)
-## # A tibble: 10 x 2
-##    word        n
-##    <chr>   <int>
-##  1 love       58
-##  2 good       56
-##  3 holiday    52
-##  4 art        36
-##  5 food       29
-##  6 music      27
-##  7 deal       24
-##  8 save       24
-##  9 safe       23
-## 10 happy      21
+  head(10) %>% knitr::kable()
 ```
+
+
+
+|word    |  n|
+|:-------|--:|
+|love    | 58|
+|good    | 56|
+|holiday | 52|
+|art     | 36|
+|food    | 29|
+|music   | 27|
+|deal    | 24|
+|save    | 24|
+|safe    | 23|
+|happy   | 21|
 
 Using `tidyr`, we can continue to examine how sentiment changes throughout the book. This is more relevant to the novels examples from the docs, but I'm including it here as an exercise. This example will use the `bing` lexicon. We need some type of interval - the example creates an index from 80 line chunks, but I'm going to update this to use the `chapter` value, which now represents the date of each tweet allowing to see changes in sentiment over time.
 
@@ -665,21 +670,28 @@ TODO: Update include and eval settings here - ok to keep in md doc but no need t
 ```r
 get_sentiments("nrc") %>% 
   filter(sentiment %in% c("positive", "negative")) %>% 
-  count(sentiment)
-## # A tibble: 2 x 2
-##   sentiment     n
-##   <chr>     <int>
-## 1 negative   3324
-## 2 positive   2312
+  count(sentiment) %>% knitr::kable()
+```
+
+
+
+|sentiment |    n|
+|:---------|----:|
+|negative  | 3324|
+|positive  | 2312|
+
+```r
 
 get_sentiments("bing") %>% 
-  count(sentiment)
-## # A tibble: 2 x 2
-##   sentiment     n
-##   <chr>     <int>
-## 1 negative   4781
-## 2 positive   2005
+  count(sentiment) %>% knitr::kable()
 ```
+
+
+
+|sentiment |    n|
+|:---------|----:|
+|negative  | 4781|
+|positive  | 2005|
 
 
 ```r
@@ -688,22 +700,23 @@ bing_word_counts <- tidy_books %>%
   count(word, sentiment, sort = TRUE) %>%
   ungroup()
 
-bing_word_counts %>% head(25)
-## # A tibble: 25 x 3
-##    word       sentiment     n
-##    <chr>      <chr>     <int>
-##  1 corruption negative    120
-##  2 like       positive     74
-##  3 love       positive     58
-##  4 great      positive     57
-##  5 good       positive     56
-##  6 best       positive     50
-##  7 hurts      negative     42
-##  8 well       positive     38
-##  9 work       positive     29
-## 10 free       positive     28
-## # ... with 15 more rows
+bing_word_counts %>% head(10) %>% knitr::kable()
 ```
+
+
+
+|word       |sentiment |   n|
+|:----------|:---------|---:|
+|corruption |negative  | 120|
+|like       |positive  |  74|
+|love       |positive  |  58|
+|great      |positive  |  57|
+|good       |positive  |  56|
+|best       |positive  |  50|
+|hurts      |negative  |  42|
+|well       |positive  |  38|
+|work       |positive  |  29|
+|free       |positive  |  28|
 
 
 What are the top words driving sentiment score?  
@@ -739,17 +752,19 @@ custom_stop_words <- bind_rows(tibble(word = c('philadelphia', 'philly', 't.co',
                                       lexicon = c("custom")),
                                stop_words)
 
-custom_stop_words %>% head()
-## # A tibble: 6 x 2
-##   word         lexicon
-##   <chr>        <chr>  
-## 1 philadelphia custom 
-## 2 philly       custom 
-## 3 t.co         custom 
-## 4 https        custom 
-## 5 amp          custom 
-## 6 a            SMART
+custom_stop_words %>% head() %>% knitr::kable()
 ```
+
+
+
+|word         |lexicon |
+|:------------|:-------|
+|philadelphia |custom  |
+|philly       |custom  |
+|t.co         |custom  |
+|https        |custom  |
+|amp          |custom  |
+|a            |SMART   |
 
 
 
@@ -819,289 +834,7 @@ tidy_books %>%
 
 
 
-<!-- TO BE CONTINUED -->
 
-<!-- ### Condition the data -->
-
-<!-- Pre-process the data (source: bryangoodrich). -->
-
-<!-- ```{r, eval = FALSE, include = FALSE} -->
-<!-- tweets <- iconv(tweets, to = "ASCII", sub = " ")  # Convert to basic ASCII text -->
-<!-- tweets <- tolower(tweets)  # Make everything lower case -->
-<!-- tweets <- gsub("rt", " ", tweets)  # Remove the "RT" (retweet) so duplicates are duplicates -->
-<!-- tweets <- gsub("@\\w+", " ", tweets)  # Remove user names -->
-<!-- tweets <- gsub("http.+ |http.+$", " ", tweets)  # Remove links -->
-<!-- tweets <- gsub("[[:punct:]]", " ", tweets)  # Remove punctuation -->
-<!-- tweets <- gsub("[ |\t]{2,}", " ", tweets)  # Remove tabs -->
-<!-- tweets <- gsub("amp", " ", tweets)  # "&" is "&amp" in HTML, so after punctuation removed ... -->
-<!-- tweets <- gsub("^ ", "", tweets)  # Leading blanks -->
-<!-- tweets <- gsub(" $", "", tweets)  # Lagging blanks -->
-<!-- tweets <- gsub(" +", " ", tweets) # General spaces (should just do all whitespaces no?) -->
-<!-- tweets <- unique(tweets)  # Now get rid of duplicates! -->
-<!-- ``` -->
-
-<!-- Convert the `tweets` object to a corpus object to use with the `tm` package. -->
-
-<!-- ```{r tm_corpus, eval = FALSE, include = FALSE} -->
-<!-- corpus <- tm::Corpus(VectorSource(tweets))  -->
-<!-- ``` -->
-
-<!-- Remove English [stop words](https://rdrr.io/rforge/tm/man/stopwords.html). _Also see [Adding custom stopwords in R tm](https://stackoverflow.com/questions/18446408/adding-custom-stopwords-in-r-tm)_.   -->
-
-<!-- ```{r stopwordstwo, eval = FALSE, include = FALSE} -->
-<!-- corpus <- tm_map(corpus, removeWords, stopwords("en"))   -->
-<!-- ``` -->
-
-<!-- Remove the search terms from the corpus.  -->
-
-<!-- _TODO: Make these variables and use paste() to place them in the search term earlier._ -->
-
-<!-- ```{r rmsearchterms, eval = FALSE, include = FALSE} -->
-<!-- #corpus <- tm_map(corpus, removeWords, c("energy", "electricity")) -->
-<!-- corpus <- tm_map(corpus, removeWords, c('tesla', 'tsla')) -->
-<!-- ``` -->
-
-<!-- Remove numbers. -->
-
-<!-- ```{r numbers, eval = FALSE, include = FALSE} -->
-<!-- corpus <- tm_map(corpus, removeNumbers, mc.cores=1) -->
-<!-- ``` -->
-
-<!-- Stem the words  (e.g. likes, liked, likely, liking >> like). _For more on stemming and lemmatization, see [NLP Stanford](https://nlp.stanford.edu/IR-book/html/htmledition/stemming-and-lemmatization-1.html)_. -->
-
-<!-- ```{r stemming, eval = FALSE, include = FALSE} -->
-<!-- corpus <- tm_map(corpus, stemDocument) -->
-<!-- ``` -->
-
-
-<!-- ### Visualization -->
-
-<!-- Display the corpus as a word cloud. -->
-
-<!-- ```{r wordcloud, eval = FALSE, include = FALSE} -->
-<!-- pal <- brewer.pal(8, "Dark2") -->
-<!-- wordcloud(corpus, min.freq=2, max.words = 150, random.order = TRUE, col = pal) -->
-<!-- ``` -->
-
-
-<!-- ### Topic Modeling -->
-
-<!-- Get the lengths and make sure we only create a Document Term Matrix (DTM) for tweets with actual content. -->
-
-<!-- ```{r dtm, eval = FALSE, include = FALSE} -->
-<!-- doc_lengths <- corpus %>% DocumentTermMatrix() %>% as.matrix() %>% rowSums() -->
-
-<!-- dtm <- corpus[doc_lengths > 0] %>% DocumentTermMatrix() -->
-<!-- ``` -->
-
-<!-- Test a Latent Dirichlet Allocation model; A LDA_VEM topic model with 2 topics. -->
-
-<!-- ```{r lda, eval = FALSE, include = FALSE} -->
-<!-- lda <- LDA(x = dtm, k = 2, method = 'VEM', control = list(seed = 1234)) -->
-<!-- ``` -->
-
-<!-- Explore it a bit with `tidytext` ([documentation](https://www.tidytextmining.com/topicmodeling.html)) -->
-
-<!-- > tidytext package provides this method for extracting the per-topic-per-word probabilities, called  -->
-<!-- β (“beta”), from the model ... For each combination, the model computes the probability of that term being generated from that topic -->
-
-<!-- ```{r lda_topics, eval = FALSE, include = FALSE} -->
-<!-- topics <- tidy(lda, matrix = "beta") -->
-<!-- topics %>% arrange(-beta) %>% head(50) -->
-<!-- ``` -->
-
-<!-- Display top terms for each topic. -->
-
-<!-- ```{r topterms, eval = FALSE, include = FALSE} -->
-<!-- top_terms <- topics %>% -->
-<!--   group_by(topic) %>% -->
-<!--   top_n(10, beta) %>% -->
-<!--   ungroup() %>% -->
-<!--   arrange(topic, -beta) -->
-
-<!-- top_terms %>% -->
-<!--   mutate(term = reorder_within(term, beta, topic)) %>% -->
-<!--   ggplot(aes(beta, term, fill = factor(topic))) + -->
-<!--   geom_col(show.legend = FALSE) + -->
-<!--   facet_wrap(~ topic, scales = "free") + -->
-<!--   scale_y_reordered() + -->
-<!--   labs( -->
-<!--     title = 'Top Terms in Twitter Corpus' -->
-<!--     , subtitle = 'The terms that are most common within each topic' -->
-<!--   ) -->
-
-<!-- ``` -->
-
-
-<!-- ```{r betaspread, eval = FALSE, include = FALSE} -->
-<!-- beta_spread <- topics %>% -->
-<!--   mutate(topic = paste0("topic", topic)) %>% -->
-<!--   spread(topic, beta) %>% -->
-<!--   filter(topic1 > .001 | topic2 > .001) %>% -->
-<!--   mutate(log_ratio = log2(topic2 / topic1)) -->
-
-<!-- beta_spread -->
-<!-- ``` -->
-
-
-<!-- Document topic probabilities. -->
-
-<!-- > Each of these values is an estimated proportion of words from that document that are generated from that topic. For example, the model estimates that only about 25% of the words in document 1 were generated from topic 1. -->
-
-<!-- ```{r doctopics, eval = FALSE, include = FALSE} -->
-<!-- documents <- tidy(lda, matrix = "gamma") -->
-<!-- documents %>% arrange(document) %>% head(50) -->
-<!-- ``` -->
-
-
-
-
-
-
-<!-- # Now for some topics -->
-
-<!-- ```{r, eval = FALSE, include = FALSE} -->
-<!-- SEED = sample(1:1000000, 1)  # Pick a random seed for replication -->
-<!-- k = 10  # Let's start with 10 topics -->
-<!-- ``` -->
-
-<!-- ```{r, eval = FALSE, include = FALSE} -->
-<!-- # This might take a minute! -->
-<!-- models <- list( -->
-<!--     CTM       = CTM(dtm, k = k, control = list(seed = SEED, var = list(tol = 10^-4), em = list(tol = 10^-3))), -->
-<!--     VEM       = LDA(dtm, k = k, control = list(seed = SEED)), -->
-<!--     VEM_Fixed = LDA(dtm, k = k, control = list(estimate.alpha = FALSE, seed = SEED)), -->
-<!--     Gibbs     = LDA(dtm, k = k, method = "Gibbs", control = list(seed = SEED, burnin = 1000, -->
-<!--                                                                  thin = 100,    iter = 1000)) -->
-<!-- ) -->
-<!-- ``` -->
-
-
-<!-- # There you have it. Models now holds 4 topics. See the topicmodels API documentation for details -->
-
-<!-- # Top 10 terms of each topic for each model -->
-<!-- # Do you see any themes you can label to these "topics" (lists of words)? -->
-
-<!-- ```{r, eval = FALSE, include = FALSE} -->
-<!-- lapply(models, terms, 10) -->
-<!-- ``` -->
-
-<!-- # matrix of tweet assignments to predominate topic on that tweet for each of the models, in case you wanted to categorize them -->
-
-<!-- ```{r, eval = FALSE, include = FALSE} -->
-<!-- assignments <- sapply(models, topics) -->
-<!-- ``` -->
-
-
-
-
-<!-- ### Scrapyard -->
-
-<!-- Configuring session for use with `twitteR` package   -->
-
-<!-- ```{r configtwitteR, eval = FALSE, include = FALSE} -->
-<!-- config <- config::get(file = 'config.yml') -->
-
-<!-- my_config <- function() { -->
-<!--     ckey = config$apikey -->
-<!--     csec = config$apikeysecret -->
-<!--     akey = config$accesstoken -->
-<!--     asec = config$accesstokensecret -->
-
-<!--     setup_twitter_oauth(ckey, csec, akey, asec)   -->
-<!-- } -->
-
-<!-- my_config() -->
-<!-- ``` -->
-
-<!-- **twitteR** -->
-<!-- First, a few examples of searches from the help docs (excluding results): -->
-
-<!-- ```{r examples, eval = FALSE, include = FALSE} -->
-<!-- ## Search between two dates -->
-<!-- searchTwitter('tesla', since = '2020-12-01', until = '2020-12-24') -->
-
-<!-- ## Geocoded results -->
-<!-- searchTwitter('patriots', geocode = '42.375, -71.1061111, 10mi') -->
-
-<!-- ## Using resultType -->
-<!-- searchTwitter('from:GrittyNHL', resultType = "popular", n = 50) -->
-
-<!-- phl_tweets <- searchTwitter('philadelphia+philly', resultType = "recent", n = 15) -->
-<!-- head(phl_tweets, 1) %>% str() -->
-<!-- ``` -->
-
-<!-- Going to write a function to format the results I care about into a tidy dataframe -->
-
-<!-- ```{r, eval = FALSE, include = FALSE} -->
-<!-- getTweets <- function(){ -->
-<!--   searchTwitter('philadelphia+philly', resultType = "recent", n = 15) -->
-<!-- } -->
-<!-- ``` -->
-
-
-
-
-
-
-
-<!-- Now, a convenience function for accessing the text part of a tweet returned by the twitteR API (source: bryangoodrich). -->
-
-<!-- ```{r fun1, eval = FALSE, include = FALSE} -->
-<!-- tweet_text <- function(x) x$getText() -->
-<!-- ``` -->
-
-<!-- Next, a search function that uses `tweet_text()` to extract the text from each tweet (source: bryangoodrich). -->
-
-<!-- ```{r fun2, eval = FALSE, include = FALSE} -->
-<!-- tweet_corpus <- function(search, n = 5000, ...) { -->
-<!--     payload <- searchTwitter(search, n = n, ...) -->
-<!--     sapply(payload, tweet_text) -->
-<!-- } -->
-<!-- ``` -->
-
-<!-- Finally, run the search. This may take a few minutes. -->
-
-<!-- ```{r search, eval = FALSE, include = FALSE} -->
-<!-- #tweets <- tweet_corpus("energy+electricity", n = 100, lang = 'en') -->
-<!-- tweets <- tweet_corpus('philadelphia+philly', n = 1000, lang = 'en') -->
-<!-- ``` -->
-
-
-
-
-
-### Post content
-
-Typical location to start editing since the bibliography chunk is hidden. Make sure that you selected `R Markdown (.Rmd)` as the _format_ option of the post when using the `New Post` *[blogdown](https://CRAN.R-project.org/package=blogdown)* addin.
-
-### R image
-
-
-
-```r
-## This imaged will be saved in the /post/*_files/ directory
-## Use echo = FALSE if you want to hide the code for making the plot
-plot(1:10, 10:1)
-```
-
-If you prefer not to use the `fig.width` and `fig.height` options in every plot chunk, edit the YAML (the part at the top of the post) with:
-
-```
-output:
-  blogdown::html_page:
-    toc: no
-    fig_width: 5
-    fig_height: 5
-```
-
-The spaces are important.
-
-### Custom image
-
-The easiest option is to use the *[blogdown](https://CRAN.R-project.org/package=blogdown)* _Insert Image_ RStudio addin to add an external image described in this [blog post](http://lcolladotor.github.io/2018/03/07/blogdown-insert-image-addin). You need to use version 0.5.7 or newer to have access to this plugin. 
-
-If you want to add images manually, check this [blog post](http://lcolladotor.github.io/2018/02/17/r-markdown-blog-template/#.WqChJZPwa50) for more details on the image syntax.
 
 
 ### Acknowledgements
@@ -1109,153 +842,41 @@ If you want to add images manually, check this [blog post](http://lcolladotor.gi
 
 This blog post was made possible thanks to:
 
-* *[BiocStyle](https://bioconductor.org/packages/3.12/BiocStyle)* <a id='cite-Oles_2020'></a>(<a href='https://github.com/Bioconductor/BiocStyle'>Oles, Morgan, and Huber, 2020</a>)
+* *[knitr](https://bioconductor.org/packages/3.12/knitr)* 
+* *[rtweet](https://bioconductor.org/packages/3.12/rtweet)* <a id='cite-rtweet-package'></a>(<a href='https://joss.theoj.org/papers/10.21105/joss.01829'>Kearney, 2019</a>)
+* *[rmarkdown](https://bioconductor.org/packages/3.12/rmarkdown)* 
+* *[NLP](https://bioconductor.org/packages/3.12/NLP)* <a id='cite-Hornik_2020'></a>(<a href='https://CRAN.R-project.org/package=NLP'>Hornik, 2020</a>)
+* *[tm](https://bioconductor.org/packages/3.12/tm)* 
+* *[RColorBrewer](https://bioconductor.org/packages/3.12/RColorBrewer)* <a id='cite-Neuwirth_2014'></a>(<a href='https://CRAN.R-project.org/package=RColorBrewer'>Neuwirth, 2014</a>)
+* *[wordcloud](https://bioconductor.org/packages/3.12/wordcloud)* <a id='cite-Fellows_2018'></a>(<a href='https://CRAN.R-project.org/package=wordcloud'>Fellows, 2018</a>)
+* *[topicmodels](https://bioconductor.org/packages/3.12/topicmodels)* <a id='cite-Grun_2011'></a>(<a href='https://doi.org/10.18637/jss.v040.i13'>Grün and Hornik, 2011</a>)
+* *[SnowballC](https://bioconductor.org/packages/3.12/SnowballC)* <a id='cite-Bouchet-Valat_2020'></a>(<a href='https://CRAN.R-project.org/package=SnowballC'>Bouchet-Valat, 2020</a>)
+* *[config](https://bioconductor.org/packages/3.12/config)* <a id='cite-Allaire_2020'></a>(<a href='https://CRAN.R-project.org/package=config'>Allaire, 2020</a>)
+* *[dplyr](https://bioconductor.org/packages/3.12/dplyr)* <a id='cite-Wickham_2020'></a>(<a href='https://CRAN.R-project.org/package=dplyr'>Wickham, François, 
+             Henry, and Müller, 2020</a>)
+* *[tidytext](https://bioconductor.org/packages/3.12/tidytext)* <a id='cite-Silge_2016'></a>(<a href='http://dx.doi.org/10.21105/joss.00037'>Silge and Robinson, 2016</a>)
+* *[tidyr](https://bioconductor.org/packages/3.12/tidyr)* <a id='cite-Wickham_2020a'></a>(<a href='https://CRAN.R-project.org/package=tidyr'>Wickham, 2020</a>)
+* *[ggplot2](https://bioconductor.org/packages/3.12/ggplot2)* <a id='cite-Wickham_2016'></a>(<a href='https://ggplot2.tidyverse.org'>Wickham, 2016</a>)
+* *[lubridate](https://bioconductor.org/packages/3.12/lubridate)* <a id='cite-Grolemund_2011'></a>(<a href='https://www.jstatsoft.org/v40/i03/'>Grolemund and Wickham, 2011</a>)
+* *[readr](https://bioconductor.org/packages/3.12/readr)* <a id='cite-Wickham_2020ab'></a>(<a href='https://CRAN.R-project.org/package=readr'>Wickham and Hester, 2020</a>)
+* *[skimr](https://bioconductor.org/packages/3.12/skimr)* <a id='cite-Waring_2020'></a>(<a href='https://CRAN.R-project.org/package=skimr'>Waring, Quinn, McNamara, Arino de la Rubia, et al., 2020</a>)
+* *[BiocStyle](https://bioconductor.org/packages/3.12/BiocStyle)* 
 * *[blogdown](https://CRAN.R-project.org/package=blogdown)* <a id='cite-Xie_2017'></a>(<a href='https://github.com/rstudio/blogdown'>Xie, Hill, and Thomas, 2017</a>)
-* *[devtools](https://CRAN.R-project.org/package=devtools)* <a id='cite-Wickham_2020'></a>(<a href='https://CRAN.R-project.org/package=devtools'>Wickham, Hester, and Chang, 2020</a>)
+* *[devtools](https://CRAN.R-project.org/package=devtools)* <a id='cite-Wickham_2020abc'></a>(<a href='https://CRAN.R-project.org/package=devtools'>Wickham, Hester, and Chang, 2020</a>)
 * *[knitcitations](https://CRAN.R-project.org/package=knitcitations)* <a id='cite-Boettiger_2020'></a>(<a href='https://github.com/cboettig/knitcitations'>Boettiger, 2020</a>)
 
-### References
 
-<p><a id='bib-Boettiger_2020'></a><a href="#cite-Boettiger_2020">[1]</a><cite>
-C. Boettiger.
-<em>knitcitations: Citations for 'Knitr' Markdown Files</em>.
-R package version 1.0.11.
-2020.
-URL: <a href="https://github.com/cboettig/knitcitations">https://github.com/cboettig/knitcitations</a>.</cite></p>
+<!-- ### References -->
 
-<p><a id='bib-Oles_2020'></a><a href="#cite-Oles_2020">[2]</a><cite>
-A. Oles, M. Morgan, and W. Huber.
-<em>BiocStyle: Standard styles for vignettes and other Bioconductor documents</em>.
-R package version 2.18.1.
-2020.
-URL: <a href="https://github.com/Bioconductor/BiocStyle">https://github.com/Bioconductor/BiocStyle</a>.</cite></p>
+<!-- ```{r bibliography, results = 'asis', echo = FALSE, cache = FALSE} -->
+<!-- ## Print bibliography -->
+<!-- bibliography(style = 'html') -->
+<!-- ``` -->
 
-<p><a id='bib-Wickham_2020'></a><a href="#cite-Wickham_2020">[3]</a><cite>
-H. Wickham, J. Hester, and W. Chang.
-<em>devtools: Tools to Make Developing R Packages Easier</em>.
-R package version 2.3.1.
-2020.
-URL: <a href="https://CRAN.R-project.org/package=devtools">https://CRAN.R-project.org/package=devtools</a>.</cite></p>
+<!-- ### Reproducibility -->
 
-<p><a id='bib-Xie_2017'></a><a href="#cite-Xie_2017">[4]</a><cite>
-Y. Xie, A. P. Hill, and A. Thomas.
-<em>blogdown: Creating Websites with R Markdown</em>.
-ISBN 978-0815363729.
-Boca Raton, Florida: Chapman and Hall/CRC, 2017.
-URL: <a href="https://github.com/rstudio/blogdown">https://github.com/rstudio/blogdown</a>.</cite></p>
-
-### Reproducibility
-
-
-```
-## - Session info -------------------------------------------------------------------------------------------------------
-##  setting  value                       
-##  version  R version 4.0.2 (2020-06-22)
-##  os       Windows 10 x64              
-##  system   x86_64, mingw32             
-##  ui       RTerm                       
-##  language (EN)                        
-##  collate  English_United States.1252  
-##  ctype    English_United States.1252  
-##  tz       America/New_York            
-##  date     2020-12-31                  
-## 
-## - Packages -----------------------------------------------------------------------------------------------------------
-##  package       * version date       lib source                                 
-##  assertthat      0.2.1   2019-03-21 [1] CRAN (R 4.0.2)                         
-##  base64enc       0.1-3   2015-07-28 [1] CRAN (R 4.0.0)                         
-##  BiocManager     1.30.10 2019-11-16 [1] CRAN (R 4.0.3)                         
-##  BiocStyle     * 2.18.1  2020-11-24 [1] Bioconductor                           
-##  blogdown        0.20    2020-06-23 [1] CRAN (R 4.0.2)                         
-##  bookdown        0.21    2020-10-13 [1] CRAN (R 4.0.3)                         
-##  callr           3.4.3   2020-03-28 [1] CRAN (R 4.0.2)                         
-##  cli             2.2.0   2020-11-20 [1] CRAN (R 4.0.3)                         
-##  colorspace      2.0-0   2020-11-11 [1] CRAN (R 4.0.3)                         
-##  config        * 0.3.1   2020-12-17 [1] CRAN (R 4.0.3)                         
-##  crayon          1.3.4   2017-09-16 [1] CRAN (R 4.0.2)                         
-##  data.table      1.12.8  2019-12-09 [1] CRAN (R 4.0.0)                         
-##  desc            1.2.0   2018-05-01 [1] CRAN (R 4.0.2)                         
-##  devtools      * 2.3.1   2020-07-21 [1] CRAN (R 4.0.2)                         
-##  digest          0.6.27  2020-10-24 [1] CRAN (R 4.0.3)                         
-##  dplyr         * 1.0.2   2020-08-18 [1] CRAN (R 4.0.3)                         
-##  ellipsis        0.3.1   2020-05-15 [1] CRAN (R 4.0.2)                         
-##  evaluate        0.14    2019-05-28 [1] CRAN (R 4.0.2)                         
-##  fansi           0.4.1   2020-01-08 [1] CRAN (R 4.0.2)                         
-##  farver          2.0.3   2020-01-16 [1] CRAN (R 4.0.2)                         
-##  fs              1.5.0   2020-07-31 [1] CRAN (R 4.0.3)                         
-##  generics        0.1.0   2020-10-31 [1] CRAN (R 4.0.3)                         
-##  ggplot2       * 3.3.2   2020-06-19 [1] CRAN (R 4.0.2)                         
-##  glue            1.4.2   2020-08-27 [1] CRAN (R 4.0.2)                         
-##  gtable          0.3.0   2019-03-25 [1] CRAN (R 4.0.2)                         
-##  hms             0.5.3   2020-01-08 [1] CRAN (R 4.0.2)                         
-##  htmltools       0.5.0   2020-06-16 [1] CRAN (R 4.0.2)                         
-##  htmlwidgets   * 1.5.2   2020-10-03 [1] CRAN (R 4.0.3)                         
-##  httr            1.4.2   2020-07-20 [1] CRAN (R 4.0.3)                         
-##  janeaustenr   * 0.1.5   2017-06-10 [1] CRAN (R 4.0.3)                         
-##  jsonlite        1.7.2   2020-12-09 [1] CRAN (R 4.0.3)                         
-##  knitcitations * 1.0.11  2020-12-30 [1] Github (cboettig/knitcitations@23750d5)
-##  knitr           1.30    2020-09-22 [1] CRAN (R 4.0.3)                         
-##  labeling        0.4.2   2020-10-20 [1] CRAN (R 4.0.3)                         
-##  lattice         0.20-41 2020-04-02 [2] CRAN (R 4.0.2)                         
-##  lazyeval        0.2.2   2019-03-15 [1] CRAN (R 4.0.2)                         
-##  lifecycle       0.2.0   2020-03-06 [1] CRAN (R 4.0.2)                         
-##  lubridate     * 1.7.9.2 2020-11-13 [1] CRAN (R 4.0.3)                         
-##  magrittr        2.0.1   2020-11-17 [1] CRAN (R 4.0.3)                         
-##  Matrix          1.2-18  2019-11-27 [2] CRAN (R 4.0.2)                         
-##  memoise         1.1.0   2017-04-21 [1] CRAN (R 4.0.2)                         
-##  modeltools      0.2-23  2020-03-05 [1] CRAN (R 4.0.3)                         
-##  munsell         0.5.0   2018-06-12 [1] CRAN (R 4.0.2)                         
-##  NLP           * 0.2-1   2020-10-14 [1] CRAN (R 4.0.3)                         
-##  pillar          1.4.6   2020-07-10 [1] CRAN (R 4.0.3)                         
-##  pkgbuild        1.0.8   2020-05-07 [1] CRAN (R 4.0.2)                         
-##  pkgconfig       2.0.3   2019-09-22 [1] CRAN (R 4.0.2)                         
-##  pkgload         1.1.0   2020-05-29 [1] CRAN (R 4.0.2)                         
-##  plotly        * 4.9.2.1 2020-04-04 [1] CRAN (R 4.0.2)                         
-##  plyr            1.8.6   2020-03-03 [1] CRAN (R 4.0.2)                         
-##  prettyunits     1.1.1   2020-01-24 [1] CRAN (R 4.0.2)                         
-##  processx        3.4.4   2020-09-03 [1] CRAN (R 4.0.3)                         
-##  ps              1.4.0   2020-10-07 [1] CRAN (R 4.0.3)                         
-##  purrr           0.3.4   2020-04-17 [1] CRAN (R 4.0.2)                         
-##  R6              2.5.0   2020-10-28 [1] CRAN (R 4.0.3)                         
-##  rappdirs        0.3.1   2016-03-28 [1] CRAN (R 4.0.2)                         
-##  RColorBrewer  * 1.1-2   2014-12-07 [1] CRAN (R 4.0.0)                         
-##  Rcpp            1.0.5   2020-07-06 [1] CRAN (R 4.0.2)                         
-##  readr         * 1.4.0   2020-10-05 [1] CRAN (R 4.0.3)                         
-##  RefManageR      1.3.0   2020-11-13 [1] CRAN (R 4.0.3)                         
-##  remotes         2.2.0   2020-07-21 [1] CRAN (R 4.0.3)                         
-##  repr            1.1.0   2020-01-28 [1] CRAN (R 4.0.3)                         
-##  reshape2      * 1.4.4   2020-04-09 [1] CRAN (R 4.0.2)                         
-##  rlang           0.4.9   2020-11-26 [1] CRAN (R 4.0.3)                         
-##  rmarkdown     * 2.5     2020-10-21 [1] CRAN (R 4.0.3)                         
-##  rprojroot       2.0.2   2020-11-15 [1] CRAN (R 4.0.2)                         
-##  rtweet        * 0.7.0   2020-01-08 [1] CRAN (R 4.0.3)                         
-##  scales          1.1.1   2020-05-11 [1] CRAN (R 4.0.2)                         
-##  sessioninfo     1.1.1   2018-11-05 [1] CRAN (R 4.0.2)                         
-##  skimr         * 2.1.2   2020-07-06 [1] CRAN (R 4.0.3)                         
-##  slam            0.1-48  2020-12-03 [1] CRAN (R 4.0.3)                         
-##  SnowballC     * 0.7.0   2020-04-01 [1] CRAN (R 4.0.3)                         
-##  stringi         1.5.3   2020-09-09 [1] CRAN (R 4.0.3)                         
-##  stringr       * 1.4.0   2019-02-10 [1] CRAN (R 4.0.2)                         
-##  testthat        2.3.2   2020-03-02 [1] CRAN (R 4.0.2)                         
-##  textdata        0.4.1   2020-05-04 [1] CRAN (R 4.0.3)                         
-##  tibble          3.0.4   2020-10-12 [1] CRAN (R 4.0.3)                         
-##  tidyr         * 1.1.2   2020-08-27 [1] CRAN (R 4.0.3)                         
-##  tidyselect      1.1.0   2020-05-11 [1] CRAN (R 4.0.2)                         
-##  tidytext      * 0.2.6   2020-09-20 [1] CRAN (R 4.0.3)                         
-##  tm            * 0.7-8   2020-11-18 [1] CRAN (R 4.0.3)                         
-##  tokenizers      0.2.1   2018-03-29 [1] CRAN (R 4.0.3)                         
-##  topicmodels   * 0.2-11  2020-04-19 [1] CRAN (R 4.0.3)                         
-##  usethis       * 2.0.0   2020-12-10 [1] CRAN (R 4.0.3)                         
-##  utf8            1.1.4   2018-05-24 [1] CRAN (R 4.0.2)                         
-##  vctrs           0.3.4   2020-08-29 [1] CRAN (R 4.0.3)                         
-##  viridisLite     0.3.0   2018-02-01 [1] CRAN (R 4.0.2)                         
-##  widgetframe   * 0.3.1   2017-12-20 [1] CRAN (R 4.0.3)                         
-##  withr           2.3.0   2020-09-22 [1] CRAN (R 4.0.3)                         
-##  wordcloud     * 2.6     2018-08-24 [1] CRAN (R 4.0.3)                         
-##  xfun            0.19    2020-10-30 [1] CRAN (R 4.0.3)                         
-##  xml2            1.3.2   2020-04-23 [1] CRAN (R 4.0.2)                         
-##  yaml            2.2.1   2020-02-01 [1] CRAN (R 4.0.0)                         
-## 
-## [1] C:/Users/rober/Documents/R/win-library/4.0
-## [2] C:/Program Files/R/R-4.0.2/library
-```
+<!-- ```{r reproducibility, echo = FALSE} -->
+<!-- ## Reproducibility info -->
+<!-- options(width = 120) -->
+<!-- session_info() -->
+<!-- ``` -->
