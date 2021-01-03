@@ -20,14 +20,14 @@ Note: In some cases, it&#39;s enough to use the scale_color_manual() and scale_f
 <meta property="og:type" content="article" />
 <meta property="og:url" content="/2020/12/30/custom-color-palette/" />
 <meta property="article:published_time" content="2020-12-30T00:00:00+00:00" />
-<meta property="article:modified_time" content="2020-12-30T12:57:43-05:00" />
+<meta property="article:modified_time" content="2021-01-02T20:03:47-05:00" />
 <meta itemprop="name" content="Custom Color Palette in R">
 <meta itemprop="description" content="Updated 2021-01-02.
 I&#39;m describing customizing my own color palette for ggplot2. This is based off of Creating corporate colour palettes for ggplot2 by drsimonj.
 First, find a bunch of colors that you like. Canva is a good place to go for inspiration; or, us this tool from Adobe Color that will extract colors from a photo you like. Then, there&#39;s always colorbrewer2.
 Note: In some cases, it&#39;s enough to use the scale_color_manual() and scale_fill_manual() functions directly within ggplot2.">
 <meta itemprop="datePublished" content="2020-12-30T00:00:00+00:00" />
-<meta itemprop="dateModified" content="2020-12-30T12:57:43-05:00" />
+<meta itemprop="dateModified" content="2021-01-02T20:03:47-05:00" />
 <meta itemprop="wordCount" content="627">
 
 
@@ -107,6 +107,21 @@ Note: In some cases, it&#39;s enough to use the scale_color_manual() and scale_f
   <section class="section aside_inner">
     <h2 class="section_title"><a  href="/post/" class="group">Posts</a></h2>
       <section class="" id="docs-posts">
+        <h3 class="section_link"><a id="docs-us-zip-code-choropleth" href="/2021/01/03/create-map-based-on-us-zip-codes/">US Zip Code Choropleth</a></h3><nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#download-the-zcta-shapefile">Download the ZCTA Shapefile</a></li>
+        <li><a href="#unzip-the-zcta-shapefile">Unzip the ZCTA Shapefile</a></li>
+        <li><a href="#read-it-into-the-r-session">Read it into the R session</a></li>
+        <li><a href="#create-test-data">Create test data</a></li>
+        <li><a href="#join-data">Join data</a></li>
+        <li><a href="#mapping">Mapping</a></li>
+        <li><a href="#acknowledgements">Acknowledgements</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
         <h3 class="section_link active"><a id="docs-custom-color-palette-in-r" href="/2020/12/30/custom-color-palette/">Custom Color Palette in R</a></h3><nav id="TableOfContents">
   <ul>
     <li>
@@ -129,6 +144,7 @@ Note: In some cases, it&#39;s enough to use the scale_color_manual() and scale_f
         <li><a href="#query-the-tweets">Query the Tweets!</a></li>
         <li><a href="#examining-data">Examining data</a></li>
         <li><a href="#sample-stats--visualizations">Sample stats &amp; visualizations</a></li>
+        <li><a href="#tweet-map">Tweet Map</a></li>
         <li><a href="#sentiment-analysis">Sentiment analysis</a></li>
         <li><a href="#comparing-sentiments">Comparing sentiments</a></li>
         <li><a href="#some-routine-checks">Some routine checks</a></li>
@@ -413,8 +429,8 @@ Henry, and Müller, 2020</a>)</li>
   
   <div class="pager_item prev">
     
-    <a href="/docs/shortcodes-applied/" class="pager_link button" title="Shortcodes Applied">
-      <span class="pager_label">Shortcodes Applied</span>
+    <a href="/2021/01/03/create-map-based-on-us-zip-codes/" class="pager_link button" title="US Zip Code Choropleth">
+      <span class="pager_label">US Zip Code Choropleth</span>
     </a>
   </div>
   
@@ -462,7 +478,7 @@ Henry, and Müller, 2020</a>)</li>
   </symbol>
 </svg>
 <script src="/js/bundle.min.02545d1b796e3dc21ed6179e9cc71c1d0b6d8c842047dcfe72785cc4fc15f2a09cefa8fc9a8ed491e8e9fb30fcec32ea64c411ddf411e3e8c681f189dffc64fa.js"></script>
-<script src="/js/search.min.14dd135dce00c95d145417c799c20e5b8998de3a890163241c7c695524bd083d498a4791728e35879e7c0e3f463f06c8efcb6c95affe3a26a4a8dda3edd47721.js" async defer></script>
+<script src="/js/search.min.f10fc9ca24fa23471df2bbb0f4a86d47c046452e8ef78e1c3a7512942f5b085a6394a52d5716e844f1ef9319b7be115df417fcb61cfce55ea8576e901fa8fb38.js" async defer></script>
 
 </body>
 </html>

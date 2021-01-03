@@ -7,8 +7,36 @@ weight: 5
 
 Sources I like to use when looking for data or for researching/sharing geographic & statistical concepts. I'm fully aware that googling is faster than scrolling through this ridiculous list, but it makes me feel better about closing Chrome tabs at the end of the day. 
 
+
+### APIs and Data sources  
+
+* [Armed Conflict Location & Event Data Project](https://acleddata.com/curated-data-files/)  
+* [US Census Bureau (datasets)](https://www.census.gov/data/datasets.html)  
+* [US Census Bureay (developers)](https://www.census.gov/data/developers.html)  
+* [Data.gov (US)](http://www.data.gov/)   
+* [NOAA Datasets](https://sos.noaa.gov/Datasets/)     
+* [Waterpoint Data (WPDX)](https://www.waterpointdata.org/)     
+* [Humanitarian Data Exchange (OCHA)](https://data.humdata.org/)     
+* [Relief Web Labs (OCHA)](https://labs.reliefweb.int/)     
+* [Taxonomy as a Service (OCHA)](https://vocabulary.unocha.org/) 
+* [Data.gov - Ocean Data](https://catalog.data.gov/dataset?groups=ocean9585#topic=ocean_navigation)  
+* [Saildrone Data](https://data.saildrone.com/)  
+* [Galapagos Vital Signs Resources](https://www.galapagosvitalsigns.org/resources)  
+* [UNICEF Data](https://data.unicef.org/)  
+* [Awesome Public Datasets (GitHub)](https://github.com/awesomedata/awesome-public-datasets)  
+* [Twitter API](https://developer.twitter.com/en/docs)  
+* [AIRBUS TerraSAR-X Archive](https://terrasar-x-archive.terrasar.com/)  
+* [DRYAD](https://datadryad.org/stash/)  
+* [UNESCO - Great Barrier Reef](https://whc.unesco.org/en/list/154/gallery/)  
+* [NASA Earth Data](https://earthdata.nasa.gov/)  
+* [NASA Data Catalog](https://data.nasa.gov/browse)  
+* [NASA Data by Subject](https://www.nasa.gov/open/data.html)  
+* [New York Times - Developer APIs](https://developer.nytimes.com/faq)  
+
+
 ### Blogdown & Hugo
 
+* {Hugo COnfiguration Markup](https://gohugo.io/getting-started/configuration-markup/)  
 * [Hugo Shortcodes](https://gohugo.io/content-management/shortcodes/)  
 * [Scientific and Technical Blogging: Radix vs. Blogdown](https://emitanaka.org/r/posts/2018-12-12-scientific-and-technical-blogging-radix-vs-blogdown/#blogdown)  
 * [Alison Hill: Blog](https://alison.rbind.io/post/2020-12-27-blogdown-checks/)  
@@ -86,31 +114,10 @@ Sources I like to use when looking for data or for researching/sharing geographi
 * [Quick R by Datacamp](https://www.statmethods.net/advgraphs/layout.html)  
 
 
-### Data sources  
-
-* [Armed Conflict Location & Event Data Project](https://acleddata.com/curated-data-files/)  
-* [census.gov](https://www.census.gov/data/datasets.html)  
-* [NOAA Datasets](https://sos.noaa.gov/Datasets/)     
-* [Waterpoint Data (WPDX)](https://www.waterpointdata.org/)     
-* [Humanitarian Data Exchange (OCHA)](https://data.humdata.org/)     
-* [Relief Web Labs (OCHA)](https://labs.reliefweb.int/)     
-* [Taxonomy as a Service (OCHA)](https://vocabulary.unocha.org/) 
-* [Data.gov - Ocean Data](https://catalog.data.gov/dataset?groups=ocean9585#topic=ocean_navigation)  
-* [Saildrone Data](https://data.saildrone.com/)  
-* [Galapagos Vital Signs Resources](https://www.galapagosvitalsigns.org/resources)  
-* [UNICEF Data](https://data.unicef.org/)  
-* [Awesome Public Datasets (GitHub)](https://github.com/awesomedata/awesome-public-datasets)  
-* [Twitter API](https://developer.twitter.com/en/docs)  
-* [AIRBUS TerraSAR-X Archive](https://terrasar-x-archive.terrasar.com/)  
-* [DRYAD](https://datadryad.org/stash/)  
-* [UNESCO - Great Barrier Reef](https://whc.unesco.org/en/list/154/gallery/)  
-* [NASA Earth Data](https://earthdata.nasa.gov/)  
-* [NASA Data Catalog](https://data.nasa.gov/browse)  
-* [NASA Data by Subject](https://www.nasa.gov/open/data.html)  
-
-
 ### Development  
 
+* [CSS Tricks (guide to flexbox)](https://css-tricks.com/snippets/css/a-guide-to-flexbox/)  
+* [Hugo Codex (breadcrumbs)](http://hugocodex.org/add-ons/breadcrumbs/)  
 * [Awesome R Shiny](https://github.com/grabear/awesome-rshiny)  
 * [Chrome DevTools](https://developers.google.com/web/tools/chrome-devtools/sources)  
 * [shinyWidgets app - dreamrs (r)](http://shinyapps.dreamrs.fr/shinyWidgets/)  

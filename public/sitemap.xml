@@ -29,11 +29,12 @@
   
   <url>
     <loc>/app/</loc>
+    <lastmod>2021-01-02T20:03:47-05:00</lastmod>
   </url>
   
   <url>
     <loc>/links/list/</loc>
-    <lastmod>2020-12-31T14:09:50-05:00</lastmod>
+    <lastmod>2021-01-02T20:03:47-05:00</lastmod>
   </url>
   
   <url>
@@ -47,13 +48,18 @@
   </url>
   
   <url>
+    <loc>/2021/01/03/create-map-based-on-us-zip-codes/</loc>
+    <lastmod>2021-01-03T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
     <loc>/2020/12/30/custom-color-palette/</loc>
-    <lastmod>2020-12-30T12:57:43-05:00</lastmod>
+    <lastmod>2021-01-02T20:03:47-05:00</lastmod>
   </url>
   
   <url>
     <loc>/2020/12/30/twitter-sentiment-philly/</loc>
-    <lastmod>2020-12-31T14:09:50-05:00</lastmod>
+    <lastmod>2021-01-02T20:03:47-05:00</lastmod>
   </url>
   
   <url>

@@ -19,7 +19,7 @@ header:
 
 
 
-Updated 2021-01-02.  
+Updated 2021-01-03.  
 
 This is a walkthrough of using the Twitter API with the `rtweet` R package. It borrows from a few difference sources, including:
 * [ropensci/rtweet documentation](https://github.com/ropensci/rtweet)  
@@ -33,24 +33,6 @@ This is a walkthrough of using the Twitter API with the `rtweet` R package. It b
 ### Load libraries
 
 
-```r
-library(rtweet)
-library(rmarkdown)
-library(NLP)
-library(tm)
-library(RColorBrewer)
-library(wordcloud)
-library(topicmodels)
-library(SnowballC)
-library(config)
-library(dplyr)
-library(tidytext)
-library(tidyr)
-library(ggplot2)
-library(lubridate)
-library(readr)
-library(skimr)
-```
 
 ### Configure Twitter API access
 
@@ -380,9 +362,11 @@ dygraph1 <- dygraph(tweets_ts, main = "Daily Tweets for 'Philadelphia' (dygraph)
 <iframe src= "dygraph1.html" width="100%" height="400" style="border: none;"></iframe>
 
 
+### Tweet Map
+
 And *where* are people tweeting?
 
-Of the 1897 tweets that we have, 133 are geotagged. We'll plot those using [leaflet](https://rstudio.github.io/leaflet/) and build on this later.
+Of the 1897 tweets that we have, 133 are geotagged. We'll plot those using [leaflet](https://rstudio.github.io/leaflet/). I'm assigning the tweet `text` to each point's `label` and `popup` arguments.  
 
 
 ```r
@@ -390,8 +374,11 @@ library(leaflet)
 
 tweet_map <- leaflet(tweets_df) %>%
   addTiles() %>%
-  addCircleMarkers(lng = ~lng
-                   , lat = ~lat)
+  addMarkers(lng = ~lng
+                   , lat = ~lat
+                   , label = ~as.character(text)
+                   , popup = ~as.character(text)
+                   )
 ```
 
 <iframe src= "tweet_map.html" width="100%" height="400" style="border: none;"></iframe>
@@ -405,7 +392,7 @@ Now switching over to [tidytext](https://www.tidytextmining.com/topicmodeling.ht
 
 Preview some of the sentiment lexicons. You'll be prompted to download the `textdata` package and the `afinn`, `bing`, and `nrc` lexicons if you don't have them already.
 
-**[afinn](http://www2.imm.dtu.dk/pubdb/pubs/6010-full.html)** - assigns a numeric value to each word on a scale of -5 to +5
+**[afinn](http://www2.imm.dtu.dk/pubdb/pubs/6010-full.html)** - assigns a numeric value to each word on a scale of -5 to +5  
 **[bing](https://www.cs.uic.edu/~liub/FBS/sentiment-analysis.html)** - binary assignment to each word, e.g. 'positive' or 'negative'  
 **[nrc](http://saifmohammad.com/WebPages/NRC-Emotion-Lexicon.htm)** - categorizes words into categories: positive, negative, anger, anticipation, disgust, fear, joy, sadness, surprise, and trust  
 

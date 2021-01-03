@@ -1,0 +1,509 @@
+<!doctype html>
+<html lang="en">
+<head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1"><meta name="generator" content="Hugo 0.79.1" />
+<link rel="apple-touch-icon" sizes="180x180" href='/favicons/apple-touch-icon.png'>
+<link rel="icon" type="image/png" sizes="32x32" href='/favicons/favicon-32x32.png'>
+<link rel="icon" type="image/png" sizes="16x16" href='/favicons/favicon-16x16.png'>
+<link rel="manifest" href='/favicons/site.webmanifest'>
+<link rel="mask-icon" href='/favicons/safari-pinned-tab.svg'  color="#004750">
+<link rel="shortcut icon" href='/favicons/favicon.ico'>
+<meta name="msapplication-TileColor" content="#ffffff">
+<meta name="msapplication-config" content='/favicons/browserconfig.xml'>
+<meta name="theme-color" content="#ffffff">
+
+<title>US Zip Code Choropleth | rjfranssen</title><meta property="og:title" content="US Zip Code Choropleth" />
+<meta property="og:description" content="First, it&#39;s important to recognize that Zip Codes are not polygons - they are a way for the US Post Office to associate mailing addresses with a particular post office or metro area delivery station, like a lookup table. However, the US Census Bureau created the &quot;Zip Code Tabulation Area&quot; (ZCTA) to generalize an areal representation of Zip Code service areas. This post demonstrates how to create a choropleth map using ZCTAs, R, and the leaflet library." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="/2021/01/03/create-map-based-on-us-zip-codes/" />
+<meta property="article:published_time" content="2021-01-03T00:00:00+00:00" />
+<meta property="article:modified_time" content="2021-01-03T00:00:00+00:00" />
+<meta itemprop="name" content="US Zip Code Choropleth">
+<meta itemprop="description" content="First, it&#39;s important to recognize that Zip Codes are not polygons - they are a way for the US Post Office to associate mailing addresses with a particular post office or metro area delivery station, like a lookup table. However, the US Census Bureau created the &quot;Zip Code Tabulation Area&quot; (ZCTA) to generalize an areal representation of Zip Code service areas. This post demonstrates how to create a choropleth map using ZCTAs, R, and the leaflet library.">
+<meta itemprop="datePublished" content="2021-01-03T00:00:00+00:00" />
+<meta itemprop="dateModified" content="2021-01-03T00:00:00+00:00" />
+<meta itemprop="wordCount" content="1084">
+
+
+
+<meta itemprop="keywords" content="r,leaflet,gis," />
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="US Zip Code Choropleth"/>
+<meta name="twitter:description" content="First, it&#39;s important to recognize that Zip Codes are not polygons - they are a way for the US Post Office to associate mailing addresses with a particular post office or metro area delivery station, like a lookup table. However, the US Census Bureau created the &quot;Zip Code Tabulation Area&quot; (ZCTA) to generalize an areal representation of Zip Code service areas. This post demonstrates how to create a choropleth map using ZCTAs, R, and the leaflet library."/>
+
+
+
+<link rel="stylesheet" href="/css/styles.69832e4c6e36908110aac09480bc33c2fa3c11ac6d26d5ad4dce56911af6bd9c8d22888b83f35eaa93b258e9ab5fee9510c6b997fd63be1b42c0f74b8b61faf9.css" integrity="sha512-aYMuTG42kIEQqsCUgLwzwvo8EaxtJtWtTc5WkRr2vZyNIoiLg/NeqpOyWOmrX&#43;6VEMa5l/1jvhtCwPdLi2H6&#43;Q==" crossorigin="anonymous">
+
+</head>
+<body class="page-page">
+  <header class="nav_header">
+<nav class="wrap nav menu">
+	<a href="/" class="nav_brand">
+		<picture data-lit="/images/rjfranssen-blowfish-wide-dark.png" data-dark="/images/rjfranssen-blowfish-wide-dark.png">
+			
+			<img srcset = '/images/rjfranssen-blowfish-wide-dark.png' alt = 'rjfranssen Logo'>
+		</picture>
+		<label class="nav_toggle toggle" title="Site Menu" role="button">
+			<svg class="icon">
+  <use xlink:href="#harmburger"></use>
+</svg>
+		</label>
+	</a>
+	<ul class="nav_body">
+		<li class="nav-item">
+<div class="search">
+  <label for="find" class="search_label"><svg class="icon">
+  <use xlink:href="#search"></use>
+</svg>
+  </label>
+  <input type="search" class="search_field" placeholder="Search..." id="find" autocomplete="off">
+  <div class="search_results"></div>
+</div>
+
+
+
+		</li>
+		<li class="nav-item">
+			<a class="nav-link" href="/about/"><span>About</span></a>
+		</li>
+		<li class="nav-item">
+			<a class="nav-link" href="/post/"><span>Posts</span></a>
+		</li>
+		<li class="nav-item">
+			<a class="nav-link" href="/app/"><span>Apps</span></a>
+		</li>
+		<li class="nav-item">
+			<a class="nav-link" href="/links/list/"><span>Links</span></a>
+		</li>
+		
+		<li class="nav-item">
+			<a class="nav-link" href="https://github.com/rjfranssen/rjfranssen.github.io" target="_blank">GitHub</a>
+		</li>
+		<li class="nav-item"><div class = 'color_mode'>
+  <label for = 'mode'></label>
+  <input type = 'checkbox' class = 'color_choice' id = 'mode' title="Toggle Dark Mode">
+</div>
+</li>
+	</ul>
+</nav>
+
+  </header>
+  <div class="main wrap pt-4"><div class="grid-auto"><aside class="aside menu">
+  <div>
+    <label class="aside_toggle toggle" title="Docs Menu" role="button">Docs Menu <svg class="icon">
+  <use xlink:href="#harmburger"></use>
+</svg></label>
+  </div>
+  <section class="section aside_inner">
+    <h2 class="section_title"><a  href="/post/" class="group">Posts</a></h2>
+      <section class="" id="docs-posts">
+        <h3 class="section_link active"><a id="docs-us-zip-code-choropleth" href="/2021/01/03/create-map-based-on-us-zip-codes/">US Zip Code Choropleth</a></h3><nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#download-the-zcta-shapefile">Download the ZCTA Shapefile</a></li>
+        <li><a href="#unzip-the-zcta-shapefile">Unzip the ZCTA Shapefile</a></li>
+        <li><a href="#read-it-into-the-r-session">Read it into the R session</a></li>
+        <li><a href="#create-test-data">Create test data</a></li>
+        <li><a href="#join-data">Join data</a></li>
+        <li><a href="#mapping">Mapping</a></li>
+        <li><a href="#acknowledgements">Acknowledgements</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+        <h3 class="section_link"><a id="docs-custom-color-palette-in-r" href="/2020/12/30/custom-color-palette/">Custom Color Palette in R</a></h3><nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#define-colors">Define colors</a></li>
+        <li><a href="#create-palettes">Create palettes</a></li>
+        <li><a href="#scale-functions-for-ggplot2">Scale functions for ggplot2</a></li>
+        <li><a href="#example-plots">Example plots</a></li>
+        <li><a href="#acknowledgements">Acknowledgements</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+        <h3 class="section_link"><a id="docs-twitter-sentiment-philly" href="/2020/12/30/twitter-sentiment-philly/">Twitter Sentiment Philly</a></h3><nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#load-libraries">Load libraries</a></li>
+        <li><a href="#configure-twitter-api-access">Configure Twitter API access</a></li>
+        <li><a href="#query-the-tweets">Query the Tweets!</a></li>
+        <li><a href="#examining-data">Examining data</a></li>
+        <li><a href="#sample-stats--visualizations">Sample stats &amp; visualizations</a></li>
+        <li><a href="#tweet-map">Tweet Map</a></li>
+        <li><a href="#sentiment-analysis">Sentiment analysis</a></li>
+        <li><a href="#comparing-sentiments">Comparing sentiments</a></li>
+        <li><a href="#some-routine-checks">Some routine checks</a></li>
+        <li><a href="#wordclouds">Wordclouds</a></li>
+        <li><a href="#what-about-sentences">What about sentences?</a></li>
+        <li><a href="#acknowledgements">Acknowledgements</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+      </section>
+  </section>
+</aside>
+
+  <main class="content">
+    <h1>US Zip Code Choropleth</h1><p>First, it's important to recognize that Zip Codes are not polygons - they are a way for the US Post Office to associate mailing addresses with a particular post office or metro area delivery station, like a lookup table. However, the US Census Bureau created the <a href="https://www.census.gov/programs-surveys/geography/guidance/geo-areas/zctas.html">&quot;Zip Code Tabulation Area&quot; (ZCTA)</a> to generalize an areal representation of Zip Code service areas. This post demonstrates how to create a choropleth map using ZCTAs, R, and the <a href="https://rstudio.github.io/leaflet/">leaflet</a> library. <em>I originally <a href="https://www.reddit.com/r/rprogramming/comments/ifnfju/create_a_map_based_off_of_us_postal_zip_codes/">posted this</a> to reddit.</em></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-r" data-lang="r"><span class="nf">library</span><span class="p">(</span><span class="n">rgdal</span><span class="p">)</span>
+<span class="nf">library</span><span class="p">(</span><span class="n">leaflet</span><span class="p">)</span>
+<span class="nf">library</span><span class="p">(</span><span class="n">dplyr</span><span class="p">)</span>
+<span class="nf">library</span><span class="p">(</span><span class="n">data.table</span><span class="p">)</span>
+<span class="nf">library</span><span class="p">(</span><span class="n">htmlwidgets</span><span class="p">)</span>
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="download-the-zcta-shapefile">Download the ZCTA Shapefile</h3>
+<p>Spatial polygons come in various formats - I tend to work with shapefiles and geojsons the most. For this example, I'm downloading the ZCTA shapefile from the U.S. Census Bureau website. I'm using the <code>cb_2018_us_zcta510_500k.zip [59 MB]</code> file found here: <strong><a href="https://www.census.gov/geographies/mapping-files/time-series/geo/carto-boundary-file.html">Cartographic Boundary Files - Shapefile</a></strong>. There are other useful US shapefiles here, too, that include county, state, and metropolitan polygons.</p>
+<p>Note the <a href="https://walker-data.com/tidycensus/">tidycensus</a> package has great wrapper functions to pull down data from the US Census Bureau website, but I'm not doing that here because I want some code that I can use for other shapefiles.</p>
+<p><img src="zcta_capture.PNG" alt=""></p>
+<h3 id="unzip-the-zcta-shapefile">Unzip the ZCTA Shapefile</h3>
+<p>Unzip the shapefile you downloaded and put it in your working directory. This folder represents the entire shapefile.</p>
+<p><img src="zcta_unzipped.PNG" alt=""></p>
+<p>If you open the shapefile folder, you'll see it's composed of several files that describe its projection and shape. <a href="https://www.loc.gov/preservation/digital/formats/fdd/fdd000280.shtml">Go here</a> to understand what each file does. For our purposes, we'll be reading it in at the folder level.</p>
+<p><img src="zcta_insides.PNG" alt=""></p>
+<h3 id="read-it-into-the-r-session">Read it into the R session</h3>
+<p>Now using the <code>rgdal</code> library to read it in as a <code>Large SpatialPolygonsDataFrame</code>.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-r" data-lang="r"><span class="n">zcta_shapefile</span> <span class="o">&lt;-</span>  <span class="n">rgdal</span><span class="o">::</span><span class="nf">readOGR</span><span class="p">(</span>
+  <span class="n">dsn</span> <span class="o">=</span> <span class="s">&#34;cb_2018_us_zcta510_500k&#34;</span><span class="p">,</span> <span class="c1"># this is the unzipped folder</span>
+  <span class="n">layer</span> <span class="o">=</span> <span class="s">&#34;cb_2018_us_zcta510_500k&#34;</span><span class="p">,</span> <span class="c1"># this is the file inside of the unzipped folder</span>
+  <span class="n">verbose</span> <span class="o">=</span> <span class="kc">FALSE</span>
+<span class="p">)</span>
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="create-test-data">Create test data</h3>
+<p>Maybe you have a spreadsheet of addressed or a table that you would import here. I'm going to create some fake numbers just for this exercise.</p>
+<p>TODO: Use a real dataset :)</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-r" data-lang="r"><span class="c1"># identify Alabama zip codes</span>
+<span class="n">al_zips</span> <span class="o">&lt;-</span> <span class="m">35004</span><span class="o">:</span><span class="m">36925</span>
+
+<span class="c1"># get some random numbers</span>
+<span class="n">sales</span> <span class="o">&lt;-</span> <span class="nf">runif</span><span class="p">(</span><span class="nf">length</span><span class="p">(</span><span class="n">al_zips</span><span class="p">),</span> <span class="n">min</span><span class="o">=</span><span class="m">1000</span><span class="p">,</span> <span class="n">max</span><span class="o">=</span><span class="m">5000</span><span class="p">)</span> <span class="o">%&gt;%</span> <span class="nf">round</span><span class="p">(</span><span class="m">0</span><span class="p">)</span>
+
+<span class="c1"># put this in a dataframe</span>
+<span class="n">sales_data</span> <span class="o">&lt;-</span> <span class="nf">data.frame</span><span class="p">(</span>
+  <span class="n">state</span> <span class="o">=</span> <span class="s">&#39;AL&#39;</span><span class="p">,</span>
+  <span class="n">zip</span> <span class="o">=</span> <span class="n">al_zips</span><span class="p">,</span>
+  <span class="n">sales</span> <span class="o">=</span> <span class="n">sales</span>
+<span class="p">)</span>
+
+<span class="c1"># ok, now i have some fake sales numbers</span>
+<span class="n">sales_data</span> <span class="o">%&gt;%</span> <span class="nf">head</span><span class="p">(</span><span class="m">5</span><span class="p">)</span>
+<span class="c1">##   state   zip sales</span>
+<span class="c1">## 1    AL 35004  1220</span>
+<span class="c1">## 2    AL 35005  1977</span>
+<span class="c1">## 3    AL 35006  3882</span>
+<span class="c1">## 4    AL 35007  2335</span>
+<span class="c1">## 5    AL 35008  2564</span>
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="join-data">Join data</h3>
+<p>Join the test data to your SpatialPolygonsDataFrame &quot;data&quot; slot. Again, this will look a bit different if you're using <code>tidycensus</code> and the <code>Simple Features (sf)</code> package (which is easier but not always an option with legacy data).</p>
+<p>I tend to copy the data slot first so I can explore it easier in RStudio and then put it back in. But be careful not to duplicate or drop any rows in your join or it'll get messed up. Again, this is easier in <code>sf</code>...</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-r" data-lang="r"><span class="c1"># copy data</span>
+<span class="n">zcta_data</span> <span class="o">&lt;-</span> <span class="n">data.table</span><span class="o">::</span><span class="nf">copy</span><span class="p">(</span><span class="n">zcta_shapefile</span><span class="o">@</span><span class="n">data</span><span class="p">)</span>
+
+<span class="c1">#  join sales data - it&#39;s very important that we do NOT  duplicate or drop rows or it&#39;s going to screw up the shapefile</span>
+<span class="n">zcta_data</span><span class="o">$</span><span class="n">ZCTA5CE10</span> <span class="o">&lt;-</span> <span class="nf">as.numeric</span><span class="p">(</span><span class="n">zcta_data</span><span class="o">$</span><span class="n">ZCTA5CE10</span><span class="p">)</span>
+<span class="n">zcta_data</span> <span class="o">&lt;-</span> <span class="n">zcta_data</span> <span class="o">%&gt;%</span> <span class="nf">left_join</span><span class="p">(</span><span class="n">sales_data</span><span class="p">,</span> <span class="n">by</span> <span class="o">=</span> <span class="nf">c</span><span class="p">(</span><span class="s">&#34;ZCTA5CE10&#34;</span> <span class="o">=</span> <span class="s">&#34;zip&#34;</span><span class="p">))</span>
+
+<span class="c1"># Now reattach this data file back to the SpatialPolygonsDataFrame data slot</span>
+<span class="n">zcta_shapefile</span><span class="o">@</span><span class="n">data</span> <span class="o">&lt;-</span> <span class="n">zcta_data</span>
+
+<span class="c1"># (optional) There are 33k ZCTAs in the US; consider reducing these to a particular region of interest.</span>
+<span class="c1"># I&#39;m using the `state` value that i just joined for demo purposes. You can skip this if you want to do the whole country</span>
+<span class="n">zcta_shapefile</span> <span class="o">&lt;-</span> <span class="n">zcta_shapefile[</span><span class="o">!</span><span class="nf">is.na</span><span class="p">(</span><span class="n">zcta_shapefile</span><span class="o">@</span><span class="n">data</span><span class="o">$</span><span class="n">state</span><span class="p">)</span> <span class="o">&amp;</span> <span class="n">zcta_shapefile</span><span class="o">@</span><span class="n">data</span><span class="o">$</span><span class="n">state</span><span class="o">==</span><span class="s">&#39;AL&#39;</span><span class="p">,</span><span class="n">]</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>Check these - they should match; if they don't, make sure the join isn't duplicating or dropping anything.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-r" data-lang="r"><span class="nf">nrow</span><span class="p">(</span><span class="n">zcta_shapefile</span><span class="o">@</span><span class="n">data</span><span class="p">)</span> <span class="o">==</span> <span class="nf">length</span><span class="p">(</span><span class="n">zcta_shapefile</span><span class="o">@</span><span class="n">polygons</span><span class="p">)</span>
+<span class="c1">## [1] TRUE</span>
+<span class="nf">nrow</span><span class="p">(</span><span class="n">zcta_shapefile</span><span class="o">@</span><span class="n">data</span><span class="p">)</span>
+<span class="c1">## [1] 642</span>
+<span class="nf">length</span><span class="p">(</span><span class="n">zcta_shapefile</span><span class="o">@</span><span class="n">polygons</span><span class="p">)</span>
+<span class="c1">## [1] 642</span>
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="mapping">Mapping</h3>
+<p>Now going to do a couple of things to prepare for the interactive map, statting ith creating map labels that will appear when someone hovers over a polygon.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-r" data-lang="r"><span class="n">labels</span> <span class="o">&lt;-</span> <span class="nf">sprintf</span><span class="p">(</span>
+  <span class="s">&#34;&lt;strong&gt;Zip: %s&lt;/strong&gt;&lt;br/&gt; Sales: $%s&#34;</span><span class="p">,</span>
+  <span class="n">zcta_shapefile</span><span class="o">@</span><span class="n">data</span><span class="o">$</span><span class="n">ZCTA5CE10</span><span class="p">,</span>
+  <span class="nf">prettyNum</span><span class="p">(</span><span class="n">zcta_shapefile</span><span class="o">@</span><span class="n">data</span><span class="o">$</span><span class="n">sales</span><span class="p">,</span> <span class="n">big.mark</span><span class="o">=</span><span class="s">&#34;,&#34;</span><span class="p">)</span>
+<span class="p">)</span> <span class="o">%&gt;%</span> <span class="nf">lapply</span><span class="p">(</span><span class="n">htmltools</span><span class="o">::</span><span class="n">HTML</span><span class="p">)</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>Next, going to create a color palette and specify the sales value for the domain over which the choropleth gets shaded.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-r" data-lang="r"><span class="n">map_pal</span> <span class="o">&lt;-</span>  <span class="n">leaflet</span><span class="o">::</span><span class="nf">colorNumeric</span><span class="p">(</span><span class="n">palette</span><span class="o">=</span><span class="s">&#34;viridis&#34;</span><span class="p">,</span> <span class="n">domain</span> <span class="o">=</span> <span class="n">zcta_shapefile</span><span class="o">@</span><span class="n">data</span><span class="o">$</span><span class="n">sales</span><span class="p">,</span> <span class="n">na.color</span><span class="o">=</span><span class="s">&#34;transparent&#34;</span><span class="p">)</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>Like I said, 33k polygons is A LOT. If you're going to plot them all, there's some options below to help our with processing (e.g. <code>preferCanvas = TRUE</code>, <code>updateWhenZooming = FALSE</code>, <code>updateWhenIdle = TRUE</code>). Otherwise, consider paring this down to an area of interest as shown in the optional step above.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span><span class="lnt">44
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-r" data-lang="r"><span class="n">zcta_map</span> <span class="o">&lt;-</span> <span class="n">zcta_shapefile</span> <span class="o">%&gt;%</span> 
+  
+  <span class="n">leaflet</span><span class="o">::</span><span class="nf">leaflet</span><span class="p">(</span><span class="n">options</span> <span class="o">=</span> <span class="nf">leafletOptions</span><span class="p">(</span><span class="n">preferCanvas</span> <span class="o">=</span> <span class="kc">TRUE</span><span class="p">))</span> <span class="o">%&gt;%</span>
+  
+  <span class="c1"># Check out map providers here: https://leaflet-extras.github.io/leaflet-providers/preview/</span>
+  <span class="nf">addProviderTiles</span><span class="p">(</span><span class="n">providers</span><span class="o">$</span><span class="n">Esri.WorldStreetMap</span><span class="p">,</span> <span class="n">options</span> <span class="o">=</span> <span class="nf">providerTileOptions</span><span class="p">(</span>
+    <span class="n">updateWhenZooming</span> <span class="o">=</span> <span class="kc">FALSE</span><span class="p">,</span>      <span class="c1"># map won&#39;t update tiles until zoom is done</span>
+    <span class="n">updateWhenIdle</span> <span class="o">=</span> <span class="kc">TRUE</span>           <span class="c1"># map won&#39;t load new tiles when panning</span>
+  <span class="p">))</span> <span class="o">%&gt;%</span>
+  
+  <span class="c1"># Alabama zip 35148</span>
+  <span class="nf">setView</span><span class="p">(</span><span class="n">lat</span> <span class="o">=</span> <span class="m">33.7492174</span><span class="p">,</span> <span class="n">lng</span> <span class="o">=</span> <span class="m">-87.0823462</span><span class="p">,</span> <span class="n">zoom</span> <span class="o">=</span> <span class="m">7</span><span class="p">)</span> <span class="o">%&gt;%</span>
+  
+  <span class="c1"># Now add those polygons!</span>
+  <span class="nf">addPolygons</span><span class="p">(</span>
+    <span class="n">fillColor</span> <span class="o">=</span> <span class="o">~</span><span class="nf">map_pal</span><span class="p">(</span><span class="n">sales</span><span class="p">),</span> <span class="c1"># the map palette we made</span>
+    <span class="n">weight</span> <span class="o">=</span> <span class="m">2</span><span class="p">,</span>
+    <span class="n">opacity</span> <span class="o">=</span> <span class="m">1</span><span class="p">,</span>
+    <span class="n">color</span> <span class="o">=</span> <span class="s">&#34;white&#34;</span><span class="p">,</span>
+    <span class="n">dashArray</span> <span class="o">=</span> <span class="s">&#34;3&#34;</span><span class="p">,</span>
+    <span class="n">stroke</span> <span class="o">=</span> <span class="kc">TRUE</span><span class="p">,</span>
+    <span class="n">fillOpacity</span> <span class="o">=</span> <span class="m">0.5</span><span class="p">,</span>
+    <span class="n">highlight</span> <span class="o">=</span> <span class="nf">highlightOptions</span><span class="p">(</span>
+      <span class="n">weight</span> <span class="o">=</span> <span class="m">5</span><span class="p">,</span>
+      <span class="n">color</span> <span class="o">=</span> <span class="s">&#34;#667&#34;</span><span class="p">,</span>
+      <span class="n">dashArray</span> <span class="o">=</span> <span class="s">&#34;&#34;</span><span class="p">,</span>
+      <span class="n">fillOpacity</span> <span class="o">=</span> <span class="m">0.7</span><span class="p">,</span>
+      <span class="n">bringToFront</span> <span class="o">=</span> <span class="kc">TRUE</span>
+    <span class="p">),</span>
+    <span class="n">label</span> <span class="o">=</span> <span class="n">labels</span><span class="p">,</span> <span class="c1"># cool labels</span>
+    <span class="n">labelOptions</span> <span class="o">=</span> <span class="nf">labelOptions</span><span class="p">(</span>
+      <span class="n">style</span> <span class="o">=</span> <span class="nf">list</span><span class="p">(</span><span class="s">&#34;font-weight&#34;</span> <span class="o">=</span> <span class="s">&#34;normal&#34;</span><span class="p">,</span> <span class="n">padding</span> <span class="o">=</span> <span class="s">&#34;3px 8px&#34;</span><span class="p">),</span>
+      <span class="n">textsize</span> <span class="o">=</span> <span class="s">&#34;15px&#34;</span><span class="p">,</span>
+      <span class="n">directon</span> <span class="o">=</span> <span class="s">&#34;auto&#34;</span>
+    <span class="p">)</span>
+  <span class="p">)</span> <span class="o">%&gt;%</span>
+  
+  <span class="c1"># Dont forget a legend</span>
+  <span class="nf">addLegend</span><span class="p">(</span>
+    <span class="n">pal</span> <span class="o">=</span> <span class="n">map_pal</span><span class="p">,</span>
+    <span class="n">values</span> <span class="o">=</span>  <span class="o">~</span><span class="n">sales</span><span class="p">,</span>
+    <span class="n">opacity</span> <span class="o">=</span> <span class="m">0.7</span><span class="p">,</span>
+    <span class="n">title</span> <span class="o">=</span> <span class="s">&#34;Sales&#34;</span>
+  <span class="p">)</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>And here is the finished map! <a href="zcta_map.html">full screen</a></p>
+<iframe src= "zcta_map.html" width="100%" height="400" style="border: none;"></iframe>
+<h3 id="acknowledgements">Acknowledgements</h3>
+<p>This blog post was made possible thanks to:</p>
+<ul>
+<li><em><a href="https://bioconductor.org/packages/3.12/rgdal">rgdal</a></em> <a id='cite-Bivand_2020'></a>(<a href='https://CRAN.R-project.org/package=rgdal'>Bivand, Keitt, and Rowlingson, 2020</a>)</li>
+<li><em><a href="https://bioconductor.org/packages/3.12/leaflet">leaflet</a></em> <a id='cite-Cheng_2019'></a>(<a href='https://CRAN.R-project.org/package=leaflet'>Cheng, Karambelkar, and Xie, 2019</a>)</li>
+<li><em><a href="https://bioconductor.org/packages/3.12/dplyr">dplyr</a></em> <a id='cite-Wickham_2020'></a>(<a href='https://CRAN.R-project.org/package=dplyr'>Wickham, François, 
+Henry, and Müller, 2020</a>)</li>
+<li><em><a href="https://bioconductor.org/packages/3.12/data.table">data.table</a></em> <a id='cite-Dowle_2019'></a>(<a href='https://CRAN.R-project.org/package=data.table'>Dowle and Srinivasan, 2019</a>)</li>
+<li><em><a href="https://bioconductor.org/packages/3.12/htmlwidgets">htmlwidgets</a></em> <a id='cite-Vaidyanathan_2020'></a>(<a href='https://CRAN.R-project.org/package=htmlwidgets'>Vaidyanathan, Xie, Allaire, Cheng, et al., 2020</a>)</li>
+<li><em><a href="https://bioconductor.org/packages/3.12/BiocStyle">BiocStyle</a></em> <a id='cite-Oles_2020'></a>(<a href='https://github.com/Bioconductor/BiocStyle'>Oles, Morgan, and Huber, 2020</a>)</li>
+<li><em><a href="https://CRAN.R-project.org/package=blogdown">blogdown</a></em> <a id='cite-Xie_2017'></a>(<a href='https://github.com/rstudio/blogdown'>Xie, Hill, and Thomas, 2017</a>)</li>
+<li><em><a href="https://CRAN.R-project.org/package=devtools">devtools</a></em> <a id='cite-Wickham_2020a'></a>(<a href='https://CRAN.R-project.org/package=devtools'>Wickham, Hester, and Chang, 2020</a>)</li>
+<li><em><a href="https://CRAN.R-project.org/package=knitcitations">knitcitations</a></em> <a id='cite-Boettiger_2020'></a>(<a href='https://github.com/cboettig/knitcitations'>Boettiger, 2020</a>)</li>
+</ul>
+<!-- ### References -->
+<!-- ```{r bibliography, results = 'asis', echo = FALSE, cache = FALSE} -->
+<!-- ## Print bibliography -->
+<!-- bibliography(style = 'html') -->
+<!-- ``` -->
+<!-- ### Reproducibility -->
+<!-- ```{r reproducibility, echo = FALSE} -->
+<!-- ## Reproducibility info -->
+<!-- options(width = 120) -->
+<!-- session_info() -->
+<!-- ``` -->
+
+    <div class="pager">
+  
+  <div class="pager_item prev">
+    
+    <a href="/docs/shortcodes-applied/" class="pager_link button" title="Shortcodes Applied">
+      <span class="pager_label">Shortcodes Applied</span>
+    </a>
+  </div>
+  
+
+  
+  <div class="pager_item next">
+    
+    <a href="/2020/12/30/custom-color-palette/" class="pager_link button" title="Custom Color Palette in R">
+      <span class="pager_label">Custom Color Palette in R</span>
+    </a>
+  </div>
+  
+</div>
+<svg width="0" height="0" class="hidden">
+  <symbol xmlns="http://www.w3.org/2000/svg" viewBox="0 0 492.004 492.004" id="next">
+    <path d="M484.14 226.886L306.46 49.202c-5.072-5.072-11.832-7.856-19.04-7.856-7.216 0-13.972 2.788-19.044 7.856l-16.132 16.136c-5.068 5.064-7.86 11.828-7.86 19.04 0 7.208 2.792 14.2 7.86 19.264L355.9 207.526H26.58C11.732 207.526 0 219.15 0 234.002v22.812c0 14.852 11.732 27.648 26.58 27.648h330.496L252.248 388.926c-5.068 5.072-7.86 11.652-7.86 18.864 0 7.204 2.792 13.88 7.86 18.948l16.132 16.084c5.072 5.072 11.828 7.836 19.044 7.836 7.208 0 13.968-2.8 19.04-7.872l177.68-177.68c5.084-5.088 7.88-11.88 7.86-19.1.016-7.244-2.776-14.04-7.864-19.12z"></path>
+  </symbol>
+  <symbol xmlns="http://www.w3.org/2000/svg" viewBox="0 0 511.999 511.999" id="search">
+    <path d="M508.874 478.708L360.142 329.976c28.21-34.827 45.191-79.103 45.191-127.309C405.333 90.917 314.416 0 202.666 0S0 90.917 0 202.667s90.917 202.667 202.667 202.667c48.206 0 92.482-16.982 127.309-45.191l148.732 148.732c4.167 4.165 10.919 4.165 15.086 0l15.081-15.082c4.165-4.166 4.165-10.92-.001-15.085zM202.667 362.667c-88.229 0-160-71.771-160-160s71.771-160 160-160 160 71.771 160 160-71.771 160-160 160z"></path>
+  </symbol>
+  <symbol xmlns="http://www.w3.org/2000/svg" viewBox="0 0 241 179" id="harmburger">
+    <path d="M1 10C1 4.477 5.477 0 11 0h220c5.523 0 10 4.477 10 10s-4.477 10-10 10H11C5.477 20 1 15.523 1 10zm0 80c0-5.523 4.477-10 10-10h220c5.523 0 10 4.477 10 10s-4.477 10-10 10H11c-5.523 0-10-4.477-10-10zm9 69c-5.523 0-10 4.477-10 10s4.477 10 10 10h220c5.523 0 10-4.477 10-10s-4.477-10-10-10H10z"></path>
+  </symbol>
+</svg>
+  </main>
+</div>
+
+  </div>
+<footer class="pt-2 pb-2">
+  <div class="wrap">
+    <p>&copy; 2021 rjfranssen</p>
+  </div>
+</footer>
+
+
+<svg width="0" height="0" class="hidden">
+  <symbol xmlns="http://www.w3.org/2000/svg" viewBox="0 0 492.004 492.004" id="next">
+    <path d="M484.14 226.886L306.46 49.202c-5.072-5.072-11.832-7.856-19.04-7.856-7.216 0-13.972 2.788-19.044 7.856l-16.132 16.136c-5.068 5.064-7.86 11.828-7.86 19.04 0 7.208 2.792 14.2 7.86 19.264L355.9 207.526H26.58C11.732 207.526 0 219.15 0 234.002v22.812c0 14.852 11.732 27.648 26.58 27.648h330.496L252.248 388.926c-5.068 5.072-7.86 11.652-7.86 18.864 0 7.204 2.792 13.88 7.86 18.948l16.132 16.084c5.072 5.072 11.828 7.836 19.044 7.836 7.208 0 13.968-2.8 19.04-7.872l177.68-177.68c5.084-5.088 7.88-11.88 7.86-19.1.016-7.244-2.776-14.04-7.864-19.12z"></path>
+  </symbol>
+  <symbol xmlns="http://www.w3.org/2000/svg" viewBox="0 0 511.999 511.999" id="search">
+    <path d="M508.874 478.708L360.142 329.976c28.21-34.827 45.191-79.103 45.191-127.309C405.333 90.917 314.416 0 202.666 0S0 90.917 0 202.667s90.917 202.667 202.667 202.667c48.206 0 92.482-16.982 127.309-45.191l148.732 148.732c4.167 4.165 10.919 4.165 15.086 0l15.081-15.082c4.165-4.166 4.165-10.92-.001-15.085zM202.667 362.667c-88.229 0-160-71.771-160-160s71.771-160 160-160 160 71.771 160 160-71.771 160-160 160z"></path>
+  </symbol>
+  <symbol xmlns="http://www.w3.org/2000/svg" viewBox="0 0 241 179" id="harmburger">
+    <path d="M1 10C1 4.477 5.477 0 11 0h220c5.523 0 10 4.477 10 10s-4.477 10-10 10H11C5.477 20 1 15.523 1 10zm0 80c0-5.523 4.477-10 10-10h220c5.523 0 10 4.477 10 10s-4.477 10-10 10H11c-5.523 0-10-4.477-10-10zm9 69c-5.523 0-10 4.477-10 10s4.477 10 10 10h220c5.523 0 10-4.477 10-10s-4.477-10-10-10H10z"></path>
+  </symbol>
+</svg>
+<script src="/js/bundle.min.02545d1b796e3dc21ed6179e9cc71c1d0b6d8c842047dcfe72785cc4fc15f2a09cefa8fc9a8ed491e8e9fb30fcec32ea64c411ddf411e3e8c681f189dffc64fa.js"></script>
+<script src="/js/search.min.f10fc9ca24fa23471df2bbb0f4a86d47c046452e8ef78e1c3a7512942f5b085a6394a52d5716e844f1ef9319b7be115df417fcb61cfce55ea8576e901fa8fb38.js" async defer></script>
+
+</body>
+</html>

@@ -6,6 +6,15 @@
     <description>Recent content in Posts on rjfranssen</description>
     <generator>Hugo -- gohugo.io</generator><atom:link href="/post/index.xml" rel="self" type="application/rss+xml" />
     <item>
+      <title>US Zip Code Choropleth</title>
+      <link>/2021/01/03/create-map-based-on-us-zip-codes/</link>
+      <pubDate>Sun, 03 Jan 2021 00:00:00 +0000</pubDate>
+      
+      <guid>/2021/01/03/create-map-based-on-us-zip-codes/</guid>
+      <description>First, it&#39;s important to recognize that Zip Codes are not polygons - they are a way for the US Post Office to associate mailing addresses with a particular post office or metro area delivery station, like a lookup table. However, the US Census Bureau created the &amp;quot;Zip Code Tabulation Area&amp;quot; (ZCTA) to generalize an areal representation of Zip Code service areas. This post demonstrates how to create a choropleth map using ZCTAs, R, and the leaflet library.</description>
+    </item>
+    
+    <item>
       <title>Custom Color Palette in R</title>
       <link>/2020/12/30/custom-color-palette/</link>
       <pubDate>Wed, 30 Dec 2020 00:00:00 +0000</pubDate>
@@ -23,9 +32,9 @@ Note: In some cases, it&#39;s enough to use the scale_color_manual() and scale_f
       <pubDate>Wed, 30 Dec 2020 00:00:00 +0000</pubDate>
       
       <guid>/2020/12/30/twitter-sentiment-philly/</guid>
-      <description>Updated 2021-01-02.
+      <description>Updated 2021-01-03.
 This is a walkthrough of using the Twitter API with the rtweet R package. It borrows from a few difference sources, including:
- ropensci/rtweet documentation here Tidy Text Mining with R Twitter Data in R Using Rtweet: Analyze and Download Twitter Data Comparing Twitter archives Mining NASA metadata Analyzing usenet text  Load libraries 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16  library(rtweet) library(rmarkdown) library(NLP) library(tm) library(RColorBrewer) library(wordcloud) library(topicmodels) library(SnowballC) library(config) library(dplyr) library(tidytext) library(tidyr) library(ggplot2) library(lubridate) library(readr) library(skimr)   Configure Twitter API access There are a couple different ways to authenticate your session.</description>
+ ropensci/rtweet documentation here Tidy Text Mining with R Twitter Data in R Using Rtweet: Analyze and Download Twitter Data Comparing Twitter archives Mining NASA metadata Analyzing usenet text  Load libraries Configure Twitter API access There are a couple different ways to authenticate your session. The rtweet package makes this pretty easy by enabling browser-based authentication.</description>
     </item>
     
   </channel>

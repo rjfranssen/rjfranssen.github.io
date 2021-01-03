@@ -41,7 +41,7 @@ This is a walkthrough of using the Twitter API with the `rtweet` R package. It b
 
 ### Load libraries
 
-```{r libraries}
+```{r libraries, echo = FALSE}
 library(rtweet)
 library(rmarkdown)
 library(NLP)
@@ -312,17 +312,22 @@ cat(paste0('<iframe src= "', widgetfile, '" width="100%" height="400" style="bor
 ```
 
 
+### Tweet Map
+
 And *where* are people tweeting?
 
-Of the `r nrow(tweets_df)` tweets that we have, `r tweets_df %>% filter(!is.na(lat) & !is.na(lng)) %>% nrow()` are geotagged. We'll plot those using [leaflet](https://rstudio.github.io/leaflet/) and build on this later.
+Of the `r nrow(tweets_df)` tweets that we have, `r tweets_df %>% filter(!is.na(lat) & !is.na(lng)) %>% nrow()` are geotagged. We'll plot those using [leaflet](https://rstudio.github.io/leaflet/). I'm assigning the tweet `text` to each point's `label` and `popup` arguments.  
 
 ```{r mapsave}
 library(leaflet)
 
 tweet_map <- leaflet(tweets_df) %>%
   addTiles() %>%
-  addCircleMarkers(lng = ~lng
-                   , lat = ~lat)
+  addMarkers(lng = ~lng
+                   , lat = ~lat
+                   , label = ~as.character(text)
+                   , popup = ~as.character(text)
+                   )
 ```
 
 ```{r, echo = FALSE, results = "asis"}
@@ -345,7 +350,7 @@ Now switching over to [tidytext](https://www.tidytextmining.com/topicmodeling.ht
 
 Preview some of the sentiment lexicons. You'll be prompted to download the `textdata` package and the `afinn`, `bing`, and `nrc` lexicons if you don't have them already.
 
-**[afinn](http://www2.imm.dtu.dk/pubdb/pubs/6010-full.html)** - assigns a numeric value to each word on a scale of -5 to +5
+**[afinn](http://www2.imm.dtu.dk/pubdb/pubs/6010-full.html)** - assigns a numeric value to each word on a scale of -5 to +5  
 **[bing](https://www.cs.uic.edu/~liub/FBS/sentiment-analysis.html)** - binary assignment to each word, e.g. 'positive' or 'negative'  
 **[nrc](http://saifmohammad.com/WebPages/NRC-Emotion-Lexicon.htm)** - categorizes words into categories: positive, negative, anger, anticipation, disgust, fear, joy, sadness, surprise, and trust  
 

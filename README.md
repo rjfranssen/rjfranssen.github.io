@@ -121,3 +121,4 @@ TODO:
 - [x] - convert .rmd to .rmarkdown to enable hugo tocs  
 - [x] - set eval=FALSE for htmlwidgets and instead save them to dir and bring them in via iframe (rmd supports htmlwidgets, rmarkdown does not)gohugo.io/content-management/organization#index-pages-index-md)  
 [page bundles (hugo-sandbox)](https://hugo-sandbox.netlify.app/hugodocs/content-management/page-bundles/)  
+- [ ] - fix class="active" in sidebar - highlighting wrong selection  

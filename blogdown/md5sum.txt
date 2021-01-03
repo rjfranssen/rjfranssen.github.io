@@ -1,4 +1,5 @@
 "file" "checksum"
 "content/about/_index.rmd" "e5cff536bcb4d868cc7ee2db95b5b43c"
 "content/post/2020-12-30-custom-color-palette/index.Rmarkdown" "0d77c10a45d4ad07c9d7bab1faf424ca"
-"content/post/2020-12-30-twitter-sentiment-philly/index.Rmarkdown" "e4d9624f4ba5d3364e92c4ebfe5ac8f7"
+"content/post/2020-12-30-twitter-sentiment-philly/index.Rmarkdown" "e4e49d792d44895ea01b823543efea7a"
+"content/post/2021-01-03-create-map-based-on-us-zip-codes/index.Rmarkdown" "7453c644a012a9d441ef73917803bfe8"
