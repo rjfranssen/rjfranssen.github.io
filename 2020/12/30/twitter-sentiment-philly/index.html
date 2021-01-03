@@ -1,12 +1,12 @@
-<!doctype html><html lang=en><head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1"><meta name=generator content="Hugo 0.77.0"><link rel=apple-touch-icon sizes=180x180 href=https://rjfranssen.io/favicons/apple-touch-icon.png><link rel=icon type=image/png sizes=32x32 href=https://rjfranssen.io/favicons/favicon-32x32.png><link rel=icon type=image/png sizes=16x16 href=https://rjfranssen.io/favicons/favicon-16x16.png><link rel=manifest href=https://rjfranssen.io/favicons/site.webmanifest><link rel=mask-icon href=https://rjfranssen.io/favicons/safari-pinned-tab.svg color=#004750><link rel="shortcut icon" href=https://rjfranssen.io/favicons/favicon.ico><meta name=msapplication-TileColor content="#ffffff"><meta name=msapplication-config content="https://rjfranssen.io/favicons/browserconfig.xml"><meta name=theme-color content="#ffffff"><title>Twitter Sentiment Philly | rjfranssen</title><meta property="og:title" content="Twitter Sentiment Philly"><meta property="og:description" content="% addTiles() %% setView(0,0,1) -- Last updated 2020-12-31.
+<!doctype html><html lang=en><head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1"><meta name=generator content="Hugo 0.77.0"><link rel=apple-touch-icon sizes=180x180 href=https://rjfranssen.io/favicons/apple-touch-icon.png><link rel=icon type=image/png sizes=32x32 href=https://rjfranssen.io/favicons/favicon-32x32.png><link rel=icon type=image/png sizes=16x16 href=https://rjfranssen.io/favicons/favicon-16x16.png><link rel=manifest href=https://rjfranssen.io/favicons/site.webmanifest><link rel=mask-icon href=https://rjfranssen.io/favicons/safari-pinned-tab.svg color=#004750><link rel="shortcut icon" href=https://rjfranssen.io/favicons/favicon.ico><meta name=msapplication-TileColor content="#ffffff"><meta name=msapplication-config content="https://rjfranssen.io/favicons/browserconfig.xml"><meta name=theme-color content="#ffffff"><title>Twitter Sentiment Philly | rjfranssen</title><meta property="og:title" content="Twitter Sentiment Philly"><meta property="og:description" content="Updated 2021-01-02.
 This is a walkthrough of using the Twitter API with the rtweet R package. It borrows from a few difference sources, including:
- ropensci/rtweet documentation here Tidy Text Mining with R Twitter Data in R Using Rtweet: Analyze and Download Twitter Data Comparing Twitter archives Mining NASA metadata Analyzing usenet text  Load libraries 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18  #library(twitteR) library(rtweet) library(rmarkdown) library(NLP) library(tm) library(RColorBrewer) library(wordcloud) library(topicmodels) library(SnowballC) library(config) library(dplyr) library(tidytext) library(tidyr) library(ggplot2) library(lubridate) library(readr) library(skimr) library(widgetframe)   Configure Twitter API access There are a couple different ways to authenticate your session."><meta property="og:type" content="article"><meta property="og:url" content="https://rjfranssen.io/2020/12/30/twitter-sentiment-philly/"><meta property="article:published_time" content="2020-12-30T00:00:00+00:00"><meta property="article:modified_time" content="2020-12-31T14:09:50-05:00"><meta itemprop=name content="Twitter Sentiment Philly"><meta itemprop=description content="% addTiles() %% setView(0,0,1) -- Last updated 2020-12-31.
+ ropensci/rtweet documentation here Tidy Text Mining with R Twitter Data in R Using Rtweet: Analyze and Download Twitter Data Comparing Twitter archives Mining NASA metadata Analyzing usenet text  Load libraries 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16  library(rtweet) library(rmarkdown) library(NLP) library(tm) library(RColorBrewer) library(wordcloud) library(topicmodels) library(SnowballC) library(config) library(dplyr) library(tidytext) library(tidyr) library(ggplot2) library(lubridate) library(readr) library(skimr)   Configure Twitter API access There are a couple different ways to authenticate your session."><meta property="og:type" content="article"><meta property="og:url" content="https://rjfranssen.io/2020/12/30/twitter-sentiment-philly/"><meta property="article:published_time" content="2020-12-30T00:00:00+00:00"><meta property="article:modified_time" content="2021-01-02T20:03:47-05:00"><meta itemprop=name content="Twitter Sentiment Philly"><meta itemprop=description content="Updated 2021-01-02.
 This is a walkthrough of using the Twitter API with the rtweet R package. It borrows from a few difference sources, including:
- ropensci/rtweet documentation here Tidy Text Mining with R Twitter Data in R Using Rtweet: Analyze and Download Twitter Data Comparing Twitter archives Mining NASA metadata Analyzing usenet text  Load libraries 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18  #library(twitteR) library(rtweet) library(rmarkdown) library(NLP) library(tm) library(RColorBrewer) library(wordcloud) library(topicmodels) library(SnowballC) library(config) library(dplyr) library(tidytext) library(tidyr) library(ggplot2) library(lubridate) library(readr) library(skimr) library(widgetframe)   Configure Twitter API access There are a couple different ways to authenticate your session."><meta itemprop=datePublished content="2020-12-30T00:00:00+00:00"><meta itemprop=dateModified content="2020-12-31T14:09:50-05:00"><meta itemprop=wordCount content="5012"><meta itemprop=keywords content="r,nlp,twitter,"><meta name=twitter:card content="summary"><meta name=twitter:title content="Twitter Sentiment Philly"><meta name=twitter:description content="% addTiles() %% setView(0,0,1) -- Last updated 2020-12-31.
+ ropensci/rtweet documentation here Tidy Text Mining with R Twitter Data in R Using Rtweet: Analyze and Download Twitter Data Comparing Twitter archives Mining NASA metadata Analyzing usenet text  Load libraries 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16  library(rtweet) library(rmarkdown) library(NLP) library(tm) library(RColorBrewer) library(wordcloud) library(topicmodels) library(SnowballC) library(config) library(dplyr) library(tidytext) library(tidyr) library(ggplot2) library(lubridate) library(readr) library(skimr)   Configure Twitter API access There are a couple different ways to authenticate your session."><meta itemprop=datePublished content="2020-12-30T00:00:00+00:00"><meta itemprop=dateModified content="2021-01-02T20:03:47-05:00"><meta itemprop=wordCount content="3669"><meta itemprop=keywords content="r,nlp,twitter,"><meta name=twitter:card content="summary"><meta name=twitter:title content="Twitter Sentiment Philly"><meta name=twitter:description content="Updated 2021-01-02.
 This is a walkthrough of using the Twitter API with the rtweet R package. It borrows from a few difference sources, including:
- ropensci/rtweet documentation here Tidy Text Mining with R Twitter Data in R Using Rtweet: Analyze and Download Twitter Data Comparing Twitter archives Mining NASA metadata Analyzing usenet text  Load libraries 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18  #library(twitteR) library(rtweet) library(rmarkdown) library(NLP) library(tm) library(RColorBrewer) library(wordcloud) library(topicmodels) library(SnowballC) library(config) library(dplyr) library(tidytext) library(tidyr) library(ggplot2) library(lubridate) library(readr) library(skimr) library(widgetframe)   Configure Twitter API access There are a couple different ways to authenticate your session."><link rel=stylesheet href=https://rjfranssen.io/css/styles.69832e4c6e36908110aac09480bc33c2fa3c11ac6d26d5ad4dce56911af6bd9c8d22888b83f35eaa93b258e9ab5fee9510c6b997fd63be1b42c0f74b8b61faf9.css integrity="sha512-aYMuTG42kIEQqsCUgLwzwvo8EaxtJtWtTc5WkRr2vZyNIoiLg/NeqpOyWOmrX+6VEMa5l/1jvhtCwPdLi2H6+Q==" crossorigin=anonymous></head><body class=page-page><header class=nav_header><nav class="wrap nav menu"><a href=https://rjfranssen.io/ class=nav_brand><picture data-lit=https://rjfranssen.io/images/rjfranssen-blowfish-wide-dark.png data-dark=https://rjfranssen.io/images/rjfranssen-blowfish-wide-dark.png>
+ ropensci/rtweet documentation here Tidy Text Mining with R Twitter Data in R Using Rtweet: Analyze and Download Twitter Data Comparing Twitter archives Mining NASA metadata Analyzing usenet text  Load libraries 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16  library(rtweet) library(rmarkdown) library(NLP) library(tm) library(RColorBrewer) library(wordcloud) library(topicmodels) library(SnowballC) library(config) library(dplyr) library(tidytext) library(tidyr) library(ggplot2) library(lubridate) library(readr) library(skimr)   Configure Twitter API access There are a couple different ways to authenticate your session."><link rel=stylesheet href=https://rjfranssen.io/css/styles.69832e4c6e36908110aac09480bc33c2fa3c11ac6d26d5ad4dce56911af6bd9c8d22888b83f35eaa93b258e9ab5fee9510c6b997fd63be1b42c0f74b8b61faf9.css integrity="sha512-aYMuTG42kIEQqsCUgLwzwvo8EaxtJtWtTc5WkRr2vZyNIoiLg/NeqpOyWOmrX+6VEMa5l/1jvhtCwPdLi2H6+Q==" crossorigin=anonymous></head><body class=page-page><header class=nav_header><nav class="wrap nav menu"><a href=https://rjfranssen.io/ class=nav_brand><picture data-lit=https://rjfranssen.io/images/rjfranssen-blowfish-wide-dark.png data-dark=https://rjfranssen.io/images/rjfranssen-blowfish-wide-dark.png>
 <img srcset=https://rjfranssen.io/images/rjfranssen-blowfish-wide-dark.png alt="rjfranssen Logo"></picture>
-<label class="nav_toggle toggle" title="Site Menu" role=button><svg class="icon"><use xlink:href="#harmburger"/></svg></label></a><ul class=nav_body><li class=nav-item><div class=search><label for=find class=search_label><svg class="icon"><use xlink:href="#search"/></svg></label><input type=search class=search_field placeholder=Search... id=find autocomplete=off><div class=search_results></div></div></li><li class=nav-item><a class=nav-link href=https://rjfranssen.io/about/><span>About</span></a></li><li class=nav-item><a class=nav-link href=https://rjfranssen.io/post/><span>Posts</span></a></li><li class=nav-item><a class=nav-link href=https://rjfranssen.io/dash/><span>Dashes</span></a></li><li class=nav-item><a class=nav-link href=https://rjfranssen.io/links/list/><span>Links</span></a></li><li class=nav-item><a class=nav-link href=https://github.com/rjfranssen/rjfranssen.github.io target=_blank>GitHub</a></li><li class=nav-item><div class=color_mode><label for=mode></label><input type=checkbox class=color_choice id=mode title="Toggle Dark Mode"></div></li></ul></nav></header><div class="main wrap pt-4"><div class=grid-auto><aside class="aside menu"><div><label class="aside_toggle toggle" title="Docs Menu" role=button>Docs Menu<svg class="icon"><use xlink:href="#harmburger"/></svg></label></div><section class="section aside_inner"><h2 class=section_title><a href=https://rjfranssen.io/post/ class=group>Posts</a></h2><section id=docs-posts><h3 class=section_link><a id=docs-custom-color-palette href=https://rjfranssen.io/2020/12/30/custom-color-palette/>Custom Color Palette</a></h3><nav id=TableOfContents><ul><li><ul><li><a href=#acknowledgements>Acknowledgements</a></li><li><a href=#references>References</a></li><li><a href=#reproducibility>Reproducibility</a></li></ul></li></ul></nav><h3 class="section_link active"><a id=docs-twitter-sentiment-philly href=https://rjfranssen.io/2020/12/30/twitter-sentiment-philly/>Twitter Sentiment Philly</a></h3><nav id=TableOfContents><ul><li><ul><li><a href=#load-libraries>Load libraries</a></li><li><a href=#configure-twitter-api-access>Configure Twitter API access</a></li><li><a href=#query-the-tweets>Query the Tweets!</a></li><li><a href=#examing-data>Examing data</a></li><li><a href=#sample-stats--visualizations>Sample stats & visualizations</a></li><li><a href=#sentiment-analysis>Sentiment analysis</a></li><li><a href=#comparing-sentiments>Comparing sentiments</a></li><li><a href=#some-routine-checks>Some routine checks</a></li><li><a href=#wordclouds>Wordclouds</a></li><li><a href=#what-about-sentences>What about sentences?</a></li><li><a href=#post-content>Post content</a></li><li><a href=#r-image>R image</a></li><li><a href=#custom-image>Custom image</a></li><li><a href=#acknowledgements>Acknowledgements</a></li><li><a href=#references>References</a></li><li><a href=#reproducibility>Reproducibility</a></li></ul></li></ul></nav></section></section></aside><main class=content><h1>Twitter Sentiment Philly</h1><p>Last updated 2020-12-31.</p><p>This is a walkthrough of using the Twitter API with the <code>rtweet</code> R package. It borrows from a few difference sources, including:</p><ul><li><a href=https://github.com/ropensci/rtweet>ropensci/rtweet documentation</a></li><li><a href=https://gist.github.com/bryangoodrich/7b5ef683ce8db592669e>here</a></li><li><a href=https://www.tidytextmining.com/topicmodeling.html>Tidy Text Mining with R</a></li><li><a href=https://www.earthdatascience.org/courses/earth-analytics/get-data-using-apis/use-twitter-api-r/>Twitter Data in R Using Rtweet: Analyze and Download Twitter Data</a></li><li><a href=https://www.tidytextmining.com/twitter.html>Comparing Twitter archives</a></li><li><a href=https://www.tidytextmining.com/nasa.html>Mining NASA metadata</a></li><li><a href=https://www.tidytextmining.com/usenet.html>Analyzing usenet text</a></li></ul><h3 id=load-libraries>Load libraries</h3><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre class=chroma><code><span class=lnt> 1
+<label class="nav_toggle toggle" title="Site Menu" role=button><svg class="icon"><use xlink:href="#harmburger"/></svg></label></a><ul class=nav_body><li class=nav-item><div class=search><label for=find class=search_label><svg class="icon"><use xlink:href="#search"/></svg></label><input type=search class=search_field placeholder=Search... id=find autocomplete=off><div class=search_results></div></div></li><li class=nav-item><a class=nav-link href=https://rjfranssen.io/about/><span>About</span></a></li><li class=nav-item><a class=nav-link href=https://rjfranssen.io/post/><span>Posts</span></a></li><li class=nav-item><a class=nav-link href=https://rjfranssen.io/app/><span>Apps</span></a></li><li class=nav-item><a class=nav-link href=https://rjfranssen.io/links/list/><span>Links</span></a></li><li class=nav-item><a class=nav-link href=https://github.com/rjfranssen/rjfranssen.github.io target=_blank>GitHub</a></li><li class=nav-item><div class=color_mode><label for=mode></label><input type=checkbox class=color_choice id=mode title="Toggle Dark Mode"></div></li></ul></nav></header><div class="main wrap pt-4"><div class=grid-auto><aside class="aside menu"><div><label class="aside_toggle toggle" title="Docs Menu" role=button>Docs Menu<svg class="icon"><use xlink:href="#harmburger"/></svg></label></div><section class="section aside_inner"><h2 class=section_title><a href=https://rjfranssen.io/post/ class=group>Posts</a></h2><section id=docs-posts><h3 class=section_link><a id=docs-custom-color-palette-in-r href=https://rjfranssen.io/2020/12/30/custom-color-palette/>Custom Color Palette in R</a></h3><nav id=TableOfContents><ul><li><ul><li><a href=#define-colors>Define colors</a></li><li><a href=#create-palettes>Create palettes</a></li><li><a href=#scale-functions-for-ggplot2>Scale functions for ggplot2</a></li><li><a href=#example-plots>Example plots</a></li><li><a href=#acknowledgements>Acknowledgements</a></li></ul></li></ul></nav><h3 class="section_link active"><a id=docs-twitter-sentiment-philly href=https://rjfranssen.io/2020/12/30/twitter-sentiment-philly/>Twitter Sentiment Philly</a></h3><nav id=TableOfContents><ul><li><ul><li><a href=#load-libraries>Load libraries</a></li><li><a href=#configure-twitter-api-access>Configure Twitter API access</a></li><li><a href=#query-the-tweets>Query the Tweets!</a></li><li><a href=#examining-data>Examining data</a></li><li><a href=#sample-stats--visualizations>Sample stats & visualizations</a></li><li><a href=#sentiment-analysis>Sentiment analysis</a></li><li><a href=#comparing-sentiments>Comparing sentiments</a></li><li><a href=#some-routine-checks>Some routine checks</a></li><li><a href=#wordclouds>Wordclouds</a></li><li><a href=#what-about-sentences>What about sentences?</a></li><li><a href=#acknowledgements>Acknowledgements</a></li></ul></li></ul></nav></section></section></aside><main class=content><h1>Twitter Sentiment Philly</h1><p>Updated 2021-01-02.</p><p>This is a walkthrough of using the Twitter API with the <code>rtweet</code> R package. It borrows from a few difference sources, including:</p><ul><li><a href=https://github.com/ropensci/rtweet>ropensci/rtweet documentation</a></li><li><a href=https://gist.github.com/bryangoodrich/7b5ef683ce8db592669e>here</a></li><li><a href=https://www.tidytextmining.com/topicmodeling.html>Tidy Text Mining with R</a></li><li><a href=https://www.earthdatascience.org/courses/earth-analytics/get-data-using-apis/use-twitter-api-r/>Twitter Data in R Using Rtweet: Analyze and Download Twitter Data</a></li><li><a href=https://www.tidytextmining.com/twitter.html>Comparing Twitter archives</a></li><li><a href=https://www.tidytextmining.com/nasa.html>Mining NASA metadata</a></li><li><a href=https://www.tidytextmining.com/usenet.html>Analyzing usenet text</a></li></ul><h3 id=load-libraries>Load libraries</h3><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre class=chroma><code><span class=lnt> 1
 </span><span class=lnt> 2
 </span><span class=lnt> 3
 </span><span class=lnt> 4
@@ -22,10 +22,7 @@ This is a walkthrough of using the Twitter API with the rtweet R package. It bor
 </span><span class=lnt>14
 </span><span class=lnt>15
 </span><span class=lnt>16
-</span><span class=lnt>17
-</span><span class=lnt>18
-</span></code></pre></td><td class=lntd><pre class=chroma><code class=language-r data-lang=r><span class=c1>#library(twitteR)</span>
-<span class=nf>library</span><span class=p>(</span><span class=n>rtweet</span><span class=p>)</span>
+</span></code></pre></td><td class=lntd><pre class=chroma><code class=language-r data-lang=r><span class=nf>library</span><span class=p>(</span><span class=n>rtweet</span><span class=p>)</span>
 <span class=nf>library</span><span class=p>(</span><span class=n>rmarkdown</span><span class=p>)</span>
 <span class=nf>library</span><span class=p>(</span><span class=n>NLP</span><span class=p>)</span>
 <span class=nf>library</span><span class=p>(</span><span class=n>tm</span><span class=p>)</span>
@@ -41,7 +38,6 @@ This is a walkthrough of using the Twitter API with the rtweet R package. It bor
 <span class=nf>library</span><span class=p>(</span><span class=n>lubridate</span><span class=p>)</span>
 <span class=nf>library</span><span class=p>(</span><span class=n>readr</span><span class=p>)</span>
 <span class=nf>library</span><span class=p>(</span><span class=n>skimr</span><span class=p>)</span>
-<span class=nf>library</span><span class=p>(</span><span class=n>widgetframe</span><span class=p>)</span>
 </code></pre></td></tr></table></div></div><h3 id=configure-twitter-api-access>Configure Twitter API access</h3><p>There are a couple different ways to authenticate your session. The <code>rtweet</code> package makes this pretty easy by enabling browser-based authentication. I prefer to authenticate in code. Check the <code>rtweet</code> vignette for connection options.</p><p>What I did: Head over to the <a href=https://developer.twitter.com/en/apply-for-access>Twitter Developer</a> site and requested a developer account to gain access to Twitter APIs and tools.</p><p>Then I used a <code>config.yml</code> to store my keys. The <code>config</code> package a good way to import keys and passwords without making them publc (just make sure they're covered by your <code>.gitignore</code> file!). Check out the <a href=https://cran.r-project.org/web/packages/config/vignettes/introduction.html>documentation</a>. <em>Note: If using Hugo and don't want it swept up into your <code>public</code> directory, you can also add <code>config.yml</code> to the <code>ignoreFiles</code> parameter in the <code>config.toml</code></em>.</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre class=chroma><code><span class=lnt>1
 </span><span class=lnt>2
 </span><span class=lnt>3
@@ -83,8 +79,6 @@ This is a walkthrough of using the Twitter API with the rtweet R package. It bor
 </span><span class=lnt>21
 </span><span class=lnt>22
 </span><span class=lnt>23
-</span><span class=lnt>24
-</span><span class=lnt>25
 </span></code></pre></td><td class=lntd><pre class=chroma><code class=language-r data-lang=r><span class=c1># Search tweets using rtweet search function</span>
 <span class=n>tweets_df</span> <span class=o>&lt;-</span> <span class=n>rtweet</span><span class=o>::</span><span class=nf>search_tweets</span><span class=p>(</span>
   <span class=n>q</span> <span class=o>=</span> <span class=s>&#39;philadelphia philly&#39;</span>
@@ -108,8 +102,6 @@ This is a walkthrough of using the Twitter API with the rtweet R package. It bor
 <span class=n>tweets_df</span><span class=o>$</span><span class=n>tweet_month</span> <span class=o>&lt;-</span> <span class=n>tweets_df</span><span class=o>$</span><span class=n>created_at</span> <span class=o>%&gt;%</span> <span class=nf>as.POSIXlt</span><span class=p>()</span> <span class=o>%&gt;%</span> <span class=nf>as.Date</span><span class=p>()</span> <span class=o>%&gt;%</span> <span class=nf>month</span><span class=p>()</span>
 <span class=n>tweets_df</span><span class=o>$</span><span class=n>tweet_day</span> <span class=o>&lt;-</span> <span class=n>tweets_df</span><span class=o>$</span><span class=n>created_at</span> <span class=o>%&gt;%</span> <span class=nf>as.POSIXlt</span><span class=p>()</span> <span class=o>%&gt;%</span> <span class=nf>as.Date</span><span class=p>()</span> <span class=o>%&gt;%</span> <span class=nf>day</span><span class=p>()</span>
 
-
-<span class=n>tweets_df</span> <span class=o>%&gt;%</span> <span class=nf>head</span><span class=p>()</span>
 </code></pre></td></tr></table></div></div><p>Optionally, save this df to a local directory so you come back to this later without having to hit the Twitter API; <code>Rds</code> and <code>Rdata</code> files load super fast. You can also add these file types to your <code>.gitignore</code> and <code>config.toml</code> if you don't want to push them to your online git repo.</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre class=chroma><code><span class=lnt>1
 </span></code></pre></td><td class=lntd><pre class=chroma><code class=language-r data-lang=r><span class=nf>saveRDS</span><span class=p>(</span><span class=n>tweets_df</span><span class=p>,</span> <span class=n>file</span> <span class=o>=</span> <span class=s>&#34;tweets_df.Rds&#34;</span><span class=p>,</span> <span class=n>compress</span> <span class=o>=</span> <span class=s>&#39;xz&#39;</span><span class=p>)</span>
 </code></pre></td></tr></table></div></div><p>Reading back in the <code>.Rds</code> file..</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre class=chroma><code><span class=lnt> 1
@@ -155,17 +147,19 @@ This is a walkthrough of using the Twitter API with the rtweet R package. It bor
 </span><span class=lnt>41
 </span><span class=lnt>42
 </span><span class=lnt>43
+</span><span class=lnt>44
 </span></code></pre></td><td class=lntd><pre class=chroma><code class=language-r data-lang=r><span class=n>tweets_df</span> <span class=o>&lt;-</span> <span class=nf>readRDS</span><span class=p>(</span><span class=s>&#34;tweets_df.Rds&#34;</span><span class=p>)</span>
 
-<span class=n>tweets_df</span> <span class=o>%&gt;%</span> <span class=nf>head</span><span class=p>(</span><span class=m>5</span><span class=p>)</span>
-<span class=c1>## # A tibble: 5 x 97</span>
+<span class=n>tweets_df</span> <span class=o>%&gt;%</span> <span class=nf>head</span><span class=p>()</span>
+<span class=c1>## # A tibble: 6 x 97</span>
 <span class=c1>##   user_id status_id created_at          screen_name text  source</span>
 <span class=c1>##   &lt;chr&gt;   &lt;chr&gt;     &lt;dttm&gt;              &lt;chr&gt;       &lt;chr&gt; &lt;chr&gt; </span>
-<span class=c1>## 1 142219~ 13439700~ 2020-12-29 17:20:08 PhillyInqu~ Unio~ Socia~</span>
-<span class=c1>## 2 142219~ 13421567~ 2020-12-24 17:14:43 PhillyInqu~ It&#39;s~ Socia~</span>
-<span class=c1>## 3 142219~ 13432591~ 2020-12-27 18:15:04 PhillyInqu~ Toda~ Socia~</span>
-<span class=c1>## 4 142219~ 13418156~ 2020-12-23 18:39:19 PhillyInqu~ COVI~ Socia~</span>
-<span class=c1>## 5 142219~ 13421897~ 2020-12-24 19:25:49 PhillyInqu~ New ~ Socia~</span>
+<span class=c1>## 1 142219~ 13439700~ 2020-12-29 17:20:08 PhillyInqu~ &#34;Uni~ Socia~</span>
+<span class=c1>## 2 142219~ 13421567~ 2020-12-24 17:14:43 PhillyInqu~ &#34;It&#39;~ Socia~</span>
+<span class=c1>## 3 142219~ 13432591~ 2020-12-27 18:15:04 PhillyInqu~ &#34;Tod~ Socia~</span>
+<span class=c1>## 4 142219~ 13418156~ 2020-12-23 18:39:19 PhillyInqu~ &#34;COV~ Socia~</span>
+<span class=c1>## 5 142219~ 13421897~ 2020-12-24 19:25:49 PhillyInqu~ &#34;New~ Socia~</span>
+<span class=c1>## 6 142219~ 13418101~ 2020-12-23 18:17:18 PhillyInqu~ &#34;&lt;U+274C&gt; S~ Socia~</span>
 <span class=c1>## # ... with 91 more variables: display_text_width &lt;dbl&gt;,</span>
 <span class=c1>## #   reply_to_status_id &lt;chr&gt;, reply_to_user_id &lt;chr&gt;,</span>
 <span class=c1>## #   reply_to_screen_name &lt;chr&gt;, is_quote &lt;lgl&gt;, is_retweet &lt;lgl&gt;,</span>
@@ -198,7 +192,11 @@ This is a walkthrough of using the Twitter API with the rtweet R package. It bor
 <span class=c1>## #   profile_banner_url &lt;chr&gt;, profile_background_url &lt;chr&gt;,</span>
 <span class=c1>## #   profile_image_url &lt;chr&gt;, lat &lt;dbl&gt;, lng &lt;dbl&gt;, tweet_datetime &lt;dttm&gt;,</span>
 <span class=c1>## #   tweet_date &lt;date&gt;, tweet_year &lt;dbl&gt;, tweet_month &lt;dbl&gt;, tweet_day &lt;int&gt;</span>
-</code></pre></td></tr></table></div></div><h3 id=examing-data>Examing data</h3><p>Now going to identify a few basic things, but first, this df has 92 columns. What are some of the columns that we're most likely to use? The <code>skimr</code> package is <strong>really</strong> good at doing this and is a good substitute for <code>summary()</code> in many cases.</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre class=chroma><code><span class=lnt> 1
+</code></pre></td></tr></table></div></div><h3 id=examining-data>Examining data</h3><p>Now going to identify a few basic things, but first, this df has 92 columns. What are some of the columns that we're most likely to use? The <code>skimr</code> package is <strong>really</strong> good at doing this and I often use it in addition to <code>summary()</code>.</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span></code></pre></td><td class=lntd><pre class=chroma><code class=language-r data-lang=r><span class=c1>#summary(tweet_df)</span>
+<span class=nf>skim</span><span class=p>(</span><span class=n>tweets_df</span><span class=p>)</span>
+</code></pre></td></tr></table></div></div><p>And what does the table look like?</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre class=chroma><code><span class=lnt> 1
 </span><span class=lnt> 2
 </span><span class=lnt> 3
 </span><span class=lnt> 4
@@ -229,10 +227,6 @@ This is a walkthrough of using the Twitter API with the rtweet R package. It bor
 </span><span class=lnt>29
 </span><span class=lnt>30
 </span><span class=lnt>31
-</span><span class=lnt>32
-</span><span class=lnt>33
-</span><span class=lnt>34
-</span><span class=lnt>35
 </span></code></pre></td><td class=lntd><pre class=chroma><code class=language-r data-lang=r><span class=n>tweets_df</span> <span class=o>%&gt;%</span> <span class=nf>select</span><span class=p>(</span>
   <span class=c1># About the tweet</span>
   <span class=n>text</span>
@@ -255,44 +249,32 @@ This is a walkthrough of using the Twitter API with the rtweet R package. It bor
   <span class=p>,</span> <span class=n>created_at</span>
   <span class=p>,</span> <span class=n>account_created_at</span>
   <span class=p>)</span> <span class=o>%&gt;%</span>
-  <span class=nf>head</span><span class=p>()</span>
-<span class=c1>## # A tibble: 6 x 18</span>
+  <span class=nf>head</span><span class=p>(</span><span class=m>2</span><span class=p>)</span>
+<span class=c1>## # A tibble: 2 x 18</span>
 <span class=c1>##   text  lang  hashtags symbols favorite_count retweet_count   lat   lng name </span>
 <span class=c1>##   &lt;chr&gt; &lt;chr&gt; &lt;list&gt;   &lt;list&gt;           &lt;int&gt;         &lt;int&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;chr&gt;</span>
-<span class=c1>## 1 &#34;Uni~ de    &lt;chr [1~ &lt;chr [~              0             0    NA    NA The ~</span>
-<span class=c1>## 2 &#34;It&#39;~ en    &lt;chr [1~ &lt;chr [~              5             1    NA    NA The ~</span>
-<span class=c1>## 3 &#34;Tod~ en    &lt;chr [2~ &lt;chr [~              4             2    NA    NA The ~</span>
-<span class=c1>## 4 &#34;COV~ en    &lt;chr [1~ &lt;chr [~             21             2    NA    NA The ~</span>
-<span class=c1>## 5 &#34;New~ en    &lt;chr [1~ &lt;chr [~              4             8    NA    NA The ~</span>
-<span class=c1>## 6 &#34;&lt;U+274C&gt; S~ en    &lt;chr [1~ &lt;chr [~              5             2    NA    NA The ~</span>
+<span class=c1>## 1 Unio~ de    &lt;chr [1~ &lt;chr [~              0             0    NA    NA The ~</span>
+<span class=c1>## 2 It&#39;s~ en    &lt;chr [1~ &lt;chr [~              5             1    NA    NA The ~</span>
 <span class=c1>## # ... with 9 more variables: screen_name &lt;chr&gt;, followers_count &lt;int&gt;,</span>
 <span class=c1>## #   friends_count &lt;int&gt;, location &lt;chr&gt;, description &lt;chr&gt;, listed_count &lt;int&gt;,</span>
 <span class=c1>## #   statuses_count &lt;int&gt;, created_at &lt;dttm&gt;, account_created_at &lt;dttm&gt;</span>
 </code></pre></td></tr></table></div></div><h3 id=sample-stats--visualizations>Sample stats & visualizations</h3><p>What is our total tweet <em>count</em>?</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre class=chroma><code><span class=lnt>1
 </span><span class=lnt>2
-</span></code></pre></td><td class=lntd><pre class=chroma><code class=language-r data-lang=r><span class=nf>nrow</span><span class=p>(</span><span class=n>tweets_df</span><span class=p>)</span>
+</span></code></pre></td><td class=lntd><pre class=chroma><code class=language-r data-lang=r><span class=nf>nrow</span><span class=p>(</span><span class=n>tweets_df</span><span class=p>)</span> <span class=o>%&gt;%</span> <span class=nf>print</span><span class=p>()</span>
 <span class=c1>## [1] 1897</span>
-</code></pre></td></tr></table></div></div><p>What is the most <em>favorited</em> tweet?</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre class=chroma><code><span class=lnt> 1
-</span><span class=lnt> 2
-</span><span class=lnt> 3
-</span><span class=lnt> 4
-</span><span class=lnt> 5
-</span><span class=lnt> 6
-</span><span class=lnt> 7
-</span><span class=lnt> 8
-</span><span class=lnt> 9
-</span><span class=lnt>10
+</code></pre></td></tr></table></div></div><p>What is the most <em>favorited</em> tweet?</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
 </span></code></pre></td><td class=lntd><pre class=chroma><code class=language-r data-lang=r><span class=n>tweets_df</span> <span class=o>%&gt;%</span>
   <span class=nf>slice_max</span><span class=p>(</span><span class=n>favorite_count</span><span class=p>,</span> <span class=n>n</span> <span class=o>=</span> <span class=m>1</span><span class=p>)</span> <span class=o>%&gt;%</span> <span class=c1># can also use arrange()</span>
   <span class=nf>select</span><span class=p>(</span><span class=n>screen_name</span>
          <span class=p>,</span> <span class=n>text</span>
          <span class=p>,</span> <span class=n>favorite_count</span>
-         <span class=p>,</span> <span class=n>created_at</span><span class=p>)</span>
-<span class=c1>## # A tibble: 1 x 4</span>
-<span class=c1>##   screen_name text                            favorite_count created_at         </span>
-<span class=c1>##   &lt;chr&gt;       &lt;chr&gt;                                    &lt;int&gt; &lt;dttm&gt;             </span>
-<span class=c1>## 1 GetUpESPN   &#34;\&#34;Carson Wentz is soft! ... H~           1993 2020-12-21 16:16:24</span>
-</code></pre></td></tr></table></div></div><p>What users are <em>tweeting the most</em>?</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre class=chroma><code><span class=lnt> 1
+         <span class=p>,</span> <span class=n>created_at</span><span class=p>)</span> <span class=o>%&gt;%</span> <span class=n>knitr</span><span class=o>::</span><span class=nf>kable</span><span class=p>()</span>
+</code></pre></td></tr></table></div></div><table><thead><tr><th style=text-align:left>screen_name</th><th style=text-align:left>text</th><th style=text-align:right>favorite_count</th><th style=text-align:left>created_at</th></tr></thead><tbody><tr><td style=text-align:left>GetUpESPN</td><td style=text-align:left>"Carson Wentz is soft! ... He don't have that Philly toughness ... But Jalen Hurts does! Jalen Hurts IS Philadelphia. Jalen Hurts is freakin' Rocky!"</td><td></td><td></td></tr></tbody></table><p>—@Realrclark25 https://t.co/nYvJ7IsB57 | 1993|2020-12-21 16:16:24 |</p><p>What users are <em>tweeting the most</em>?</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre class=chroma><code><span class=lnt> 1
 </span><span class=lnt> 2
 </span><span class=lnt> 3
 </span><span class=lnt> 4
@@ -338,29 +320,19 @@ This is a walkthrough of using the Twitter API with the rtweet R package. It bor
 </span><span class=lnt>14
 </span><span class=lnt>15
 </span><span class=lnt>16
-</span><span class=lnt>17
-</span><span class=lnt>18
-</span><span class=lnt>19
-</span><span class=lnt>20
-</span><span class=lnt>21
 </span></code></pre></td><td class=lntd><pre class=chroma><code class=language-r data-lang=r><span class=n>tweets_df</span> <span class=o>%&gt;%</span>
   <span class=nf>group_by</span><span class=p>(</span><span class=n>lang</span><span class=p>)</span> <span class=o>%&gt;%</span>
   <span class=nf>summarize</span><span class=p>(</span><span class=n>num_tweets</span> <span class=o>=</span> <span class=nf>n</span><span class=p>())</span> <span class=o>%&gt;%</span>
   <span class=nf>arrange</span><span class=p>(</span><span class=o>-</span><span class=n>num_tweets</span><span class=p>)</span> <span class=o>%&gt;%</span> <span class=c1># can also use slice_max()</span>
-  <span class=nf>head</span><span class=p>(</span><span class=m>10</span><span class=p>)</span>
-<span class=c1>## # A tibble: 10 x 2</span>
-<span class=c1>##    lang  num_tweets</span>
-<span class=c1>##    &lt;chr&gt;      &lt;int&gt;</span>
-<span class=c1>##  1 en          1829</span>
-<span class=c1>##  2 und           34</span>
-<span class=c1>##  3 cy             8</span>
-<span class=c1>##  4 es             6</span>
-<span class=c1>##  5 de             3</span>
-<span class=c1>##  6 et             3</span>
-<span class=c1>##  7 ja             3</span>
-<span class=c1>##  8 fr             2</span>
-<span class=c1>##  9 pt             2</span>
-<span class=c1>## 10 ro             2</span>
+  <span class=nf>head</span><span class=p>(</span><span class=m>5</span><span class=p>)</span>
+<span class=c1>## # A tibble: 5 x 2</span>
+<span class=c1>##   lang  num_tweets</span>
+<span class=c1>##   &lt;chr&gt;      &lt;int&gt;</span>
+<span class=c1>## 1 en          1829</span>
+<span class=c1>## 2 und           34</span>
+<span class=c1>## 3 cy             8</span>
+<span class=c1>## 4 es             6</span>
+<span class=c1>## 5 de             3</span>
 
 <span class=c1># ggplot(tweets_df) +</span>
 <span class=c1>#   geom_bar(aes(x = lang, fill = lang))</span>
@@ -420,8 +392,6 @@ This is a walkthrough of using the Twitter API with the rtweet R package. It bor
 </span><span class=lnt>16
 </span><span class=lnt>17
 </span><span class=lnt>18
-</span><span class=lnt>19
-</span><span class=lnt>20
 </span></code></pre></td><td class=lntd><pre class=chroma><code class=language-r data-lang=r><span class=n>tweets_per_day</span> <span class=o>&lt;-</span> <span class=n>tweets_df</span> <span class=o>%&gt;%</span>
   <span class=nf>group_by</span><span class=p>(</span><span class=n>tweet_date</span><span class=p>)</span> <span class=o>%&gt;%</span>
   <span class=nf>summarize</span><span class=p>(</span><span class=n>num_tweets</span> <span class=o>=</span> <span class=nf>n</span><span class=p>())</span> <span class=o>%&gt;%</span>
@@ -435,47 +405,55 @@ This is a walkthrough of using the Twitter API with the rtweet R package. It bor
   <span class=nf>scale_fill_viridis_d</span><span class=p>(</span><span class=n>option</span> <span class=o>=</span> <span class=s>&#34;viridis&#34;</span><span class=p>)</span> <span class=o>+</span>
   <span class=nf>theme_gray</span><span class=p>()</span> <span class=o>+</span>
   <span class=nf>theme</span><span class=p>(</span><span class=n>legend.position</span> <span class=o>=</span> <span class=s>&#34;none&#34;</span><span class=p>)</span> <span class=o>+</span>
-  <span class=nf>labs</span><span class=p>(</span><span class=n>title</span> <span class=o>=</span> <span class=s>&#34;Daily Tweets&#34;</span><span class=p>)</span> <span class=o>+</span>
+  <span class=nf>labs</span><span class=p>(</span><span class=n>title</span> <span class=o>=</span> <span class=s>&#34;Daily Tweets for &#39;Philadelphia&#39; (ggplot2 + plotly)&#34;</span><span class=p>)</span> <span class=o>+</span>
   <span class=nf>xlab</span><span class=p>(</span><span class=s>&#34;&#34;</span><span class=p>)</span> <span class=o>+</span>
   <span class=nf>ylab</span><span class=p>(</span><span class=s>&#34;Number of Tweets&#34;</span><span class=p>)</span> 
 
-<span class=c1>#plotly::ggplotly(plt1)</span>
-
-<span class=n>plt1</span>
-</code></pre></td></tr></table></div></div><p><img src=/post/2020-12-30-twitter-sentiment-philly/index_files/figure-html/pltone-1.png width=672></p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre class=chroma><code><span class=lnt>1
+<span class=n>pltly1</span> <span class=o>&lt;-</span> <span class=n>plotly</span><span class=o>::</span><span class=nf>ggplotly</span><span class=p>(</span><span class=n>plt1</span><span class=p>)</span>
+</code></pre></td></tr></table></div></div><p><em>Note: for html widgets, because I'm writing this in .Rmarkdown, I use the below snippet to save the html widget to file and then bring it back in via an iframe. The main reason is that <code>.Rmarkdown</code> files get rendered as <code>.markdown</code> and then <code>html</code>, and my widgets were getting lost. Widgets work great with <code>.Rmd</code> files, but I lose some of the other hugo functionalities like the TOCs and code highlighting. This might change soon if it hasn't already. I've hidden these snippets for the other html widgets below.</em></p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre class=chroma><code><span class=lnt>1
 </span><span class=lnt>2
 </span><span class=lnt>3
 </span><span class=lnt>4
 </span><span class=lnt>5
 </span><span class=lnt>6
 </span><span class=lnt>7
+</span><span class=lnt>8
+</span></code></pre></td><td class=lntd><pre class=chroma><code class=language-r data-lang=r><span class=n>widget</span> <span class=o>&lt;-</span> <span class=n>pltly1</span>
+<span class=n>widgetfile</span> <span class=o>&lt;-</span> <span class=s>&#39;pltly1.html&#39;</span>
+
+<span class=n>htmlwidgets</span><span class=o>::</span><span class=nf>saveWidget</span><span class=p>(</span><span class=n>widget</span> <span class=o>=</span> <span class=n>widget</span>
+                        <span class=p>,</span> <span class=n>selfcontained</span> <span class=o>=</span> <span class=kc>TRUE</span>
+                        <span class=p>,</span> <span class=n>file</span> <span class=o>=</span> <span class=n>widgetfile</span><span class=p>)</span>
+
+<span class=nf>cat</span><span class=p>(</span><span class=nf>paste0</span><span class=p>(</span><span class=s>&#39;&lt;iframe src= &#34;&#39;</span><span class=p>,</span> <span class=n>widgetfile</span><span class=p>,</span> <span class=s>&#39;&#34; width=&#34;100%&#34; height=&#34;400&#34; style=&#34;border: none;&#34;&gt;&lt;/iframe&gt;&#39;</span><span class=p>))</span>
+</code></pre></td></tr></table></div></div><iframe src=pltly1.html width=100% height=400 style=border:none></iframe><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span><span class=lnt>7
+</span><span class=lnt>8
 </span></code></pre></td><td class=lntd><pre class=chroma><code class=language-r data-lang=r><span class=c1># Using dygraph</span>
 <span class=c1># convert series to an xts object </span>
 <span class=n>tweets_ts</span> <span class=o>&lt;-</span> <span class=n>xts</span><span class=o>::</span><span class=nf>xts</span><span class=p>(</span><span class=n>tweets_per_day</span><span class=o>$</span><span class=n>num_tweets</span><span class=p>,</span> <span class=n>order.by</span> <span class=o>=</span> <span class=n>tweets_per_day</span><span class=o>$</span><span class=n>tweet_date</span><span class=p>)</span>
 <span class=c1># Create the dygraph</span>
 <span class=nf>library</span><span class=p>(</span><span class=n>dygraphs</span><span class=p>)</span>
-<span class=nf>dygraph</span><span class=p>(</span><span class=n>tweets_ts</span><span class=p>,</span> <span class=n>main</span> <span class=o>=</span> <span class=s>&#34;Daily Tweets for &#39;Philadelphia&#39;&#34;</span><span class=p>)</span> <span class=o>%&gt;%</span>
+
+<span class=n>dygraph1</span> <span class=o>&lt;-</span> <span class=nf>dygraph</span><span class=p>(</span><span class=n>tweets_ts</span><span class=p>,</span> <span class=n>main</span> <span class=o>=</span> <span class=s>&#34;Daily Tweets for &#39;Philadelphia&#39; (dygraph)&#34;</span><span class=p>)</span> <span class=o>%&gt;%</span>
   <span class=nf>dySeries</span><span class=p>(</span><span class=s>&#34;V1&#34;</span><span class=p>,</span> <span class=n>label</span> <span class=o>=</span> <span class=s>&#34;Tweet Count&#34;</span><span class=p>)</span>
-</code></pre></td></tr></table></div></div><p>And <em>where</em> are people tweeting?</p><p>Of the 1897 tweets that we have, 133 are geotagged. We'll plot those using <a href=https://rstudio.github.io/leaflet/>leaflet</a> and build on this later.</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre class=chroma><code><span class=lnt> 1
-</span><span class=lnt> 2
-</span><span class=lnt> 3
-</span><span class=lnt> 4
-</span><span class=lnt> 5
-</span><span class=lnt> 6
-</span><span class=lnt> 7
-</span><span class=lnt> 8
-</span><span class=lnt> 9
-</span><span class=lnt>10
+</code></pre></td></tr></table></div></div><iframe src=dygraph1.html width=100% height=400 style=border:none></iframe><p>And <em>where</em> are people tweeting?</p><p>Of the 1897 tweets that we have, 133 are geotagged. We'll plot those using <a href=https://rstudio.github.io/leaflet/>leaflet</a> and build on this later.</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
 </span></code></pre></td><td class=lntd><pre class=chroma><code class=language-r data-lang=r><span class=nf>library</span><span class=p>(</span><span class=n>leaflet</span><span class=p>)</span>
 
 <span class=n>tweet_map</span> <span class=o>&lt;-</span> <span class=nf>leaflet</span><span class=p>(</span><span class=n>tweets_df</span><span class=p>)</span> <span class=o>%&gt;%</span>
   <span class=nf>addTiles</span><span class=p>()</span> <span class=o>%&gt;%</span>
   <span class=nf>addCircleMarkers</span><span class=p>(</span><span class=n>lng</span> <span class=o>=</span> <span class=o>~</span><span class=n>lng</span>
                    <span class=p>,</span> <span class=n>lat</span> <span class=o>=</span> <span class=o>~</span><span class=n>lat</span><span class=p>)</span>
-
-<span class=n>htmlwidgets</span><span class=o>::</span><span class=nf>saveWidget</span><span class=p>(</span><span class=n>widget</span> <span class=o>=</span> <span class=n>tweet_map</span>
-                        <span class=p>,</span> <span class=s>&#39;tweet_map.html&#39;</span>
-                        <span class=p>,</span> <span class=n>selfcontained</span> <span class=o>=</span> <span class=kc>TRUE</span><span class=p>)</span>
 </code></pre></td></tr></table></div></div><iframe src=tweet_map.html width=100% height=400 style=border:none></iframe><h3 id=sentiment-analysis>Sentiment analysis</h3><p>Now switching over to <a href=https://www.tidytextmining.com/topicmodeling.html>tidytext</a></p><blockquote><p>The function <code>get_sentiments()</code> allows us to get specific sentiment lexicons with the appropriate measures for each one.</p></blockquote><p>Preview some of the sentiment lexicons. You'll be prompted to download the <code>textdata</code> package and the <code>afinn</code>, <code>bing</code>, and <code>nrc</code> lexicons if you don't have them already.</p><p><strong><a href=http://www2.imm.dtu.dk/pubdb/pubs/6010-full.html>afinn</a></strong> - assigns a numeric value to each word on a scale of -5 to +5
 <strong><a href=https://www.cs.uic.edu/~liub/FBS/sentiment-analysis.html>bing</a></strong> - binary assignment to each word, e.g. 'positive' or 'negative'<br><strong><a href=http://saifmohammad.com/WebPages/NRC-Emotion-Lexicon.htm>nrc</a></strong> - categorizes words into categories: positive, negative, anger, anticipation, disgust, fear, joy, sadness, surprise, and trust</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre class=chroma><code><span class=lnt> 1
 </span><span class=lnt> 2
@@ -557,15 +535,6 @@ This is a walkthrough of using the Twitter API with the rtweet R package. It bor
 </span><span class=lnt>12
 </span><span class=lnt>13
 </span><span class=lnt>14
-</span><span class=lnt>15
-</span><span class=lnt>16
-</span><span class=lnt>17
-</span><span class=lnt>18
-</span><span class=lnt>19
-</span><span class=lnt>20
-</span><span class=lnt>21
-</span><span class=lnt>22
-</span><span class=lnt>23
 </span></code></pre></td><td class=lntd><pre class=chroma><code class=language-r data-lang=r><span class=nf>library</span><span class=p>(</span><span class=n>stringr</span><span class=p>)</span>
 <span class=nf>library</span><span class=p>(</span><span class=n>janeaustenr</span><span class=p>)</span>
 
@@ -579,17 +548,8 @@ This is a walkthrough of using the Twitter API with the rtweet R package. It bor
   <span class=nf>ungroup</span><span class=p>()</span> <span class=o>%&gt;%</span>
   <span class=nf>unnest_tokens</span><span class=p>(</span><span class=n>word</span><span class=p>,</span> <span class=n>text</span><span class=p>)</span>
 
-<span class=n>tidy_books</span> <span class=o>%&gt;%</span> <span class=nf>head</span><span class=p>()</span>
-<span class=c1>## # A tibble: 6 x 4</span>
-<span class=c1>##   book                linenumber chapter word       </span>
-<span class=c1>##   &lt;fct&gt;                    &lt;int&gt;   &lt;int&gt; &lt;chr&gt;      </span>
-<span class=c1>## 1 Sense &amp; Sensibility          1       0 sense      </span>
-<span class=c1>## 2 Sense &amp; Sensibility          1       0 and        </span>
-<span class=c1>## 3 Sense &amp; Sensibility          1       0 sensibility</span>
-<span class=c1>## 4 Sense &amp; Sensibility          3       0 by         </span>
-<span class=c1>## 5 Sense &amp; Sensibility          3       0 jane       </span>
-<span class=c1>## 6 Sense &amp; Sensibility          3       0 austen</span>
-</code></pre></td></tr></table></div></div><p>But I want to run this on tweets, so I need to reshape the data. I only executed one search for <code>philadelphia+philly</code>, so I'm going to build a dataframe from that. Though, we can run multiple searches and assign each search its own <code>book</code> value to enable comparisons and faceted plots later.</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre class=chroma><code><span class=lnt> 1
+<span class=n>tidy_books</span> <span class=o>%&gt;%</span> <span class=nf>head</span><span class=p>()</span> <span class=o>%&gt;%</span> <span class=n>knitr</span><span class=o>::</span><span class=nf>kable</span><span class=p>()</span>
+</code></pre></td></tr></table></div></div><table><thead><tr><th style=text-align:left>book</th><th style=text-align:right>linenumber</th><th style=text-align:right>chapter</th><th style=text-align:left>word</th></tr></thead><tbody><tr><td style=text-align:left>Sense & Sensibility</td><td style=text-align:right>1</td><td style=text-align:right>0</td><td style=text-align:left>sense</td></tr><tr><td style=text-align:left>Sense & Sensibility</td><td style=text-align:right>1</td><td style=text-align:right>0</td><td style=text-align:left>and</td></tr><tr><td style=text-align:left>Sense & Sensibility</td><td style=text-align:right>1</td><td style=text-align:right>0</td><td style=text-align:left>sensibility</td></tr><tr><td style=text-align:left>Sense & Sensibility</td><td style=text-align:right>3</td><td style=text-align:right>0</td><td style=text-align:left>by</td></tr><tr><td style=text-align:left>Sense & Sensibility</td><td style=text-align:right>3</td><td style=text-align:right>0</td><td style=text-align:left>jane</td></tr><tr><td style=text-align:left>Sense & Sensibility</td><td style=text-align:right>3</td><td style=text-align:right>0</td><td style=text-align:left>austen</td></tr></tbody></table><p>But I want to run this on tweets, so I need to reshape the data. I only executed one search for <code>philadelphia+philly</code>, so I'm going to build a dataframe from that. Though, we can run multiple searches and assign each search its own <code>book</code> value to enable comparisons and faceted plots later.</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre class=chroma><code><span class=lnt> 1
 </span><span class=lnt> 2
 </span><span class=lnt> 3
 </span><span class=lnt> 4
@@ -604,15 +564,6 @@ This is a walkthrough of using the Twitter API with the rtweet R package. It bor
 </span><span class=lnt>13
 </span><span class=lnt>14
 </span><span class=lnt>15
-</span><span class=lnt>16
-</span><span class=lnt>17
-</span><span class=lnt>18
-</span><span class=lnt>19
-</span><span class=lnt>20
-</span><span class=lnt>21
-</span><span class=lnt>22
-</span><span class=lnt>23
-</span><span class=lnt>24
 </span></code></pre></td><td class=lntd><pre class=chroma><code class=language-r data-lang=r><span class=n>tweets_book</span> <span class=o>&lt;-</span> <span class=nf>cbind</span><span class=p>(</span><span class=s>&#39;Philadelphia&#39;</span><span class=p>,</span> <span class=n>tweets_df</span><span class=o>$</span><span class=n>text</span><span class=p>)</span> <span class=o>%&gt;%</span> <span class=nf>data.frame</span><span class=p>()</span>
 <span class=nf>colnames</span><span class=p>(</span><span class=n>tweets_book</span><span class=p>)</span> <span class=o>&lt;-</span> <span class=nf>c</span><span class=p>(</span><span class=s>&#39;book&#39;</span><span class=p>,</span> <span class=s>&#39;text&#39;</span><span class=p>)</span>
 
@@ -627,79 +578,26 @@ This is a walkthrough of using the Twitter API with the rtweet R package. It bor
   <span class=nf>ungroup</span><span class=p>()</span> <span class=o>%&gt;%</span>
   <span class=nf>unnest_tokens</span><span class=p>(</span><span class=n>word</span><span class=p>,</span> <span class=n>text</span><span class=p>)</span>
 
-<span class=n>tidy_books</span> <span class=o>%&gt;%</span> <span class=nf>head</span><span class=p>()</span>
-<span class=c1>## # A tibble: 6 x 4</span>
-<span class=c1>##   book         chapter    linenumber word    </span>
-<span class=c1>##   &lt;chr&gt;        &lt;date&gt;          &lt;int&gt; &lt;chr&gt;   </span>
-<span class=c1>## 1 Philadelphia 2020-12-29          1 union   </span>
-<span class=c1>## 2 Philadelphia 2020-12-29          1 to      </span>
-<span class=c1>## 3 Philadelphia 2020-12-29          1 sell    </span>
-<span class=c1>## 4 Philadelphia 2020-12-29          1 mark    </span>
-<span class=c1>## 5 Philadelphia 2020-12-29          1 mckenzie</span>
-<span class=c1>## 6 Philadelphia 2020-12-29          1 to</span>
-</code></pre></td></tr></table></div></div><p>Now the tweets are in a tidy format with one word per row.</p><p>Looking at the <code>nrc</code> lexicon, what are some of the "joy" words?</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre class=chroma><code><span class=lnt> 1
-</span><span class=lnt> 2
-</span><span class=lnt> 3
-</span><span class=lnt> 4
-</span><span class=lnt> 5
-</span><span class=lnt> 6
-</span><span class=lnt> 7
-</span><span class=lnt> 8
-</span><span class=lnt> 9
-</span><span class=lnt>10
-</span><span class=lnt>11
-</span><span class=lnt>12
-</span><span class=lnt>13
+<span class=n>tidy_books</span> <span class=o>%&gt;%</span> <span class=nf>head</span><span class=p>()</span> <span class=o>%&gt;%</span> <span class=n>knitr</span><span class=o>::</span><span class=nf>kable</span><span class=p>()</span>
+</code></pre></td></tr></table></div></div><table><thead><tr><th style=text-align:left>book</th><th style=text-align:left>chapter</th><th style=text-align:right>linenumber</th><th style=text-align:left>word</th></tr></thead><tbody><tr><td style=text-align:left>Philadelphia</td><td style=text-align:left>2020-12-29</td><td style=text-align:right>1</td><td style=text-align:left>union</td></tr><tr><td style=text-align:left>Philadelphia</td><td style=text-align:left>2020-12-29</td><td style=text-align:right>1</td><td style=text-align:left>to</td></tr><tr><td style=text-align:left>Philadelphia</td><td style=text-align:left>2020-12-29</td><td style=text-align:right>1</td><td style=text-align:left>sell</td></tr><tr><td style=text-align:left>Philadelphia</td><td style=text-align:left>2020-12-29</td><td style=text-align:right>1</td><td style=text-align:left>mark</td></tr><tr><td style=text-align:left>Philadelphia</td><td style=text-align:left>2020-12-29</td><td style=text-align:right>1</td><td style=text-align:left>mckenzie</td></tr><tr><td style=text-align:left>Philadelphia</td><td style=text-align:left>2020-12-29</td><td style=text-align:right>1</td><td style=text-align:left>to</td></tr></tbody></table><p>Now the tweets are in a tidy format with one word per row.</p><p>Looking at the <code>nrc</code> lexicon, what are some of the "joy" words?</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
 </span></code></pre></td><td class=lntd><pre class=chroma><code class=language-r data-lang=r><span class=n>nrc_joy</span> <span class=o>&lt;-</span> <span class=nf>get_sentiments</span><span class=p>(</span><span class=s>&#34;nrc&#34;</span><span class=p>)</span> <span class=o>%&gt;%</span> 
   <span class=nf>filter</span><span class=p>(</span><span class=n>sentiment</span> <span class=o>==</span> <span class=s>&#34;joy&#34;</span><span class=p>)</span>
 
-<span class=nf>head</span><span class=p>(</span><span class=n>nrc_joy</span><span class=p>)</span>
-<span class=c1>## # A tibble: 6 x 2</span>
-<span class=c1>##   word          sentiment</span>
-<span class=c1>##   &lt;chr&gt;         &lt;chr&gt;    </span>
-<span class=c1>## 1 absolution    joy      </span>
-<span class=c1>## 2 abundance     joy      </span>
-<span class=c1>## 3 abundant      joy      </span>
-<span class=c1>## 4 accolade      joy      </span>
-<span class=c1>## 5 accompaniment joy      </span>
-<span class=c1>## 6 accomplish    joy</span>
-</code></pre></td></tr></table></div></div><p>How many "joy" words do we have in our tweets?</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre class=chroma><code><span class=lnt> 1
-</span><span class=lnt> 2
-</span><span class=lnt> 3
-</span><span class=lnt> 4
-</span><span class=lnt> 5
-</span><span class=lnt> 6
-</span><span class=lnt> 7
-</span><span class=lnt> 8
-</span><span class=lnt> 9
-</span><span class=lnt>10
-</span><span class=lnt>11
-</span><span class=lnt>12
-</span><span class=lnt>13
-</span><span class=lnt>14
-</span><span class=lnt>15
-</span><span class=lnt>16
-</span><span class=lnt>17
-</span><span class=lnt>18
+<span class=nf>head</span><span class=p>(</span><span class=n>nrc_joy</span><span class=p>)</span> <span class=o>%&gt;%</span> <span class=n>knitr</span><span class=o>::</span><span class=nf>kable</span><span class=p>()</span>
+</code></pre></td></tr></table></div></div><table><thead><tr><th style=text-align:left>word</th><th style=text-align:left>sentiment</th></tr></thead><tbody><tr><td style=text-align:left>absolution</td><td style=text-align:left>joy</td></tr><tr><td style=text-align:left>abundance</td><td style=text-align:left>joy</td></tr><tr><td style=text-align:left>abundant</td><td style=text-align:left>joy</td></tr><tr><td style=text-align:left>accolade</td><td style=text-align:left>joy</td></tr><tr><td style=text-align:left>accompaniment</td><td style=text-align:left>joy</td></tr><tr><td style=text-align:left>accomplish</td><td style=text-align:left>joy</td></tr></tbody></table><p>How many "joy" words do we have in our tweets?</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
 </span></code></pre></td><td class=lntd><pre class=chroma><code class=language-r data-lang=r><span class=n>tidy_books</span> <span class=o>%&gt;%</span>
   <span class=nf>filter</span><span class=p>(</span><span class=n>book</span> <span class=o>==</span> <span class=s>&#34;Philadelphia&#34;</span><span class=p>)</span> <span class=o>%&gt;%</span>
   <span class=nf>inner_join</span><span class=p>(</span><span class=n>nrc_joy</span><span class=p>)</span> <span class=o>%&gt;%</span>
   <span class=nf>count</span><span class=p>(</span><span class=n>word</span><span class=p>,</span> <span class=n>sort</span> <span class=o>=</span> <span class=kc>TRUE</span><span class=p>)</span> <span class=o>%&gt;%</span>
-  <span class=nf>head</span><span class=p>(</span><span class=m>10</span><span class=p>)</span>
-<span class=c1>## # A tibble: 10 x 2</span>
-<span class=c1>##    word        n</span>
-<span class=c1>##    &lt;chr&gt;   &lt;int&gt;</span>
-<span class=c1>##  1 love       58</span>
-<span class=c1>##  2 good       56</span>
-<span class=c1>##  3 holiday    52</span>
-<span class=c1>##  4 art        36</span>
-<span class=c1>##  5 food       29</span>
-<span class=c1>##  6 music      27</span>
-<span class=c1>##  7 deal       24</span>
-<span class=c1>##  8 save       24</span>
-<span class=c1>##  9 safe       23</span>
-<span class=c1>## 10 happy      21</span>
-</code></pre></td></tr></table></div></div><p>Using <code>tidyr</code>, we can continue to examine how sentiment changes throughout the book. This is more relevant to the novels examples from the docs, but I'm including it here as an exercise. This example will use the <code>bing</code> lexicon. We need some type of interval - the example creates an index from 80 line chunks, but I'm going to update this to use the <code>chapter</code> value, which now represents the date of each tweet allowing to see changes in sentiment over time.</p><p>From the docs:</p><blockquote><p>... First, we find a sentiment score for each word using the Bing lexicon and inner_join().
+  <span class=nf>head</span><span class=p>(</span><span class=m>10</span><span class=p>)</span> <span class=o>%&gt;%</span> <span class=n>knitr</span><span class=o>::</span><span class=nf>kable</span><span class=p>()</span>
+</code></pre></td></tr></table></div></div><table><thead><tr><th style=text-align:left>word</th><th style=text-align:right>n</th></tr></thead><tbody><tr><td style=text-align:left>love</td><td style=text-align:right>58</td></tr><tr><td style=text-align:left>good</td><td style=text-align:right>56</td></tr><tr><td style=text-align:left>holiday</td><td style=text-align:right>52</td></tr><tr><td style=text-align:left>art</td><td style=text-align:right>36</td></tr><tr><td style=text-align:left>food</td><td style=text-align:right>29</td></tr><tr><td style=text-align:left>music</td><td style=text-align:right>27</td></tr><tr><td style=text-align:left>deal</td><td style=text-align:right>24</td></tr><tr><td style=text-align:left>save</td><td style=text-align:right>24</td></tr><tr><td style=text-align:left>safe</td><td style=text-align:right>23</td></tr><tr><td style=text-align:left>happy</td><td style=text-align:right>21</td></tr></tbody></table><p>Using <code>tidyr</code>, we can continue to examine how sentiment changes throughout the book. This is more relevant to the novels examples from the docs, but I'm including it here as an exercise. This example will use the <code>bing</code> lexicon. We need some type of interval - the example creates an index from 80 line chunks, but I'm going to update this to use the <code>chapter</code> value, which now represents the date of each tweet allowing to see changes in sentiment over time.</p><p>From the docs:</p><blockquote><p>... First, we find a sentiment score for each word using the Bing lexicon and inner_join().
 Next, we count up how many positive and negative words there are in defined sections of each book. We define an index here to keep track of where we are in the narrative; this index (using integer division) counts up sections of 80 lines of text.<br>The %/% operator does integer division (x %/% y is equivalent to floor(x/y)) so the index keeps track of which 80-line section of text we are counting up negative and positive sentiment in.<br>Small sections of text may not have enough words in them to get a good estimate of sentiment while really large sections can wash out narrative structure. For these books, using 80 lines works well, but this can vary depending on individual texts, how long the lines were to start with, etc. We then use spread() so that we have negative and positive sentiment in separate columns, and lastly calculate a net sentiment (positive - negative).</p></blockquote><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre class=chroma><code><span class=lnt>1
 </span><span class=lnt>2
 </span><span class=lnt>3
@@ -800,79 +698,31 @@ Next, we count up how many positive and negative words there are in defined sect
   <span class=nf>theme</span><span class=p>(</span><span class=n>legend.position</span> <span class=o>=</span> <span class=s>&#34;none&#34;</span><span class=p>)</span> <span class=o>+</span>
   <span class=nf>xlab</span><span class=p>(</span><span class=s>&#34;&#34;</span><span class=p>)</span> <span class=o>+</span>
   <span class=nf>ylab</span><span class=p>(</span><span class=s>&#34;Sentiment&#34;</span><span class=p>)</span>
-</code></pre></td></tr></table></div></div><p><img src=/post/2020-12-30-twitter-sentiment-philly/index_files/figure-html/sentimentplottwo-1.png width=672></p><h3 id=some-routine-checks>Some routine checks</h3><p>When comparing results across different lexicons, consider word counts and the ratio of positive words to negative words.</p><p>TODO: Update include and eval settings here - ok to keep in md doc but no need to knit them</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre class=chroma><code><span class=lnt> 1
-</span><span class=lnt> 2
-</span><span class=lnt> 3
-</span><span class=lnt> 4
-</span><span class=lnt> 5
-</span><span class=lnt> 6
-</span><span class=lnt> 7
-</span><span class=lnt> 8
-</span><span class=lnt> 9
-</span><span class=lnt>10
-</span><span class=lnt>11
-</span><span class=lnt>12
-</span><span class=lnt>13
-</span><span class=lnt>14
-</span><span class=lnt>15
-</span><span class=lnt>16
+</code></pre></td></tr></table></div></div><p><img src=/post/2020-12-30-twitter-sentiment-philly/index_files/figure-html/sentimentplottwo-1.png width=672></p><h3 id=some-routine-checks>Some routine checks</h3><p>When comparing results across different lexicons, consider word counts and the ratio of positive words to negative words.</p><p>TODO: Update include and eval settings here - ok to keep in md doc but no need to knit them</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
 </span></code></pre></td><td class=lntd><pre class=chroma><code class=language-r data-lang=r><span class=nf>get_sentiments</span><span class=p>(</span><span class=s>&#34;nrc&#34;</span><span class=p>)</span> <span class=o>%&gt;%</span> 
   <span class=nf>filter</span><span class=p>(</span><span class=n>sentiment</span> <span class=o>%in%</span> <span class=nf>c</span><span class=p>(</span><span class=s>&#34;positive&#34;</span><span class=p>,</span> <span class=s>&#34;negative&#34;</span><span class=p>))</span> <span class=o>%&gt;%</span> 
-  <span class=nf>count</span><span class=p>(</span><span class=n>sentiment</span><span class=p>)</span>
-<span class=c1>## # A tibble: 2 x 2</span>
-<span class=c1>##   sentiment     n</span>
-<span class=c1>##   &lt;chr&gt;     &lt;int&gt;</span>
-<span class=c1>## 1 negative   3324</span>
-<span class=c1>## 2 positive   2312</span>
-
+  <span class=nf>count</span><span class=p>(</span><span class=n>sentiment</span><span class=p>)</span> <span class=o>%&gt;%</span> <span class=n>knitr</span><span class=o>::</span><span class=nf>kable</span><span class=p>()</span>
+</code></pre></td></tr></table></div></div><table><thead><tr><th style=text-align:left>sentiment</th><th style=text-align:right>n</th></tr></thead><tbody><tr><td style=text-align:left>negative</td><td style=text-align:right>3324</td></tr><tr><td style=text-align:left>positive</td><td style=text-align:right>2312</td></tr></tbody></table><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span></code></pre></td><td class=lntd><pre class=chroma><code class=language-r data-lang=r>
 <span class=nf>get_sentiments</span><span class=p>(</span><span class=s>&#34;bing&#34;</span><span class=p>)</span> <span class=o>%&gt;%</span> 
-  <span class=nf>count</span><span class=p>(</span><span class=n>sentiment</span><span class=p>)</span>
-<span class=c1>## # A tibble: 2 x 2</span>
-<span class=c1>##   sentiment     n</span>
-<span class=c1>##   &lt;chr&gt;     &lt;int&gt;</span>
-<span class=c1>## 1 negative   4781</span>
-<span class=c1>## 2 positive   2005</span>
-</code></pre></td></tr></table></div></div><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre class=chroma><code><span class=lnt> 1
-</span><span class=lnt> 2
-</span><span class=lnt> 3
-</span><span class=lnt> 4
-</span><span class=lnt> 5
-</span><span class=lnt> 6
-</span><span class=lnt> 7
-</span><span class=lnt> 8
-</span><span class=lnt> 9
-</span><span class=lnt>10
-</span><span class=lnt>11
-</span><span class=lnt>12
-</span><span class=lnt>13
-</span><span class=lnt>14
-</span><span class=lnt>15
-</span><span class=lnt>16
-</span><span class=lnt>17
-</span><span class=lnt>18
-</span><span class=lnt>19
-</span><span class=lnt>20
+  <span class=nf>count</span><span class=p>(</span><span class=n>sentiment</span><span class=p>)</span> <span class=o>%&gt;%</span> <span class=n>knitr</span><span class=o>::</span><span class=nf>kable</span><span class=p>()</span>
+</code></pre></td></tr></table></div></div><table><thead><tr><th style=text-align:left>sentiment</th><th style=text-align:right>n</th></tr></thead><tbody><tr><td style=text-align:left>negative</td><td style=text-align:right>4781</td></tr><tr><td style=text-align:left>positive</td><td style=text-align:right>2005</td></tr></tbody></table><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
 </span></code></pre></td><td class=lntd><pre class=chroma><code class=language-r data-lang=r><span class=n>bing_word_counts</span> <span class=o>&lt;-</span> <span class=n>tidy_books</span> <span class=o>%&gt;%</span>
   <span class=nf>inner_join</span><span class=p>(</span><span class=nf>get_sentiments</span><span class=p>(</span><span class=s>&#34;bing&#34;</span><span class=p>))</span> <span class=o>%&gt;%</span>
   <span class=nf>count</span><span class=p>(</span><span class=n>word</span><span class=p>,</span> <span class=n>sentiment</span><span class=p>,</span> <span class=n>sort</span> <span class=o>=</span> <span class=kc>TRUE</span><span class=p>)</span> <span class=o>%&gt;%</span>
   <span class=nf>ungroup</span><span class=p>()</span>
 
-<span class=n>bing_word_counts</span> <span class=o>%&gt;%</span> <span class=nf>head</span><span class=p>(</span><span class=m>25</span><span class=p>)</span>
-<span class=c1>## # A tibble: 25 x 3</span>
-<span class=c1>##    word       sentiment     n</span>
-<span class=c1>##    &lt;chr&gt;      &lt;chr&gt;     &lt;int&gt;</span>
-<span class=c1>##  1 corruption negative    120</span>
-<span class=c1>##  2 like       positive     74</span>
-<span class=c1>##  3 love       positive     58</span>
-<span class=c1>##  4 great      positive     57</span>
-<span class=c1>##  5 good       positive     56</span>
-<span class=c1>##  6 best       positive     50</span>
-<span class=c1>##  7 hurts      negative     42</span>
-<span class=c1>##  8 well       positive     38</span>
-<span class=c1>##  9 work       positive     29</span>
-<span class=c1>## 10 free       positive     28</span>
-<span class=c1>## # ... with 15 more rows</span>
-</code></pre></td></tr></table></div></div><p>What are the top words driving sentiment score?</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre class=chroma><code><span class=lnt> 1
+<span class=n>bing_word_counts</span> <span class=o>%&gt;%</span> <span class=nf>head</span><span class=p>(</span><span class=m>10</span><span class=p>)</span> <span class=o>%&gt;%</span> <span class=n>knitr</span><span class=o>::</span><span class=nf>kable</span><span class=p>()</span>
+</code></pre></td></tr></table></div></div><table><thead><tr><th style=text-align:left>word</th><th style=text-align:left>sentiment</th><th style=text-align:right>n</th></tr></thead><tbody><tr><td style=text-align:left>corruption</td><td style=text-align:left>negative</td><td style=text-align:right>120</td></tr><tr><td style=text-align:left>like</td><td style=text-align:left>positive</td><td style=text-align:right>74</td></tr><tr><td style=text-align:left>love</td><td style=text-align:left>positive</td><td style=text-align:right>58</td></tr><tr><td style=text-align:left>great</td><td style=text-align:left>positive</td><td style=text-align:right>57</td></tr><tr><td style=text-align:left>good</td><td style=text-align:left>positive</td><td style=text-align:right>56</td></tr><tr><td style=text-align:left>best</td><td style=text-align:left>positive</td><td style=text-align:right>50</td></tr><tr><td style=text-align:left>hurts</td><td style=text-align:left>negative</td><td style=text-align:right>42</td></tr><tr><td style=text-align:left>well</td><td style=text-align:left>positive</td><td style=text-align:right>38</td></tr><tr><td style=text-align:left>work</td><td style=text-align:left>positive</td><td style=text-align:right>29</td></tr><tr><td style=text-align:left>free</td><td style=text-align:left>positive</td><td style=text-align:right>28</td></tr></tbody></table><p>What are the top words driving sentiment score?</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre class=chroma><code><span class=lnt> 1
 </span><span class=lnt> 2
 </span><span class=lnt> 3
 </span><span class=lnt> 4
@@ -894,35 +744,17 @@ Next, we count up how many positive and negative words there are in defined sect
   <span class=nf>facet_wrap</span><span class=p>(</span><span class=o>~</span><span class=n>sentiment</span><span class=p>,</span> <span class=n>scales</span> <span class=o>=</span> <span class=s>&#34;free_y&#34;</span><span class=p>)</span> <span class=o>+</span>
   <span class=nf>labs</span><span class=p>(</span><span class=n>x</span> <span class=o>=</span> <span class=s>&#34;Contribution to sentiment&#34;</span><span class=p>,</span>
        <span class=n>y</span> <span class=o>=</span> <span class=kc>NULL</span><span class=p>)</span>
-</code></pre></td></tr></table></div></div><p><img src=/post/2020-12-30-twitter-sentiment-philly/index_files/figure-html/sentplotfour-1.png width=672></p><h3 id=wordclouds>Wordclouds</h3><p>I don't find wordclouds terrible useful, but they're not terrible for a background graphic or an attention grabber.</p><p>First, let's add some custom stop words (i.e. words to exclude from the analysis). If you want to know why, run the next chunk and see how URLs (and obviously our original search terms) throw off our term frequency matrix.</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre class=chroma><code><span class=lnt> 1
-</span><span class=lnt> 2
-</span><span class=lnt> 3
-</span><span class=lnt> 4
-</span><span class=lnt> 5
-</span><span class=lnt> 6
-</span><span class=lnt> 7
-</span><span class=lnt> 8
-</span><span class=lnt> 9
-</span><span class=lnt>10
-</span><span class=lnt>11
-</span><span class=lnt>12
-</span><span class=lnt>13
-</span><span class=lnt>14
+</code></pre></td></tr></table></div></div><p><img src=/post/2020-12-30-twitter-sentiment-philly/index_files/figure-html/sentplotfour-1.png width=672></p><h3 id=wordclouds>Wordclouds</h3><p>I don't find wordclouds terrible useful, but they're not terrible for a background graphic or an attention grabber.</p><p>First, let's add some custom stop words (i.e. words to exclude from the analysis). If you want to know why, run the next chunk and see how URLs (and obviously our original search terms) throw off our term frequency matrix.</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
 </span></code></pre></td><td class=lntd><pre class=chroma><code class=language-r data-lang=r><span class=n>custom_stop_words</span> <span class=o>&lt;-</span> <span class=nf>bind_rows</span><span class=p>(</span><span class=nf>tibble</span><span class=p>(</span><span class=n>word</span> <span class=o>=</span> <span class=nf>c</span><span class=p>(</span><span class=s>&#39;philadelphia&#39;</span><span class=p>,</span> <span class=s>&#39;philly&#39;</span><span class=p>,</span> <span class=s>&#39;t.co&#39;</span><span class=p>,</span> <span class=s>&#39;https&#39;</span><span class=p>,</span> <span class=s>&#39;amp&#39;</span><span class=p>),</span>
                                       <span class=n>lexicon</span> <span class=o>=</span> <span class=nf>c</span><span class=p>(</span><span class=s>&#34;custom&#34;</span><span class=p>)),</span>
                                <span class=n>stop_words</span><span class=p>)</span>
 
-<span class=n>custom_stop_words</span> <span class=o>%&gt;%</span> <span class=nf>head</span><span class=p>()</span>
-<span class=c1>## # A tibble: 6 x 2</span>
-<span class=c1>##   word         lexicon</span>
-<span class=c1>##   &lt;chr&gt;        &lt;chr&gt;  </span>
-<span class=c1>## 1 philadelphia custom </span>
-<span class=c1>## 2 philly       custom </span>
-<span class=c1>## 3 t.co         custom </span>
-<span class=c1>## 4 https        custom </span>
-<span class=c1>## 5 amp          custom </span>
-<span class=c1>## 6 a            SMART</span>
-</code></pre></td></tr></table></div></div><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre class=chroma><code><span class=lnt>1
+<span class=n>custom_stop_words</span> <span class=o>%&gt;%</span> <span class=nf>head</span><span class=p>()</span> <span class=o>%&gt;%</span> <span class=n>knitr</span><span class=o>::</span><span class=nf>kable</span><span class=p>()</span>
+</code></pre></td></tr></table></div></div><table><thead><tr><th style=text-align:left>word</th><th style=text-align:left>lexicon</th></tr></thead><tbody><tr><td style=text-align:left>philadelphia</td><td style=text-align:left>custom</td></tr><tr><td style=text-align:left>philly</td><td style=text-align:left>custom</td></tr><tr><td style=text-align:left>t.co</td><td style=text-align:left>custom</td></tr><tr><td style=text-align:left>https</td><td style=text-align:left>custom</td></tr><tr><td style=text-align:left>amp</td><td style=text-align:left>custom</td></tr><tr><td style=text-align:left>a</td><td style=text-align:left>SMART</td></tr></tbody></table><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre class=chroma><code><span class=lnt>1
 </span><span class=lnt>2
 </span><span class=lnt>3
 </span><span class=lnt>4
@@ -990,145 +822,5 @@ Next, we count up how many positive and negative words there are in defined sect
 <span class=c1>##   book         chapter    positivewords words positive_ratio</span>
 <span class=c1>##   &lt;chr&gt;        &lt;date&gt;             &lt;int&gt; &lt;int&gt;          &lt;dbl&gt;</span>
 <span class=c1>## 1 Philadelphia 2020-12-21           196  5755         0.0341</span>
-</code></pre></td></tr></table></div></div><h3 id=post-content>Post content</h3><p>Typical location to start editing since the bibliography chunk is hidden. Make sure that you selected <code>R Markdown (.Rmd)</code> as the <em>format</em> option of the post when using the <code>New Post</code> <em><a href="https://CRAN.R-project.org/package=blogdown">blogdown</a></em> addin.</p><h3 id=r-image>R image</h3><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre class=chroma><code><span class=lnt>1
-</span><span class=lnt>2
-</span><span class=lnt>3
-</span></code></pre></td><td class=lntd><pre class=chroma><code class=language-r data-lang=r><span class=c1>## This imaged will be saved in the /post/*_files/ directory</span>
-<span class=c1>## Use echo = FALSE if you want to hide the code for making the plot</span>
-<span class=nf>plot</span><span class=p>(</span><span class=m>1</span><span class=o>:</span><span class=m>10</span><span class=p>,</span> <span class=m>10</span><span class=o>:</span><span class=m>1</span><span class=p>)</span>
-</code></pre></td></tr></table></div></div><p>If you prefer not to use the <code>fig.width</code> and <code>fig.height</code> options in every plot chunk, edit the YAML (the part at the top of the post) with:</p><pre><code>output:
-  blogdown::html_page:
-    toc: no
-    fig_width: 5
-    fig_height: 5
-</code></pre><p>The spaces are important.</p><h3 id=custom-image>Custom image</h3><p>The easiest option is to use the <em><a href="https://CRAN.R-project.org/package=blogdown">blogdown</a></em> <em>Insert Image</em> RStudio addin to add an external image described in this <a href=http://lcolladotor.github.io/2018/03/07/blogdown-insert-image-addin>blog post</a>. You need to use version 0.5.7 or newer to have access to this plugin.</p><p>If you want to add images manually, check this <a href=http://lcolladotor.github.io/2018/02/17/r-markdown-blog-template/#.WqChJZPwa50>blog post</a> for more details on the image syntax.</p><h3 id=acknowledgements>Acknowledgements</h3><p>This blog post was made possible thanks to:</p><ul><li><em><a href=https://bioconductor.org/packages/3.12/BiocStyle>BiocStyle</a></em> <a id=cite-Oles_2020></a>(<a href=https://github.com/Bioconductor/BiocStyle>Oles, Morgan, and Huber, 2020</a>)</li><li><em><a href="https://CRAN.R-project.org/package=blogdown">blogdown</a></em> <a id=cite-Xie_2017></a>(<a href=https://github.com/rstudio/blogdown>Xie, Hill, and Thomas, 2017</a>)</li><li><em><a href="https://CRAN.R-project.org/package=devtools">devtools</a></em> <a id=cite-Wickham_2020></a>(<a href="https://CRAN.R-project.org/package=devtools">Wickham, Hester, and Chang, 2020</a>)</li><li><em><a href="https://CRAN.R-project.org/package=knitcitations">knitcitations</a></em> <a id=cite-Boettiger_2020></a>(<a href=https://github.com/cboettig/knitcitations>Boettiger, 2020</a>)</li></ul><h3 id=references>References</h3><p><a id=bib-Boettiger_2020></a><a href=#cite-Boettiger_2020>[1]</a><cite>
-C. Boettiger.
-<em>knitcitations: Citations for 'Knitr' Markdown Files</em>.
-R package version 1.0.11.
-2020.
-URL: <a href=https://github.com/cboettig/knitcitations>https://github.com/cboettig/knitcitations</a>.</cite></p><p><a id=bib-Oles_2020></a><a href=#cite-Oles_2020>[2]</a><cite>
-A. Oles, M. Morgan, and W. Huber.
-<em>BiocStyle: Standard styles for vignettes and other Bioconductor documents</em>.
-R package version 2.18.1.
-2020.
-URL: <a href=https://github.com/Bioconductor/BiocStyle>https://github.com/Bioconductor/BiocStyle</a>.</cite></p><p><a id=bib-Wickham_2020></a><a href=#cite-Wickham_2020>[3]</a><cite>
-H. Wickham, J. Hester, and W. Chang.
-<em>devtools: Tools to Make Developing R Packages Easier</em>.
-R package version 2.3.1.
-2020.
-URL: <a href="https://CRAN.R-project.org/package=devtools">https://CRAN.R-project.org/package=devtools</a>.</cite></p><p><a id=bib-Xie_2017></a><a href=#cite-Xie_2017>[4]</a><cite>
-Y. Xie, A. P. Hill, and A. Thomas.
-<em>blogdown: Creating Websites with R Markdown</em>.
-ISBN 978-0815363729.
-Boca Raton, Florida: Chapman and Hall/CRC, 2017.
-URL: <a href=https://github.com/rstudio/blogdown>https://github.com/rstudio/blogdown</a>.</cite></p><h3 id=reproducibility>Reproducibility</h3><pre><code>## - Session info -------------------------------------------------------------------------------------------------------
-##  setting  value                       
-##  version  R version 4.0.2 (2020-06-22)
-##  os       Windows 10 x64              
-##  system   x86_64, mingw32             
-##  ui       RTerm                       
-##  language (EN)                        
-##  collate  English_United States.1252  
-##  ctype    English_United States.1252  
-##  tz       America/New_York            
-##  date     2020-12-31                  
-## 
-## - Packages -----------------------------------------------------------------------------------------------------------
-##  package       * version date       lib source                                 
-##  assertthat      0.2.1   2019-03-21 [1] CRAN (R 4.0.2)                         
-##  base64enc       0.1-3   2015-07-28 [1] CRAN (R 4.0.0)                         
-##  BiocManager     1.30.10 2019-11-16 [1] CRAN (R 4.0.3)                         
-##  BiocStyle     * 2.18.1  2020-11-24 [1] Bioconductor                           
-##  blogdown        0.20    2020-06-23 [1] CRAN (R 4.0.2)                         
-##  bookdown        0.21    2020-10-13 [1] CRAN (R 4.0.3)                         
-##  callr           3.4.3   2020-03-28 [1] CRAN (R 4.0.2)                         
-##  cli             2.2.0   2020-11-20 [1] CRAN (R 4.0.3)                         
-##  colorspace      2.0-0   2020-11-11 [1] CRAN (R 4.0.3)                         
-##  config        * 0.3.1   2020-12-17 [1] CRAN (R 4.0.3)                         
-##  crayon          1.3.4   2017-09-16 [1] CRAN (R 4.0.2)                         
-##  data.table      1.12.8  2019-12-09 [1] CRAN (R 4.0.0)                         
-##  desc            1.2.0   2018-05-01 [1] CRAN (R 4.0.2)                         
-##  devtools      * 2.3.1   2020-07-21 [1] CRAN (R 4.0.2)                         
-##  digest          0.6.27  2020-10-24 [1] CRAN (R 4.0.3)                         
-##  dplyr         * 1.0.2   2020-08-18 [1] CRAN (R 4.0.3)                         
-##  ellipsis        0.3.1   2020-05-15 [1] CRAN (R 4.0.2)                         
-##  evaluate        0.14    2019-05-28 [1] CRAN (R 4.0.2)                         
-##  fansi           0.4.1   2020-01-08 [1] CRAN (R 4.0.2)                         
-##  farver          2.0.3   2020-01-16 [1] CRAN (R 4.0.2)                         
-##  fs              1.5.0   2020-07-31 [1] CRAN (R 4.0.3)                         
-##  generics        0.1.0   2020-10-31 [1] CRAN (R 4.0.3)                         
-##  ggplot2       * 3.3.2   2020-06-19 [1] CRAN (R 4.0.2)                         
-##  glue            1.4.2   2020-08-27 [1] CRAN (R 4.0.2)                         
-##  gtable          0.3.0   2019-03-25 [1] CRAN (R 4.0.2)                         
-##  hms             0.5.3   2020-01-08 [1] CRAN (R 4.0.2)                         
-##  htmltools       0.5.0   2020-06-16 [1] CRAN (R 4.0.2)                         
-##  htmlwidgets   * 1.5.2   2020-10-03 [1] CRAN (R 4.0.3)                         
-##  httr            1.4.2   2020-07-20 [1] CRAN (R 4.0.3)                         
-##  janeaustenr   * 0.1.5   2017-06-10 [1] CRAN (R 4.0.3)                         
-##  jsonlite        1.7.2   2020-12-09 [1] CRAN (R 4.0.3)                         
-##  knitcitations * 1.0.11  2020-12-30 [1] Github (cboettig/knitcitations@23750d5)
-##  knitr           1.30    2020-09-22 [1] CRAN (R 4.0.3)                         
-##  labeling        0.4.2   2020-10-20 [1] CRAN (R 4.0.3)                         
-##  lattice         0.20-41 2020-04-02 [2] CRAN (R 4.0.2)                         
-##  lazyeval        0.2.2   2019-03-15 [1] CRAN (R 4.0.2)                         
-##  lifecycle       0.2.0   2020-03-06 [1] CRAN (R 4.0.2)                         
-##  lubridate     * 1.7.9.2 2020-11-13 [1] CRAN (R 4.0.3)                         
-##  magrittr        2.0.1   2020-11-17 [1] CRAN (R 4.0.3)                         
-##  Matrix          1.2-18  2019-11-27 [2] CRAN (R 4.0.2)                         
-##  memoise         1.1.0   2017-04-21 [1] CRAN (R 4.0.2)                         
-##  modeltools      0.2-23  2020-03-05 [1] CRAN (R 4.0.3)                         
-##  munsell         0.5.0   2018-06-12 [1] CRAN (R 4.0.2)                         
-##  NLP           * 0.2-1   2020-10-14 [1] CRAN (R 4.0.3)                         
-##  pillar          1.4.6   2020-07-10 [1] CRAN (R 4.0.3)                         
-##  pkgbuild        1.0.8   2020-05-07 [1] CRAN (R 4.0.2)                         
-##  pkgconfig       2.0.3   2019-09-22 [1] CRAN (R 4.0.2)                         
-##  pkgload         1.1.0   2020-05-29 [1] CRAN (R 4.0.2)                         
-##  plotly        * 4.9.2.1 2020-04-04 [1] CRAN (R 4.0.2)                         
-##  plyr            1.8.6   2020-03-03 [1] CRAN (R 4.0.2)                         
-##  prettyunits     1.1.1   2020-01-24 [1] CRAN (R 4.0.2)                         
-##  processx        3.4.4   2020-09-03 [1] CRAN (R 4.0.3)                         
-##  ps              1.4.0   2020-10-07 [1] CRAN (R 4.0.3)                         
-##  purrr           0.3.4   2020-04-17 [1] CRAN (R 4.0.2)                         
-##  R6              2.5.0   2020-10-28 [1] CRAN (R 4.0.3)                         
-##  rappdirs        0.3.1   2016-03-28 [1] CRAN (R 4.0.2)                         
-##  RColorBrewer  * 1.1-2   2014-12-07 [1] CRAN (R 4.0.0)                         
-##  Rcpp            1.0.5   2020-07-06 [1] CRAN (R 4.0.2)                         
-##  readr         * 1.4.0   2020-10-05 [1] CRAN (R 4.0.3)                         
-##  RefManageR      1.3.0   2020-11-13 [1] CRAN (R 4.0.3)                         
-##  remotes         2.2.0   2020-07-21 [1] CRAN (R 4.0.3)                         
-##  repr            1.1.0   2020-01-28 [1] CRAN (R 4.0.3)                         
-##  reshape2      * 1.4.4   2020-04-09 [1] CRAN (R 4.0.2)                         
-##  rlang           0.4.9   2020-11-26 [1] CRAN (R 4.0.3)                         
-##  rmarkdown     * 2.5     2020-10-21 [1] CRAN (R 4.0.3)                         
-##  rprojroot       2.0.2   2020-11-15 [1] CRAN (R 4.0.2)                         
-##  rtweet        * 0.7.0   2020-01-08 [1] CRAN (R 4.0.3)                         
-##  scales          1.1.1   2020-05-11 [1] CRAN (R 4.0.2)                         
-##  sessioninfo     1.1.1   2018-11-05 [1] CRAN (R 4.0.2)                         
-##  skimr         * 2.1.2   2020-07-06 [1] CRAN (R 4.0.3)                         
-##  slam            0.1-48  2020-12-03 [1] CRAN (R 4.0.3)                         
-##  SnowballC     * 0.7.0   2020-04-01 [1] CRAN (R 4.0.3)                         
-##  stringi         1.5.3   2020-09-09 [1] CRAN (R 4.0.3)                         
-##  stringr       * 1.4.0   2019-02-10 [1] CRAN (R 4.0.2)                         
-##  testthat        2.3.2   2020-03-02 [1] CRAN (R 4.0.2)                         
-##  textdata        0.4.1   2020-05-04 [1] CRAN (R 4.0.3)                         
-##  tibble          3.0.4   2020-10-12 [1] CRAN (R 4.0.3)                         
-##  tidyr         * 1.1.2   2020-08-27 [1] CRAN (R 4.0.3)                         
-##  tidyselect      1.1.0   2020-05-11 [1] CRAN (R 4.0.2)                         
-##  tidytext      * 0.2.6   2020-09-20 [1] CRAN (R 4.0.3)                         
-##  tm            * 0.7-8   2020-11-18 [1] CRAN (R 4.0.3)                         
-##  tokenizers      0.2.1   2018-03-29 [1] CRAN (R 4.0.3)                         
-##  topicmodels   * 0.2-11  2020-04-19 [1] CRAN (R 4.0.3)                         
-##  usethis       * 2.0.0   2020-12-10 [1] CRAN (R 4.0.3)                         
-##  utf8            1.1.4   2018-05-24 [1] CRAN (R 4.0.2)                         
-##  vctrs           0.3.4   2020-08-29 [1] CRAN (R 4.0.3)                         
-##  viridisLite     0.3.0   2018-02-01 [1] CRAN (R 4.0.2)                         
-##  widgetframe   * 0.3.1   2017-12-20 [1] CRAN (R 4.0.3)                         
-##  withr           2.3.0   2020-09-22 [1] CRAN (R 4.0.3)                         
-##  wordcloud     * 2.6     2018-08-24 [1] CRAN (R 4.0.3)                         
-##  xfun            0.19    2020-10-30 [1] CRAN (R 4.0.3)                         
-##  xml2            1.3.2   2020-04-23 [1] CRAN (R 4.0.2)                         
-##  yaml            2.2.1   2020-02-01 [1] CRAN (R 4.0.0)                         
-## 
-## [1] C:/Users/rober/Documents/R/win-library/4.0
-## [2] C:/Program Files/R/R-4.0.2/library
-</code></pre><div class=pager><div class="pager_item prev"><a href=https://rjfranssen.io/2020/12/30/custom-color-palette/ class="pager_link button" title="Custom Color Palette"><span class=pager_label>Custom Color Palette</span></a></div></div><svg width="0" height="0" class="hidden"><symbol xmlns="http://www.w3.org/2000/svg" viewBox="0 0 492.004 492.004" id="next"><path d="M484.14 226.886 306.46 49.202c-5.072-5.072-11.832-7.856-19.04-7.856-7.216.0-13.972 2.788-19.044 7.856l-16.132 16.136c-5.068 5.064-7.86 11.828-7.86 19.04.0 7.208 2.792 14.2 7.86 19.264L355.9 207.526H26.58C11.732 207.526.0 219.15.0 234.002v22.812c0 14.852 11.732 27.648 26.58 27.648h330.496L252.248 388.926c-5.068 5.072-7.86 11.652-7.86 18.864.0 7.204 2.792 13.88 7.86 18.948l16.132 16.084c5.072 5.072 11.828 7.836 19.044 7.836 7.208.0 13.968-2.8 19.04-7.872l177.68-177.68c5.084-5.088 7.88-11.88 7.86-19.1.016-7.244-2.776-14.04-7.864-19.12z"/></symbol><symbol xmlns="http://www.w3.org/2000/svg" viewBox="0 0 511.999 511.999" id="search"><path d="M508.874 478.708 360.142 329.976c28.21-34.827 45.191-79.103 45.191-127.309C405.333 90.917 314.416.0 202.666.0S0 90.917.0 202.667s90.917 202.667 202.667 202.667c48.206.0 92.482-16.982 127.309-45.191l148.732 148.732c4.167 4.165 10.919 4.165 15.086.0l15.081-15.082c4.165-4.166 4.165-10.92-.001-15.085zM202.667 362.667c-88.229.0-160-71.771-160-160s71.771-160 160-160 160 71.771 160 160-71.771 160-160 160z"/></symbol><symbol xmlns="http://www.w3.org/2000/svg" viewBox="0 0 241 179" id="harmburger"><path d="M1 10C1 4.477 5.477.0 11 0h220c5.523.0 10 4.477 10 10s-4.477 10-10 10H11C5.477 20 1 15.523 1 10zm0 80c0-5.523 4.477-10 10-10h220c5.523.0 10 4.477 10 10s-4.477 10-10 10H11c-5.523.0-10-4.477-10-10zm9 69c-5.523.0-10 4.477-10 10s4.477 10 10 10h220c5.523.0 10-4.477 10-10s-4.477-10-10-10H10z"/></symbol></svg></main></div></div><footer class="pt-2 pb-2"><div class=wrap><p>&copy; 2020 rjfranssen</p></div></footer><svg width="0" height="0" class="hidden"><symbol xmlns="http://www.w3.org/2000/svg" viewBox="0 0 492.004 492.004" id="next"><path d="M484.14 226.886 306.46 49.202c-5.072-5.072-11.832-7.856-19.04-7.856-7.216.0-13.972 2.788-19.044 7.856l-16.132 16.136c-5.068 5.064-7.86 11.828-7.86 19.04.0 7.208 2.792 14.2 7.86 19.264L355.9 207.526H26.58C11.732 207.526.0 219.15.0 234.002v22.812c0 14.852 11.732 27.648 26.58 27.648h330.496L252.248 388.926c-5.068 5.072-7.86 11.652-7.86 18.864.0 7.204 2.792 13.88 7.86 18.948l16.132 16.084c5.072 5.072 11.828 7.836 19.044 7.836 7.208.0 13.968-2.8 19.04-7.872l177.68-177.68c5.084-5.088 7.88-11.88 7.86-19.1.016-7.244-2.776-14.04-7.864-19.12z"/></symbol><symbol xmlns="http://www.w3.org/2000/svg" viewBox="0 0 511.999 511.999" id="search"><path d="M508.874 478.708 360.142 329.976c28.21-34.827 45.191-79.103 45.191-127.309C405.333 90.917 314.416.0 202.666.0S0 90.917.0 202.667s90.917 202.667 202.667 202.667c48.206.0 92.482-16.982 127.309-45.191l148.732 148.732c4.167 4.165 10.919 4.165 15.086.0l15.081-15.082c4.165-4.166 4.165-10.92-.001-15.085zM202.667 362.667c-88.229.0-160-71.771-160-160s71.771-160 160-160 160 71.771 160 160-71.771 160-160 160z"/></symbol><symbol xmlns="http://www.w3.org/2000/svg" viewBox="0 0 241 179" id="harmburger"><path d="M1 10C1 4.477 5.477.0 11 0h220c5.523.0 10 4.477 10 10s-4.477 10-10 10H11C5.477 20 1 15.523 1 10zm0 80c0-5.523 4.477-10 10-10h220c5.523.0 10 4.477 10 10s-4.477 10-10 10H11c-5.523.0-10-4.477-10-10zm9 69c-5.523.0-10 4.477-10 10s4.477 10 10 10h220c5.523.0 10-4.477 10-10s-4.477-10-10-10H10z"/></symbol></svg><script src=https://rjfranssen.io/js/bundle.min.e23f146f1a54fbecd66e224e25d9b7ccad3a5c1c5bce508f74e215a81d39631aca9d233d80f0ed724c10fb9c858451882b84a74c3d5e1c3e4ff71431ec79c2e4.js></script><script src=https://rjfranssen.io/js/search.min.0301e4cb1219b895f85a4e24f1e415cd8c1e928c78d67e30998ad62a250008a5f73a5409a1421e47d5beaab15969cc5df5fe220333ef0a2a9f0fe10de858af50.js async defer></script></body></html>
+</code></pre></td></tr></table></div></div><h3 id=acknowledgements>Acknowledgements</h3><p>This blog post was made possible thanks to:</p><ul><li><em><a href=https://bioconductor.org/packages/3.12/knitr>knitr</a></em></li><li><em><a href=https://bioconductor.org/packages/3.12/rtweet>rtweet</a></em> <a id=cite-rtweet-package></a>(<a href=https://joss.theoj.org/papers/10.21105/joss.01829>Kearney, 2019</a>)</li><li><em><a href=https://bioconductor.org/packages/3.12/rmarkdown>rmarkdown</a></em></li><li><em><a href=https://bioconductor.org/packages/3.12/NLP>NLP</a></em> <a id=cite-Hornik_2020></a>(<a href="https://CRAN.R-project.org/package=NLP">Hornik, 2020</a>)</li><li><em><a href=https://bioconductor.org/packages/3.12/tm>tm</a></em></li><li><em><a href=https://bioconductor.org/packages/3.12/RColorBrewer>RColorBrewer</a></em> <a id=cite-Neuwirth_2014></a>(<a href="https://CRAN.R-project.org/package=RColorBrewer">Neuwirth, 2014</a>)</li><li><em><a href=https://bioconductor.org/packages/3.12/wordcloud>wordcloud</a></em> <a id=cite-Fellows_2018></a>(<a href="https://CRAN.R-project.org/package=wordcloud">Fellows, 2018</a>)</li><li><em><a href=https://bioconductor.org/packages/3.12/topicmodels>topicmodels</a></em> <a id=cite-Grun_2011></a>(<a href=https://doi.org/10.18637/jss.v040.i13>Grün and Hornik, 2011</a>)</li><li><em><a href=https://bioconductor.org/packages/3.12/SnowballC>SnowballC</a></em> <a id=cite-Bouchet-Valat_2020></a>(<a href="https://CRAN.R-project.org/package=SnowballC">Bouchet-Valat, 2020</a>)</li><li><em><a href=https://bioconductor.org/packages/3.12/config>config</a></em> <a id=cite-Allaire_2020></a>(<a href="https://CRAN.R-project.org/package=config">Allaire, 2020</a>)</li><li><em><a href=https://bioconductor.org/packages/3.12/dplyr>dplyr</a></em> <a id=cite-Wickham_2020></a>(<a href="https://CRAN.R-project.org/package=dplyr">Wickham, François,
+Henry, and Müller, 2020</a>)</li><li><em><a href=https://bioconductor.org/packages/3.12/tidytext>tidytext</a></em> <a id=cite-Silge_2016></a>(<a href=http://dx.doi.org/10.21105/joss.00037>Silge and Robinson, 2016</a>)</li><li><em><a href=https://bioconductor.org/packages/3.12/tidyr>tidyr</a></em> <a id=cite-Wickham_2020a></a>(<a href="https://CRAN.R-project.org/package=tidyr">Wickham, 2020</a>)</li><li><em><a href=https://bioconductor.org/packages/3.12/ggplot2>ggplot2</a></em> <a id=cite-Wickham_2016></a>(<a href=https://ggplot2.tidyverse.org>Wickham, 2016</a>)</li><li><em><a href=https://bioconductor.org/packages/3.12/lubridate>lubridate</a></em> <a id=cite-Grolemund_2011></a>(<a href=https://www.jstatsoft.org/v40/i03/>Grolemund and Wickham, 2011</a>)</li><li><em><a href=https://bioconductor.org/packages/3.12/readr>readr</a></em> <a id=cite-Wickham_2020ab></a>(<a href="https://CRAN.R-project.org/package=readr">Wickham and Hester, 2020</a>)</li><li><em><a href=https://bioconductor.org/packages/3.12/skimr>skimr</a></em> <a id=cite-Waring_2020></a>(<a href="https://CRAN.R-project.org/package=skimr">Waring, Quinn, McNamara, Arino de la Rubia, et al., 2020</a>)</li><li><em><a href=https://bioconductor.org/packages/3.12/BiocStyle>BiocStyle</a></em></li><li><em><a href="https://CRAN.R-project.org/package=blogdown">blogdown</a></em> <a id=cite-Xie_2017></a>(<a href=https://github.com/rstudio/blogdown>Xie, Hill, and Thomas, 2017</a>)</li><li><em><a href="https://CRAN.R-project.org/package=devtools">devtools</a></em> <a id=cite-Wickham_2020abc></a>(<a href="https://CRAN.R-project.org/package=devtools">Wickham, Hester, and Chang, 2020</a>)</li><li><em><a href="https://CRAN.R-project.org/package=knitcitations">knitcitations</a></em> <a id=cite-Boettiger_2020></a>(<a href=https://github.com/cboettig/knitcitations>Boettiger, 2020</a>)</li></ul><div class=pager><div class="pager_item prev"><a href=https://rjfranssen.io/2020/12/30/custom-color-palette/ class="pager_link button" title="Custom Color Palette in R"><span class=pager_label>Custom Color Palette in R</span></a></div></div><svg width="0" height="0" class="hidden"><symbol xmlns="http://www.w3.org/2000/svg" viewBox="0 0 492.004 492.004" id="next"><path d="M484.14 226.886 306.46 49.202c-5.072-5.072-11.832-7.856-19.04-7.856-7.216.0-13.972 2.788-19.044 7.856l-16.132 16.136c-5.068 5.064-7.86 11.828-7.86 19.04.0 7.208 2.792 14.2 7.86 19.264L355.9 207.526H26.58C11.732 207.526.0 219.15.0 234.002v22.812c0 14.852 11.732 27.648 26.58 27.648h330.496L252.248 388.926c-5.068 5.072-7.86 11.652-7.86 18.864.0 7.204 2.792 13.88 7.86 18.948l16.132 16.084c5.072 5.072 11.828 7.836 19.044 7.836 7.208.0 13.968-2.8 19.04-7.872l177.68-177.68c5.084-5.088 7.88-11.88 7.86-19.1.016-7.244-2.776-14.04-7.864-19.12z"/></symbol><symbol xmlns="http://www.w3.org/2000/svg" viewBox="0 0 511.999 511.999" id="search"><path d="M508.874 478.708 360.142 329.976c28.21-34.827 45.191-79.103 45.191-127.309C405.333 90.917 314.416.0 202.666.0S0 90.917.0 202.667s90.917 202.667 202.667 202.667c48.206.0 92.482-16.982 127.309-45.191l148.732 148.732c4.167 4.165 10.919 4.165 15.086.0l15.081-15.082c4.165-4.166 4.165-10.92-.001-15.085zM202.667 362.667c-88.229.0-160-71.771-160-160s71.771-160 160-160 160 71.771 160 160-71.771 160-160 160z"/></symbol><symbol xmlns="http://www.w3.org/2000/svg" viewBox="0 0 241 179" id="harmburger"><path d="M1 10C1 4.477 5.477.0 11 0h220c5.523.0 10 4.477 10 10s-4.477 10-10 10H11C5.477 20 1 15.523 1 10zm0 80c0-5.523 4.477-10 10-10h220c5.523.0 10 4.477 10 10s-4.477 10-10 10H11c-5.523.0-10-4.477-10-10zm9 69c-5.523.0-10 4.477-10 10s4.477 10 10 10h220c5.523.0 10-4.477 10-10s-4.477-10-10-10H10z"/></symbol></svg></main></div></div><footer class="pt-2 pb-2"><div class=wrap><p>&copy; 2021 rjfranssen</p></div></footer><svg width="0" height="0" class="hidden"><symbol xmlns="http://www.w3.org/2000/svg" viewBox="0 0 492.004 492.004" id="next"><path d="M484.14 226.886 306.46 49.202c-5.072-5.072-11.832-7.856-19.04-7.856-7.216.0-13.972 2.788-19.044 7.856l-16.132 16.136c-5.068 5.064-7.86 11.828-7.86 19.04.0 7.208 2.792 14.2 7.86 19.264L355.9 207.526H26.58C11.732 207.526.0 219.15.0 234.002v22.812c0 14.852 11.732 27.648 26.58 27.648h330.496L252.248 388.926c-5.068 5.072-7.86 11.652-7.86 18.864.0 7.204 2.792 13.88 7.86 18.948l16.132 16.084c5.072 5.072 11.828 7.836 19.044 7.836 7.208.0 13.968-2.8 19.04-7.872l177.68-177.68c5.084-5.088 7.88-11.88 7.86-19.1.016-7.244-2.776-14.04-7.864-19.12z"/></symbol><symbol xmlns="http://www.w3.org/2000/svg" viewBox="0 0 511.999 511.999" id="search"><path d="M508.874 478.708 360.142 329.976c28.21-34.827 45.191-79.103 45.191-127.309C405.333 90.917 314.416.0 202.666.0S0 90.917.0 202.667s90.917 202.667 202.667 202.667c48.206.0 92.482-16.982 127.309-45.191l148.732 148.732c4.167 4.165 10.919 4.165 15.086.0l15.081-15.082c4.165-4.166 4.165-10.92-.001-15.085zM202.667 362.667c-88.229.0-160-71.771-160-160s71.771-160 160-160 160 71.771 160 160-71.771 160-160 160z"/></symbol><symbol xmlns="http://www.w3.org/2000/svg" viewBox="0 0 241 179" id="harmburger"><path d="M1 10C1 4.477 5.477.0 11 0h220c5.523.0 10 4.477 10 10s-4.477 10-10 10H11C5.477 20 1 15.523 1 10zm0 80c0-5.523 4.477-10 10-10h220c5.523.0 10 4.477 10 10s-4.477 10-10 10H11c-5.523.0-10-4.477-10-10zm9 69c-5.523.0-10 4.477-10 10s4.477 10 10 10h220c5.523.0 10-4.477 10-10s-4.477-10-10-10H10z"/></symbol></svg><script src=https://rjfranssen.io/js/bundle.min.e23f146f1a54fbecd66e224e25d9b7ccad3a5c1c5bce508f74e215a81d39631aca9d233d80f0ed724c10fb9c858451882b84a74c3d5e1c3e4ff71431ec79c2e4.js></script><script src=https://rjfranssen.io/js/search.min.dfcb79b72ba2c8da30e65fd457e710817f878dee8b4e199e3602b642749ba25a7f5f4052e1e9f2afc4fa14de2f9fb858622a4c7ecee8c8b51b9396cf1e2549d6.js async defer></script></body></html>
