@@ -41,6 +41,7 @@ Sources I like to use when looking for data or for researching/sharing geographi
 * [Scientific and Technical Blogging: Radix vs. Blogdown](https://emitanaka.org/r/posts/2018-12-12-scientific-and-technical-blogging-radix-vs-blogdown/#blogdown)  
 * [Alison Hill: Blog](https://alison.rbind.io/post/2020-12-27-blogdown-checks/)  
 * [Work with RStudio, GitHub and Netlify to create and deploy your own webpage](https://medium.com/@diegousaiuk/how-i-used-hugo-and-blogdown-to-set-up-my-own-website-e32e2eddbf81)  
+* [Toha Getting Start Pages (GitHub deploy)](https://toha-guides.netlify.app/posts/getting-started/github-pages/)  
 
 ### Cheatsheets  
 

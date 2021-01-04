@@ -36,7 +36,7 @@ weight: 5
   <div class="card" style="width: 250px;cursor: pointer;" onclick="window.open('https://rjfranssen.shinyapps.io/crime-dash/')">
     <div class="container">
     <img src="/images/crime-dash-card.png" alt="crime-dash" style="width:100%">
-      <p>one of my first apps - trying to get my hands around interactivity</p>
+      <p>one of my first apps to get my hands around interactivity</p>
     </div>
   </div>
   
