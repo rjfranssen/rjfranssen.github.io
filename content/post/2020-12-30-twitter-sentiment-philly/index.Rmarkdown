@@ -28,7 +28,15 @@ knitr::opts_chunk$set(collapse = TRUE
 ```
 
 
-Updated `r today()`.  
+```{r echo=FALSE}
+# Calculate reading time
+bytes <- file.size("index.Rmarkdown")
+words <- bytes/10
+minutes <- words/100
+```
+
+`r today()` | _`r round(minutes)` min_
+
 
 This is a walkthrough of using the Twitter API with the `rtweet` R package. It borrows from a few difference sources, including:
 * [ropensci/rtweet documentation](https://github.com/ropensci/rtweet)  
@@ -183,7 +191,7 @@ tweets_df %>%
   select(screen_name
          , text
          , favorite_count
-         , created_at) %>% knitr::kable()
+         , created_at)
 
 ```
 
@@ -245,8 +253,8 @@ ggplot(users_by_source) +
   labs(title = "Top 10 Twitter Platforms People are Using") +
   xlab("") +
   ylab("Number of Users") +
-  scale_y_continuous(breaks = seq(0, 400, by=50), limits = c(0, 400), expand = c(0, 0)) + # use expand() to remove empty space between axis and bars
-  geom_hline(yintercept = seq(0, 400, by = 25), color = 'white')
+  scale_y_continuous(breaks = seq(0, 450, by=50), limits = c(0, 450), expand = c(0, 0)) + # use expand() to remove empty space between axis and bars
+  geom_hline(yintercept = seq(0, 450, by = 25), color = 'white')
 ```
 
 
@@ -276,7 +284,10 @@ pltly1 <- plotly::ggplotly(plt1)
 ```
 
 
-_Note: for html widgets, because I'm writing this in .Rmarkdown, I use the below snippet to save the html widget to file and then bring it back in via an iframe. The main reason is that `.Rmarkdown` files get rendered as `.markdown` and then `html`, and my widgets were getting lost. Widgets work great with `.Rmd` files, but I lose some of the other hugo functionalities like the TOCs and code highlighting. This might change soon if it hasn't already. I've hidden these snippets for the other html widgets below._
+_Note: Because I'm writing this in .Rmarkdown, I use the below snippet to save the html widget to file and then bring it back in via an iframe. The main reason is that `.Rmarkdown` files are processed by `Pandoc`, output as `.markdown` and then processed by Hugo/Goldmark before becoming `html` files. The `.Rmd` files are processed by `Pandoc` and output as `html`; so, while the `.Rmd` is widget-friendly, I was losing the Hugo/Goldmark styling associated with my Hugo theme (e.g. TOCs, code highlighting). This is why all my posts that involve code are written in `.Rmarkdown`. See the [blogdown docs](https://bookdown.org/yihui/blogdown/output-format.html) for a better explanation._
+
+**Update!** Exporting and bringing an html file via an iframe is no longer necessary with `blogdown 1.0`! I'm going to see the code as a reference if I need to do it again to avoid css conflicts, but giant thanks to the blogdown team for making this workaround obsolete. See the [release notes including markdown comparisons here](https://blog.rstudio.com/2021/01/18/blogdown-v1.0/).
+
 
 ```{r, results = "asis"}
 widget <- pltly1
@@ -414,17 +425,19 @@ Looking at the `nrc` lexicon, what are some of the "joy" words?
 nrc_joy <- get_sentiments("nrc") %>% 
   filter(sentiment == "joy")
 
-head(nrc_joy) %>% knitr::kable()
+head(nrc_joy)
 ```
 
-How many "joy" words do we have in our tweets?
+How many "joy" words do we have in our tweets? 
+
+_Note: When I last ran this code, the second word listed under "joy" was "white". I don't believe that the word "white" is synonymous with "joy" or should be interpreted as joyous, but I left it here to demonstrate an assumption that is built into this particular lexicon, and that we must rely on context to judge the sentiment of a word and to beware of these occurrences in our analyses. I plan to append this post with methods to evaluate words based on context._
 
 ```{r sentimentsfive}
 tidy_books %>%
   filter(book == "Philadelphia") %>%
   inner_join(nrc_joy) %>%
   count(word, sort = TRUE) %>%
-  head(10) %>% knitr::kable()
+  head(10)
 ```
 
 Using `tidyr`, we can continue to examine how sentiment changes throughout the book. This is more relevant to the novels examples from the docs, but I'm including it here as an exercise. This example will use the `bing` lexicon. We need some type of interval - the example creates an index from 80 line chunks, but I'm going to update this to use the `chapter` value, which now represents the date of each tweet allowing to see changes in sentiment over time.
@@ -438,7 +451,7 @@ From the docs:
 
 ```{r sentimentssix}
 philly_sentiment <- tidy_books %>%
-  inner_join(get_sentiments("bing")) %>%
+  inner_join(get_sentiments("bing"), by = c("word" = "word")) %>%
   #count(book, index = linenumber %/% 80, sentiment) %>% # 80-line tweet chunks
   count(book, index = chapter, sentiment) %>%
   spread(sentiment, n, fill = 0) %>%
@@ -475,16 +488,17 @@ Using `dplyr::inner_join()`, estimate the different sentiment values for each le
 ```{r comparetwo}
 ## afinn
 afinn <- philly_tweets %>% 
-  inner_join(get_sentiments("afinn")) %>% 
+  inner_join(get_sentiments("afinn"), by = c("word" = "word")) %>% 
   #group_by(index = linenumber %/% 80) %>% # Can use 80-line chunks
   group_by(index = chapter) %>% # or other type of index value, like date
   summarise(sentiment = sum(value)) %>% 
-  mutate(method = "AFINN")
+  mutate(method = "AFINN") %>%
+  ungroup()
 
 ## rbinding bing and nrc
 bing_and_nrc <- bind_rows(
   philly_tweets %>% 
-    inner_join(get_sentiments("bing")) %>%
+    inner_join(get_sentiments("bing"), by = c("word" = "word")) %>%
     mutate(method = "Bing et al."),
   philly_tweets %>% 
     inner_join(get_sentiments("nrc") %>% 
@@ -525,10 +539,10 @@ TODO: Update include and eval settings here - ok to keep in md doc but no need t
 ```{r sentimentcounts}
 get_sentiments("nrc") %>% 
   filter(sentiment %in% c("positive", "negative")) %>% 
-  count(sentiment) %>% knitr::kable()
+  count(sentiment)
 
 get_sentiments("bing") %>% 
-  count(sentiment) %>% knitr::kable()
+  count(sentiment)
 ```
 
 ```{r routineone}

@@ -16,9 +16,12 @@ header:
 ---
 
 
+
+
+
+2021-01-21 | _10 min_
+
 First, it's important to recognize that Zip Codes are not polygons - they are a way for the US Post Office to associate mailing addresses with a particular post office or metro area delivery station, like a lookup table. However, the US Census Bureau created the ["Zip Code Tabulation Area" (ZCTA)](https://www.census.gov/programs-surveys/geography/guidance/geo-areas/zctas.html) to generalize an areal representation of Zip Code service areas. This post demonstrates how to create a choropleth map using ZCTAs, R, and the [leaflet](https://rstudio.github.io/leaflet/) library. _I originally [posted this](https://www.reddit.com/r/rprogramming/comments/ifnfju/create_a_map_based_off_of_us_postal_zip_codes/) to reddit._
-
-
 
 
 
@@ -88,11 +91,11 @@ sales_data <- data.frame(
 # ok, now i have some fake sales numbers
 sales_data %>% head(5)
 ##   state   zip sales
-## 1    AL 35004  1220
-## 2    AL 35005  1977
-## 3    AL 35006  3882
-## 4    AL 35007  2335
-## 5    AL 35008  2564
+## 1    AL 35004  2454
+## 2    AL 35005  2972
+## 3    AL 35006  2094
+## 4    AL 35007  4973
+## 5    AL 35008  3773
 ```
 
 

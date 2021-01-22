@@ -1,26 +1,28 @@
 ---
-title: Custom Color Palette in R
-author: rjfranssen
+title: "Custom Color Palette in R"
+author: "rjfranssen"
 date: '2020-12-30'
-slug: custom-color-palette
-categories:
-  - utilities
-  - helpers
-tags:
-  - r
-  - ggplot2
-  - color
 header:
   caption: ''
   image: ''
   preview: yes
+slug: custom-color-palette
+tags:
+- r
+- ggplot2
+- color
+categories:
+- utilities
+- helpers
 ---
 
 
 
 
 
-Updated 2021-01-02.
+
+
+2021-01-21 | _8 min_
 
 I'm describing customizing my own color palette for ggplot2. This is based off of [Creating corporate colour palettes for ggplot2](https://drsimonj.svbtle.com/creating-corporate-colour-palettes-for-ggplot2) by [drsimonj](https://twitter.com/drsimonj).
 
@@ -72,7 +74,7 @@ splashdown_cols() %>% show_col()
 splashdown_cols("light_sea_green", "burnt_sienna") %>% show_col()
 ```
 
-<img src="/post/2020-12-30-custom-color-palette/index_files/figure-html/examples-1.png" width="672" />
+<img src="{{< blogdown/postref >}}index_files/figure-html/examples-1.png" width="672" />
 
 Very simple plot with color selection.
 
@@ -83,7 +85,7 @@ ggplot(mtcars, aes(hp, mpg)) +
                size = 4, alpha = .8)
 ```
 
-<img src="/post/2020-12-30-custom-color-palette/index_files/figure-html/simpltplot-1.png" width="672" />
+<img src="{{< blogdown/postref >}}index_files/figure-html/simpltplot-1.png" width="672" />
 
 ### Create palettes
 
@@ -123,10 +125,10 @@ splashdown_pal("primary")(12) %>% show_col()
 splashdown_pal("secondary")(4) %>% show_col()
 ```
 
-<img src="/post/2020-12-30-custom-color-palette/index_files/figure-html/showinterp-1.png" width="672" />
+<img src="{{< blogdown/postref >}}index_files/figure-html/showinterp-1.png" width="672" />
 
 
-### Scale functions for ggplot2
+### Create Scale functions for ggplot2
 
 Everything that's been up to this point is creating a storage places for favorite colors. Now, prepare some functions specifically for using with `ggplot`.
 
@@ -157,6 +159,7 @@ scale_fill_splashdown <- function(palette = "main", discrete = TRUE, reverse = F
 ```
 
 
+
 ### Example plots
 
 
@@ -167,7 +170,7 @@ ggplot(iris, aes(Sepal.Width, Sepal.Length, color = Sepal.Length)) +
     scale_color_splashdown(discrete = FALSE, palette = "primary")
 ```
 
-<img src="/post/2020-12-30-custom-color-palette/index_files/figure-html/exampletwo-1.png" width="672" />
+<img src="{{< blogdown/postref >}}index_files/figure-html/exampletwo-1.png" width="672" />
 
 
 ```r
@@ -176,7 +179,7 @@ ggplot(iris, aes(Sepal.Width, Sepal.Length, color = Species)) +
     scale_color_splashdown("secondary")
 ```
 
-<img src="/post/2020-12-30-custom-color-palette/index_files/figure-html/exampleone-1.png" width="672" />
+<img src="{{< blogdown/postref >}}index_files/figure-html/exampleone-1.png" width="672" />
 
 
 
@@ -187,7 +190,7 @@ ggplot(mpg, aes(manufacturer, fill = manufacturer)) +
     scale_fill_splashdown(palette = "all", guide = "none")
 ```
 
-<img src="/post/2020-12-30-custom-color-palette/index_files/figure-html/examplethree-1.png" width="672" />
+<img src="{{< blogdown/postref >}}index_files/figure-html/examplethree-1.png" width="672" />
 
 
 Finally, I want to be able to pull down my palette whereever I am, so I copied the above R code into `splashdown_col_pal.r` and pushed it to my [GitHub repo](https://github.com/rjfranssen/rjfranssen). I can read it down using `devtools` as an [r file](https://stackoverflow.com/questions/35720660/how-to-use-an-r-script-from-github) or as a [gist](https://gist.github.com/jtoll/4041987). [(devtools cheatsheet)](https://rstudio.com/wp-content/uploads/2015/03/devtools-cheatsheet.pdf)  

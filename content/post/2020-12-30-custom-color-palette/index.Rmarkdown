@@ -1,19 +1,19 @@
 ---
-title: Custom Color Palette in R
-author: rjfranssen
+title: "Custom Color Palette in R"
+author: "rjfranssen"
 date: '2020-12-30'
-slug: custom-color-palette
-categories:
-  - utilities
-  - helpers
-tags:
-  - r
-  - ggplot2
-  - color
 header:
   caption: ''
   image: ''
   preview: yes
+slug: custom-color-palette
+tags:
+- r
+- ggplot2
+- color
+categories:
+- utilities
+- helpers
 ---
 
 
@@ -31,7 +31,14 @@ knitr::opts_chunk$set(collapse = TRUE
 ```
 
 
-Updated `r today()`.
+```{r echo=FALSE}
+# Calculate reading time
+bytes <- file.size("index.Rmarkdown")
+words <- bytes/10
+minutes <- words/100
+```
+
+`r today()` | _`r round(minutes)` min_
 
 I'm describing customizing my own color palette for ggplot2. This is based off of [Creating corporate colour palettes for ggplot2](https://drsimonj.svbtle.com/creating-corporate-colour-palettes-for-ggplot2) by [drsimonj](https://twitter.com/drsimonj).
 
@@ -124,7 +131,7 @@ splashdown_pal("secondary")(4) %>% show_col()
 ```
 
 
-### Scale functions for ggplot2
+### Create Scale functions for ggplot2
 
 Everything that's been up to this point is creating a storage places for favorite colors. Now, prepare some functions specifically for using with `ggplot`.
 
@@ -152,6 +159,7 @@ scale_fill_splashdown <- function(palette = "main", discrete = TRUE, reverse = F
   }
 }
 ```
+
 
 
 ### Example plots

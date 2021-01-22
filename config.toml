@@ -4,12 +4,12 @@ enableRobotsTXT = true
 theme = "compose"
 enableGitInfo = true
 enableEmoji = true # added this
-ignoreFiles = ["\\.Rmd$", "\\.Rmarkdown$", "_files$", "_cache$", "\\.yml$",] # added this per blogdown recommendation
+ignoreFiles = ["\\.Rmd$", "\\.Rmarkdown$", "_cache$", "\\.yml$", "\\.knit\\.md$", "\\.utf8\\.md$"] # added this per blogdown recommendation
 
 disableKinds = ["taxonomy", "taxonomyTerm"]
 
-[permalinks] # added this for new blog posts per blogdown recommendation
-    post = "/:year/:month/:day/:slug/"
+#[permalinks] # added this for new blog posts per blogdown recommendation
+#    post = "/:year/:month/:day/:slug/" # I'm taking this out; no reason to parse these out so far
     
 #  menu items
 #[[menu.main]]

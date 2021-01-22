@@ -2,15 +2,15 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>rjfranssen</title>
-    <link>/</link>
+    <link>https://rjfranssen.io/</link>
     <description>Recent content on rjfranssen</description>
-    <generator>Hugo -- gohugo.io</generator><atom:link href="/index.xml" rel="self" type="application/rss+xml" />
+    <generator>Hugo -- gohugo.io</generator><atom:link href="https://rjfranssen.io/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Overview</title>
-      <link>/docs/overview/</link>
+      <link>https://rjfranssen.io/docs/overview/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>/docs/overview/</guid>
+      <guid>https://rjfranssen.io/docs/overview/</guid>
       <description>Instead of writing all your site pages from scratch, Hugo lets you define and use shortcodes.
 Why shortcodes? While markdown is sufficient to produce simple pages, it&#39;s insufficient where complex page structures are needed. Thusly, whenever we need special styling, shortcodes compliment the shortcomings of markdown.
 This way, you can side step complex html and css boilerplate in your content files.</description>
@@ -18,32 +18,32 @@ This way, you can side step complex html and css boilerplate in your content fil
     
     <item>
       <title>Apps</title>
-      <link>/app/</link>
+      <link>https://rjfranssen.io/app/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>/app/</guid>
+      <guid>https://rjfranssen.io/app/</guid>
       <description>my favorite shiny app with cool home ranging models and time lapse tiger tracking
 static flexdashboard page that i use for fast chart and map snippets--shiny app i created to demo view covid data updates using r and js
-one of my first apps - trying to get my hands around interactivity
+one of my first apps to get my hands around interactivity
 </description>
     </item>
     
     <item>
       <title>Links and References</title>
-      <link>/links/list/</link>
+      <link>https://rjfranssen.io/links/list/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>/links/list/</guid>
+      <guid>https://rjfranssen.io/links/list/</guid>
       <description>Sources I like to use when looking for data or for researching/sharing geographic &amp;amp; statistical concepts. I&#39;m fully aware that googling is faster than scrolling through this ridiculous list, but it makes me feel better about closing Chrome tabs at the end of the day.
 APIs and Data sources  Armed Conflict Location &amp;amp; Event Data Project US Census Bureau (datasets) US Census Bureay (developers) Data.gov (US) NOAA Datasets Waterpoint Data (WPDX) Humanitarian Data Exchange (OCHA) Relief Web Labs (OCHA) Taxonomy as a Service (OCHA) Data.</description>
     </item>
     
     <item>
       <title>Shortcodes</title>
-      <link>/docs/shortcodes/</link>
+      <link>https://rjfranssen.io/docs/shortcodes/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>/docs/shortcodes/</guid>
+      <guid>https://rjfranssen.io/docs/shortcodes/</guid>
       <description>Why shortcodes? While markdown is sufficient to produce simple pages, it&#39;s insufficient where complex page structures are needed. Thusly, whenever we need special styling, shortcodes compliment the shortcomings of markdown.
 This way, you can side step complex html and css boilerplate in your content files.
 Sometimes, the shortcode will wrap content, sometimes it won&#39;t. When content is wrapped, a closing shortcode tag is needed. Please see the link I provided above and the markdown files for examples.</description>
@@ -51,29 +51,42 @@ Sometimes, the shortcode will wrap content, sometimes it won&#39;t. When content
     
     <item>
       <title>Shortcodes Applied</title>
-      <link>/docs/shortcodes-applied/</link>
+      <link>https://rjfranssen.io/docs/shortcodes-applied/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>/docs/shortcodes-applied/</guid>
-      <description>Using blocks, columns &amp;amp; buttons 1 2 3 4 5 6 7 8 9 10 11 12 13  {{&amp;lt; block &amp;#34;grid-2&amp;#34; &amp;gt;}} {{&amp;lt; column &amp;gt;}} #### Coumn 1  Lorem ipsum dolor sit amet, ... {{&amp;lt; button &amp;#34;https://github.com/onweru/compose&amp;#34; &amp;#34;Download Theme&amp;#34; &amp;gt;}} {{&amp;lt; /column &amp;gt;}} {{&amp;lt; column &amp;gt;}} &amp;lt;!-- generates 👇 --&amp;gt;   Coumn 1 Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et</description>
+      <guid>https://rjfranssen.io/docs/shortcodes-applied/</guid>
+      <description>Using blocks, columns &amp;amp; buttons {{&amp;lt; block &amp;#34;grid-2&amp;#34; &amp;gt;}} {{&amp;lt; column &amp;gt;}} #### Coumn 1  Lorem ipsum dolor sit amet, ... {{&amp;lt; button &amp;#34;https://github.com/onweru/compose&amp;#34; &amp;#34;Download Theme&amp;#34; &amp;gt;}} {{&amp;lt; /column &amp;gt;}} {{&amp;lt; column &amp;gt;}} &amp;lt;!-- generates 👇 --&amp;gt; Coumn 1 Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et
+dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</description>
+    </item>
+    
+    <item>
+      <title>Parameterized Reporting in R</title>
+      <link>https://rjfranssen.io/post/parameteried-reporting-in-r/</link>
+      <pubDate>Sat, 16 Jan 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://rjfranssen.io/post/parameteried-reporting-in-r/</guid>
+      <description>2021-01-21 | 9 min
+Just give me the code Skip all this and jump to the parameterized-reporting-example.Rmd file in my parameterized-reporting repo.
+About parametrized reports This is a parameterized report written in in R Markdown. It consists of a combination of text and code chunks and uses R, pandoc, and LaTeX to connect to a data source, create visualizations, and export a single file to html, pdf, or word without changing the code.</description>
     </item>
     
     <item>
       <title>US Zip Code Choropleth</title>
-      <link>/2021/01/03/create-map-based-on-us-zip-codes/</link>
+      <link>https://rjfranssen.io/post/create-map-based-on-us-zip-codes/</link>
       <pubDate>Sun, 03 Jan 2021 00:00:00 +0000</pubDate>
       
-      <guid>/2021/01/03/create-map-based-on-us-zip-codes/</guid>
-      <description>First, it&#39;s important to recognize that Zip Codes are not polygons - they are a way for the US Post Office to associate mailing addresses with a particular post office or metro area delivery station, like a lookup table. However, the US Census Bureau created the &amp;quot;Zip Code Tabulation Area&amp;quot; (ZCTA) to generalize an areal representation of Zip Code service areas. This post demonstrates how to create a choropleth map using ZCTAs, R, and the leaflet library.</description>
+      <guid>https://rjfranssen.io/post/create-map-based-on-us-zip-codes/</guid>
+      <description>2021-01-21 | 10 min
+First, it&#39;s important to recognize that Zip Codes are not polygons - they are a way for the US Post Office to associate mailing addresses with a particular post office or metro area delivery station, like a lookup table. However, the US Census Bureau created the &amp;quot;Zip Code Tabulation Area&amp;quot; (ZCTA) to generalize an areal representation of Zip Code service areas. This post demonstrates how to create a choropleth map using ZCTAs, R, and the leaflet library.</description>
     </item>
     
     <item>
       <title>Custom Color Palette in R</title>
-      <link>/2020/12/30/custom-color-palette/</link>
+      <link>https://rjfranssen.io/post/custom-color-palette/</link>
       <pubDate>Wed, 30 Dec 2020 00:00:00 +0000</pubDate>
       
-      <guid>/2020/12/30/custom-color-palette/</guid>
-      <description>Updated 2021-01-02.
+      <guid>https://rjfranssen.io/post/custom-color-palette/</guid>
+      <description>2021-01-21 | 8 min
 I&#39;m describing customizing my own color palette for ggplot2. This is based off of Creating corporate colour palettes for ggplot2 by drsimonj.
 First, find a bunch of colors that you like. Canva is a good place to go for inspiration; or, us this tool from Adobe Color that will extract colors from a photo you like. Then, there&#39;s always colorbrewer2.
 Note: In some cases, it&#39;s enough to use the scale_color_manual() and scale_fill_manual() functions directly within ggplot2.</description>
@@ -81,13 +94,13 @@ Note: In some cases, it&#39;s enough to use the scale_color_manual() and scale_f
     
     <item>
       <title>Twitter Sentiment Philly</title>
-      <link>/2020/12/30/twitter-sentiment-philly/</link>
+      <link>https://rjfranssen.io/post/twitter-sentiment-philly/</link>
       <pubDate>Wed, 30 Dec 2020 00:00:00 +0000</pubDate>
       
-      <guid>/2020/12/30/twitter-sentiment-philly/</guid>
-      <description>Updated 2021-01-03.
+      <guid>https://rjfranssen.io/post/twitter-sentiment-philly/</guid>
+      <description>2021-01-21 | 26 min
 This is a walkthrough of using the Twitter API with the rtweet R package. It borrows from a few difference sources, including:
- ropensci/rtweet documentation here Tidy Text Mining with R Twitter Data in R Using Rtweet: Analyze and Download Twitter Data Comparing Twitter archives Mining NASA metadata Analyzing usenet text  Load libraries Configure Twitter API access There are a couple different ways to authenticate your session. The rtweet package makes this pretty easy by enabling browser-based authentication.</description>
+ ropensci/rtweet documentation here Tidy Text Mining with R Twitter Data in R Using Rtweet: Analyze and Download Twitter Data Comparing Twitter archives Mining NASA metadata Analyzing usenet text  Load libraries Configure Twitter API access There are a couple different ways to authenticate your session.</description>
     </item>
     
   </channel>

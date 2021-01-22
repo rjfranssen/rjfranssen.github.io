@@ -201,6 +201,19 @@ Sources I like to use when looking for data or for researching/sharing geographi
 * [MITIE](https://github.com/mit-nlp/MITIE)     
 * [MITIE trainer](https://github.com/Sotera/mitie-trainer)   
 
+### Phaser  
+
+* [An Absolute Beginner's Guide to Using npm (node)](https://nodesource.com/blog/an-absolute-beginners-guide-to-using-npm/)  
+* [npm http-server (npmjs)](https://www.npmjs.com/package/http-server)  
+* [Getting Started with Phaser3](https://phaser.io/tutorials/getting-started-phaser3/part5)  
+* [Making Your First Phaser3 Game](https://phaser.io/tutorials/making-your-first-phaser-3-game/part1)  
+* [Phaser3 IDEs Writeup](https://phaser.io/tutorials/getting-started-phaser3/part3)  
+* [Phaser3 Examples (labs)](http://labs.phaser.io/)  
+* [Phaser3 Examples (GitHub)](https://github.com/photonstorm/phaser3-examples)  
+* [Phaser2 Forum](https://www.html5gamedevs.com/forum/14-phaser-2/)  
+* [Phaser-made Games](https://phaser.io/news/category/game)  
+* [Phaser3 Particle Editor](https://github.com/koreezgames/phaser3-particle-editor)  
+* [Phaser3 Level Editor](https://stackblitz.com/edit/phaser3-level-editor)  
 
 ### Research  
 

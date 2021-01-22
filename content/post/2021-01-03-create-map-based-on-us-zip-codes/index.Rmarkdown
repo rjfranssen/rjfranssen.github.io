@@ -15,9 +15,6 @@ header:
   preview: yes
 ---
 
-
-First, it's important to recognize that Zip Codes are not polygons - they are a way for the US Post Office to associate mailing addresses with a particular post office or metro area delivery station, like a lookup table. However, the US Census Bureau created the ["Zip Code Tabulation Area" (ZCTA)](https://www.census.gov/programs-surveys/geography/guidance/geo-areas/zctas.html) to generalize an areal representation of Zip Code service areas. This post demonstrates how to create a choropleth map using ZCTAs, R, and the [leaflet](https://rstudio.github.io/leaflet/) library. _I originally [posted this](https://www.reddit.com/r/rprogramming/comments/ifnfju/create_a_map_based_off_of_us_postal_zip_codes/) to reddit._
-
 ```{r setup, include = FALSE, message = FALSE, warning = FALSE}
 # Knitr options: https://yihui.org/knitr/options/
 library(lubridate)
@@ -49,6 +46,17 @@ bib <- c(
     'knitcitations' = citation('knitcitations')
 )
 ```
+
+```{r echo=FALSE}
+# Calculate reading time
+bytes <- file.size("index.Rmarkdown")
+words <- bytes/10
+minutes <- words/100
+```
+
+`r today()` | _`r round(minutes)` min_
+
+First, it's important to recognize that Zip Codes are not polygons - they are a way for the US Post Office to associate mailing addresses with a particular post office or metro area delivery station, like a lookup table. However, the US Census Bureau created the ["Zip Code Tabulation Area" (ZCTA)](https://www.census.gov/programs-surveys/geography/guidance/geo-areas/zctas.html) to generalize an areal representation of Zip Code service areas. This post demonstrates how to create a choropleth map using ZCTAs, R, and the [leaflet](https://rstudio.github.io/leaflet/) library. _I originally [posted this](https://www.reddit.com/r/rprogramming/comments/ifnfju/create_a_map_based_off_of_us_postal_zip_codes/) to reddit._
 
 
 ```{r libraries}

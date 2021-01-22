@@ -20,7 +20,7 @@ knitr::opts_chunk$set(echo = TRUE)
 library(blogdown)
 
 new_site(
-  dir = "~/io",
+  dir = "~/rjfranssen.github.io",
   install_hugo = TRUE,
   format = "toml",
   sample = TRUE,

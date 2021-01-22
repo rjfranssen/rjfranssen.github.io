@@ -19,7 +19,10 @@ header:
 
 
 
-Updated 2021-01-03.  
+
+
+2021-01-21 | _26 min_
+
 
 This is a walkthrough of using the Twitter API with the `rtweet` R package. It borrows from a few difference sources, including:
 * [ropensci/rtweet documentation](https://github.com/ropensci/rtweet)  
@@ -106,12 +109,12 @@ tweets_df %>% head()
 ## # A tibble: 6 x 97
 ##   user_id status_id created_at          screen_name text  source
 ##   <chr>   <chr>     <dttm>              <chr>       <chr> <chr> 
-## 1 142219~ 13439700~ 2020-12-29 17:20:08 PhillyInqu~ "Uni~ Socia~
-## 2 142219~ 13421567~ 2020-12-24 17:14:43 PhillyInqu~ "It'~ Socia~
-## 3 142219~ 13432591~ 2020-12-27 18:15:04 PhillyInqu~ "Tod~ Socia~
-## 4 142219~ 13418156~ 2020-12-23 18:39:19 PhillyInqu~ "COV~ Socia~
-## 5 142219~ 13421897~ 2020-12-24 19:25:49 PhillyInqu~ "New~ Socia~
-## 6 142219~ 13418101~ 2020-12-23 18:17:18 PhillyInqu~ "<U+274C> S~ Socia~
+## 1 157556~ 13520120~ 2021-01-20 21:56:15 NBCPhilade~ Wher~ Socia~
+## 2 157556~ 13512856~ 2021-01-18 21:49:44 NBCPhilade~ Pres~ Socia~
+## 3 157556~ 13501436~ 2021-01-15 18:11:35 NBCPhilade~ JUST~ Socia~
+## 4 157556~ 13516454~ 2021-01-19 21:39:16 NBCPhilade~ UPDA~ Socia~
+## 5 157556~ 13499459~ 2021-01-15 05:06:07 NBCPhilade~ Phil~ Socia~
+## 6 157556~ 13498216~ 2021-01-14 20:52:18 NBCPhilade~ The ~ Socia~
 ## # ... with 91 more variables: display_text_width <dbl>,
 ## #   reply_to_status_id <chr>, reply_to_user_id <chr>,
 ## #   reply_to_screen_name <chr>, is_quote <lgl>, is_retweet <lgl>,
@@ -189,8 +192,8 @@ tweets_df %>% select(
 ## # A tibble: 2 x 18
 ##   text  lang  hashtags symbols favorite_count retweet_count   lat   lng name 
 ##   <chr> <chr> <list>   <list>           <int>         <int> <dbl> <dbl> <chr>
-## 1 Unio~ de    <chr [1~ <chr [~              0             0    NA    NA The ~
-## 2 It's~ en    <chr [1~ <chr [~              5             1    NA    NA The ~
+## 1 Wher~ en    <chr [1~ <chr [~              0             0    NA    NA NBC1~
+## 2 Pres~ en    <chr [1~ <chr [~            100             6    NA    NA NBC1~
 ## # ... with 9 more variables: screen_name <chr>, followers_count <int>,
 ## #   friends_count <int>, location <chr>, description <chr>, listed_count <int>,
 ## #   statuses_count <int>, created_at <dttm>, account_created_at <dttm>
@@ -203,7 +206,7 @@ What is our total tweet *count*?
 
 ```r
 nrow(tweets_df) %>% print()
-## [1] 1897
+## [1] 1981
 ```
 
 What is the most *favorited* tweet?  
@@ -215,16 +218,12 @@ tweets_df %>%
   select(screen_name
          , text
          , favorite_count
-         , created_at) %>% knitr::kable()
+         , created_at)
+## # A tibble: 1 x 4
+##   screen_name  text                           favorite_count created_at         
+##   <chr>        <chr>                                   <int> <dttm>             
+## 1 ScottPresler "Unarmed man murdered while w~           2899 2021-01-18 17:35:01
 ```
-
-
-
-|screen_name |text                                                                                                                                                                                          | favorite_count|created_at          |
-|:-----------|:---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|--------------:|:-------------------|
-|GetUpESPN   |"Carson Wentz is soft! ... He don't have that Philly toughness ... But Jalen Hurts does! Jalen Hurts IS Philadelphia. Jalen Hurts is freakin' Rocky!"
-
-—@Realrclark25 https://t.co/nYvJ7IsB57 |           1993|2020-12-21 16:16:24 |
 
 
 What users are *tweeting the most*?  
@@ -248,7 +247,7 @@ ggplot(top_tweeters) +
   ylab("Number of Tweets")
 ```
 
-<img src="/post/2020-12-30-twitter-sentiment-philly/index_files/figure-html/statsthree-1.png" width="672" />
+<img src="{{< blogdown/postref >}}index_files/figure-html/statsthree-1.png" width="672" />
 
 
 In what *languages* are they tweeting?  
@@ -265,11 +264,11 @@ tweets_df %>%
 ## # A tibble: 5 x 2
 ##   lang  num_tweets
 ##   <chr>      <int>
-## 1 en          1829
-## 2 und           34
-## 3 cy             8
-## 4 es             6
-## 5 de             3
+## 1 en          1907
+## 2 und           44
+## 3 cy             9
+## 4 da             3
+## 5 et             3
 
 # ggplot(tweets_df) +
 #   geom_bar(aes(x = lang, fill = lang))
@@ -297,11 +296,11 @@ ggplot(users_by_source) +
   labs(title = "Top 10 Twitter Platforms People are Using") +
   xlab("") +
   ylab("Number of Users") +
-  scale_y_continuous(breaks = seq(0, 400, by=50), limits = c(0, 400), expand = c(0, 0)) + # use expand() to remove empty space between axis and bars
-  geom_hline(yintercept = seq(0, 400, by = 25), color = 'white')
+  scale_y_continuous(breaks = seq(0, 450, by=50), limits = c(0, 450), expand = c(0, 0)) + # use expand() to remove empty space between axis and bars
+  geom_hline(yintercept = seq(0, 450, by = 25), color = 'white')
 ```
 
-<img src="/post/2020-12-30-twitter-sentiment-philly/index_files/figure-html/statsfive-1.png" width="672" />
+<img src="{{< blogdown/postref >}}index_files/figure-html/statsfive-1.png" width="672" />
 
 
 *How many* tweets per day?  
@@ -331,7 +330,10 @@ pltly1 <- plotly::ggplotly(plt1)
 ```
 
 
-_Note: for html widgets, because I'm writing this in .Rmarkdown, I use the below snippet to save the html widget to file and then bring it back in via an iframe. The main reason is that `.Rmarkdown` files get rendered as `.markdown` and then `html`, and my widgets were getting lost. Widgets work great with `.Rmd` files, but I lose some of the other hugo functionalities like the TOCs and code highlighting. This might change soon if it hasn't already. I've hidden these snippets for the other html widgets below._
+_Note: Because I'm writing this in .Rmarkdown, I use the below snippet to save the html widget to file and then bring it back in via an iframe. The main reason is that `.Rmarkdown` files are processed by `Pandoc`, output as `.markdown` and then processed by Hugo/Goldmark before becoming `html` files. The `.Rmd` files are processed by `Pandoc` and output as `html`; so, while the `.Rmd` is widget-friendly, I was losing the Hugo/Goldmark styling associated with my Hugo theme (e.g. TOCs, code highlighting). This is why all my posts that involve code are written in `.Rmarkdown`. See the [blogdown docs](https://bookdown.org/yihui/blogdown/output-format.html) for a better explanation._
+
+**Update!** Exporting and bringing an html file via an iframe is no longer necessary with `blogdown 1.0`! I'm going to see the code as a reference if I need to do it again to avoid css conflicts, but giant thanks to the blogdown team for making this workaround obsolete. See the [release notes including markdown comparisons here](https://blog.rstudio.com/2021/01/18/blogdown-v1.0/).
+
 
 
 ```r
@@ -366,7 +368,7 @@ dygraph1 <- dygraph(tweets_ts, main = "Daily Tweets for 'Philadelphia' (dygraph)
 
 And *where* are people tweeting?
 
-Of the 1897 tweets that we have, 133 are geotagged. We'll plot those using [leaflet](https://rstudio.github.io/leaflet/). I'm assigning the tweet `text` to each point's `label` and `popup` arguments.  
+Of the 1981 tweets that we have, 111 are geotagged. We'll plot those using [leaflet](https://rstudio.github.io/leaflet/). I'm assigning the tweet `text` to each point's `label` and `popup` arguments.  
 
 
 ```r
@@ -490,14 +492,14 @@ tidy_books %>% head() %>% knitr::kable()
 
 
 
-|book         |chapter    | linenumber|word     |
-|:------------|:----------|----------:|:--------|
-|Philadelphia |2020-12-29 |          1|union    |
-|Philadelphia |2020-12-29 |          1|to       |
-|Philadelphia |2020-12-29 |          1|sell     |
-|Philadelphia |2020-12-29 |          1|mark     |
-|Philadelphia |2020-12-29 |          1|mckenzie |
-|Philadelphia |2020-12-29 |          1|to       |
+|book         |chapter    | linenumber|word  |
+|:------------|:----------|----------:|:-----|
+|Philadelphia |2021-01-20 |          1|where |
+|Philadelphia |2021-01-20 |          1|was   |
+|Philadelphia |2021-01-20 |          1|this  |
+|Philadelphia |2021-01-20 |          1|when  |
+|Philadelphia |2021-01-20 |          1|we    |
+|Philadelphia |2021-01-20 |          1|were  |
 
 
 Now the tweets are in a tidy format with one word per row.  
@@ -509,21 +511,21 @@ Looking at the `nrc` lexicon, what are some of the "joy" words?
 nrc_joy <- get_sentiments("nrc") %>% 
   filter(sentiment == "joy")
 
-head(nrc_joy) %>% knitr::kable()
+head(nrc_joy)
+## # A tibble: 6 x 2
+##   word          sentiment
+##   <chr>         <chr>    
+## 1 absolution    joy      
+## 2 abundance     joy      
+## 3 abundant      joy      
+## 4 accolade      joy      
+## 5 accompaniment joy      
+## 6 accomplish    joy
 ```
 
+How many "joy" words do we have in our tweets? 
 
-
-|word          |sentiment |
-|:-------------|:---------|
-|absolution    |joy       |
-|abundance     |joy       |
-|abundant      |joy       |
-|accolade      |joy       |
-|accompaniment |joy       |
-|accomplish    |joy       |
-
-How many "joy" words do we have in our tweets?
+_Note: When I last ran this code, the second word listed under "joy" was "white". I don't believe that the word "white" is synonymous with "joy" or should be interpreted as joyous, but I left it here to demonstrate an assumption that is built into this particular lexicon, and that we must rely on context to judge the sentiment of a word and to beware of these occurrences in our analyses. I plan to append this post with methods to evaluate words based on context._
 
 
 ```r
@@ -531,23 +533,21 @@ tidy_books %>%
   filter(book == "Philadelphia") %>%
   inner_join(nrc_joy) %>%
   count(word, sort = TRUE) %>%
-  head(10) %>% knitr::kable()
+  head(10)
+## # A tibble: 10 x 2
+##    word             n
+##    <chr>        <int>
+##  1 good            47
+##  2 white           46
+##  3 food            41
+##  4 love            30
+##  5 music           25
+##  6 inauguration    24
+##  7 vote            21
+##  8 birthday        19
+##  9 resources       19
+## 10 grant           18
 ```
-
-
-
-|word    |  n|
-|:-------|--:|
-|love    | 58|
-|good    | 56|
-|holiday | 52|
-|art     | 36|
-|food    | 29|
-|music   | 27|
-|deal    | 24|
-|save    | 24|
-|safe    | 23|
-|happy   | 21|
 
 Using `tidyr`, we can continue to examine how sentiment changes throughout the book. This is more relevant to the novels examples from the docs, but I'm including it here as an exercise. This example will use the `bing` lexicon. We need some type of interval - the example creates an index from 80 line chunks, but I'm going to update this to use the `chapter` value, which now represents the date of each tweet allowing to see changes in sentiment over time.
 
@@ -561,7 +561,7 @@ From the docs:
 
 ```r
 philly_sentiment <- tidy_books %>%
-  inner_join(get_sentiments("bing")) %>%
+  inner_join(get_sentiments("bing"), by = c("word" = "word")) %>%
   #count(book, index = linenumber %/% 80, sentiment) %>% # 80-line tweet chunks
   count(book, index = chapter, sentiment) %>%
   spread(sentiment, n, fill = 0) %>%
@@ -581,7 +581,7 @@ ggplot(philly_sentiment) +
   ylab("Sentiment")
 ```
 
-<img src="/post/2020-12-30-twitter-sentiment-philly/index_files/figure-html/sentimentsplotone-1.png" width="672" />
+<img src="{{< blogdown/postref >}}index_files/figure-html/sentimentsplotone-1.png" width="672" />
 
 
 
@@ -603,16 +603,17 @@ Using `dplyr::inner_join()`, estimate the different sentiment values for each le
 ```r
 ## afinn
 afinn <- philly_tweets %>% 
-  inner_join(get_sentiments("afinn")) %>% 
+  inner_join(get_sentiments("afinn"), by = c("word" = "word")) %>% 
   #group_by(index = linenumber %/% 80) %>% # Can use 80-line chunks
   group_by(index = chapter) %>% # or other type of index value, like date
   summarise(sentiment = sum(value)) %>% 
-  mutate(method = "AFINN")
+  mutate(method = "AFINN") %>%
+  ungroup()
 
 ## rbinding bing and nrc
 bing_and_nrc <- bind_rows(
   philly_tweets %>% 
-    inner_join(get_sentiments("bing")) %>%
+    inner_join(get_sentiments("bing"), by = c("word" = "word")) %>%
     mutate(method = "Bing et al."),
   philly_tweets %>% 
     inner_join(get_sentiments("nrc") %>% 
@@ -643,7 +644,7 @@ bind_rows(afinn,
   ylab("Sentiment")
 ```
 
-<img src="/post/2020-12-30-twitter-sentiment-philly/index_files/figure-html/sentimentplottwo-1.png" width="672" />
+<img src="{{< blogdown/postref >}}index_files/figure-html/sentimentplottwo-1.png" width="672" />
 
 
 
@@ -657,28 +658,21 @@ TODO: Update include and eval settings here - ok to keep in md doc but no need t
 ```r
 get_sentiments("nrc") %>% 
   filter(sentiment %in% c("positive", "negative")) %>% 
-  count(sentiment) %>% knitr::kable()
-```
-
-
-
-|sentiment |    n|
-|:---------|----:|
-|negative  | 3324|
-|positive  | 2312|
-
-```r
+  count(sentiment)
+## # A tibble: 2 x 2
+##   sentiment     n
+##   <chr>     <int>
+## 1 negative   3324
+## 2 positive   2312
 
 get_sentiments("bing") %>% 
-  count(sentiment) %>% knitr::kable()
+  count(sentiment)
+## # A tibble: 2 x 2
+##   sentiment     n
+##   <chr>     <int>
+## 1 negative   4781
+## 2 positive   2005
 ```
-
-
-
-|sentiment |    n|
-|:---------|----:|
-|negative  | 4781|
-|positive  | 2005|
 
 
 ```r
@@ -692,18 +686,18 @@ bing_word_counts %>% head(10) %>% knitr::kable()
 
 
 
-|word       |sentiment |   n|
-|:----------|:---------|---:|
-|corruption |negative  | 120|
-|like       |positive  |  74|
-|love       |positive  |  58|
-|great      |positive  |  57|
-|good       |positive  |  56|
-|best       |positive  |  50|
-|hurts      |negative  |  42|
-|well       |positive  |  38|
-|work       |positive  |  29|
-|free       |positive  |  28|
+|word       |sentiment |  n|
+|:----------|:---------|--:|
+|like       |positive  | 73|
+|corruption |negative  | 68|
+|best       |positive  | 61|
+|good       |positive  | 47|
+|well       |positive  | 45|
+|free       |positive  | 44|
+|killed     |negative  | 42|
+|right      |positive  | 37|
+|great      |positive  | 36|
+|ready      |positive  | 32|
 
 
 What are the top words driving sentiment score?  
@@ -723,7 +717,7 @@ bing_word_counts %>%
        y = NULL)
 ```
 
-<img src="/post/2020-12-30-twitter-sentiment-philly/index_files/figure-html/sentplotfour-1.png" width="672" />
+<img src="{{< blogdown/postref >}}index_files/figure-html/sentplotfour-1.png" width="672" />
 
 
 
@@ -764,7 +758,7 @@ tidy_books %>%
   with(wordcloud(word, n, max.words = 100, col = brewer.pal(8, "Dark2")))
 ```
 
-<img src="/post/2020-12-30-twitter-sentiment-philly/index_files/figure-html/wordcloudone-1.png" width="672" />
+<img src="{{< blogdown/postref >}}index_files/figure-html/wordcloudone-1.png" width="672" />
 
 Going to compare the most popular positive and negative words using `comparison.cloud()`. Keep a look out for pronouns that get mistaken for positive or negative words (e.g. 'hurts' as in 'jalen hurts', though you might leave that in depending on how you feel about the Eagles qb situation).  
 
@@ -780,7 +774,7 @@ tidy_books %>%
                    max.words = 100)
 ```
 
-<img src="/post/2020-12-30-twitter-sentiment-philly/index_files/figure-html/wordcloudtwo-1.png" width="672" />
+<img src="{{< blogdown/postref >}}index_files/figure-html/wordcloudtwo-1.png" width="672" />
 
 
 ### What about sentences?  
@@ -816,7 +810,7 @@ tidy_books %>%
 ## # A tibble: 1 x 5
 ##   book         chapter    positivewords words positive_ratio
 ##   <chr>        <date>             <int> <int>          <dbl>
-## 1 Philadelphia 2020-12-21           196  5755         0.0341
+## 1 Philadelphia 2021-01-13           106  2478         0.0428
 ```
 
 

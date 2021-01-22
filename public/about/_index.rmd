@@ -8,6 +8,6 @@ weight: 1
 
 [My CV describing different things I've done.]  
 
-<link rel="stylesheet" href="css/cards.css">  
-
 Add a note about me and then two cards: (1) cv in html, and (2) cv in pdf  
+
+And some other stuff

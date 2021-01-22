@@ -4,6 +4,10 @@
 .Rds
 .Ruserdata
 .Rproj.user
-site_files/
 config.yml
 cb_2018_us_zcta510_500k/
+.DS_Store
+Thumbs.db
+resources/
+site_files/
+drafts/
