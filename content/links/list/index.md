@@ -32,16 +32,20 @@ Sources I like to use when looking for data or for researching/sharing geographi
 * [NASA Data Catalog](https://data.nasa.gov/browse)  
 * [NASA Data by Subject](https://www.nasa.gov/open/data.html)  
 * [New York Times - Developer APIs](https://developer.nytimes.com/faq)  
-
+* [Global Terrorism Database (GTD)](https://start.umd.edu/data-tools/global-terrorism-database-gtd)  
+* [DataHub (Collections)](https://datahub.io/collections)  
+* [DataHub - Data Packaged Core Datasets](https://github.com/datasets)  
+* [Socioeconomic Data and Applications Center (sedac)](https://sedac.ciesin.columbia.edu/data/sets/browse)  
 
 ### Blogdown & Hugo
 
-* {Hugo COnfiguration Markup](https://gohugo.io/getting-started/configuration-markup/)  
+* [Hugo Configuration Markup](https://gohugo.io/getting-started/configuration-markup/)  
 * [Hugo Shortcodes](https://gohugo.io/content-management/shortcodes/)  
 * [Scientific and Technical Blogging: Radix vs. Blogdown](https://emitanaka.org/r/posts/2018-12-12-scientific-and-technical-blogging-radix-vs-blogdown/#blogdown)  
 * [Alison Hill: Blog](https://alison.rbind.io/post/2020-12-27-blogdown-checks/)  
 * [Work with RStudio, GitHub and Netlify to create and deploy your own webpage](https://medium.com/@diegousaiuk/how-i-used-hugo-and-blogdown-to-set-up-my-own-website-e32e2eddbf81)  
 * [Toha Getting Start Pages (GitHub deploy)](https://toha-guides.netlify.app/posts/getting-started/github-pages/)  
+* [Visual R Markdown](https://rstudio.github.io/visual-markdown-editing/#/intro)  
 
 ### Cheatsheets  
 
@@ -66,7 +70,7 @@ Sources I like to use when looking for data or for researching/sharing geographi
 * [knitr options](https://yihui.org/knitr/options/)  
 
 
-### Databases  
+### Databases & Databricks  
 
 * [Visual Explanation of SQL joins (codinghorror)](https://blog.codinghorror.com/a-visual-explanation-of-sql-joins/)  
 * [PostGIS - Reference](http://postgis.net/docs/reference.html)  
@@ -82,6 +86,7 @@ Sources I like to use when looking for data or for researching/sharing geographi
 * [Querying Data with Apache Drill](https://www.oreilly.com/library/view/learning-apache-drill/9781492032786/ch04.html)  
 * [Faster Operations with the JSONB Data Type in PostgreSQL](https://www.compose.com/articles/faster-operations-with-the-jsonb-data-type-in-postgresql/)  
 * [SQL vs NoSQL: 7 Key Takeaways](https://www.kdnuggets.com/2020/12/sql-vs-nosql-7-key-takeaways.html)  
+* [5 Things to Know about Databricks (datalere)](https://datalere.com/databricks/5-things-to-know-about-databricks/)  
 
 
 ### Data Science Programming
@@ -140,7 +145,23 @@ Sources I like to use when looking for data or for researching/sharing geographi
 * [How to Deploy a Web app Using Docker Web Server (DevTeam.Space)](https://www.devteam.space/blog/how-to-deploy-a-web-app-with-docker-containers/)  
 * [Twitter Developer Portal](https://developer.twitter.com/)  
 * [Paul Vanderlaken: Blog](https://paulvanderlaken.com/tag/shiny/)  
+* [Mozilla Developer (js test)](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/trim)  
+* [Use `formattable` with `DT`](https://cran.r-project.org/web/packages/formattable/vignettes/formattable-data-frame.html)  
+* [R Shiny App Formats](https://shiny.rstudio.com/articles/app-formats.html)  
+* [Firebase Authentication](https://firebase.john-coene.com/index.html)  
+* [rio (r)](https://github.com/leeper/rio)  
+* [datamods (r)](https://github.com/dreamRs/datamods)  
+* [flextable (r)](https://davidgohel.github.io/flextable/)  
+* [googlesheets4 (r)](https://googlesheets4.tidyverse.org/)  
+* [Saving Changes (git) (atlassian)](https://www.atlassian.com/git/tutorials/saving-changes)  
+* [Using Branches (git) (atlassian)](https://www.atlassian.com/git/tutorials/using-branches)  
+* [Comparing Workflows (git) (atlassian)](https://www.atlassian.com/git/tutorials/comparing-workflows)  
+* {GitLab docs}(https://docs.gitlab.com/ce/gitlab-basics/index.html)  
 
+### Favorite Packages (build this out!)  
+
+* [CiphR](https://github.com/hsamuelson/CiphR)  
+* [r2dr](http://www.r2d3.us/visual-intro-to-machine-learning-part-1/)  
 
 ### Geographic  
 
@@ -227,6 +248,9 @@ Sources I like to use when looking for data or for researching/sharing geographi
 * [r/science](https://www.reddit.com/r/science/)  
 * [r/askscience](https://www.reddit.com/r/askscience/)  
 * [Tweet Sentiment Visualization](https://www.csc2.ncsu.edu/faculty/healey/tweet_viz/tweet_app/)  
+* [CRISP-DM (wiki)](https://en.wikipedia.org/wiki/Cross-industry_standard_process_for_data_mining)  
+* [KDD, SEMMA AND CRISP-DM: A PARALLEL OVERVIEW (Azevedo, Santos)](https://recipp.ipp.pt/bitstream/10400.22/136/3/KDD-CRISP-SEMMA.pdf)  
+* [KDD Process in Data Mining](https://www.geeksforgeeks.org/kdd-process-in-data-mining/)  
 
 
 ### Statistics  
@@ -333,4 +357,5 @@ Sources I like to use when looking for data or for researching/sharing geographi
 * [Data visualization: basic principles](https://paldhous.github.io/ucb/2016/dataviz/week2.html) 
 * [billboard.js (js)](https://naver.github.io/billboard.js/demo/#Chart.AreaChart)  
 * [r/dataisbeautiful](https://www.reddit.com/r/dataisbeautiful/)  
+* [Storytelling with data](https://www.maptive.com/101-guide-telling-compelling-story-data/)  
 
