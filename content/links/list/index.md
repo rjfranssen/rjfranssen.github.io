@@ -157,6 +157,9 @@ Sources I like to use when looking for data or for researching/sharing geographi
 * [Using Branches (git) (atlassian)](https://www.atlassian.com/git/tutorials/using-branches)  
 * [Comparing Workflows (git) (atlassian)](https://www.atlassian.com/git/tutorials/comparing-workflows)  
 * {GitLab docs}(https://docs.gitlab.com/ce/gitlab-basics/index.html)  
+* [Combining Shiny & R Markdown(beta.rstudioconnect)](https://beta.rstudioconnect.com/content/2671/Combining-Shiny-R-Markdown.html)  
+* [R Markdown Formats (r4ds)](https://r4ds.had.co.nz/r-markdown-formats.html)  
+* [Tips and tricks for working with images and figures in R Markdown documents (zevross)](http://zevross.com/blog/2017/06/19/tips-and-tricks-for-working-with-images-and-figures-in-r-markdown-documents/)  
 
 ### Favorite Packages (build this out!)  
 
@@ -184,7 +187,7 @@ Sources I like to use when looking for data or for researching/sharing geographi
 * [DataCamp](https://www.datacamp.com/)
 * [3Blue1Brown](https://www.youtube.com/channel/UCYO_jab_esuFRV4b17AJtAw)  
 * [ZevRoss Tech Blog](https://www.zevross.com/blog/)  
-
+* [pythonbasics.org (tutorials include flask, tkinter, etc.)](https://pythonbasics.org/)  
 
 ### Linux and Cloud  
 
@@ -305,7 +308,7 @@ Sources I like to use when looking for data or for researching/sharing geographi
 ### Tips, Tools, References  
 
 * [23 RStudio Tips, Tricks, and Shortcuts (Dataquest)](https://www.dataquest.io/blog/rstudio-tips-tricks-shortcuts/)  
-* [emo(ji)](https://github.com/hadley/emo)  
+* [emoji](https://github.com/hadley/emo)  
 * [favicon.io favicon converter](https://favicon.io/favicon-converter/)  
 * [Markdown Guide](https://www.markdownguide.org/extended-syntax/)      
 * [Pandoc User's Guide](https://pandoc.org/MANUAL.html#pandocs-markdown)   
